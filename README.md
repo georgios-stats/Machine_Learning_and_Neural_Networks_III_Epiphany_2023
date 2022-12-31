@@ -95,7 +95,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
     
     4. in the *URL of your Git repository* section insert the link: 
         
-        <https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021.git> 
+        <https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git> 
 
     ... this will gonna download the whole Bayesian learning teaching material. You can navigate to the material.  
 
@@ -103,7 +103,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 
 Ways:
 
-1. You can click [[HERE](https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021/archive/refs/heads/main.zip)].
+1. You can click [[HERE](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/archive/refs/heads/main.zip)].
 
 2. You can click the green button 'Clone or download' and download it as a zip file
 
@@ -123,7 +123,7 @@ Ways:
     
     ... then run:
 
-    -   git clone https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021.git
+    -   git clone https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git
 
 4. You can use rstudio:
 
@@ -131,7 +131,7 @@ Ways:
     
     2.  In the section *Repository URL* write
         
-        -   <https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021.git>
+        -   <https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git>
         
         -   … and complete the rest as you wish
     
@@ -174,7 +174,7 @@ Ways:
         *mkdir Bayesian_Statistics_Michaelmas_2021  
         cd Bayesian_Statistics_Michaelmas_2021  
         git init  
-        git remote add -f origin https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021.git  
+        git remote add -f origin https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git  
         git config core.sparseCheckout true  
         echo "Computer_practical/*" >> .git/info/sparse-checkout  
         git pull origin master*

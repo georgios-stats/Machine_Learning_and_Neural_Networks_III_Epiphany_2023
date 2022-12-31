@@ -58,13 +58,13 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 <!--
 ### Additional reading material
 
--   '[Additional reading material](https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021/tree/main/Additional_reading_material#additional-reading-material)' folder contains the additional reading material that students at Level IV and master level are required to independently study.
+-   '[Additional reading material](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Additional_reading_material#additional-reading-material)' folder contains the additional reading material that students at Level IV and master level are required to independently study.
 -->
 
 <!--
 ### Web-applets
 
--   '[Shiny_applets](https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021/tree/master/Shiny_applets#shiny-applets)' folder contains the source code of the web applets used in the lectures.
+-   '[Shiny_applets](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/master/Shiny_applets#shiny-applets)' folder contains the source code of the web applets used in the lectures.
 -->
 
 <!--
@@ -97,7 +97,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
         
         <https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git> 
 
-    ... this will gonna download the whole Bayesian learning teaching material. You can navigate to the material.  
+    ... this will gonna download the whole Machine learning and Neural Networks learning teaching material. You can navigate to the material.  
 
 ### How to download the whole repository
 
@@ -171,8 +171,8 @@ Ways:
 
     -   run in the terminal the following:
         
-        *mkdir Bayesian_Statistics_Michaelmas_2021  
-        cd Bayesian_Statistics_Michaelmas_2021  
+        *mkdir Machine_Learning_and_Neural_Networks_III_Epiphany_2023  
+        cd Machine_Learning_and_Neural_Networks_III_Epiphany_2023  
         git init  
         git remote add -f origin https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023.git  
         git config core.sparseCheckout true  

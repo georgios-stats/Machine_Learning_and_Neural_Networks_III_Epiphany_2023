@@ -45,13 +45,13 @@
 
 #### Stochastic learning  
 
-Stochastic gradient descent procedure  
+Learning problem: Definitions, notation, and formulation -A recap  
 
-+ BTD
++ [00.Statistical_learning_framework_recap.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/00.Statistical_learning_framework_recap.pdf)  
 
-Stochastic gradient Langevin dynamic procedure  
+Elements of convex learning problems  
 
-+ BTD
++ [01.Convex_learning_problems.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/01.Convex_learning_problems.pdf)  
 
 
 

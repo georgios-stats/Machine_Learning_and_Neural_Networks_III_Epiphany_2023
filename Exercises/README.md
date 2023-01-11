@@ -40,9 +40,7 @@
 
 All the exercises  
 
-+ [Exercise_sheet_complete.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Exercise_sheet_complete.pdf) & [Exercise_sheet_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Exercise_sheet_complete.pdf)  
-
-+ [Exercise_sheet_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Exercise_sheet_complete.pdf) & [Exercise_sheet_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Exercise_sheet_questions.pdf)  
++ [Exercise_sheet_complete.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_complete.pdf) & [Exercise_sheet_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_questions.pdf)  
 
 
 ------------------------------------------------------------------------

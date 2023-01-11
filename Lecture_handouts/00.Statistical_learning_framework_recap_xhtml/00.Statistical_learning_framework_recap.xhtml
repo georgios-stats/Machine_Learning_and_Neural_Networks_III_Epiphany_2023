@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="GENERATOR" content="LyX 2.3.6.1" />
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<title>LyX Document</title>
+<style type='text/css'>
+/* Layout-provided Styles */
+div.standard {
+text-align: left;
+
+}
+div.plain_layout {
+text-align: left;
+
+}
+h3.subsection_ {
+font-weight: bold;
+font-size: medium;
+margin-top: 0.9ex;
+margin-bottom: 0.5ex;
+text-align: left;
+
+}
+ul.itemize {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
+h2.section {
+font-weight: normal;
+font-style: normal;
+font-variant: small-caps;
+font-size: medium;
+margin-top: 1.3ex;
+margin-bottom: 0.7ex;
+text-align: center;
+
+}
+div.theorem {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.theorem_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+div.definition {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.definition_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+div.notation {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.notation_label {
+font-weight: normal;
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
+div.example {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.example_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+div.remark {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.remark_label {
+font-weight: normal;
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
+div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; border-right: solid black 1ex; padding: 0.5ex; }
+
+
+</style>
+</head>
+<body dir="auto">
+
+
+<div class="standard" id='magicparlabel-1'><div class='Shadowbox'><div class="plain_layout" id='magicparlabel-10'>Machine Learning and Neural Networks (MATH3431)&nbsp;&nbsp;Epiphany term, 2023<div style='height:3ex'></div></div>
+
+<div class="plain_layout" style='text-align: center;' id='magicparlabel-11'> Handout 0: Learning problem: Definitions, notation, and formulation –A recap <div style='height:3ex'></div></div>
+
+<div class="plain_layout" id='magicparlabel-28'>Lecturer &amp; author: Georgios P. Karagiannis <a href="georgios.karagiannis@durham.ac.uk">georgios.karagiannis@durham.ac.uk</a></div>
+
+<div class="plain_layout" id='magicparlabel-29'><hr />
+
+<div style='height:3ex'></div></div>
+<h3 class="subsection_" id='magicparlabel-30'>Aim</h3>
+<div class="plain_layout" id='magicparlabel-31'>To get some definitions and set-up about the learning procedure; essentially to formalize what introduced in term 1. </div>
+
+<div class="plain_layout" id='magicparlabel-32'><hr />
+
+</div>
+<h3 class="subsection_" id='magicparlabel-33'>Reading&nbsp;list&nbsp;&amp;&nbsp;references:</h3>
+
+<ul class="itemize" id='magicparlabel-34'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.</li>
+<li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. </li>
+</ul>
+</div></div>
+<h2 class="section" id='magicparlabel-36'><span class="section_label">1</span> Introductions and loose definitions</h2>
+<div class="standard" id='magicparlabel-37'><b>Pattern recognition</b> is the automated discovery of patterns and regularities in data <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. <b>Machine learning (ML)</b> are statistical procedures for building and understanding probabilistic methods that 'learn'. <b>ML algorithms</b> <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='fraktur'><mi>A</mi>
+  </mstyle>
+ </mrow></math> build a (probabilistic/deterministic) model able to make predictions or decisions with minimum human interference and can be used for pattern recognition. <b>Learning</b> (or training, estimation) is called the procedure where the ML model is tuned. <b>Training data</b> (or observations, sample data set, exemplars) is a set of observables <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <mrow>
+   <msub>
+    <mrow><mi>z</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math> used to tune the parameters of the ML model. <b>Test set</b> is a set of available examples/observables <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <mrow><mi>z</mi>
+   <msub>
+    <mrow><mo>'</mo>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math> (different than the training data) used to verify the performance of the ML model for a given a measure of success. <b>Measure of success</b> (or performance) is a quantity that indicates how bad the corresponding ML model or Algorithm performs (eg quantifies the failure/error), and can also be used for comparisons among different ML models; eg, <b>Risk function</b> or <b>Empirical Risk Function</b>. Two main problems in ML are the supervised learning (we focus here) and the unsupervised learning.</div>
+
+<div class="standard" id='magicparlabel-38'><b>Supervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> comprises examples of the input vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> along with their corresponding target vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. <b>Classiﬁcation problems</b> are those which aim to assign each input vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>x</mi>
+ </mrow></math> to one of a ﬁnite number of discrete categories of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>y</mi>
+ </mrow></math>. <b>Regression problems</b> are those where the output <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>y</mi>
+ </mrow></math> consists of one or more continuous variables. All in all, the learner wishes to recover an unknown pattern (i.e. functional relationship) between components <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> that serves as inputs and components <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> that act as outputs; i.e. 
+<span style = "text-align: center;"><img src="lyxpreviewIxnAkb1.png" alt="Mathematical Equation" />
+</span>
+. Hence, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>X</mi>
+  </mstyle>
+ </mrow></math> is the input domain, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>Y</mi>
+  </mstyle>
+ </mrow></math> is the output domain. The goal of learning is to discover a function which predicts <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> from <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. </div>
+
+<div class="standard" id='magicparlabel-39'><b>Unsupervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> consists of a set of input vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> without any corresponding target values ; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. In clustering the goal is to discover groups of similar examples within the data of it is to discover groups of similar examples within the data.</div>
+<h2 class="section" id='magicparlabel-44'><span class="section_label">2</span> (loose) Notation in learning</h2>
+
+<div class="definition" id='magicparlabel-45'><div class="definition_item"><span class="definition_label">Definition 1.</span>
+The learner's output is a function, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo>:</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &rarr; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> which predicts <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> from <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. It is also called hypothesis, prediction rule, predictor, or classifier.</div>
+</div>
+
+<div class="standard" id='magicparlabel-46'><br />
+
+</div>
+
+<div class="notation" id='magicparlabel-47'><div class="notation_item"><span class="notation_label">Notation 2.</span>
+We often denote the set of hypothesis as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>H</mi>
+  </mstyle>
+ </mrow></math> ; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-52'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-53'><div class="definition_item"><span class="definition_label">Definition 3.</span>
+Training data set <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>S</mi>
+  </mstyle>
+ </mrow></math> of size <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>m</mi>
+ </mrow></math> is any finite sequence of pairs <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>y</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>;</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math> in <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. This is the information that the learner has assess. </div>
+</div>
+
+<div class="standard" id='magicparlabel-54'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-55'><div class="definition_item"><span class="definition_label">Definition 4.</span>
+Data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is the probability distribution over <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>, unknown to the learner that has generated the data.</div>
+</div>
+
+<div class="standard" id='magicparlabel-56'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-57'><div class="definition_item"><span class="definition_label">Definition 5.</span>
+We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='fraktur'><mi>A</mi>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mstyle mathvariant='script'><mi>S</mi>
+   </mstyle>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> the hypothesis (outcome) that a learning algorithm <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='fraktur'><mi>A</mi>
+  </mstyle>
+ </mrow></math> returns given training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>S</mi>
+ </mrow></math>. </div>
+</div>
+
+
+
+<div class="standard" id='magicparlabel-65'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-66'><div class="definition_item"><span class="definition_label">Definition 6.</span>
+(Loss function) Given any set of hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>H</mi>
+  </mstyle>
+ </mrow></math> and some domain <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>, a loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is any function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo>:</mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo> &rarr; </mo>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math>. The purpose of loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo>,</mo><mi>z</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is to quantify the &ldquo;error&rdquo; for a given hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>h</mi>
+ </mrow></math> and example <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>z</mi>
+ </mrow></math> –the greater the error the greater its value of the loss.</div>
+</div>
+
+<div class="standard" id='magicparlabel-67'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-68'><div class="example_item"><span class="example_label">Example 7.</span>
+In binary classification problems where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> is discrete, a loss function can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &ell; </mi>
+    </mrow>
+    <mrow>
+     <mrow><mn>0</mn><mo>-</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <mstyle mathvariant='normal'><mn>1</mn>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>y</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo>
+  </mrow>
+ </mrow></math></div>
+</div>
+
+<div class="standard" id='magicparlabel-73'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-74'><div class="example_item"><span class="example_label">Example 8.</span>
+<a id="exa_In_regression_problems" />
+In regression problems <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>Y</mi>
+  </mstyle>
+ </mrow></math> is uncountable, a loss function can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &ell; </mi>
+    </mrow>
+    <mrow>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>s</mi><mi>q</mi>
+      </mrow>
+     </mstyle>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math></div>
+</div>
+
+<div class="standard" id='magicparlabel-75'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-76'><div class="definition_item"><span class="definition_label">Definition 9.</span>
+(Risk function) The risk function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>R</mi>
+    </mrow>
+    <mrow><mi>g</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>h</mi>
+ </mrow></math> is the expected loss of the hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>, w.r.t. probability distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>g</mi>
+ </mrow></math> over domain <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>Z</mi>
+ </mrow></math>; i.e.<a id="eq_asfgasfgasg" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow>
+     <msub>
+      <mrow><mi>R</mi>
+      </mrow>
+      <mrow><mi>g</mi>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+     <msub>
+      <mrow>
+       <mstyle mathvariant='normal'><mi>E</mi>
+       </mstyle>
+      </mrow>
+      <mrow>
+       <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>h</mi><mo>,</mo><mi>z</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>(2.1)
+   </mtd>
+  </mtr>
+ </mtable></math></div>
+</div>
+
+<div class="remark" id='magicparlabel-77'><div class="remark_item"><span class="remark_label">Remark 10.</span>
+In learning, an ideal way to obtain an optimal predictor <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi>h</mi>
+   </mrow>
+   <mrow><mo>*</mo>
+   </mrow>
+  </msup>
+ </mrow></math> is to compute the risk minimizer <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msup>
+    <mrow><mi>h</mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msup><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow><mi> &forall; </mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>R</mi>
+     </mrow>
+     <mrow><mi>g</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math></div>
+</div>
+
+<div class="standard" id='magicparlabel-78'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-79'><div class="example_item"><span class="example_label">Example 11.</span>
+<a id="exa__Cont__Example__" />
+(Cont. Ex. <a href="#exa_In_regression_problems">8</a>)The risk function is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>R</mi>
+    </mrow>
+    <mrow><mi>g</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='normal'><mi>E</mi>
+     </mstyle>
+    </mrow>
+    <mrow>
+     <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+     </mrow>
+    </mrow>
+   </msub>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>, and it measures the quality of the hypothesis function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo>:</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &rarr; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> as the expected square difference between the predicted values <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>h</mi>
+ </mrow></math> and the true target values <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>y</mi>
+ </mrow></math> at every <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>x</mi>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-80'><br />
+
+</div>
+
+<div class="remark" id='magicparlabel-81'><div class="remark_item"><span class="remark_label">Remark 12.</span>
+Computing the risk minimizer may be practically challenging due to the integration w.r.t. the unknown data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>g</mi>
+ </mrow></math> involved in the expectation <a href="#eq_asfgasfgasg">(2.1)</a>. Suboptimally, one may resort to the Empirical risk function.</div>
+</div>
+
+<div class="standard" id='magicparlabel-82'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-83'><div class="definition_item"><span class="definition_label">Definition 13.</span>
+(Empirical risk function) The empirical risk function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>R</mi>
+      </mrow><mo stretchy="true">&circ;</mo>
+     </mover>
+    </mrow>
+    <mrow><mi>S</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>h</mi>
+ </mrow></math> is the expectation of loss of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>h</mi>
+ </mrow></math> over a given sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mn>1</mn>
+     </mrow>
+    </msub><mo>,</mo><mn>...</mn><mo>,</mo>
+    <msub>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='script'><mi>Z</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>; i.e. <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>R</mi>
+      </mrow><mo stretchy="true">&circ;</mo>
+     </mover>
+    </mrow>
+    <mrow><mi>S</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <mfrac>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </mfrac>
+   <msubsup>
+    <mrow><mo> &sum; </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo>,</mo>
+    <msub>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mn>.</mn>
+  </mrow>
+ </mrow></math></div>
+</div>
+
+<div class="standard" id='magicparlabel-84'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-85'><div class="example_item"><span class="example_label">Example 14.</span>
+(Cont. Example <a href="#exa__Cont__Example__">11</a>) Given given sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>y</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>;</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> the empirical risk function is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>R</mi>
+      </mrow><mo stretchy="true">&circ;</mo>
+     </mover>
+    </mrow>
+    <mrow><mi>S</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>h</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <mfrac>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </mfrac>
+   <msubsup>
+    <mrow><mo> &sum; </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo>
+      <msub>
+       <mrow><mi>y</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-86'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-87'><div class="example_item"><span class="example_label">Example 15.</span>
+Consider a learning problem where the true data generation distribution (unknown to the learner) is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, the statistical model (known to the learner) is given by a sampling distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>y</mi><mo>|</mo><mi> &theta; </mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> where the parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &theta; </mi>
+ </mrow></math> is unknown. The goal is to learn <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &theta; </mi>
+ </mrow></math>. If we assume loss function <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi> &theta; </mi><mo>,</mo><mi>z</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mfrac>
+    <mrow>
+     <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow>
+      <msub>
+       <mrow><mi>f</mi>
+       </mrow>
+       <mrow><mi> &theta; </mi>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </mrow>
+   </mfrac>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>then the risk is <a id="eq_qrgqwrgqwerg" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow>
+     <msub>
+      <mrow><mi>R</mi>
+      </mrow>
+      <mrow><mi>g</mi>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi> &theta; </mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+     <msub>
+      <mrow>
+       <mstyle mathvariant='normal'><mi>E</mi>
+       </mstyle>
+      </mrow>
+      <mrow>
+       <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mfrac>
+       <mrow>
+        <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </mrow>
+       <mrow>
+        <mrow>
+         <msub>
+          <mrow><mi>f</mi>
+          </mrow>
+          <mrow><mi> &theta; </mi>
+          </mrow>
+         </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </mrow>
+      </mfrac>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+     <msub>
+      <mrow>
+       <mstyle mathvariant='normal'><mi>E</mi>
+       </mstyle>
+      </mrow>
+      <mrow>
+       <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo>
+     <msub>
+      <mrow>
+       <mstyle mathvariant='normal'><mi>E</mi>
+       </mstyle>
+      </mrow>
+      <mrow>
+       <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow>
+       <msub>
+        <mrow><mi>f</mi>
+        </mrow>
+        <mrow><mi> &theta; </mi>
+        </mrow>
+       </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>(2.2)
+   </mtd>
+  </mtr>
+ </mtable></math> whose minimizer is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msup>
+    <mrow><mi> &theta; </mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msup><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi> &theta; </mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>R</mi>
+     </mrow>
+     <mrow><mi>g</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi> &theta; </mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi> &theta; </mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>E</mi>
+      </mstyle>
+     </mrow>
+     <mrow>
+      <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+      </mrow>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mo>-</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>f</mi>
+       </mrow>
+       <mrow><mi> &theta; </mi>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>z</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> as the first term in <a href="#eq_qrgqwrgqwerg">(2.2)</a> is constant. Note that in the Maximum Likelihood Estimation technique the MLE <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi> &theta; </mi>
+   </mrow>
+   <mrow>
+    <mstyle mathvariant='normal'>
+     <mrow><mi>M</mi><mi>L</mi><mi>E</mi>
+     </mrow>
+    </mstyle>
+   </mrow>
+  </msub>
+ </mrow></math> is the minimizer of <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &theta; </mi>
+    </mrow>
+    <mrow>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>M</mi><mi>L</mi><mi>E</mi>
+      </mrow>
+     </mstyle>
+    </mrow>
+   </msub><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi> &theta; </mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <mfrac>
+     <mrow><mn>1</mn>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </mfrac>
+    <msubsup>
+     <mrow><mo> &sum; </mo>
+     </mrow>
+     <mrow>
+      <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+      </mrow>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </msubsup><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mo>-</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>f</mi>
+       </mrow>
+       <mrow><mi> &theta; </mi>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>z</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>y</mi>
+     </mrow>
+     <mrow><mn>1</mn>
+     </mrow>
+    </msub><mo>,</mo><mn>...</mn><mo>,</mo>
+    <msub>
+     <mrow><mi>y</mi>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> is an IID sample from <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>g</mi>
+ </mrow></math>. Hence, MLE <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi> &theta; </mi>
+   </mrow>
+   <mrow>
+    <mstyle mathvariant='normal'>
+     <mrow><mi>M</mi><mi>L</mi><mi>E</mi>
+     </mrow>
+    </mstyle>
+   </mrow>
+  </msub>
+ </mrow></math> can be considered as the minimizer of the empirical risk <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>R</mi>
+    </mrow>
+    <mrow><mi>S</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi> &theta; </mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <mfrac>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </mfrac>
+   <msubsup>
+    <mrow><mo> &sum; </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo>-</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>f</mi>
+      </mrow>
+      <mrow><mi> &theta; </mi>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <msub>
+      <mrow><mi>z</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-88'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-89'><div class="example_item"><span class="example_label">Example 16.</span>
+(Linear Regression) Consider the multiple linear regression problem 
+<span style = "text-align: center;"><img src="lyxpreviewIxnAkb1.png" alt="Mathematical Equation" />
+</span>
+ where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &sube; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle><mo> &sube; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>. </div>
+
+<ul class="itemize" id='magicparlabel-90'><li class="itemize_item">The hypothesis is a linear function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo>:</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &rarr; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> (that learner wishes to learn) to approximate mapping 
+<span style = "text-align: center;"><img src="lyxpreviewIxnAkb1.png" alt="Mathematical Equation" />
+</span>
+. The hypothesis set 
+<span style = "text-align: center;"><img src="lyxpreviewiKXuhw1.png" alt="Mathematical Equation" />
+</span>
+. We can use the loss <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>h</mi><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>. </li>
+<li class="itemize_item">Equivalently, learning problem can be set differently because the predictor (linear function) is parametrized by <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> as 
+<span style = "text-align: center;"><img src="lyxpreviewVkBhzm1.png" alt="Mathematical Equation" />
+</span>
+. Set <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mi>w</mi><mo> &isin; </mo>
+    <msup>
+     <mrow>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mrow>
+     <mrow><mi>d</mi>
+     </mrow>
+    </msup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> . The set of examples is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>=</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &times; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. The loss is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>w</mi><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo>&lt;</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>-</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>. </li>
+</ul>
+</div>
+
+<div class="standard" id='magicparlabel-92'><br />
+
+</div>
+
+
+<div class="standard" id='magicparlabel-93'><br />
+
+</div>
+
+
+
+
+</body>
+</html>

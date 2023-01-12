@@ -161,6 +161,22 @@ font-variant: normal;
 font-size: medium;
 
 }
+div.conclusion {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.conclusion_label {
+font-weight: normal;
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
 div.remark {
 font-style: normal;
 font-variant: normal;
@@ -229,9 +245,9 @@ Most of the ML problems discussed in the course (eg, Artificial neural networks,
 </div>
 
 <div class="note" id='magicparlabel-42'><div class="note_item"><span class="note_label">Note 3.</span>
-Extensions of handle non-convex problems as below can be done via surrogates –to be discussed.</div>
+Non convex problems can Treatments of convex learning methods to handle non-convex problems can be done via surrogates –to be discussed.</div>
 </div>
-<h2 class="section" id='magicparlabel-43'><span class="section_label">2</span> Convex learning problem</h2>
+<h2 class="section" id='magicparlabel-43'><span class="section_label">2</span> Convex learning problems</h2>
 
 <div class="definition" id='magicparlabel-44'><div class="definition_item"><span class="definition_label">Definition 4.</span>
 Convex learning problem is a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -245,7 +261,7 @@ Convex learning problem is a learning problem <math xmlns="http://www.w3.org/199
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
- </mrow></math> is the learning problem that the hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> that the hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>H</mi>
   </mstyle>
@@ -403,7 +419,7 @@ Multiple linear regression <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msup>
   </mrow>
- </mrow></math>is a convex learning problem for arguments discussed below.</div>
+ </mrow></math>is a convex learning problem for reasons that will be discussed below.</div>
 </div>
 <h2 class="section" id='magicparlabel-47'><span class="section_label">3</span> Convexity</h2>
 
@@ -733,7 +749,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>. If <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>g</mi>
- </mrow></math>is convex function then <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is convex function then <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
  </mrow></math>is convex function. </div>
 
@@ -748,7 +764,7 @@ See Exercise <a href="#exer___">exer:()</a> in the Exercise sheet.</div>
 
 <div class="example" id='magicparlabel-64'><div class="example_item"><span class="example_label">Example 12.</span>
 Consider the regression problem 
-<span style = "text-align: center;"><img src="lyxpreviewUKQSmP1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewumobum1.png" alt="Mathematical Equation" />
 </span>
  with <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -793,7 +809,7 @@ Consider the regression problem
     </mrow>
    </msup>
   </mrow>
- </mrow></math> because <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is convex because <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>a</mi>
@@ -809,7 +825,7 @@ Consider the regression problem
     </mrow>
    </msup>
   </mrow>
- </mrow></math> is convex and Proposition <a href="#prop_Let__such">11</a>.</div>
+ </mrow></math> and Proposition <a href="#prop_Let__such">11</a>.</div>
 </div>
 
 <div class="standard" id='magicparlabel-65'><br />
@@ -1489,8 +1505,8 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="note" id='magicparlabel-77'><div class="note_item"><span class="note_label">Note 16.</span>
-So a Lipschitz function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="conclusion" id='magicparlabel-77'><div class="conclusion_item"><span class="conclusion_label">Conclusion 16.</span>
+That means: a Lipschitz function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
@@ -2221,7 +2237,7 @@ So, given Examples <a href="#exa_Consider_the_function">17</a> and <a href="#exa
     </mrow>
    </msup>
   </mrow>
- </mrow></math> is -Lipschitz for a given <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> , the loss unction is -Lipschitz for a given <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>z</mi>
  </mrow></math>.</div>
 </div>
@@ -2431,11 +2447,11 @@ If <math xmlns="http://www.w3.org/1998/Math/MathML">
      </mrow>
     </mfrac>
     <msup>
-     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&uArr;</mo>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
 
       <mrow><mi>v</mi><mo>-</mo><mi>w</mi>
       </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&uArr;</mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
 
      </mrow>
      <mrow><mn>2</mn>
@@ -2566,7 +2582,7 @@ If <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>which provide assumptions to bound the gradient. </div>
+ </mrow></math>which provides assumptions to bound the gradient. </div>
 </div>
 
 <div class="standard" id='magicparlabel-106'><br />
@@ -2826,7 +2842,7 @@ It is <math xmlns="http://www.w3.org/1998/Math/MathML">
 <h2 class="section" id='magicparlabel-111'><span class="section_label">6</span> Non-convex learning problems (treatments)</h2>
 
 <div class="remark" id='magicparlabel-112'><div class="remark_item"><span class="remark_label">Remark 27.</span>
-The loss function of a learning problem may be non-convex. A proper treatment would be to upper bound the non-convex loss function by a convex surrogate loss function.</div>
+The loss function of a learning problem may be non-convex which implies that the risk function is non-convex. A proper treatment would be to upper bound the non-convex loss function by a convex surrogate loss function.</div>
 </div>
 
 <div class="example" id='magicparlabel-113'><div class="example_item"><span class="example_label">Example 28.</span>
@@ -2838,8 +2854,18 @@ consider the problem of learning <math xmlns="http://www.w3.org/1998/Math/MathML
   </mrow>
  </mrow></math> from hypothesis set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mstyle mathvariant='script'><mi>H</mi>
-  </mstyle>
+  <mrow>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo> &sub; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
  </mrow></math> with respect to the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mn>0</mn><mo>-</mo><mn>1</mn>
@@ -2871,7 +2897,32 @@ consider the problem of learning <math xmlns="http://www.w3.org/1998/Math/MathML
     </mrow>
    </msub>
   </mrow>
- </mrow></math> which is non-convex. A convex surrogate loss function can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>, \nd <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>. Here <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is non-convex. A convex surrogate loss function can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mover>
@@ -2931,6 +2982,180 @@ consider the problem of learning <math xmlns="http://www.w3.org/1998/Math/MathML
    </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
+  </mrow>
+ </mrow></math>. Then we compute<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>w</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msub><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>x</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow>
+      <mover>
+       <mrow><mi>R</mi>
+       </mrow><mo stretchy="true">&tilde;</mo>
+      </mover>
+     </mrow>
+     <mrow><mi>g</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>x</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>E</mi>
+      </mstyle>
+     </mrow>
+     <mrow>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &sim; </mo><mi>g</mi>
+      </mrow>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo><mi>y</mi><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> instead of <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msub><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>x</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>R</mi>
+     </mrow>
+     <mrow><mi>g</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> min </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>x</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>E</mi>
+      </mstyle>
+     </mrow>
+     <mrow>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &sim; </mo><mi>g</mi>
+      </mrow>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <msub>
+     <mrow>
+      <mstyle mathvariant='normal'><mn>1</mn>
+      </mstyle>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>y</mi><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo> &le; </mo><mn>0</mn>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> Of course by using the surrogate loss instead of the actuall one, we introduce some approximation error in the produced output <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>w</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msub><mo> &ne; </mo>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msub>
   </mrow>
  </mrow></math>.</div>
 </div>

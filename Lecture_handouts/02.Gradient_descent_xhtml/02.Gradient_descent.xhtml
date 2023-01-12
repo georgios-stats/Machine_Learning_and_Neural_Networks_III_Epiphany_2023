@@ -7,6 +7,9 @@
 <title>LyX Document</title>
 <style type='text/css'>
 /* Layout-provided Styles */
+del.strikeout {
+  text-decoration: line-through;
+}
 div.standard {
 text-align: left;
 
@@ -311,13 +314,55 @@ Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
 
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> arg </mo>
+     <msub>
+      <mrow><mo> min </mo>
+      </mrow>
+      <mrow>
+       <mrow><mi> &forall; </mi><mi>h</mi><mo> &isin; </mo>
+        <mstyle mathvariant='script'><mi>H</mi>
+        </mstyle>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <mfrac>
+       <mrow><mn>1</mn>
+       </mrow>
+       <mrow><mi>n</mi>
+       </mrow>
+      </mfrac>
+      <msubsup>
+       <mrow><mo> &sum; </mo>
+       </mrow>
+       <mrow>
+        <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+        </mrow>
+       </mrow>
+       <mrow><mi>n</mi>
+       </mrow>
+      </msubsup><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>h</mi><mo>,</mo>
+       <msub>
+        <mrow><mi>z</mi>
+        </mrow>
+        <mrow><mi>i</mi>
+        </mrow>
+       </msub>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
     </mrow>
    </mtd>
    <mtd>(1.1)
    </mtd>
   </mtr>
- </mtable></math> If analytical minimization of <a href="#eq_emfmin">(1.1)</a> is impossible or impractical, numerical procedures can be applied; eg Gradient descent. Such approaches introduce additional errors in the solution. </div>
+ </mtable></math> If analytical minimization of <a href="#eq_emfmin">(1.1)</a> is impossible or impractical, numerical procedures can be applied; eg Gradient Descent (GD) algorithms. Such approaches introduce additional errors in the solution. </div>
 </div>
 <h2 class="section" id='magicparlabel-43'><span class="section_label">2</span> Description</h2>
 
@@ -326,7 +371,7 @@ Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 
 <div class="notation" id='magicparlabel-45'><div class="notation_item"><span class="notation_label">Notation 2.</span>
-For the sake of simplicity and generalization, we will present Gradient descent in the following minimization problem<a id="eq_gvbzvcb" />
+For the sake of notation simplicity and generalization, we will present Gradient Descent (GD) in the following minimization problem<a id="eq_gvbzvcb" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -391,7 +436,7 @@ For the sake of simplicity and generalization, we will present Gradient descent 
   </mrow>
  </mrow></math>. Eg, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
- </mrow></math> can be an ERF.</div>
+ </mrow></math> can be an empirical risk function.</div>
 </div>
 
 <div class="standard" id='magicparlabel-46'><br />
@@ -421,7 +466,7 @@ Assume (for now) that <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 
 <div class="definition" id='magicparlabel-49'><div class="definition_item"><span class="definition_label">Definition 4.</span>
-The Gradient descent algorithm for the solution of the minimization problem <a href="#eq_gvbzvcb">2.1</a> is in Algorithm <a href="#alg_Gradient_descent_algorithm">1</a> where <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+The Gradient descent algorithm for the solution of the minimization problem <a href="#eq_gvbzvcb">(2.1)</a> is given in Algorithm <a href="#alg_Gradient_descent_algorithm">1</a> where <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &nabla; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>w</mi>
@@ -477,7 +522,9 @@ The Gradient descent algorithm for the solution of the minimization problem <a h
   </mrow>
  </mrow></math>is the gradient of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
- </mrow></math> at .
+ </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>w</mi>
+ </mrow></math>.
 <div class='float-algorithm'><ul class="itemize" id='magicparlabel-53'><li class="itemize_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn><mi>T</mi>
@@ -529,7 +576,18 @@ The Gradient descent algorithm for the solution of the minimization problem <a h
  </mrow></math></div>
 
 <div class="plain_layout" id='magicparlabel-55'><span class='float-caption-Standard float-caption float-caption-standard'>Algorithm 1:  <a id="alg_Gradient_descent_algorithm" />
-Gradient descent algorithm </span></div>
+Gradient descent algorithm; learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <msub>
+   <mrow><mi> &eta; </mi>
+   </mrow>
+   <mrow><mi>t</mi>
+   </mrow>
+  </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math> </span></div>
 
 
 </div>
@@ -541,18 +599,29 @@ Gradient descent algorithm </span></div>
 </div>
 
 <div class="remark" id='magicparlabel-62'><div class="remark_item"><span class="remark_label">Remark 5.</span>
-As a motivation, consider the 2nd-Taylor polinomial for the approximation of <math xmlns="http://www.w3.org/1998/Math/MathML">
+As a motivation, consider the (1st order) Taylor polynomial for the approximation of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>w</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> around for <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>u</mi>
  </mrow></math> in a small area around <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>w</mi>
- </mrow></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>u</mi>
+ </mrow></math> (i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>v</mi><mo>-</mo><mi>u</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo>=</mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>s</mi><mi>m</mi><mi>a</mi><mi>l</mi><mi>l</mi>
+    </mrow>
+   </mstyle>
+  </mrow>
+ </mrow></math>)<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>u</mi>
@@ -884,54 +953,61 @@ As a motivation, consider the 2nd-Taylor polinomial for the approximation of <ma
 </div>
 
 <div class="remark" id='magicparlabel-64'><div class="remark_item"><span class="remark_label">Remark 6.</span>
-The output of GD can be (but not a exclusively), the average<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msubsup>
-    <mrow><mi>w</mi>
-    </mrow>
+The output of GD can be (but not a exclusively), the average<a id="eq_fghsgh" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
     <mrow>
-     <mstyle mathvariant='normal'>
-      <mrow><mi>G</mi><mi>D</mi>
+     <msubsup>
+      <mrow><mi>w</mi>
       </mrow>
-     </mstyle>
-    </mrow>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      <mrow>
+       <mstyle mathvariant='normal'>
+        <mrow><mi>G</mi><mi>D</mi>
+        </mrow>
+       </mstyle>
+      </mrow>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>T</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-    </mrow>
-   </msubsup><mo>=</mo>
-   <mfrac>
-    <mrow><mn>1</mn>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </mfrac>
-   <msubsup>
-    <mrow><mo> &sum; </mo>
-    </mrow>
-    <mrow>
-     <mrow><mi>t</mi><mo>=</mo><mn>1</mn>
-     </mrow>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msubsup><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      </mrow>
+     </msubsup><mo>=</mo>
+     <mfrac>
+      <mrow><mn>1</mn>
+      </mrow>
+      <mrow><mi>T</mi>
+      </mrow>
+     </mfrac>
+     <msubsup>
+      <mrow><mo> &sum; </mo>
+      </mrow>
+      <mrow>
+       <mrow><mi>t</mi><mo>=</mo><mn>1</mn>
+       </mrow>
+      </mrow>
+      <mrow><mi>T</mi>
+      </mrow>
+     </msubsup><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <msup>
-    <mrow><mi>w</mi>
-    </mrow>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+     <msup>
+      <mrow><mi>w</mi>
+      </mrow>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>t</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-    </mrow>
-   </msup>
+      </mrow>
+     </msup>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-  </mrow>
- </mrow></math> after discarding the first few iterations of <math xmlns="http://www.w3.org/1998/Math/MathML">
+    </mrow>
+   </mtd>
+   <mtd>(2.3)
+   </mtd>
+  </mtr>
+ </mtable></math> after discarding the first few iterations of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
    <mrow><mi>w</mi>
@@ -1054,7 +1130,7 @@ GD algorithm converges to a local minimum, <math xmlns="http://www.w3.org/1998/M
     </mrow>
    </msub>
   </mrow>
- </mrow></math>, under different sets of regularity conditions (some weaker other stronger). In Section <a href="#sec_Analysis">4</a> perform an analysis.</div>
+ </mrow></math> (in some sense), under different sets of regularity conditions (some are weaker other stronger). Section <a href="#sec_Analysis">4</a> has a brief discussion.</div>
 </div>
 
 <div class="standard" id='magicparlabel-67'><br />
@@ -1100,9 +1176,9 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mi>t</mi>
    </mrow>
   </msub>
- </mrow></math>are:</div>
+ </mrow></math> are:</div>
 
-<ol class="enumerate" id='magicparlabel-69'><li class="enumerate_item">constant; <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-69'><li class="enumerate_item"><u>constant</u>; <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1135,7 +1211,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
   </msub>
  </mrow></math> and then oscillate around it. </li>
 <li class="enumerate_item"><a id="enu_decreasing_and_converging" />
-decreasing and converging to zero; e.g. <math xmlns="http://www.w3.org/1998/Math/MathML">
+<u>decreasing and converging to zero</u>; e.g. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1168,7 +1244,7 @@ decreasing and converging to zero; e.g. <math xmlns="http://www.w3.org/1998/Math
  <mrow>
   <mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math>. The rational is that GD algorithm at the begining starts by performing larger step to explore the area for discovering possible minima while reducing the size of the steps with the iterations to converge to a possible <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. The rational is that GD algorithm at the beginning starts by performing larger step to explore the area for discovering possible minima while reducing the size of the steps with the iterations to converge to a possible <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
    <mrow><mi>w</mi>
@@ -1177,7 +1253,7 @@ decreasing and converging to zero; e.g. <math xmlns="http://www.w3.org/1998/Math
    </mrow>
   </msub>
  </mrow></math> value. </li>
-<li class="enumerate_item">decreasing and converging to a tiny value <math xmlns="http://www.w3.org/1998/Math/MathML">
+<li class="enumerate_item"><u>decreasing and converging to a tiny value</u> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
    <mrow><mi> &tau; </mi>
@@ -1236,7 +1312,7 @@ decreasing and converging to zero; e.g. <math xmlns="http://www.w3.org/1998/Math
   </mrow>
  </mrow></math>. Same as previously, but the algorithm aims at oscillating around the detected local minimum. </li>
 <li class="enumerate_item"><a id="enu_constant_until_an" />
-constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
+<u>constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
    <mrow><mi>T</mi>
@@ -1244,7 +1320,7 @@ constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mn>0</mn>
    </mrow>
   </msub>
- </mrow></math> and then decreasing; eg <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> and then decreasing</u>; eg <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1338,7 +1414,8 @@ constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
   </msub>
  </mrow></math>). The first stage is called burn-in and it is discarded from the output of the GD algorithm. </li>
 </ol>
-<div class="standard" id='magicparlabel-73'>Parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
+
+<ul class="itemize" id='magicparlabel-73'><li class="itemize_item">Parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo>,</mo><mi> &sigmav; </mi><mo>,</mo>
    <msub>
@@ -1348,7 +1425,8 @@ constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msub>
   </mrow>
- </mrow></math> may be chosen based on pilot runs. A set of conditions for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> may be chosen based on pilot runs. </li>
+<li class="itemize_item">A set of regularity conditions restricting the choices of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -1359,7 +1437,7 @@ constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
   </msub>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math> are those from Robbins–Monro algorithm <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> are those of Robbins–Monro algorithm (to be seen and discussed later)<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd>
@@ -1409,15 +1487,16 @@ constant until an iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </mtd>
   </mtr>
- </mtable></math>(to be seen and discussed later), satisfied by items <a href="#enu_decreasing_and_converging">2.</a> and <a href="#enu_constant_until_an">4.</a>.</div>
+ </mtable></math>E.g., they are satisfied by choices in items <a href="#enu_decreasing_and_converging">2.</a> and <a href="#enu_constant_until_an">4.</a> .</li>
+</ul>
 </div>
 
-<div class="standard" id='magicparlabel-74'><br />
+<div class="standard" id='magicparlabel-75'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-75'><span class="section_label">3</span> Examples</h2>
-<h2 class="section" id='magicparlabel-76'><span class="section_label">4</span> Analysis<a id="sec_Analysis" />
+<h2 class="section" id='magicparlabel-76'><span class="section_label">3</span> Examples</h2>
+<h2 class="section" id='magicparlabel-77'><span class="section_label">4</span> Analysis<a id="sec_Analysis" />
 </h2>
-<h2 class="section" id='magicparlabel-77'><span class="section_label">5</span> Subgradients</h2>
+<h2 class="section" id='magicparlabel-78'><span class="section_label">5</span> Subgradients</h2>
 </body>
 </html>

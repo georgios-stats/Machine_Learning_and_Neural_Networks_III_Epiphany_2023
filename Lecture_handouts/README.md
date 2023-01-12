@@ -54,4 +54,6 @@ Elements of convex learning problems
 + [01.Convex_learning_problems.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/01.Convex_learning_problems.pdf)  
 
 
+Stochastic gradient descent  
 
++ [02.Gradient_descent.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/02.Gradient_descent.pdf)  

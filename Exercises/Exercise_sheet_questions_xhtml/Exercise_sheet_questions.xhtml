@@ -1,0 +1,1477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="GENERATOR" content="LyX 2.3.6" />
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<title>LyX Document</title>
+<style type='text/css'>
+/* LyX Provided Styles */
+mstyle.math { font-style: italic; }
+
+/* Layout-provided Styles */
+div.standard {
+	margin-bottom: 2ex;
+}
+div.plain_layout {
+text-align: left;
+
+}
+h1.part {
+font-weight: bold;
+font-size: x-large;
+margin-top: 2ex;
+margin-bottom: 1.5ex;
+text-align: left;
+
+}
+div.theorem {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.theorem_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+div.exercise {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.exercise_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+div.solution_ {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.solution__label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
+dl.description dt { font-weight: bold; }
+ul.itemize {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
+div.proof {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.proof_label {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
+div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; border-right: solid black 1ex; padding: 0.5ex; }
+
+
+</style>
+</head>
+<body dir="auto">
+<div class="standard" id='magicparlabel-3'><div class='Shadowbox'><div class="plain_layout" id='magicparlabel-7'>MATH3431 Machine Learning and Neural Networks III Epiphany term 2023<div style='height:3ex'></div></div>
+
+<div class="plain_layout" style='text-align: center;' id='magicparlabel-8'><b><span style='font-size:x-large;'>Exercise sheet</span></b><div style='height:3ex'></div></div>
+
+<div class="plain_layout" id='magicparlabel-9'>Lecturer: Georgios P. Karagiannis&nbsp;&nbsp; <a href="georgios.karagiannis@durham.ac.uk">georgios.karagiannis@durham.ac.uk</a></div>
+</div></div>
+
+<div class="standard" id='magicparlabel-10'>&nbsp;<div style='height:1ex'></div><div style='height:1ex'></div></div>
+
+<div class="standard" id='magicparlabel-11'>&nbsp;</div>
+<h1 class="part" id='magicparlabel-12'><span class="part_label">Part I</span> Stochastic learning</h1>
+
+<div class="exercise" id='magicparlabel-13'><div class="exercise_item"><span class="exercise_label">Exercise #.</span>
+<a id="exer___" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-15'>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup><mo> &rarr; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo>&lt;</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> or some <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. If <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>g</mi>
+ </mrow></math>is convex function then <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>f</mi>
+ </mrow></math>is convex function. </div>
+
+
+
+<div class="solution_" id='magicparlabel-21'><div class="solution__item"><span class="solution__label">Solution.</span>
+Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo>,</mo><mi>v</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>a</mi><mo> &isin; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+  </mrow>
+ </mrow></math>. It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi> &alpha; </mi><mi>u</mi><mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>v</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo>&lt;</mo><mi> &alpha; </mi><mi>u</mi><mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>v</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd><mrow/>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo>=</mo>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo>&lt;</mo><mi> &alpha; </mi><mi>u</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mo>&lt;</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>v</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd><mrow/>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo>=</mo>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi> &alpha; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mo>&lt;</mo><mi>u</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mo>&lt;</mo><mi>v</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mi>y</mi><mo>=</mo><mi> &alpha; </mi><mi>y</mi><mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>1</mn><mo>-</mo><mi> &alpha; </mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>y</mi>
+    </mrow>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow><mi> &alpha; </mi><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo>&lt;</mo><mi>u</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo>&lt;</mo><mi>v</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <mstyle class='math'><mi>g</mi>
+      </mstyle>&nbsp;<mi>i</mi><mi>s</mi>&nbsp;<mi>c</mi><mi>o</mi><mi>n</mi><mi>v</mi><mi>e</mi><mi>x</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mstyle>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo>=</mo>
+   </mtd>
+   <mtd>
+    <mrow><mi> &alpha; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>1</mn><mo>−</mo><mi> &alpha; </mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd><mrow/>
+   </mtd>
+  </mtr>
+ </mtable></math></div>
+</div>
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-27'><hr />
+
+</div>
+
+<div class="exercise" id='magicparlabel-32'><div class="exercise_item"><span class="exercise_label">Exercise #.</span>
+<a id="exer____1" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-34'>Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>g</mi>
+   </mrow>
+   <mrow><mn>1</mn>
+   </mrow>
+  </msub>
+ </mrow></math> be <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi> &rho; </mi>
+   </mrow>
+   <mrow><mn>1</mn>
+   </mrow>
+  </msub>
+ </mrow></math>-Lipschitz and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>g</mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msub>
+ </mrow></math> be <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi> &rho; </mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msub>
+ </mrow></math>-Lipschitz. Then <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>f</mi>
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>g</mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &rho; </mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi> &rho; </mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math>-Lipschitz.</div>
+
+
+
+<div class="solution_" id='magicparlabel-40'><div class="solution__item"><span class="solution__label">Solution.</span>
+&nbsp;<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+     <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+<mo>=</mo>
+    </mrow>
+   </mtd>
+   <mtd><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>g</mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>g</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo>
+     <msub>
+      <mrow><mi>g</mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>g</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow>
+     <msub>
+      <mrow><mi> &rho; </mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>g</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo>
+      <msub>
+       <mrow><mi>g</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+    </mrow>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow>
+     <msub>
+      <mrow><mi> &rho; </mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub>
+     <msub>
+      <mrow><mi> &rho; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub><mo>-</mo>
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+    </mrow>
+   </mtd>
+  </mtr>
+ </mtable></math></div>
+</div>
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-46'><hr />
+
+</div>
+
+<div class="exercise" id='magicparlabel-51'><div class="exercise_item"><span class="exercise_label">Exercise #.</span>
+<a id="exer____2" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-53'>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup><mo> &rarr; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo>:</mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle><mo> &rarr; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> be a <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math>-smooth function. Then <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>f</mi>
+ </mrow></math> is a <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow><mi> &beta; </mi>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math>-smooth.</div>
+
+<dl class='description' id='magicparlabel-54'><dt class="description_label">Hint:</dt>
+<dd class="description_item"> You may use Cauchy-Schwarz inequality <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo> &lang; </mo><mi>y</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo> &le; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>y</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+  </mrow>
+ </mrow></math></dd>
+</dl>
+
+
+<div class="standard" id='magicparlabel-60'>&nbsp;<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd><mrow/>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mi>g</mi><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &lang; </mo><mi>v</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo>
+     <mfrac>
+      <mrow><mi> &beta; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </mfrac>
+     <msup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow><mo> &lang; </mo><mi>v</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <mstyle class='math'><mi>g</mi>
+      </mstyle>&nbsp;<mi>i</mi><mi>s</mi>&nbsp;<mi>s</mi><mi>m</mi><mi>o</mi><mi>o</mi><mi>t</mi><mi>h</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mstyle>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mi>g</mi><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &lang; </mo><mi>v</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo>
+     <mfrac>
+      <mrow><mi> &beta; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </mfrac>
+     <msup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+        <mrow><mi>v</mi><mo>-</mo><mi>w</mi>
+        </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>C</mi><mi>a</mi><mi>u</mi><mi>c</mi><mi>h</mi><mi>y</mi><mo>-</mo><mi>S</mi><mi>c</mi><mi>h</mi><mi>w</mi><mi>a</mi><mi>t</mi><mi>z</mi>&nbsp;<mi>i</mi><mi>n</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>t</mi><mi>y</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mstyle>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo>=</mo>
+   </mtd>
+   <mtd>
+    <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo> &lang; </mo><mi> &nabla; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo><mi>v</mi><mo>-</mo><mi>w</mi><mo> &rang; </mo><mo>+</mo>
+     <mfrac>
+      <mrow>
+       <mrow><mi> &beta; </mi>
+        <msup>
+         <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+        </msup>
+       </mrow>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </mfrac>
+     <msup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+       <mrow><mi>v</mi><mo>-</mo><mi>w</mi>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup>
+    </mrow>
+   </mtd>
+   <mtd><mrow/>
+   </mtd>
+  </mtr>
+ </mtable></math></div>
+
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-66'><hr />
+
+</div>
+
+<div class="exercise" id='magicparlabel-71'><div class="exercise_item"><span class="exercise_label">Exercise #.</span>
+<a id="exer____2_1" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-73'><math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo><mi>S</mi><mo> &rarr; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &rho; </mi>
+ </mrow></math>-Lipschitz over an open convex set <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>S</mi>
+ </mrow></math> if and only if for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo> &isin; </mo><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi> &rho; </mi>
+  </mrow>
+ </mrow></math>. </div>
+
+<dl class='description' id='magicparlabel-74'><dt class="description_label">Hint:</dt>
+<dd class="description_item"> You may use Cauchy-Schwarz inequality <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo> &lang; </mo><mi>y</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo> &le; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>y</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+  </mrow>
+ </mrow></math></dd>
+</dl>
+<div class="standard" id='magicparlabel-75'>&nbsp;</div>
+
+<div class="solution_" id='magicparlabel-80'><div class="solution__item"><span class="solution__label">Solution.</span>
+
+<span style = "text-align: center;"><img src="lyxpreviewrcFoAN1.png" alt="Mathematical Equation" />
+</span>
+ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo><mi>S</mi><mo> &rarr; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> be <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &rho; </mi>
+ </mrow></math>-Lipschitz over convex set <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>S</mi>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo> &isin; </mo><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<ul class="itemize" id='magicparlabel-81'><li class="itemize_item">Since <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>S</mi>
+ </mrow></math> is open we get that there exist <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &epsi; </mi><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> such as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo>:</mo><mo>=</mo><mi>w</mi><mo>+</mo><mi> &epsi; </mi>
+   <mfrac>
+    <mrow><mi>v</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+    </mrow>
+   </mfrac>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math>. So <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo> &lang; </mo><mi>u</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo> &rang; </mo><mo>=</mo><mi> &epsi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>u</mi><mo>-</mo><mi>w</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo>=</mo><mi> &epsi; </mi>
+  </mrow>
+ </mrow></math>.</li>
+<li class="itemize_item">From the subgradient definition we get<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &ge; </mo><mo> &lang; </mo><mi>u</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi>v</mi><mo> &rang; </mo><mo>=</mo><mi> &epsi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+  </mrow>
+ </mrow></math></li>
+<li class="itemize_item">From the Lipschitzness of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> we get<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &ge; </mo><mi> &rho; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>u</mi><mo>-</mo><mi>w</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo>=</mo><mi> &rho; </mi><mi> &epsi; </mi>
+  </mrow>
+ </mrow></math></li>
+</ul>
+<div class="standard" id='magicparlabel-84'>Therefore <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi> &rho; </mi>
+  </mrow>
+ </mrow></math>.</div>
+
+<div class="proof" id='magicparlabel-85'><div class="proof_item"><span class="proof_label">Proof.</span>
+
+<span style = "text-align: center;"><img src="lyxpreviewISNFgZ1.png" alt="Mathematical Equation" />
+</span>
+ It is for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo> &isin; </mo><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi> &rho; </mi>
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<ul class="itemize" id='magicparlabel-86'><li class="itemize_item">For any <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math>, it is<a id="eq_hafsuighrsiurIUFASNGRSGWUTRG" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &le; </mo>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mo> &lang; </mo><mi>v</mi><mo>,</mo><mi>w</mi><mo>-</mo><mi>u</mi><mo> &rang; </mo>
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>&nbsp;<mi>b</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>u</mi><mi>s</mi><mi>e</mi>&nbsp;
+      <mstyle class='math'>
+       <mrow><mi>v</mi><mo> &isin; </mo><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+      </mstyle>&nbsp;
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mstyle>
+   </mtd>
+   <mtd>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+     <mrow><mi>w</mi><mo>-</mo><mi>u</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'>
+     <mrow><mi>b</mi><mi>y</mi>&nbsp;<mi>C</mi><mi>a</mi><mi>u</mi><mi>c</mi><mi>h</mi><mi>y</mi><mo>-</mo><mi>S</mi><mi>c</mi><mi>h</mi><mi>w</mi><mi>a</mi><mi>r</mi><mi>z</mi>&nbsp;<mi>i</mi><mi>n</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>t</mi><mi>y</mi>
+     </mrow>
+    </mstyle>
+   </mtd>
+   <mtd>(1)
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mo> &le; </mo>
+   </mtd>
+   <mtd>
+    <mrow><mi> &rho; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+     <mrow><mi>w</mi><mo>-</mo><mi>u</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mstyle mathvariant='normal'>
+     <mrow><mi>b</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>u</mi><mi>s</mi><mi>e</mi>&nbsp;
+      <mstyle class='math'>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi> &rho; </mi>
+       </mrow>
+      </mstyle>
+     </mrow>
+    </mstyle>
+   </mtd>
+   <mtd>
+   </mtd>
+  </mtr>
+ </mtable></math></li>
+<li class="itemize_item">Similarly it results <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo>,</mo><mi>w</mi><mo> &isin; </mo><mi>S</mi>
+  </mrow>
+ </mrow></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &le; </mo><mo> &lang; </mo><mi>v</mi><mo>,</mo><mi>u</mi><mo>-</mo><mi>w</mi><mo> &rang; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>v</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>u</mi><mo>-</mo><mi>w</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi> &rho; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>u</mi><mo>-</mo><mi>w</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+  </mrow>
+ </mrow></math>from <a href="#eq_hafsuighrsiurIUFASNGRSGWUTRG">(1)</a> because <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo>,</mo><mi>u</mi>
+  </mrow>
+ </mrow></math> can be swaped in <a href="#eq_hafsuighrsiurIUFASNGRSGWUTRG">(1)</a> as they both are any values in <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>S</mi>
+ </mrow></math>.</li>
+</ul>
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-93'><hr />
+
+</div>
+
+<div class="exercise" id='magicparlabel-98'><div class="exercise_item"><span class="exercise_label">Exercise #.</span>
+<a id="exer____2_1_1" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-100'>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo><mn>...</mn><mo>,</mo>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>r</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> be <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>r</mi>
+ </mrow></math> convex functions, and let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mo> max </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>g</mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. Show that for some <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>w</mi>
+ </mrow></math> it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &nabla; </mi>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>k</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &isin; </mo><mi> &part; </mi><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>k</mi><mo>=</mo><mo> arg </mo>
+   <msub>
+    <mrow><mo> max </mo>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>g</mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is the index of function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> presenting the greatest value at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>w</mi>
+ </mrow></math>. </div>
+
+
+
+<div class="standard" id='magicparlabel-106'>Since <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>g</mi>
+   </mrow>
+   <mrow><mi>j</mi>
+   </mrow>
+  </msub>
+ </mrow></math> is convex, for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>u</mi>
+ </mrow></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &ge; </mo>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo> &lang; </mo><mi>u</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi> &nabla; </mi>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &rang; </mo>
+  </mrow>
+ </mrow></math>However <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mo> max </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi> &forall; </mi><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>g</mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &ge; </mo>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> for any <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>j</mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>w</mi>
+ </mrow></math>. Then<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>u</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &ge; </mo><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mo> &lang; </mo><mi>u</mi><mo>-</mo><mi>w</mi><mo>,</mo><mi> &nabla; </mi>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &rang; </mo>
+  </mrow>
+ </mrow></math> Then by the definition of the sub-gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &nabla; </mi>
+   <msub>
+    <mrow><mi>g</mi>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &isin; </mo><mi> &part; </mi><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math></div>
+
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-112'><hr />
+
+</div>
+
+</body>
+</html>

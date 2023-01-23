@@ -240,6 +240,30 @@ div.Boxed {
 	border: solid thick black;
 	padding: 0.5ex;
 }
+span.foot_label {
+	vertical-align: super;
+	font-size: smaller;
+	font-weight: bold;
+	text-decoration: underline;
+}
+div.foot {
+	display: inline;
+	font-size: small;
+	font-weight: medium;
+	font-family: serif;
+	font-variant: normal;
+	font-style: normal;
+}
+div.foot_inner { display: none; }
+div.foot:hover div.foot_inner {
+	display: block;
+	border: 1px double black;
+	margin: 0em 1em;
+	padding: 1em;
+}
+span.flex_url {
+font-family: monospace;
+}
 div.float {
 	border: 2px solid black;
 	text-align: center;
@@ -6052,8 +6076,9 @@ The accumulation of positive terms in <a href="#eq_fgsfg">(7.3)</a> makes the su
 
 </div>
 <h2 class="section" id='magicparlabel-366'><span class="section_label">8</span> <a id="sec_Example" />
-Example</h2>
-<div class="standard" id='magicparlabel-367'>We Continue Example in Section <a href="#sec_Examples">sec:Examples</a> in Handout 2, however here we consider a dataset <math xmlns="http://www.w3.org/1998/Math/MathML">
+Example<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-370'>Code can be found in <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/03.Stochastic_gradient_descent</span></div>
+</div></div></h2>
+<div class="standard" id='magicparlabel-375'>We Continue Example in Section <a href="#sec_Examples">sec:Examples</a> in Handout 2, however here we consider a dataset <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -6095,11 +6120,11 @@ Example</h2>
  </mrow></math> examples.</div>
 
 
-<div class="standard" id='magicparlabel-372'><br />
+<div class="standard" id='magicparlabel-380'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-373'><div class="example_item"><span class="example_label">Example 52.</span>
+<div class="example" id='magicparlabel-381'><div class="example_item"><span class="example_label">Example 52.</span>
 <a id="exa_The_batch_SGD" />
 The batch SGD algorithm (Algorithm <a href="#alg_batch_Stochastic_Gradient">26</a>) with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -6115,13 +6140,13 @@ The batch SGD algorithm (Algorithm <a href="#alg_batch_Stochastic_Gradient">26</
   </mrow>
  </mrow></math> is </div>
 
-<ul class="itemize" id='magicparlabel-374'><li class="itemize_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-382'><li class="itemize_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
   </mrow>
  </mrow></math> iterate:
 
-<ol class="enumerate" id='magicparlabel-375'><li class="enumerate_item">Randomly generate a set <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-383'><li class="enumerate_item">Randomly generate a set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
    <mrow>
@@ -6433,7 +6458,7 @@ compute <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> STOP</li>
 </ol>
 </li></ul>
-<div class="standard" id='magicparlabel-378'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-386'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -6691,11 +6716,11 @@ compute <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> In Figures <a href="#fig_Example_">a</a> &amp; <a href="#fig_Example__3">d</a>, we observe that increasing the batch size has improved the convergence, however this is not a panacea. </div>
 </div>
 
-<div class="standard" id='magicparlabel-379'><br />
+<div class="standard" id='magicparlabel-387'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-380'><div class="example_item"><span class="example_label">Example 53.</span>
+<div class="example" id='magicparlabel-388'><div class="example_item"><span class="example_label">Example 53.</span>
 <a id="exa_The_SVRG_with" />
 The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -6713,13 +6738,13 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> is</div>
 
-<ul class="itemize" id='magicparlabel-381'><li class="itemize" style='text-align: left;'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-389'><li class="itemize" style='text-align: left;'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
   </mrow>
  </mrow></math> iterate:
 
-<ol class="enumerate" id='magicparlabel-382'><li class="enumerate_item"><a id="enu_sample___and_2_1" />
+<ol class="enumerate" id='magicparlabel-390'><li class="enumerate_item"><a id="enu_sample___and_2_1" />
  randomly generate a set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -7073,7 +7098,7 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>, 
 
-<ol class="enumerate" id='magicparlabel-389'><li class="enumerate_item">set <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-397'><li class="enumerate_item">set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mover>
@@ -7259,7 +7284,7 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
 </li><li class="enumerate" style='text-align: left;'>if a termination criterion is satisfied STOP</li>
 </ol>
 </li></ul>
-<div class="standard" id='magicparlabel-396'>Because <a href="#eq_tyhtsstyrujey">(8.2)</a> is actually the gradient of the Risk function at <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-404'>Because <a href="#eq_tyhtsstyrujey">(8.2)</a> is actually the gradient of the Risk function at <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mover>
    <mrow><mi>w</mi>
@@ -7495,11 +7520,11 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>In Figure <a href="#fig_Example__2">c</a> we observe the frequency of the snapshots has improved the convergence; however this is not a panacea as seen in Figure <a href="#fig_Example__5">f</a>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-397'><br />
+<div class="standard" id='magicparlabel-405'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-398'><div class="example_item"><span class="example_label">Example 54.</span>
+<div class="example" id='magicparlabel-406'><div class="example_item"><span class="example_label">Example 54.</span>
 <a id="exa_The_AdaGrad_with" />
 The AdaGrad with <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -7529,7 +7554,7 @@ The AdaGrad with <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> is</div>
 
-<ul class="itemize" id='magicparlabel-399'><li class="itemize_item">Set <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-407'><li class="itemize_item">Set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -7557,7 +7582,7 @@ The AdaGrad with <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> iterate:
 
-<ol class="enumerate" id='magicparlabel-401'><li class="enumerate_item"><a id="enu_sample___and_2_1_1" />
+<ol class="enumerate" id='magicparlabel-409'><li class="enumerate_item"><a id="enu_sample___and_2_1_1" />
  randomly generate a set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -7949,7 +7974,7 @@ compute<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> STOP</li>
 </ol>
 </li></ul>
-<div class="standard" id='magicparlabel-408'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-416'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -8129,11 +8154,11 @@ compute<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> it did not work. </div>
 </div>
 
-<div class="standard" id='magicparlabel-409'><br />
+<div class="standard" id='magicparlabel-417'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-410'><div class="example_item"><span class="example_label">Example 55.</span>
+<div class="example" id='magicparlabel-418'><div class="example_item"><span class="example_label">Example 55.</span>
 <a id="exa_Consider_a__rather" />
 Consider a (rather naive) loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8271,13 +8296,13 @@ Consider a (rather naive) loss function <math xmlns="http://www.w3.org/1998/Math
  </mrow></math> as</div>
 </div>
 
-<ul class="itemize" id='magicparlabel-411'><li class="itemize_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-419'><li class="itemize_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
   </mrow>
  </mrow></math> iterate:
 
-<ol class="enumerate" id='magicparlabel-412'><li class="enumerate_item"><a id="enu_sample___and_2_1_1_1" />
+<ol class="enumerate" id='magicparlabel-420'><li class="enumerate_item"><a id="enu_sample___and_2_1_1_1" />
  randomly generate a set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -8572,7 +8597,7 @@ compute<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> STOP</li>
 </ol>
-<div class="standard" id='magicparlabel-419'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-427'>because <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -8752,13 +8777,13 @@ compute<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> and converge. </div>
 </li></ul>
 
-<div class="standard" id='magicparlabel-420'><br />
+<div class="standard" id='magicparlabel-428'><br />
 
 </div>
 
 
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-429'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-437'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_Example_" />
 batch SGD Example <a href="#exa_The_batch_SGD">52</a> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8770,7 +8795,7 @@ batch SGD Example <a href="#exa_The_batch_SGD">52</a> <math xmlns="http://www.w3
   </msub>
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-437'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-445'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Example__1" />
 online SGD with projection Example <a href="#exa_Consider_a__rather">55</a><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8782,7 +8807,7 @@ online SGD with projection Example <a href="#exa_Consider_a__rather">55</a><math
   </msub>
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-445'><img style='width:33%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_1.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-453'><img style='width:33%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_1.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_Example__2" />
 SVRG Example <a href="#exa_The_SVRG_with">53</a> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8797,7 +8822,7 @@ SVRG Example <a href="#exa_The_SVRG_with">53</a> <math xmlns="http://www.w3.org/
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-454'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-462'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ures_03_Stochastic_gradient_descent_SGD_w_1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig_Example__3" />
 batch SGD Example <a href="#exa_The_batch_SGD">52</a> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8809,7 +8834,7 @@ batch SGD Example <a href="#exa_The_batch_SGD">52</a> <math xmlns="http://www.w3
   </msub>
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-462'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-470'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_projSGD_w_2.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig_Example__4" />
 online SGD with projection Example <a href="#exa_Consider_a__rather">55</a> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8821,7 +8846,7 @@ online SGD with projection Example <a href="#exa_Consider_a__rather">55</a> <mat
   </msub>
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-470'><img style='width:33%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_2.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_2.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-478'><img style='width:33%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_2.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____res_03_Stochastic_gradient_descent_SVRG_w_2.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig_Example__5" />
 SVRG Example <a href="#exa_The_SVRG_with">53</a> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8836,7 +8861,7 @@ SVRG Example <a href="#exa_The_SVRG_with">53</a> <math xmlns="http://www.w3.org/
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-479'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_1.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-487'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_1.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig_Example__1_1" />
 online AdaGrad Example <a href="#exa_The_AdaGrad_with">54</a><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8848,7 +8873,7 @@ online AdaGrad Example <a href="#exa_The_AdaGrad_with">54</a><math xmlns="http:/
   </msub>
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-487'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_2.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_2.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-495'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_2.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____03_Stochastic_gradient_descent_AdaGrad_w_2.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig_Example__1_1_1" />
 online AdaGrad Example <a href="#exa_The_AdaGrad_with">54</a><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -8862,7 +8887,7 @@ online AdaGrad Example <a href="#exa_The_AdaGrad_with">54</a><math xmlns="http:/
 </div>
 
 
-<div class="plain_layout" id='magicparlabel-492'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 8.1:  Simulations of the Examples </span></div>
+<div class="plain_layout" id='magicparlabel-500'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 8.1:  Simulations of the Examples </span></div>
 
 
 </div>

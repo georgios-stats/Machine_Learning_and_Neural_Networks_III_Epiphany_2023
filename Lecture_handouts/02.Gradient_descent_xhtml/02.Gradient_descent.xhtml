@@ -1490,7 +1490,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mi>t</mi>
    </mrow>
   </msub>
- </mrow></math> is called learning rate, step size, or gain. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is called learning rate, step size, or gain. It determines the size of the steps GD takes to reach a (local) minimum. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -3320,7 +3320,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
 
 <div class="proof" id='magicparlabel-217'><div class="proof_item"><span class="proof_label">Proof.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewaeMVvS1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewIjNzpx1.png" alt="Mathematical Equation" />
 </span>
  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3432,7 +3432,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math>.</div>
 <div class="proof_item">For 
-<span style = "text-align: center;"><img src="lyxpreviewOKUPwV1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewIgAkpX1.png" alt="Mathematical Equation" />
 </span>
  see Exercise <a href="#exer____2_1">exer:()-2-1</a> in the Exercise sheet.</div>
 </div>
@@ -3900,10 +3900,12 @@ The above results from the analysis of the GD also hold for the GD with subgradi
 <div class="standard" id='magicparlabel-238'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-239'><span class="section_label">5</span> Examples<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-243'>Code is available in <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/02.Gradient_descent/example_1.R</span></div>
+<h2 class="section" id='magicparlabel-239'><span class="section_label">5</span> <a id="sec_Examples" />
+Examples<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-243'>Code is available in <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/02.Gradient_descent/example_1.R</span></div>
 </div></div></h2>
 
 <div class="example" id='magicparlabel-248'><div class="example_item"><span class="example_label">Example 33.</span>
+<a id="exa_Consider_the_simple" />
 Consider the simple Normal linear regression problem where the dataset <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -3948,140 +3950,147 @@ Consider the simple Normal linear regression problem where the dataset <math xml
    <mstyle mathvariant='script'><mi>D</mi>
    </mstyle>
   </mrow>
- </mrow></math> is generated from a Normal data generating model <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
-   <mtable>
-    <mtr>
-     <mtd>
-      <msub>
-       <mrow><mi>y</mi>
-       </mrow>
-       <mrow><mi>i</mi>
-       </mrow>
-      </msub>
-     </mtd>
-    </mtr>
-    <mtr>
-     <mtd>
-      <msub>
-       <mrow><mi>x</mi>
-       </mrow>
-       <mrow><mi>i</mi>
-       </mrow>
-      </msub>
-     </mtd>
-    </mtr>
-   </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo><mover accent='false'><mo> &sim; </mo>
-   <mstyle mathvariant='normal'>
-    <mrow><mi>i</mi><mi>i</mi><mi>d</mi>
-    </mrow>
-   </mstyle></mover>
-   <mstyle mathvariant='normal'><mi>N</mi>
-   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+ </mrow></math> is generated from a Normal data generating model <a id="eq_data_geenratin_distr_example_h2" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
+     <mtable>
+      <mtr>
+       <mtd>
+        <msub>
+         <mrow><mi>y</mi>
+         </mrow>
+         <mrow><mi>i</mi>
+         </mrow>
+        </msub>
+       </mtd>
+      </mtr>
+      <mtr>
+       <mtd>
+        <msub>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mi>i</mi>
+         </mrow>
+        </msub>
+       </mtd>
+      </mtr>
+     </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo><mover accent='false'><mo> &sim; </mo>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>i</mi><mi>i</mi><mi>d</mi>
+      </mrow>
+     </mstyle></mover>
+     <mstyle mathvariant='normal'><mi>N</mi>
+     </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
-    <mtable>
-     <mtr>
-      <mtd>
-       <msub>
-        <mrow><mi> &mu; </mi>
-        </mrow>
-        <mrow><mi>y</mi>
-        </mrow>
-       </msub>
-      </mtd>
-     </mtr>
-     <mtr>
-      <mtd>
-       <msub>
-        <mrow><mi> &mu; </mi>
-        </mrow>
-        <mrow><mi>x</mi>
-        </mrow>
-       </msub>
-      </mtd>
-     </mtr>
-    </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>[</mo>
-    <mtable>
-     <mtr>
-      <mtd>
-       <msubsup>
-        <mrow><mi> &sigma; </mi>
-        </mrow>
-        <mrow><mi>y</mi>
-        </mrow>
-        <mrow><mn>2</mn>
-        </mrow>
-       </msubsup>
-      </mtd>
-      <mtd>
-       <mrow><mi> &rho; </mi>
-        <msqrt>
-         <mrow>
-          <msubsup>
-           <mrow><mi> &sigma; </mi>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
+      <mtable>
+       <mtr>
+        <mtd>
+         <msub>
+          <mrow><mi> &mu; </mi>
+          </mrow>
+          <mrow><mi>y</mi>
+          </mrow>
+         </msub>
+        </mtd>
+       </mtr>
+       <mtr>
+        <mtd>
+         <msub>
+          <mrow><mi> &mu; </mi>
+          </mrow>
+          <mrow><mi>x</mi>
+          </mrow>
+         </msub>
+        </mtd>
+       </mtr>
+      </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo><mo>,</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>[</mo>
+      <mtable>
+       <mtr>
+        <mtd>
+         <msubsup>
+          <mrow><mi> &sigma; </mi>
+          </mrow>
+          <mrow><mi>y</mi>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+         </msubsup>
+        </mtd>
+        <mtd>
+         <mrow><mi> &rho; </mi>
+          <msqrt>
+           <mrow>
+            <msubsup>
+             <mrow><mi> &sigma; </mi>
+             </mrow>
+             <mrow><mi>y</mi>
+             </mrow>
+             <mrow><mn>2</mn>
+             </mrow>
+            </msubsup>
+            <msubsup>
+             <mrow><mi> &sigma; </mi>
+             </mrow>
+             <mrow><mi>x</mi>
+             </mrow>
+             <mrow><mn>2</mn>
+             </mrow>
+            </msubsup>
            </mrow>
-           <mrow><mi>y</mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-          </msubsup>
-          <msubsup>
-           <mrow><mi> &sigma; </mi>
-           </mrow>
-           <mrow><mi>x</mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-          </msubsup>
+          </msqrt>
          </mrow>
-        </msqrt>
-       </mrow>
-      </mtd>
-     </mtr>
-     <mtr>
-      <mtd>
-       <mrow><mi> &rho; </mi>
-        <msqrt>
-         <mrow>
-          <msubsup>
-           <mrow><mi> &sigma; </mi>
+        </mtd>
+       </mtr>
+       <mtr>
+        <mtd>
+         <mrow><mi> &rho; </mi>
+          <msqrt>
+           <mrow>
+            <msubsup>
+             <mrow><mi> &sigma; </mi>
+             </mrow>
+             <mrow><mi>y</mi>
+             </mrow>
+             <mrow><mn>2</mn>
+             </mrow>
+            </msubsup>
+            <msubsup>
+             <mrow><mi> &sigma; </mi>
+             </mrow>
+             <mrow><mi>x</mi>
+             </mrow>
+             <mrow><mn>2</mn>
+             </mrow>
+            </msubsup>
            </mrow>
-           <mrow><mi>y</mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-          </msubsup>
-          <msubsup>
-           <mrow><mi> &sigma; </mi>
-           </mrow>
-           <mrow><mi>x</mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-          </msubsup>
+          </msqrt>
          </mrow>
-        </msqrt>
-       </mrow>
-      </mtd>
-      <mtd>
-       <msubsup>
-        <mrow><mi> &sigma; </mi>
-        </mrow>
-        <mrow><mi>x</mi>
-        </mrow>
-        <mrow><mn>2</mn>
-        </mrow>
-       </msubsup>
-      </mtd>
-     </mtr>
-    </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>]</mo>
-   </mrow>
+        </mtd>
+        <mtd>
+         <msubsup>
+          <mrow><mi> &sigma; </mi>
+          </mrow>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+         </msubsup>
+        </mtd>
+       </mtr>
+      </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>]</mo>
+     </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-  </mrow>
- </mrow></math> for <math xmlns="http://www.w3.org/1998/Math/MathML">
+    </mrow>
+   </mtd>
+   <mtd>(5.1)
+   </mtd>
+  </mtr>
+ </mtable></math> for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>n</mi>
   </mrow>
@@ -4169,7 +4178,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
            <msub>
             <mrow><mi> &sigma; </mi>
             </mrow>
-            <mrow><mi>x</mi>
+            <mrow><mi>y</mi>
             </mrow>
            </msub>
           </mrow>
@@ -4177,7 +4186,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
            <msub>
             <mrow><mi> &sigma; </mi>
             </mrow>
-            <mrow><mi>y</mi>
+            <mrow><mi>x</mi>
             </mrow>
            </msub>
           </mrow>
@@ -4199,7 +4208,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
            <msub>
             <mrow><mi> &sigma; </mi>
             </mrow>
-            <mrow><mi>x</mi>
+            <mrow><mi>y</mi>
             </mrow>
            </msub>
           </mrow>
@@ -4207,7 +4216,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
            <msub>
             <mrow><mi> &sigma; </mi>
             </mrow>
-            <mrow><mi>y</mi>
+            <mrow><mi>x</mi>
             </mrow>
            </msub>
           </mrow>
@@ -4218,7 +4227,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
      </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo><mn>.</mn>
     </mrow>
    </mtd>
-   <mtd>(5.1)
+   <mtd>(5.2)
    </mtd>
   </mtr>
  </mtable></math>To learn the optimal <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -4401,7 +4410,9 @@ Consider the simple Normal linear regression problem where the dataset <math xml
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>The GD Algorithm <a href="#alg_Gradient_descent_algorithm">1</a> is</div>
+ </mrow></math>The GD Algorithm <a href="#alg_Gradient_descent_algorithm">1</a> with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &eta; </mi>
+ </mrow></math> is</div>
 <div class="standard" id='magicparlabel-249'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
@@ -4434,13 +4445,7 @@ compute <a id="eq_GD_UPDATE_MECHANISM_1" />
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
       </mrow>
-     </msup><mo>-</mo>
-     <msub>
-      <mrow><mi> &eta; </mi>
-      </mrow>
-      <mrow><mi>t</mi>
-      </mrow>
-     </msub>
+     </msup><mo>-</mo><mi> &eta; </mi>
      <msub>
       <mrow><mi>v</mi>
       </mrow>
@@ -4449,7 +4454,7 @@ compute <a id="eq_GD_UPDATE_MECHANISM_1" />
      </msub><mo>,</mo>
     </mrow>
    </mtd>
-   <mtd>(5.2)
+   <mtd>(5.3)
    </mtd>
   </mtr>
  </mtable></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -4847,7 +4852,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
     </mrow>
    </msubsup><mo>=</mo><mn>1</mn>
   </mrow>
- </mrow></math>. Then the real value <a href="#eq_ex_minimizaer">(5.1)</a> that I need to learn equals to <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Then the real value <a href="#eq_ex_minimizaer">(5.2)</a> that I need to learn equals to <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msup>

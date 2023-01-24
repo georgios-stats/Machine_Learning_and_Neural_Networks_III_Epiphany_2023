@@ -718,3 +718,5 @@ abline(h=w_true[1], col='red')
 plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
+
+

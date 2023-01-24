@@ -3,12 +3,12 @@ title: "Stochastic learning methods"
 subtitle: "Case study: enzyme data-set"
 author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
 output:
-  html_document:
-    df_print: paged
+  html_notebook: 
     number_sections: true
   word_document: default
   pdf_document: default
-  html_notebook: 
+  html_document:
+    df_print: paged
     number_sections: true
 header-includes: 
   - \usepackage{tikz}
@@ -172,7 +172,7 @@ R_{g}\left(w\right)= & \text{E}\left(\ell\left(w,z=\left(x,y\right)\right)\right
 $$
 
 
-## Task 1 {-}
+## Task (given) {-}
 
 The prediction rule is $$h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}$$, where $w\in\mathbb{R}^{2}$
 
@@ -188,7 +188,7 @@ prediction_rule <- function(x,w) {
 
 
 
-## Task 2 {-} 
+## Task (given) {-}
 
 
 The loss function as 
@@ -207,7 +207,7 @@ loss_fun <- function(w,z) {
 }
 ```
 
-## Task 3 {-} 
+## Task (given) {-}
 
 The Empirical risk function is
 $$
@@ -232,7 +232,7 @@ empirical_risk_fun <- function(w,z,n) {
 }
 ```
 
-## Task 4 {-} 
+## Task (given) {-}
 
 Write a function `learning_rate(t,t0)' that computes the learning rate sequence $$\eta_{t}=\frac{t_0}{t}$$ where $t$ is the iteration stage and $t_0$ is a constant. Use $t_0=3$ as default value.  
 
@@ -243,7 +243,7 @@ learning_rate <-function(t,t0=3) {
 }
 ```
 
-## Task 5 {-} 
+## Task (given) {-}
 
 Code the function 'grad_loss_fun(w,z)' that returns the gradient of the loss function at parameter value w, and at example value z. 
 
@@ -257,7 +257,7 @@ grad_loss_fun <- function(w,z) {
 }
 ```
 
-## Task 6 {-} 
+## Task (given) {-}
 
 Code the function 'grad_risk_fun <- function(w,z,n)' that returns the gradient of the risk function at parameter value $w$, and using the dataset $z$ of size $n\times 2$ .  
 
@@ -277,11 +277,15 @@ grad_risk_fun <- function(w,z,n) {
 
 ## Task 
 
-Code a Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.1$ that returns the chain of $\{w^{(t)}\}$. 
+Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=1000$. 
 
-You may use the R function 'grad{numDeriv}' to numerically compute the gradient. Try ?grad .
+Seed with $w^{(0)}=(-0.3,3)^\top$.   
+
+You may use the R function 'grad{numDeriv}' to numerically compute the gradient; e.g. numDeriv::grad( erf_fun, w ) . Try ?grad for more info.
+
+Alternatively, you can you the corresponding function grad_risk_fun provide above. 
 
 
 ```{r}
@@ -303,7 +307,11 @@ Plot the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$
 
 ## Task 
 
-Repeat previous couple of tasks to run GD by changing the values of $\eta$ in the range $(0.001,1.0)$. Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$. If necessary change the termination criterio to consider more or less iterations.
+Repeat previous task to run GD by changing the values of $\eta$ in the range $(0.001,1.0)$. 
+
+Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$.  
+
+If necessary change the termination criterio to consider more or less iterations.
 
 ```{r}
 #
@@ -313,7 +321,11 @@ Repeat previous couple of tasks to run GD by changing the values of $\eta$ in th
 
 ## Task 
 
-Repeat previous couple of tasks to run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose. Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$. If necessary change the termination criterion to consider more or less iterations.
+Repeat previous couple of tasks to run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
+
+Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$.  
+
+If necessary change the termination criterion to consider more or less iterations.
 
 
 ```{r}
@@ -328,7 +340,7 @@ Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.
 
 Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
 
-The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+The dataset containing the examples to train the model are generated below, and stored in the array $z_{\text{obs}}$.  
 
 ```{r}
 set.seed(2023)
@@ -340,7 +352,11 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task 
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$. The batch sampling may be performed as a sampling with replacement (see ?sample.int). The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+
+The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
+
+The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 #
@@ -351,7 +367,11 @@ Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta
 
 ## Task 
 
-Repeat the task above by experimenting and changing the values of the learning rate $eta$ and that of the batch size $m$. Plot the produced chains. What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?
+Repeat the task above by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
+
+Plot the produced chains of $\{w^{(t)}\}$. 
+
+What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?
 
 
 ```{r}
@@ -380,7 +400,7 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task 
 
-Code an online AdaGrad algorithm with $\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
+Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
 
 Use $\epsilon=10^{-6}$
 

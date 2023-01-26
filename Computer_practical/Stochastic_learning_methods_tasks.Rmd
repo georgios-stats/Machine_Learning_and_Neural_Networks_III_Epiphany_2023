@@ -1,6 +1,6 @@
 ---
 title: "Stochastic learning methods"
-subtitle: "Case study: enzyme data-set"
+subtitle: "Logistic regression"
 author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
 output:
   html_notebook: 
@@ -273,6 +273,35 @@ grad_risk_fun <- function(w,z,n) {
 
 ```
 
+## Task (to do)  
+
+Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples). Do this by using the command 'grad_risk_fun' provided above.
+
+```{r}
+w <- c(-0.1,1.5)
+gr <- grad_risk_fun (w, z=z_obs, n=n_obs) 
+gr
+```
+
+
+## Task (to do)  
+
+Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
+
+E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
+
+```{r}
+w <- c(-0.1,1.5)
+#
+erf_fun <- function(w, z = z_obs, n=n_obs) {
+  return( empirical_risk_fun(w, z, n) ) 
+}
+#
+gr <- numDeriv::grad( erf_fun, w )
+#
+gr
+```
+
 # Task: Gradient descent
 
 ## Task 
@@ -453,6 +482,61 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task 
 
+
+Compute $w^{*}$ from the minimization problem 
+
+$$
+w^{*}=\arg\min_{w\in\mathcal{H}}\left( F(w) \right)
+$$
+where $F(w)=\left\Vert w-w' \right\Vert$, $w'=(-0.1,0.3)^\top$ and  $\mathcal{H}=\{w\in\mathbb{R}^{2}:|w|_2 \le 2.0\} $. 
+
+Use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.  
+
+A set of sufficient arguments for the function to run is given below.
+
+```{r}
+# out <- nloptr(x0=..,   
+#               eval_f=..., #   
+#               eval_grad_f=...,  
+#               eval_g_ineq = ...,  
+#               eval_jac_g_ineq = ...,   
+#               w_now=...,  
+#               opts = list("algorithm" = "NLOPT_LD_MMA",  
+#                           "xtol_rel"=1.0e-8)  
+# out$solution
+```
+
+
+The following functions are provided.
+
+```{r}
+#
+boundary <- 2.0 # this is the value |w|_{2}^{2} <= boundary
+# auxiliary functions to compute the projection
+eval_f0 <- function( w_proj, w_now ){ 
+  return( sqrt(sum((w_proj-w_now)^2)) )
+}
+eval_grad_f0 <- function( w, w_now ){ 
+  return( c( 2*(w[1]-w_now[1]), 2*(w[2]-w_now[2]) ) )
+}
+eval_g0 <- function( w_proj, w_now) {
+  return( sum(w_proj^2) -(boundary)^2 )
+}
+eval_jac_g0 <- function( x, w_now ) {
+  return(   c(2*w[1],2*w[2] )  )
+}
+```
+
+Write your code below
+
+```{r}
+#
+#
+#
+```
+
+## Task 
+
 Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
@@ -486,4 +570,42 @@ eval_jac_g0 <- function( x, w_now ) {
 #
 #
 ```
+
+
+---
+
+# Stochastic Variance Reduced Gradient Descent (SVRG)  
+
+## Task
+
+Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
+
+Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
+
+The sampling may be performed as a sampling with replacement (see ?sample.int).  
+
+The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
+
+Produce the trace plots of the produced chains $\{w^(t)\}$.  
+
+
+```{r}
+#
+#
+#
+```
+
+## Task
+
+Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
+
+
+
+```{r}
+#
+#
+#
+```
+
+
 

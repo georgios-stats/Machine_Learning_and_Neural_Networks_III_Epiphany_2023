@@ -81,7 +81,18 @@ font-variant: normal;
 font-size: medium;
 
 }
+ol.enumerate {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
 div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; border-right: solid black 1ex; padding: 0.5ex; }
+div.Boxed {
+	border: solid thick black;
+	padding: 0.5ex;
+}
 
 
 </style>
@@ -920,7 +931,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 <div class="solution_" id='magicparlabel-78'><div class="solution__item"><span class="solution__label">Solution.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewzWBgCA1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewtMHxjm1.png" alt="Mathematical Equation" />
 </span>
  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1035,7 +1046,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 <div class="proof" id='magicparlabel-83'><div class="proof_item"><span class="proof_label">Proof.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewgcdlfU1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewqLZFpw1.png" alt="Mathematical Equation" />
 </span>
  It is for all <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1455,6 +1466,1167 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 <div class="standard" id='magicparlabel-110'><hr />
+
+</div>
+
+<div class="standard" style='text-align: center;' id='magicparlabel-115'>The following is given as a homework (Formative assessment 1)</div>
+
+<div class="exercise" id='magicparlabel-116'><div class="exercise_item"><span class="exercise_label">Exercise #.6.</span>
+<a id="exer____2_1_1_1" />
+(<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> &starf; </mo>
+ </mrow></math>)<div class="standard" id='magicparlabel-118'>Consider the binary classification problem with inputs <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mi>x</mi><mo> &isin; </mo>
+    <msup>
+     <mrow>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mrow>
+     <mrow><mi>d</mi>
+     </mrow>
+    </msup><mo>:</mo>
+    <msub>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msub><mo> &le; </mo><mi>L</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> for some given value <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>L</mi><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>, target <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mo>-</mo><mn>1</mn><mo>,</mo><mo>+</mo><mn>1</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math>, and prediction rule <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>h</mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mo>:</mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup><mo> &rarr; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mo>-</mo><mn>1</mn><mo>,</mo><mo>+</mo><mn>1</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> with <a id="eq__2" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow>
+     <msub>
+      <mrow><mi>h</mi>
+      </mrow>
+      <mrow><mi>w</mi>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>s</mi><mi>i</mi><mi>g</mi><mi>n</mi>
+      </mrow>
+     </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msup>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mi> &top; </mi>
+       </mrow>
+      </msup><mi>x</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>(2)
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mrow/>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>s</mi><mi>i</mi><mi>g</mi><mi>n</mi>
+      </mrow>
+     </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msubsup>
+       <mrow><mo> &sum; </mo>
+       </mrow>
+       <mrow>
+        <mrow><mi>j</mi><mo>=</mo><mn>1</mn>
+        </mrow>
+       </mrow>
+       <mrow><mi>d</mi>
+       </mrow>
+      </msubsup>
+      <msub>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mi>j</mi>
+       </mrow>
+      </msub>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>j</mi>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>(3)
+   </mtd>
+  </mtr>
+ </mtable></math> Let the hypothesis class of prediction rules be<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='normal'>
+   <mstyle class='math'>
+    <mrow>
+     <mstyle mathvariant='script'><mi>H</mi>
+     </mstyle><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+     <mrow><mi>x</mi><mo> &rarr; </mo>
+      <msup>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mi> &top; </mi>
+       </mrow>
+      </msup><mi>x</mi><mo>:</mo><mi> &forall; </mi><mi>w</mi><mo> &isin; </mo>
+      <msup>
+       <mrow>
+        <mstyle mathvariant='double-struck'><mi>R</mi>
+        </mstyle>
+       </mrow>
+       <mrow><mi>d</mi>
+       </mrow>
+      </msup>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+    </mrow>
+   </mstyle>
+  </mstyle>
+ </mrow></math> In other words, the hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>h</mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> is parametrized by <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> it receives an input vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo>:</mo><mo>=</mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> and it returns the label <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>y</mi><mo>=</mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>s</mi><mi>i</mi><mi>g</mi><mi>n</mi>
+    </mrow>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mi> &top; </mi>
+     </mrow>
+    </msup><mi>x</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Y</mi>
+   </mstyle><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mo> &plusmn; </mo><mn>1</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math>. </div>
+
+<div class="standard" id='magicparlabel-135'>Consider a loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo>:</mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup><mo> &rarr; </mo>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='double-struck'>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mstyle>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> with<a id="eq_" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo><mi>y</mi>
+      <msup>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mi> &top; </mi>
+       </mrow>
+      </msup><mi>x</mi>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mi> &lambda; </mi>
+     <msubsup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msubsup>
+    </mrow>
+   </mtd>
+   <mtd>(4)
+   </mtd>
+  </mtr>
+ </mtable></math> for some given value <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &lambda; </mi><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>. </div>
+
+<div class="standard" id='magicparlabel-136'>Assume there is available a dataset of examples <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>S</mi>
+    </mrow>
+    <mrow><mi>n</mi>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>y</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>;</mo><mspace width="6px" /><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>n</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math> of size <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>n</mi>
+ </mrow></math>.</div>
+
+<div class="standard" id='magicparlabel-137'>Do the following tasks. </div>
+
+<dl class='description' id='magicparlabel-138'><dt class="description_label">Hint-1:</dt>
+<dd class="description_item"> We denote <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>s</mi><mi>i</mi><mi>g</mi><mi>n</mi>
+    </mrow>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi> &xi; </mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+   <mtable>
+    <mtr>
+     <mtd>
+      <mrow><mo>-</mo><mn>1</mn><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow>
+       <mstyle mathvariant='normal'>
+        <mrow><mi>i</mi><mi>f</mi>
+        </mrow>
+       </mstyle><mspace width="6px" /><mi> &xi; </mi><mo> &le; </mo><mn>0</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+    <mtr>
+     <mtd>
+      <mrow><mo>+</mo><mn>1</mn><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow>
+       <mstyle mathvariant='normal'>
+        <mrow><mi>i</mi><mi>f</mi>
+        </mrow>
+       </mstyle><mspace width="6px" /><mi> &xi; </mi><mo>&gt;</mo><mn>0</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+   </mtable>
+  </mrow>
+ </mrow></math></dd>
+<dt class="description_label">Hint-2:</dt>
+<dd class="description_item"> The notation <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo> &plusmn; </mo><mn>1</mn>
+  </mrow>
+ </mrow></math> means either <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo>-</mo><mn>1</mn>
+  </mrow>
+ </mrow></math> or <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo>+</mo><mn>1</mn>
+  </mrow>
+ </mrow></math>.</dd>
+<dt class="description_label">HInt-3:</dt>
+<dd class="description_item"> We define <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='double-struck'>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mstyle>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mo>+</mo><mi> &infin; </mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math></dd>
+<dt class="description_label">Hint-4:</dt>
+<dd class="description_item"> We denote <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub><mo>:</mo><mo>=</mo>
+   <msqrt>
+    <mrow>
+     <msub>
+      <mrow><mo> &sum; </mo>
+      </mrow>
+      <mrow>
+       <mrow><mi> &forall; </mi><mi>j</mi>
+       </mrow>
+      </mrow>
+     </msub>
+     <msup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <msub>
+        <mrow><mi>x</mi>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+       </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup>
+    </mrow>
+   </msqrt>
+  </mrow>
+ </mrow></math> the Euclidean distance.</dd>
+</dl>
+
+<ol class="enumerate" id='magicparlabel-142'><li class="enumerate_item">Show that the function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle><mo> &rarr; </mo>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo><mi>x</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is convex in <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='double-struck'><mi>R</mi>
+  </mstyle>
+ </mrow></math>; and show that the loss <a href="#eq_">(4)</a> is convex.
+
+<dl class='description' id='magicparlabel-143'><dt class="description_label">Hint:</dt>
+<dd class="description_item"> You may use Example 13 from Handout 1.</dd>
+</dl>
+</li><li class="enumerate_item">Show that the loss <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &ell; </mi>
+ </mrow></math> <a href="#eq_">(4)</a> is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>L</mi>
+ </mrow></math>-Lipschitz when <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+   <mrow><mi>x</mi><mo> &isin; </mo>
+    <msup>
+     <mrow>
+      <mstyle mathvariant='double-struck'><mi>R</mi>
+      </mstyle>
+     </mrow>
+     <mrow><mi>d</mi>
+     </mrow>
+    </msup><mo>:</mo>
+    <msub>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msub><mo> &le; </mo><mi>L</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+  </mrow>
+ </mrow></math>
+
+<dl class='description' id='magicparlabel-145'><dt class="description_label">Hint:</dt>
+<dd class="description_item"> You may use the definition of Lipschitz function. Without loss of generality, you can consider any <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>1</mn><mo>-</mo><mi>y</mi>
+   <msubsup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msubsup><mi>x</mi><mo> &le; </mo><mn>1</mn><mo>-</mo><mi>y</mi>
+   <msubsup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msubsup><mi>x</mi>
+  </mrow>
+ </mrow></math>, and then take cases <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>1</mn><mo>-</mo><mi>y</mi>
+   <msubsup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msubsup><mi>x</mi><mspace width="6px" /><mo>&gt;</mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>o</mi><mi>r</mi>
+    </mrow>
+   </mstyle><mo>&lt;</mo><mspace width="6px" /><mn>0</mn>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>1</mn><mo>-</mo><mi>y</mi>
+   <msubsup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msubsup><mi>x</mi><mo>&gt;</mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>o</mi><mi>r</mi>
+    </mrow>
+   </mstyle><mo>&lt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> to deal with the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo> max </mo>
+ </mrow></math>.</dd>
+</dl>
+</li><li class="enumerate_item">Construct the set of sub-gradients <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> of the function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo>:</mo>
+   <mstyle mathvariant='double-struck'><mi>R</mi>
+   </mstyle><mo> &rarr; </mo>
+   <msub>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo><mi>x</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. Show that the vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>v</mi>
+ </mrow></math> with <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+   <mtable>
+    <mtr>
+     <mtd>
+      <mrow><mn>2</mn><mi> &lambda; </mi><mi>x</mi><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow><mi>y</mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup><mi>x</mi><mo>&lt;</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+    <mtr>
+     <mtd>
+      <mrow><mn>2</mn><mi> &lambda; </mi><mi>x</mi><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow><mi>y</mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup><mi>x</mi><mo>=</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+    <mtr>
+     <mtd>
+      <mrow><mo>-</mo><mi>y</mi><mi>x</mi><mo>+</mo><mn>2</mn><mi> &lambda; </mi><mi>x</mi><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow><mi>y</mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup><mi>x</mi><mo>&gt;</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+   </mtable>
+  </mrow>
+ </mrow></math> is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo> &isin; </mo>
+   <msub>
+    <mrow><mi> &part; </mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, aka a sub-gradient of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>w</mi>
+ </mrow></math>, for any <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>.</li>
+<li class="enumerate_item"><a id="enu_Write_down_ordered" />
+Write down the algorithm of online AdaGrad (Adaptive Stochastic Gradient Descent) with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &eta; </mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>, batch size <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>m</mi>
+ </mrow></math>, and termination criterion <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>t</mi><mo>&gt;</mo>
+   <msub>
+    <mrow><mi>T</mi>
+    </mrow>
+    <mrow><mo> max </mo>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>T</mi>
+    </mrow>
+    <mrow><mo> max </mo>
+    </mrow>
+   </msub><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> in order to discover <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi>w</mi>
+   </mrow>
+   <mrow><mo>*</mo>
+   </mrow>
+  </msup>
+ </mrow></math> such as <a id="eq__1" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow>
+     <msup>
+      <mrow><mi>w</mi>
+      </mrow>
+      <mrow><mo>*</mo>
+      </mrow>
+     </msup><mo>=</mo><mo> arg </mo>
+     <msub>
+      <mrow><mo> min </mo>
+      </mrow>
+      <mrow>
+       <mrow><mi> &forall; </mi><mi>w</mi><mo>:</mo>
+        <msub>
+         <mrow><mi>h</mi>
+         </mrow>
+         <mrow><mi>w</mi>
+         </mrow>
+        </msub><mo> &isin; </mo>
+        <mstyle mathvariant='script'><mi>H</mi>
+        </mstyle>
+       </mrow>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow>
+        <mstyle mathvariant='normal'><mi>E</mi>
+        </mstyle>
+       </mrow>
+       <mrow>
+        <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+        </mrow>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+        <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+        </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>(5)
+   </mtd>
+  </mtr>
+ </mtable></math> The formulas in your algorithm have to be tailored to <a href="#eq_">4</a>.</li>
+<li class="enumerate_item">Use the R code given below in order to generate the dataset of observed examples <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>S</mi>
+    </mrow>
+    <mrow><mi>n</mi>
+    </mrow>
+   </msub><mo>=</mo>
+   <msubsup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>z</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow>
+       <msub>
+        <mrow><mi>x</mi>
+        </mrow>
+        <mrow><mi>i</mi>
+        </mrow>
+       </msub><mo>,</mo>
+       <msub>
+        <mrow><mi>y</mi>
+        </mrow>
+        <mrow><mi>i</mi>
+        </mrow>
+       </msub>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>n</mi>
+    </mrow>
+   </msubsup>
+  </mrow>
+ </mrow></math> that contains <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>n</mi><mo>=</mo><mn>1</mn>
+   <msup>
+    <mrow><mn>0</mn>
+    </mrow>
+    <mrow><mn>6</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> examples with inputs <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>x</mi>
+ </mrow></math> of dimension <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>d</mi><mo>=</mo><mn>2</mn>
+  </mrow>
+ </mrow></math>. Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &lambda; </mi><mo>=</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>. Use a seed <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mn>0</mn>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msup><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>0</mn><mo>,</mo><mn>0</mn>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>.
+
+<ol class="enumerate" id='magicparlabel-161'><li class="enumerate_item">By using suitable values for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>m</mi>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi> &eta; </mi>
+   </mrow>
+   <mrow><mi>t</mi>
+   </mrow>
+  </msub>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>T</mi>
+   </mrow>
+   <mrow><mo> max </mo>
+   </mrow>
+  </msub>
+ </mrow></math>, code the algorithm you designed in part <a href="#enu_Write_down_ordered">4.</a>, and run it.</li>
+<li class="enumerate_item">Plot the trace plots for each of the dimensions of the generated chain <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <msup>
+   <mrow><mi>w</mi>
+   </mrow>
+   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+  </msup>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math> against the iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>t</mi>
+ </mrow></math>. </li>
+<li class="enumerate_item">Report the value of the output <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msubsup>
+   <mrow><mi>w</mi>
+   </mrow>
+   <mrow>
+    <mstyle mathvariant='normal'>
+     <mrow><mi>a</mi><mi>d</mi><mi>a</mi><mi>G</mi><mi>r</mi><mi>a</mi><mi>d</mi>
+     </mrow>
+    </mstyle>
+   </mrow>
+   <mrow><mo>*</mo>
+   </mrow>
+  </msubsup>
+ </mrow></math> (any type) of the algorithm as the solution to <a href="#eq__1">(5)</a>.</li>
+<li class="enumerate_item">To which cluster <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>y</mi>
+ </mrow></math> (i.e., <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo>-</mo><mn>1</mn>
+  </mrow>
+ </mrow></math> or <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>1</mn>
+ </mrow></math>) <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>n</mi><mi>e</mi><mi>w</mi>
+      </mrow>
+     </mstyle>
+    </mrow>
+   </msub><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>1</mn><mo>,</mo><mn>0</mn>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> belongs?</li>
+</ol>
+</li></ol>
+
+<div class="standard" id='magicparlabel-165'><br />
+
+</div>
+
+<div class="standard" id='magicparlabel-166'><div class='Boxed'><div class="plain_layout" id='magicparlabel-170'># R code. Run it before you run anything else</div>
+
+<div class="plain_layout" id='magicparlabel-171'><span style='font-family:monospace;'>#</span></div>
+
+<div class="plain_layout" id='magicparlabel-172'><span style='font-family:monospace;'>data_generating_model &lt;- function(n,w) { </span></div>
+
+<div class="plain_layout" id='magicparlabel-173'><span style='font-family:monospace;'>z &lt;- rep( NaN, times=n*3 ) </span></div>
+
+<div class="plain_layout" id='magicparlabel-174'><span style='font-family:monospace;'>z &lt;- matrix(z, nrow = n, ncol = 3) </span></div>
+
+<div class="plain_layout" id='magicparlabel-175'><span style='font-family:monospace;'>z[,1] &lt;- rep(1,times=n) </span></div>
+
+<div class="plain_layout" id='magicparlabel-176'><span style='font-family:monospace;'>z[,2] &lt;- runif(n, min = -10, max = 10) </span></div>
+
+<div class="plain_layout" id='magicparlabel-177'><span style='font-family:monospace;'>p &lt;- w[1]*z[,1] + w[2]*z[,2] p &lt;- exp(p) / (1+exp(p)) </span></div>
+
+<div class="plain_layout" id='magicparlabel-178'><span style='font-family:monospace;'>z[,3] &lt;- rbinom(n, size = 1, prob = p) </span></div>
+
+<div class="plain_layout" id='magicparlabel-179'><span style='font-family:monospace;'>ind &lt;- (z[,3]==0)</span></div>
+
+<div class="plain_layout" id='magicparlabel-180'><span style='font-family:monospace;'>z[ind,3] &lt;- -1 </span></div>
+
+<div class="plain_layout" id='magicparlabel-181'><span style='font-family:monospace;'>x &lt;- z[,1:2] </span></div>
+
+<div class="plain_layout" id='magicparlabel-182'><span style='font-family:monospace;'>y &lt;- z[,3]</span></div>
+
+<div class="plain_layout" id='magicparlabel-183'><span style='font-family:monospace;'>return(list(z=z, x=x, y=y)) </span></div>
+
+<div class="plain_layout" id='magicparlabel-184'><span style='font-family:monospace;'>} </span></div>
+
+<div class="plain_layout" id='magicparlabel-185'><span style='font-family:monospace;'>n_obs &lt;- 1000000</span></div>
+
+<div class="plain_layout" id='magicparlabel-186'><span style='font-family:monospace;'>w_true &lt;- c(-3,4) </span></div>
+
+<div class="plain_layout" id='magicparlabel-187'><span style='font-family:monospace;'>set.seed(2023)</span></div>
+
+<div class="plain_layout" id='magicparlabel-188'><span style='font-family:monospace;'>out &lt;- data_generating_model(n = n_obs, w = w_true)</span></div>
+
+<div class="plain_layout" id='magicparlabel-189'><span style='font-family:monospace;'>set.seed(0)</span></div>
+
+<div class="plain_layout" id='magicparlabel-190'><span style='font-family:monospace;'>z_obs &lt;- out$z #z=(x,y)</span></div>
+
+<div class="plain_layout" id='magicparlabel-191'><span style='font-family:monospace;'>x &lt;- out$x</span></div>
+
+<div class="plain_layout" id='magicparlabel-192'><span style='font-family:monospace;'>y &lt;- out$y</span></div>
+
+<div class="plain_layout" id='magicparlabel-193'><span style='font-family:monospace;'>#z_obs2=z_obs</span></div>
+
+<div class="plain_layout" id='magicparlabel-194'><span style='font-family:monospace;'>#z_obs2[z_obs[,3]==-1,3]=0</span></div>
+
+<div class="plain_layout" id='magicparlabel-195'><span style='font-family:monospace;'>#w_true &lt;- as.numeric(glm(z_obs2[,3]~ 1+ z_obs2[,2],family = "binomial" )$coefficients) </span></div>
+</div></div>
+
+
+</div>
+</div>
+<div class="standard" id='magicparlabel-219'><hr />
 
 </div>
 </body>

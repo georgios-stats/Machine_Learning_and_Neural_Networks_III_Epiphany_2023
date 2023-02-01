@@ -40,7 +40,9 @@
 
 All the exercises  
 
-+ [Exercise_sheet_complete.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_complete.pdf) & [Exercise_sheet_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_questions.pdf)  
++ Questions [PDF](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_questions.pdf) & [HTML](https://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_questions_xhtml/Exercise_sheet_questions.xhtml)  
+
++ Complete [PDF](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_complete.pdf) & [HTML](https://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Exercise_sheet_complete_xhtml/Exercise_sheet_complete.xhtml)  
 
 
 ------------------------------------------------------------------------
@@ -48,15 +50,11 @@ All the exercises
 
 ### Homework sheets
 
--   Homework 1  
+Homework 1  
 
-TBD
++ Questions [PDF](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Homework_1_questions.pdf) & [HTML](https://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Homework_1_questions_xhtml/Homework_1_questions_xhtml)  
 
-<!--
-
-    [Homework_1_complete.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Homework_1_complete.pdf) & [Homework_1_questions.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Homework/Homework_1_questions.pdf)  
-
--->
++ Complete [PDF](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Homework_1_complete.pdf) & [HTML](https://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Exercises/Homework_1_complete_xhtml/Homework_1_complete.xhtml)  
 
 ------------------------------------------------------------------------
 

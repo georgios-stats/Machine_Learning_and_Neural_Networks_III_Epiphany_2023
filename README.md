@@ -49,7 +49,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 
 ### Computer practicals
 
--   '[Computer_practicals](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practicals#aim)' folder contains the material for your computer practical classes
+-   '[Computer_practicals](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)' folder contains the material for your computer practical classes
 
 ### Excercises
 

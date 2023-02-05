@@ -628,6 +628,10 @@ div.Boxed {
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
+ </mrow></math> for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &lambda; </mi><mo>=</mo><mn>0</mn>
+  </mrow>
  </mrow></math> <a href="#eq_">(3)</a> is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>L</mi>
  </mrow></math>-Lipschitz (with respect to <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -666,7 +670,7 @@ div.Boxed {
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
   </mrow>
- </mrow></math>
+ </mrow></math>.
 
 <dl class='description' id='magicparlabel-45'><dt class="description_label">Hint:</dt>
 <dd class="description_item"> You may use the definition of Lipschitz function. Without loss of generality, you can consider any <math xmlns="http://www.w3.org/1998/Math/MathML">

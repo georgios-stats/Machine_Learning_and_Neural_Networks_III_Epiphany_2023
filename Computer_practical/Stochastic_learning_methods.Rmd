@@ -62,7 +62,7 @@ Students will become able to:
 
 + implement GD, batch/online SGD, AdaGrad, SGD with projection, SVRG algorithms in R with possibility to extend to other programming languadges  
 
-+ refresh logistic regression 
++ refresh logistic regression, with Ridge penalty  
 
 ---
 

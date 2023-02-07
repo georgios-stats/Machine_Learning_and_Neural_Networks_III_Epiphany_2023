@@ -157,7 +157,7 @@ w_true <- as.numeric(glm(z_obs[,3]~ 1 + z_obs[,2],family = "binomial" )$coeffici
 The predictive rule $h_{w}\left(x\right)$ is 
 
 \[
-h_{w}\left(x\right)=w^{\top}x
+h_{w}\left(x\right)=\frac{\exp\left(x^{\top}w\right)}{1+\exp\left(x^{\top}w\right)}
 \]
 
 where $w\in\mathbb{R}^{2}$ is the unknown parameter we wish to learn. The hypothesis class is $$\mathcal{H}=\{w\in\mathbb{R}^{2}\}$$.   
@@ -273,18 +273,20 @@ grad_log_sampling_pdf <- function(w,z) {
   grd <- -(h-y)*x
   return (grd)
 }
-gr <- grad_log_sampling_pdf(w,z = z_obs[1,])
+gr <- grad_log_sampling_pdf(w = c(-0.1,1.5),z = z_obs[1,])
 gr
 ```
 
 
 ## Task  
 
-Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=0.51$, and constant $C_{0}=10^{-6}$.  
+Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
+
+The learning rate can be constant around $C_{0}=10^{-6}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant $C_{0}=10^{-6}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate).  
 
 The termination criterion is when the total number of iterations excesses $T_{\text{max}}=3\times 10^{3}$. 
 
-Seed with $w^{(0)}=(-0.3,3)^\top$.   
+Seed with $w^{(0)}=(-1,0)^\top$.   
 
 You may use the R function 'grad{numDeriv}' to numerically compute the gradient; e.g. numDeriv::grad( erf_fun, w ) . Try ?grad for more info.  
 
@@ -310,22 +312,24 @@ If you are not happy with the convergence, feel free to tune the algorithmic par
 
 ## Task  
 
-Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=0.51$, and constant $C_{0}=10^{-2}$.  
+Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced.  
+
+The learning rate can be constant around $C_{0}=10^{-2}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant $C_{0}=10^{-2}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate). 
 
 The termination criterion is when the total number of iterations excesses $T_{\text{max}}=3\times 10^{3}$. 
 
-Seed with $w^{(0)}=(-0.3,3)^\top$.   
+Seed with $w^{(0)}=(-1,0)^\top$.   
 
 You may use the R function 'grad{numDeriv}' to numerically compute the gradient; e.g. numDeriv::grad( erf_fun, w ) . Try ?grad for more info.  
 
 If the gradient explodes apply gradient clipping/scaling with threshold $C=10.0$, as 
 
 \[
-w^{(t+1)}=w^{(t)}+\eta_{t}\left(\frac{m}{n}\sum_{j\in\mathcal{J}^{(t)}}\text{clip}\left(\nabla_{w}\log\left(f\left(z^{(t)}w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
+w^{(t+1)}=w^{(t)}+\eta_{t}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\text{clip}\left(\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
 \]
  where 
 \[
-\text{clip}\left(v,c\right)=\min\left(1,\frac{c}{\left\Vert v\right\Vert }\right)
+\text{clip}\left(v,c\right)=v\min\left(1,\frac{c}{\left\Vert v\right\Vert }\right)
 \]
  and $v$ is the gradient. 
 
@@ -336,11 +340,9 @@ w^{(t+1)}=w^{(t)}+\eta_{t}\left(\frac{m}{n}\sum_{j\in\mathcal{J}^{(t)}}\text{cli
 ```
 
 ```{r}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
 #
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
+#
+#
 ```
 
 
@@ -351,8 +353,8 @@ Let's go back to the code without using the clipping gradient.
 Based on the above, copy the tail end of the generated chain $w^(t)$ after discarding the burn in, as 'w_chain_output'.  
 
 ```{r}
-T_bunrin <- as.integer(0.6*Tmax)
-w_chain_output <- w_chain[T_bunrin:Tmax,]
+#T_bunrin <- as.integer(0.6*Tmax)
+#w_chain_output <- w_chain[T_bunrin:Tmax,]
 ```
 
 
@@ -405,7 +407,7 @@ based on SGLD output chain.
 Use the prediction rule  
 
 \[
-h_{w}\left(x\right)=w^{\top}x
+h_{w}\left(x\right)=\frac{\exp\left(x^{\top}w\right)}{1+\exp\left(x^{\top}w\right)}
 \]
 
 and the estimates for $w$ in order to classify the example with feature $x_\text{new}=c(1, 0.5)$.  
@@ -413,7 +415,7 @@ and the estimates for $w$ in order to classify the example with feature $x_\text
 Particularly, compute the point estimate  
 
 \[
-\widehat{h_{w}\left(x\right)}=\frac{1}{T}\sum_{t=1}^{T}\left(x^{\top}w^{(t)}\right)
+\widehat{h_{w}\left(x\right)}=\frac{1}{T}\sum_{t=1}^{T}h_{w^{(t)}}\left(x\right)=\frac{1}{T}\sum_{t=1}^{T}\frac{\exp\left(x^{\top}w^{(t)}\right)}{1+\exp\left(x^{\top}w^{(t)}\right)}
 \]
 
 ```{r}
@@ -431,29 +433,25 @@ Now, compute the point estimate
 by just plugin in the estimate $\hat{w}$. 
 
 ```{r}
-x_new <- c(1,0.5)
-w_est <- colMeans(w_chain_output)
-h_est <- prediction_rule( x_new , w_est )
-h_est
+#
+#
+#
 ```
 
 Now, estimate the pdf of the prediction rule at the example with feature $x_\text{new}=c(1, 0.5)$ (to represent the uncertainty) by using a histogram  
 
 ```{r}
-x_new <- c(1,0.5)
-T <- dim(w_chain_output)[1]
-h_chain <- c()
-for (t in 1:T) {
-  h_chain <- c( h_chain , 
-                prediction_rule( x_new , w_chain_output[t,] ) 
-                )
-}
-hist(h_chain)
+#
+#
+#
+#
 ```
 
 
 
 # Mixture model (Homework challenge)  
+
+The following example is given as a homework practice. The problem is non convex, there are two modes (maxima) (true values) in the posterior distribution. You will see that you will not be able to visit both of the models (maxima) with one run.  You may need to perform several runs starting your algorithm from different seeds $w^{(0)}$.  
 
 ```{r}
 rm( list = ls() )
@@ -555,27 +553,6 @@ for some constants $C_0$ and $\varsigma\in(0.5,1]$.
 #
 #
 #
-```
-
-
-## Task (given)  
-
-Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=4.0$ (at the 1st example; i.e. $z_{1}$).  
-
-Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
-
-E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
-
-```{r}
-w <- 4.0
-#
-aux_fun <- function(w, z = z_obs[1]) {
-  return( log_sampling_pdf(z, w) ) 
-}
-#
-gr <- numDeriv::grad( aux_fun, w )
-#
-gr
 ```
 
 

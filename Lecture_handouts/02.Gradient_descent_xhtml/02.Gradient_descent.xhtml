@@ -328,17 +328,23 @@ font-family: monospace;
 <div style='height:3ex'></div></div>
 <h3 class="subsection_" id='magicparlabel-25'>Reading list &amp; references:</h3>
 
-<ul class="itemize" id='magicparlabel-26'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.</li>
-<li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. </li>
+<ul class="itemize" id='magicparlabel-26'><li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
+
+<ul class="itemize" id='magicparlabel-27'><li class="itemize_item">Ch. 14.1 Gradient Descent</li>
+</ul>
+</li></ul>
+<div class="plain_layout" id='magicparlabel-28'>Further reading</div>
+
+<ul class="itemize" id='magicparlabel-29'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer. </li>
 </ul>
 </div></div>
-<h2 class="section" id='magicparlabel-28'><span class="section_label">1</span> Motivations</h2>
+<h2 class="section" id='magicparlabel-30'><span class="section_label">1</span> Motivations</h2>
 
-<div class="standard" id='magicparlabel-29'><br />
+<div class="standard" id='magicparlabel-31'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-30'><div class="note_item"><span class="note_label">Note 1.</span>
+<div class="note" id='magicparlabel-32'><div class="note_item"><span class="note_label">Note 1.</span>
 Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -514,13 +520,13 @@ Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mtr>
  </mtable></math> If analytical minimization of <a href="#eq_emfmin">(1.1)</a> is impossible or impractical, numerical procedures can be applied; eg Gradient Descent (GD) algorithms. Such approaches introduce numerical errors in the solution. </div>
 </div>
-<h2 class="section" id='magicparlabel-31'><span class="section_label">2</span> Description </h2>
+<h2 class="section" id='magicparlabel-33'><span class="section_label">2</span> Description </h2>
 
-<div class="standard" id='magicparlabel-32'><br />
+<div class="standard" id='magicparlabel-34'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-33'><div class="notation_item"><span class="notation_label">Notation 2.</span>
+<div class="notation" id='magicparlabel-35'><div class="notation_item"><span class="notation_label">Notation 2.</span>
 For the sake of notation simplicity and generalization, we will present Gradient Descent (GD) in the following minimization problem<a id="eq_gvbzvcb" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -612,11 +618,11 @@ For the sake of notation simplicity and generalization, we will present Gradient
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-34'><br />
+<div class="standard" id='magicparlabel-36'><br />
 
 </div>
 
-<div class="assumption" id='magicparlabel-35'><div class="assumption_item"><span class="assumption_label">Assumption 3.</span>
+<div class="assumption" id='magicparlabel-37'><div class="assumption_item"><span class="assumption_label">Assumption 3.</span>
 Assume (for now) that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
@@ -634,11 +640,11 @@ Assume (for now) that <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> is a differentiable function.</div>
 </div>
 
-<div class="standard" id='magicparlabel-36'><br />
+<div class="standard" id='magicparlabel-38'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-37'><div class="definition_item"><span class="definition_label">Definition 4.</span>
+<div class="definition" id='magicparlabel-39'><div class="definition_item"><span class="definition_label">Definition 4.</span>
 Given a per-specified learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -718,13 +724,13 @@ Given a per-specified learning rate <math xmlns="http://www.w3.org/1998/Math/Mat
  <mrow><mi>f</mi>
  </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>w</mi>
- </mrow></math>.<div class='float-algorithm'><div class="plain_layout" style='text-align: left;' id='magicparlabel-45'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>.<div class='float-algorithm'><div class="plain_layout" style='text-align: left;' id='magicparlabel-47'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
   </mrow>
  </mrow></math> iterate: </div>
 
-<ol class="enumerate" id='magicparlabel-46'><li class="enumerate" style='text-align: left;'>compute <a id="eq_GD_UPDATE_MECHANISM" />
+<ol class="enumerate" id='magicparlabel-48'><li class="enumerate" style='text-align: left;'>compute <a id="eq_GD_UPDATE_MECHANISM" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -803,7 +809,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
   </mrow>
  </mrow></math></li>
 </ol>
-<div class="plain_layout" id='magicparlabel-48'><span class='float-caption-Standard float-caption float-caption-standard'>Algorithm 1:  <a id="alg_Gradient_descent_algorithm" />
+<div class="plain_layout" id='magicparlabel-50'><span class='float-caption-Standard float-caption float-caption-standard'>Algorithm 1:  <a id="alg_Gradient_descent_algorithm" />
 Gradient descent algorithm with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -817,7 +823,7 @@ Gradient descent algorithm with learning rate <math xmlns="http://www.w3.org/199
 </div>
 </div>
 
-<div class="remark" id='magicparlabel-53'><div class="remark_item"><span class="remark_label">Remark 5.</span>
+<div class="remark" id='magicparlabel-55'><div class="remark_item"><span class="remark_label">Remark 5.</span>
 Interpreting GD, GD produces a chain <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
@@ -858,11 +864,11 @@ Interpreting GD, GD produces a chain <math xmlns="http://www.w3.org/1998/Math/Ma
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-54'><br />
+<div class="standard" id='magicparlabel-56'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-55'><div class="remark_item"><span class="remark_label">Remark 6.</span>
+<div class="remark" id='magicparlabel-57'><div class="remark_item"><span class="remark_label">Remark 6.</span>
 For more intuitive explanation, consider the (1st order) Taylor polynomial for the approximation of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -903,7 +909,7 @@ For more intuitive explanation, consider the (1st order) Taylor polynomial for t
   </mrow>
  </mrow></math>Assuming convexity for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
- </mrow></math>, it is <div class="marginal"><div class="plain_layout" id='magicparlabel-59'>See 
+ </mrow></math>, it is <div class="marginal"><div class="plain_layout" id='magicparlabel-61'>See 
 <br />
 
 Handout 1</div>
@@ -1297,16 +1303,16 @@ Handout 1</div>
  </mrow></math> controls the trade off in <a href="#eq_dtrtg">(2.5)</a>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-60'><br />
+<div class="standard" id='magicparlabel-62'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-61'><div class="remark_item"><span class="remark_label">Remark 7.</span>
+<div class="remark" id='magicparlabel-63'><div class="remark_item"><span class="remark_label">Remark 7.</span>
 Given <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>T</mi>
  </mrow></math> GD algorithm iterations, the output of GD can be (but not a exclusively), </div>
 
-<ol class="enumerate" id='magicparlabel-62'><li class="enumerate_item">the average (after discarding the first few iterations of <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-64'><li class="enumerate_item">the average (after discarding the first few iterations of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
    <mrow><mi>w</mi>
@@ -1452,11 +1458,11 @@ Given <math xmlns="http://www.w3.org/1998/Math/MathML">
 </ol>
 </div>
 
-<div class="standard" id='magicparlabel-65'><br />
+<div class="standard" id='magicparlabel-67'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-66'><div class="note_item"><span class="note_label">Note 8.</span>
+<div class="note" id='magicparlabel-68'><div class="note_item"><span class="note_label">Note 8.</span>
 <a id="note_GD_algorithm_converges" />
 GD output converges to a local minimum, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1486,11 +1492,11 @@ GD output converges to a local minimum, <math xmlns="http://www.w3.org/1998/Math
  </mrow></math> (in some sense), under different sets of regularity conditions (some are weaker other stronger). Section <a href="#sec_Analysis">4</a> has a brief analysis.</div>
 </div>
 
-<div class="standard" id='magicparlabel-67'><br />
+<div class="standard" id='magicparlabel-69'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-68'><div class="remark_item"><span class="remark_label">Remark 9.</span>
+<div class="remark" id='magicparlabel-70'><div class="remark_item"><span class="remark_label">Remark 9.</span>
 <a id="rem_The_parameter_" />
 The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1532,7 +1538,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
   </msub>
  </mrow></math> are:</div>
 
-<ol class="enumerate" id='magicparlabel-69'><li class="enumerate_item"><u>constant</u>; <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-71'><li class="enumerate_item"><u>constant</u>; <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1917,7 +1923,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>) are are often discarded/ignored from the output of the GD algorithm. </li>
 </ol>
 
-<ul class="itemize" id='magicparlabel-73'><li class="itemize_item">Parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-75'><li class="itemize_item">Parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo>,</mo><mi> &sigmav; </mi><mo>,</mo>
    <msub>
@@ -1937,14 +1943,14 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
 </ul>
 </div>
 
-<div class="standard" id='magicparlabel-105'><br />
+<div class="standard" id='magicparlabel-107'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-106'><div class="remark_item"><span class="remark_label">Remark 10.</span>
+<div class="remark" id='magicparlabel-108'><div class="remark_item"><span class="remark_label">Remark 10.</span>
 There are several practical termination criteria that can be used in GD Algorithm <a href="#alg_Gradient_descent_algorithm">1</a>(step <a href="#enu_terminate_if">2.</a>). They aim to terminate the recursion in practice. Some popular termination criteria are</div>
 
-<ol class="enumerate" id='magicparlabel-107'><li class="enumerate_item">terminate when the gradient is sufficiently close to zero; i.e. if <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-109'><li class="enumerate_item">terminate when the gradient is sufficiently close to zero; i.e. if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
 
@@ -2035,15 +2041,15 @@ There are several practical termination criteria that can be used in GD Algorith
   </mrow>
  </mrow></math> then STOP</li>
 </ol>
-<div class="standard" id='magicparlabel-110'>Here (1) may be deceive if the chain is in a flat area, (2) may be deceived if the learning rate become too small, (3) is obviously a last resort.</div>
+<div class="standard" id='magicparlabel-112'>Here (1) may be deceive if the chain is in a flat area, (2) may be deceived if the learning rate become too small, (3) is obviously a last resort.</div>
 </div>
-<h2 class="section" id='magicparlabel-111'><span class="section_label">3</span> GD for non-differentiable functions (using sub-gradients)</h2>
+<h2 class="section" id='magicparlabel-113'><span class="section_label">3</span> GD for non-differentiable functions (using sub-gradients)</h2>
 
-<div class="note" id='magicparlabel-112'><div class="note_item"><span class="note_label">Note 11.</span>
+<div class="note" id='magicparlabel-114'><div class="note_item"><span class="note_label">Note 11.</span>
 In several learning problems the function to be minimized is not differentiable. GD can be extended to address such problems with the use of subgradients. </div>
 </div>
 
-<div class="definition" id='magicparlabel-113'><div class="definition_item"><span class="definition_label">Definition 12.</span>
+<div class="definition" id='magicparlabel-115'><div class="definition_item"><span class="definition_label">Definition 12.</span>
 Vector <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>v</mi>
  </mrow></math> is called subgradient of a function <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -2076,11 +2082,11 @@ Vector <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-114'><br />
+<div class="standard" id='magicparlabel-116'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-115'><div class="note_item"><span class="note_label">Note 13.</span>
+<div class="note" id='magicparlabel-117'><div class="note_item"><span class="note_label">Note 13.</span>
 Essentially there may be more than one subgradients of the function at a specific point. As seen by <a href="#eq_subgradient_condition">(3.1)</a>, subgradients are the slopes of all the lines passing through the point <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -2098,13 +2104,13 @@ Essentially there may be more than one subgradients of the function at a specifi
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>. <div class='float-figure'><div class="plain_layout" id='magicparlabel-119'> </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-123'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/subgradient.pdf' alt='image: ' />
+ </mrow></math>. <div class='float-figure'><div class="plain_layout" id='magicparlabel-121'> </div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-125'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/subgradient.pdf' alt='image: ' />
 </div>
 
-<div class="plain_layout" id='magicparlabel-124'><span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  subgradients satisfying <a href="#eq_subgradient_condition">(3.1)</a> in the non-differentiable case</span></div>
+<div class="plain_layout" id='magicparlabel-126'><span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  subgradients satisfying <a href="#eq_subgradient_condition">(3.1)</a> in the non-differentiable case</span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-132'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/gradient.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-134'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/gradient.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  gradient satisfying the equality in <a href="#eq_subgradient_condition">(3.1)</a> in the differentiable case</span></div>
 </div>
 
@@ -2112,11 +2118,11 @@ Essentially there may be more than one subgradients of the function at a specifi
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-162'><br />
+<div class="standard" id='magicparlabel-164'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-163'><div class="notation_item"><span class="notation_label">Notation 14.</span>
+<div class="notation" id='magicparlabel-165'><div class="notation_item"><span class="notation_label">Notation 14.</span>
 The set of subgradients of function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo><mi>S</mi><mo> &rarr; </mo>
@@ -2137,11 +2143,11 @@ The set of subgradients of function <math xmlns="http://www.w3.org/1998/Math/Mat
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-169'><br />
+<div class="standard" id='magicparlabel-171'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-170'><div class="definition_item"><span class="definition_label">Definition 15.</span>
+<div class="definition" id='magicparlabel-172'><div class="definition_item"><span class="definition_label">Definition 15.</span>
 The Gradient Descent algorithm using subgradients in non-differentiable cases, results by replacing the gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &nabla; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -2260,21 +2266,21 @@ The Gradient Descent algorithm using subgradients in non-differentiable cases, r
   </mtr>
  </mtable></math></div>
 </div>
-<h3 class="subsection" id='magicparlabel-175'><span class="subsection_label">3.1</span> Construction of subgradient</h3>
+<h3 class="subsection" id='magicparlabel-177'><span class="subsection_label">3.1</span> Construction of subgradient</h3>
 
-<div class="note" id='magicparlabel-176'><div class="note_item"><span class="note_label">Note 16.</span>
+<div class="note" id='magicparlabel-178'><div class="note_item"><span class="note_label">Note 16.</span>
 We discuss how to construct subgradients in practice.</div>
 </div>
 
-<div class="standard" id='magicparlabel-177'><br />
+<div class="standard" id='magicparlabel-179'><br />
 
 </div>
 
-<div class="fact" id='magicparlabel-178'><div class="fact_item"><span class="fact_label">Fact 17.</span>
+<div class="fact" id='magicparlabel-180'><div class="fact_item"><span class="fact_label">Fact 17.</span>
 <a id="thm_If_function_" />
 Some properties of subgradient sets that help for their construction</div>
 
-<ol class="enumerate" id='magicparlabel-179'><li class="enumerate_item"><i>If function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-181'><li class="enumerate_item"><i>If function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo><mi>S</mi><mo> &rarr; </mo>
    <mstyle mathvariant='double-struck'><mi>R</mi>
@@ -2403,7 +2409,7 @@ Some properties of subgradient sets that help for their construction</div>
 </ol>
 </div>
 
-<div class="example" id='magicparlabel-186'><div class="example_item"><span class="example_label">Example 18.</span>
+<div class="example" id='magicparlabel-188'><div class="example_item"><span class="example_label">Example 18.</span>
 Consider the function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
@@ -2463,7 +2469,7 @@ Consider the function <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>.</div>
 
-<div class="solution_" id='magicparlabel-187'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-189'><div class="solution__item"><span class="solution__label">Solution.</span>
 Using Fact <a href="#thm_If_function_">17</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &part; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -2573,14 +2579,14 @@ Using Fact <a href="#thm_If_function_">17</a>, it is <math xmlns="http://www.w3.
  </mrow></math></div>
 </div>
 </div>
-<h2 class="section" id='magicparlabel-188'><span class="section_label">4</span> Analysis of Gradient descent<a id="sec_Analysis" />
+<h2 class="section" id='magicparlabel-190'><span class="section_label">4</span> Analysis of Gradient descent<a id="sec_Analysis" />
 </h2>
 
-<div class="assumption" id='magicparlabel-189'><div class="assumption_item"><span class="assumption_label">Assumption 19.</span>
+<div class="assumption" id='magicparlabel-191'><div class="assumption_item"><span class="assumption_label">Assumption 19.</span>
 <a id="assu_For_the_sake" />
 For the sake of the analysis of the GD, let us consider:</div>
 
-<ol class="enumerate" id='magicparlabel-190'><li class="enumerate_item"><i>constant learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-192'><li class="enumerate_item"><i>constant learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2637,7 +2643,7 @@ For the sake of the analysis of the GD, let us consider:</div>
   </mrow>
  </mrow></math></i></li>
 </ol>
-<div class="standard" id='magicparlabel-192'><i>Also as we will see, function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-194'><i>Also as we will see, function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
@@ -2647,7 +2653,7 @@ For the sake of the analysis of the GD, let us consider:</div>
  </mrow></math> should be convex and Lipschitz fin order for the following results to hold</i></div>
 </div>
 
-<div class="notation" id='magicparlabel-193'><div class="notation_item"><span class="notation_label">Notation 20.</span>
+<div class="notation" id='magicparlabel-195'><div class="notation_item"><span class="notation_label">Notation 20.</span>
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
@@ -2659,21 +2665,21 @@ For the sake of the analysis of the GD, let us consider:</div>
  </mrow></math> is the minimizer in <a href="#eq_gvbzvcb">(2.1)</a>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-194'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-195'><div class="note_item"><span class="note_label">Note 21.</span>
-We consider Lemma <a href="#lem_Let__be">22</a> as given Fact. </div>
-</div>
-
 <div class="standard" id='magicparlabel-196'><br />
 
 </div>
 
-<div class="lemma" id='magicparlabel-197'><div class="lemma_item"><span class="lemma_label">Lemma 22.</span>
+<div class="note" id='magicparlabel-197'><div class="note_item"><span class="note_label">Note 21.</span>
+We consider Lemma <a href="#lem_Let__be">22</a> as given Fact. </div>
+</div>
+
+<div class="standard" id='magicparlabel-198'><br />
+
+</div>
+
+<div class="lemma" id='magicparlabel-199'><div class="lemma_item"><span class="lemma_label">Lemma 22.</span>
 <a id="lem_Let__be" />
-<div class="marginal"><div class="plain_layout" id='magicparlabel-201'>No need to 
+<div class="marginal"><div class="plain_layout" id='magicparlabel-203'>No need to 
 <br />
 
 memorize</div>
@@ -2835,16 +2841,16 @@ memorize</div>
   </mtr>
  </mtable></math></div>
 
-<div class="proof" id='magicparlabel-202'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-204'><div class="proof_item"><span class="proof_label">Proof.</span>
 Omitted; see the 2nd reference.</div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-203'><br />
+<div class="standard" id='magicparlabel-205'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-204'><div class="note_item"><span class="note_label">Note 23.</span>
+<div class="note" id='magicparlabel-206'><div class="note_item"><span class="note_label">Note 23.</span>
 To find an upper bound of the GD error, we try to bound the error <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -2879,11 +2885,11 @@ To find an upper bound of the GD error, we try to bound the error <math xmlns="h
  </mrow></math> with purpose to use Lemma <a href="#lem_Let__be">22</a>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-205'><br />
+<div class="standard" id='magicparlabel-207'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-206'><div class="proposition_item"><span class="proposition_label">Proposition 24.</span>
+<div class="proposition" id='magicparlabel-208'><div class="proposition_item"><span class="proposition_label">Proposition 24.</span>
 <a id="prop_Consider_the_minimization" />
 Consider the minimization problem <a href="#eq_gvbzvcb">(2.1)</a>. Given Assumptions <a href="#assu_For_the_sake">19</a>, the error can be bounded as<a id="eq_sdftrgrg" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3013,8 +3019,8 @@ Consider the minimization problem <a href="#eq_gvbzvcb">(2.1)</a>. Given Assumpt
   </mrow>
  </mrow></math> </div>
 
-<div class="proof" id='magicparlabel-207'><div class="proof_item"><span class="proof_label">Proof.</span>
-It is<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-211'>Jensen's inequality for convex <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="proof" id='magicparlabel-209'><div class="proof_item"><span class="proof_label">Proof.</span>
+It is<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-213'>Jensen's inequality for convex <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mn>.</mn>
@@ -3257,23 +3263,23 @@ It is<div class="foot"><span class="foot_label">1</span><div class="foot_inner">
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-212'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-213'><div class="note_item"><span class="note_label">Note 25.</span>
-The following provides conditions under which the gradient (or sub-gradient) is bounded. This is necessary in order to bound <a href="#eq_sdftrgrg">(4.2)</a> with <a href="#eq_sgdgw">(4.1)</a> in a meaningful manner.</div>
-</div>
-
 <div class="standard" id='magicparlabel-214'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-215'><div class="proposition_item"><span class="proposition_label">Proposition 26.</span>
-<a id="prop__is__Lipschitz" />
-<div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-219'>If this was a Homework there would be a Hint:</div>
+<div class="note" id='magicparlabel-215'><div class="note_item"><span class="note_label">Note 25.</span>
+The following provides conditions under which the gradient (or sub-gradient) is bounded. This is necessary in order to bound <a href="#eq_sdftrgrg">(4.2)</a> with <a href="#eq_sgdgw">(4.1)</a> in a meaningful manner.</div>
+</div>
 
-<ul class="itemize" id='magicparlabel-220'><li class="itemize_item">If <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-216'><br />
+
+</div>
+
+<div class="proposition" id='magicparlabel-217'><div class="proposition_item"><span class="proposition_label">Proposition 26.</span>
+<a id="prop__is__Lipschitz" />
+<div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-221'>If this was a Homework there would be a Hint:</div>
+
+<ul class="itemize" id='magicparlabel-222'><li class="itemize_item">If <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>S</mi>
  </mrow></math> is open there exist <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3328,9 +3334,9 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math>. </div>
 
-<div class="proof" id='magicparlabel-221'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-223'><div class="proof_item"><span class="proof_label">Proof.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewulRjKJ1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewPuiRdk1.png" alt="Mathematical Equation" />
 </span>
  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3355,7 +3361,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math>. </div>
 
-<ul class="itemize" id='magicparlabel-222'><li class="itemize_item">Since <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-224'><li class="itemize_item">Since <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>S</mi>
  </mrow></math> is open we get that there exist <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3433,7 +3439,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math></li>
 </ul>
-<div class="standard" id='magicparlabel-225'>Therefore <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-227'>Therefore <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
 <mi>v</mi>
@@ -3442,25 +3448,25 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math>.</div>
 <div class="proof_item">For 
-<span style = "text-align: center;"><img src="lyxpreviewGXoVUu1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewXDHfTc1.png" alt="Mathematical Equation" />
 </span>
  see Exercise <a href="#exer____2_1">exer:()-2-1</a> in the Exercise sheet.</div>
 </div>
-</div>
-
-<div class="standard" id='magicparlabel-227'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-228'><div class="note_item"><span class="note_label">Note 27.</span>
-The following summaries Lemma <a href="#lem_Let__be">22</a>, and Propositions <a href="#prop_Consider_the_minimization">24</a>, <a href="#prop__is__Lipschitz">26</a> with respect to the GD algorithm.</div>
 </div>
 
 <div class="standard" id='magicparlabel-229'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-230'><div class="proposition_item"><span class="proposition_label">Proposition 28.</span>
+<div class="note" id='magicparlabel-230'><div class="note_item"><span class="note_label">Note 27.</span>
+The following summaries Lemma <a href="#lem_Let__be">22</a>, and Propositions <a href="#prop_Consider_the_minimization">24</a>, <a href="#prop__is__Lipschitz">26</a> with respect to the GD algorithm.</div>
+</div>
+
+<div class="standard" id='magicparlabel-231'><br />
+
+</div>
+
+<div class="proposition" id='magicparlabel-232'><div class="proposition_item"><span class="proposition_label">Proposition 28.</span>
 <a id="prop_Let__be" />
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3630,26 +3636,26 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>.</div>
 
-<div class="solution_" id='magicparlabel-231'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-233'><div class="solution__item"><span class="solution__label">Solution.</span>
 Straightforward from Lemma <a href="#lem_Let__be">22</a>, and Propositions <a href="#prop_Consider_the_minimization">24</a>, <a href="#prop__is__Lipschitz">26</a>. </div>
 </div>
-</div>
-
-<div class="standard" id='magicparlabel-232'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-233'><div class="note_item"><span class="note_label">Note 29.</span>
-The following shows that a given learning rate depending on the iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>t</mi>
- </mrow></math>, we can reduce the upper bound of the error as well as find the number of required iterations to achieve convergence. </div>
 </div>
 
 <div class="standard" id='magicparlabel-234'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-235'><div class="proposition_item"><span class="proposition_label">Proposition 30.</span>
+<div class="note" id='magicparlabel-235'><div class="note_item"><span class="note_label">Note 29.</span>
+The following shows that a given learning rate depending on the iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>t</mi>
+ </mrow></math>, we can reduce the upper bound of the error as well as find the number of required iterations to achieve convergence. </div>
+</div>
+
+<div class="standard" id='magicparlabel-236'><br />
+
+</div>
+
+<div class="proposition" id='magicparlabel-237'><div class="proposition_item"><span class="proposition_label">Proposition 30.</span>
 (Cont Prop. <a href="#prop_Let__be">28</a>)<a id="prop_Let__be_1" />
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3763,7 +3769,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> <i>. Then</i></div>
 
-<ol class="enumerate" id='magicparlabel-236'><li class="enumerate_item"><i><a id="enu_the_output_" />
+<ol class="enumerate" id='magicparlabel-238'><li class="enumerate_item"><i><a id="enu_the_output_" />
 upper bound on the sub-optimality is </i><a id="eq_asfgasfgasdf" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -3882,12 +3888,12 @@ a given level off accuracy <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></i></li>
 </ol>
 
-<div class="proof" id='magicparlabel-238'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-240'><div class="proof_item"><span class="proof_label">Proof.</span>
 Part <a href="#enu_the_output_">1.</a> is a simple substitution from Proposition <a href="#prop_Let__be">28</a>, and part <a href="#enu_a_given_level">2.</a> is implied from part 1.</div>
 </div>
 </div>
 
-<div class="note" id='magicparlabel-239'><div class="note_item"><span class="note_label">Note 31.</span>
+<div class="note" id='magicparlabel-241'><div class="note_item"><span class="note_label">Note 31.</span>
 The result on Proposition <a href="#prop_Let__be_1">30</a> heavily relies on setting suitable values for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>B</mi>
  </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3895,11 +3901,11 @@ The result on Proposition <a href="#prop_Let__be_1">30</a> heavily relies on set
  </mrow></math> which is rather a difficult task to be done in very complicated learning problems (e.g., learning a neural network).</div>
 </div>
 
-<div class="standard" id='magicparlabel-240'><br />
+<div class="standard" id='magicparlabel-242'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-241'><div class="remark_item"><span class="remark_label">Remark 32.</span>
+<div class="remark" id='magicparlabel-243'><div class="remark_item"><span class="remark_label">Remark 32.</span>
 The above results from the analysis of the GD also hold for the GD with subgradients; just replace <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &nabla; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -3931,14 +3937,14 @@ The above results from the analysis of the GD also hold for the GD with subgradi
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-242'><br />
+<div class="standard" id='magicparlabel-244'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-243'><span class="section_label">5</span> <a id="sec_Examples" />
-Examples<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-247'>Code is available in <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/02.Gradient_descent/example_1.R</span></div>
+<h2 class="section" id='magicparlabel-245'><span class="section_label">5</span> <a id="sec_Examples" />
+Examples<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-249'>Code is available in <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/02.Gradient_descent/example_1.R</span></div>
 </div></div></h2>
 
-<div class="example" id='magicparlabel-252'><div class="example_item"><span class="example_label">Example 33.</span>
+<div class="example" id='magicparlabel-254'><div class="example_item"><span class="example_label">Example 33.</span>
 <a id="exa_Consider_the_simple" />
 Consider the simple Normal linear regression problem where the dataset <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -4484,13 +4490,13 @@ Consider the simple Normal linear regression problem where the dataset <math xml
  </mrow></math>The GD Algorithm <a href="#alg_Gradient_descent_algorithm">1</a> with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &eta; </mi>
  </mrow></math> is</div>
-<div class="standard" id='magicparlabel-253'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-255'>For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
   </mrow>
  </mrow></math> iterate:</div>
 
-<ol class="enumerate" id='magicparlabel-254'><li class="enumerate" style='text-align: left;'><a id="enu_compute__where" />
+<ol class="enumerate" id='magicparlabel-256'><li class="enumerate" style='text-align: left;'><a id="enu_compute__where" />
 compute <a id="eq_GD_UPDATE_MECHANISM_1" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -5149,7 +5155,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
    </mrow>
   </msup>
  </mrow></math>. This is because it creates unreasonably big steps in <a href="#eq_GD_UPDATE_MECHANISM">(2.2)</a> that the produced chain overshoots the global minimum. See the cartoon in Figures <a href="#fig__2">g</a> and <a href="#fig__1_1">h</a>. 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-266'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_1.pdf' alt='image: ' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-268'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_1.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_chain" />
  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5172,7 +5178,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-274'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_2.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-276'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_2.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_chain_1" />
  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5195,7 +5201,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-282'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/f_error.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-284'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/f_error.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_chain_2" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5251,7 +5257,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-291'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_1_zoom.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-293'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_1_zoom.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig_" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5274,7 +5280,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-299'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_2_zoom.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-301'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/w_2_zoom.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig__1" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5297,7 +5303,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-307'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/f_error_zoom.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-309'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/f_error_zoom.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig_chain_2_1" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5353,11 +5359,11 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
 </div>
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-319'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/cartoon-big-learning-rate.pdf' alt='image: ' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-321'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/cartoon-big-learning-rate.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig__2" />
 Unnecessarily large learning rate</span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-327'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/cartoon-small-learning-rate.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-329'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/figures/02.Gradient_descent/cartoon-small-learning-rate.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig__1_1" />
 Unnecessarily small learning rate</span></div>
 </div>
@@ -5366,7 +5372,7 @@ Unnecessarily small learning rate</span></div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-332'><br />
+<div class="standard" id='magicparlabel-334'><br />
 
 </div>
 </body>

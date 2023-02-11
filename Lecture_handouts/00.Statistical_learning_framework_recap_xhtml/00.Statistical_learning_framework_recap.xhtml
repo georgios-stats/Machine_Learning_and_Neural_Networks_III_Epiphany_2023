@@ -185,12 +185,18 @@ div.foot:hover div.foot_inner {
 </div>
 <h3 class="subsection_" id='magicparlabel-33'>Reading&nbsp;list&nbsp;&amp;&nbsp;references:</h3>
 
-<ul class="itemize" id='magicparlabel-34'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.</li>
-<li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. </li>
+<ul class="itemize" id='magicparlabel-34'><li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
+
+<ul class="itemize" id='magicparlabel-35'><li class="itemize_item">Ch. 1 Introduction</li>
 </ul>
+</li><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.
+
+<ul class="itemize" id='magicparlabel-37'><li class="itemize_item">Ch. 1 Introduction</li>
+</ul>
+</li></ul>
 </div></div>
-<h2 class="section" id='magicparlabel-36'><span class="section_label">1</span> General Introductions and loose definitions</h2>
-<div class="standard" id='magicparlabel-37'><b>Pattern recognition</b> is the automated discovery of patterns and regularities in data <math xmlns="http://www.w3.org/1998/Math/MathML">
+<h2 class="section" id='magicparlabel-38'><span class="section_label">1</span> General Introductions and loose definitions</h2>
+<div class="standard" id='magicparlabel-39'><b>Pattern recognition</b> is the automated discovery of patterns and regularities in data <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>z</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>Z</mi>
@@ -234,7 +240,7 @@ div.foot:hover div.foot_inner {
 
  </mrow></math> (different than the training data) used to verify the performance of the ML model for a given a measure of success. <b>Measure of success</b> (or performance) is a quantity that indicates how bad the corresponding ML model or Algorithm performs (eg quantifies the failure/error), and can also be used for comparisons among different ML models; eg, <b>Risk function</b> or <b>Empirical Risk Function</b>. Two main problems in ML are the supervised learning (we focus here) and the unsupervised learning.</div>
 
-<div class="standard" id='magicparlabel-38'><b>Supervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-40'><b>Supervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>z</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>Z</mi>
@@ -291,7 +297,7 @@ div.foot:hover div.foot_inner {
    </mstyle>
   </mrow>
  </mrow></math> that act as outputs; i.e. 
-<span style = "text-align: center;"><img src="lyxpreviewbPRVxJ1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewKnwQnn1.png" alt="Mathematical Equation" />
 </span>
 . Hence, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -315,7 +321,7 @@ div.foot:hover div.foot_inner {
   </mrow>
  </mrow></math>. </div>
 
-<div class="standard" id='magicparlabel-39'><b>Unsupervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-41'><b>Unsupervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>z</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>Z</mi>
@@ -336,9 +342,9 @@ div.foot:hover div.foot_inner {
    </mstyle>
   </mrow>
  </mrow></math>. In clustering the goal is to discover groups of similar examples within the data of it is to discover groups of similar examples within the data.</div>
-<h2 class="section" id='magicparlabel-44'><span class="section_label">2</span> (loose) Notation &amp; definitions in learning</h2>
+<h2 class="section" id='magicparlabel-46'><span class="section_label">2</span> (loose) Notation &amp; definitions in learning</h2>
 
-<div class="definition" id='magicparlabel-45'><div class="definition_item"><span class="definition_label">Definition 1.</span>
+<div class="definition" id='magicparlabel-47'><div class="definition_item"><span class="definition_label">Definition 1.</span>
 The learner's output is a function, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo>:</mo>
@@ -362,11 +368,11 @@ The learner's output is a function, <math xmlns="http://www.w3.org/1998/Math/Mat
  </mrow></math>. It is also called hypothesis, prediction rule, predictor, or classifier.</div>
 </div>
 
-<div class="standard" id='magicparlabel-46'><br />
+<div class="standard" id='magicparlabel-48'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-47'><div class="notation_item"><span class="notation_label">Notation 2.</span>
+<div class="notation" id='magicparlabel-49'><div class="notation_item"><span class="notation_label">Notation 2.</span>
 We often denote the set of hypothesis as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>H</mi>
@@ -380,13 +386,13 @@ We often denote the set of hypothesis as <math xmlns="http://www.w3.org/1998/Mat
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-52'><br />
+<div class="standard" id='magicparlabel-54'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-53'><div class="example_item"><span class="example_label">Example 3.</span>
+<div class="example" id='magicparlabel-55'><div class="example_item"><span class="example_label">Example 3.</span>
 <a id="exa__Linear_Regression__Consider" />
-(Linear Regression)<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-57'><math xmlns="http://www.w3.org/1998/Math/MathML">
+(Linear Regression)<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-59'><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>=</mo>
    <msup>
@@ -485,11 +491,11 @@ We often denote the set of hypothesis as <math xmlns="http://www.w3.org/1998/Mat
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-58'><br />
+<div class="standard" id='magicparlabel-60'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-59'><div class="definition_item"><span class="definition_label">Definition 4.</span>
+<div class="definition" id='magicparlabel-61'><div class="definition_item"><span class="definition_label">Definition 4.</span>
 Training data set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>S</mi>
@@ -531,11 +537,11 @@ Training data set <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. This is the information that the learner has assess. </div>
 </div>
 
-<div class="standard" id='magicparlabel-60'><br />
+<div class="standard" id='magicparlabel-62'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-61'><div class="definition_item"><span class="definition_label">Definition 5.</span>
+<div class="definition" id='magicparlabel-63'><div class="definition_item"><span class="definition_label">Definition 5.</span>
 Data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -556,11 +562,11 @@ Data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>, unknown to the learner that has generated the data.</div>
 </div>
 
-<div class="standard" id='magicparlabel-62'><br />
+<div class="standard" id='magicparlabel-64'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-63'><div class="definition_item"><span class="definition_label">Definition 6.</span>
+<div class="definition" id='magicparlabel-65'><div class="definition_item"><span class="definition_label">Definition 6.</span>
 We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -583,11 +589,11 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 
 
-<div class="standard" id='magicparlabel-71'><br />
+<div class="standard" id='magicparlabel-73'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-72'><div class="definition_item"><span class="definition_label">Definition 7.</span>
+<div class="definition" id='magicparlabel-74'><div class="definition_item"><span class="definition_label">Definition 7.</span>
 (Loss function) Given any set of hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>H</mi>
@@ -641,11 +647,11 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> –the greater the error the greater its value of the loss.</div>
 </div>
 
-<div class="standard" id='magicparlabel-73'><br />
+<div class="standard" id='magicparlabel-75'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-74'><div class="example_item"><span class="example_label">Example 8.</span>
+<div class="example" id='magicparlabel-76'><div class="example_item"><span class="example_label">Example 8.</span>
 <a id="exa_In_regression_problems" />
 (Cont. Example <a href="#exa__Linear_Regression__Consider">3</a>) In regression problems <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -706,11 +712,11 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-75'><br />
+<div class="standard" id='magicparlabel-77'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-76'><div class="example_item"><span class="example_label">Example 9.</span>
+<div class="example" id='magicparlabel-78'><div class="example_item"><span class="example_label">Example 9.</span>
 In binary classification problems with <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo>:</mo>
@@ -775,11 +781,11 @@ In binary classification problems with <math xmlns="http://www.w3.org/1998/Math/
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-81'><br />
+<div class="standard" id='magicparlabel-83'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-82'><div class="definition_item"><span class="definition_label">Definition 10.</span>
+<div class="definition" id='magicparlabel-84'><div class="definition_item"><span class="definition_label">Definition 10.</span>
 (Risk function) The risk function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -848,7 +854,7 @@ In binary classification problems with <math xmlns="http://www.w3.org/1998/Math/
  </mtable></math></div>
 </div>
 
-<div class="remark" id='magicparlabel-83'><div class="remark_item"><span class="remark_label">Remark 11.</span>
+<div class="remark" id='magicparlabel-85'><div class="remark_item"><span class="remark_label">Remark 11.</span>
 In learning, an ideal way to obtain an optimal predictor <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
@@ -892,11 +898,11 @@ In learning, an ideal way to obtain an optimal predictor <math xmlns="http://www
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-84'><br />
+<div class="standard" id='magicparlabel-86'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-85'><div class="example_item"><span class="example_label">Example 12.</span>
+<div class="example" id='magicparlabel-87'><div class="example_item"><span class="example_label">Example 12.</span>
 <a id="exa__Cont__Example__" />
 (Cont. Ex. <a href="#exa_In_regression_problems">8</a>) The risk function is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -958,21 +964,21 @@ In learning, an ideal way to obtain an optimal predictor <math xmlns="http://www
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-86'><br />
+<div class="standard" id='magicparlabel-88'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-87'><div class="note_item"><span class="note_label">Note 13.</span>
+<div class="note" id='magicparlabel-89'><div class="note_item"><span class="note_label">Note 13.</span>
 Computing the risk minimizer may be practically challenging due to the integration w.r.t. the unknown data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>g</mi>
  </mrow></math> involved in the expectation <a href="#eq_asfgasfgasg">(2.1)</a>. Sub-optimally, one may resort to the Empirical risk function.</div>
 </div>
 
-<div class="standard" id='magicparlabel-88'><br />
+<div class="standard" id='magicparlabel-90'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-89'><div class="definition_item"><span class="definition_label">Definition 14.</span>
+<div class="definition" id='magicparlabel-91'><div class="definition_item"><span class="definition_label">Definition 14.</span>
 (Empirical risk function) The empirical risk function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -1070,11 +1076,11 @@ Computing the risk minimizer may be practically challenging due to the integrati
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-90'><br />
+<div class="standard" id='magicparlabel-92'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-91'><div class="example_item"><span class="example_label">Example 15.</span>
+<div class="example" id='magicparlabel-93'><div class="example_item"><span class="example_label">Example 15.</span>
 (Cont. Example <a href="#exa__Cont__Example__">12</a>) Given given sample <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -1163,11 +1169,11 @@ Computing the risk minimizer may be practically challenging due to the integrati
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-92'><br />
+<div class="standard" id='magicparlabel-94'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-93'><div class="example_item"><span class="example_label">Example 16.</span>
+<div class="example" id='magicparlabel-95'><div class="example_item"><span class="example_label">Example 16.</span>
 Consider a learning problem where the true data generation distribution (unknown to the learner) is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>g</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -1589,7 +1595,7 @@ Consider a learning problem where the true data generation distribution (unknown
  </mrow></math>.</div>
 </div>
 
-<div class="definition" id='magicparlabel-94'><div class="definition_item"><span class="definition_label">Definition 17.</span>
+<div class="definition" id='magicparlabel-96'><div class="definition_item"><span class="definition_label">Definition 17.</span>
 A learning problem with hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>H</mi>
@@ -1614,13 +1620,13 @@ A learning problem with hypothesis class <math xmlns="http://www.w3.org/1998/Mat
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-95'><br />
+<div class="standard" id='magicparlabel-97'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-96'><div class="example_item"><span class="example_label">Example 18.</span>
+<div class="example" id='magicparlabel-98'><div class="example_item"><span class="example_label">Example 18.</span>
 Consider the multiple linear regression problem 
-<span style = "text-align: center;"><img src="lyxpreviewbPRVxJ1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewKnwQnn1.png" alt="Mathematical Equation" />
 </span>
  where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1789,10 +1795,10 @@ Consider the multiple linear regression problem
   </mrow>
  </mrow></math>. The latter will be mainly used.</div>
 </div>
-<h2 class="section" id='magicparlabel-103'><span class="section_label">A</span> Useful bits</h2>
-<div class="standard" id='magicparlabel-104'>Below are some standard notation used as default in the notes except in cases that is defined otherwise. </div>
+<h2 class="section" id='magicparlabel-105'><span class="section_label">A</span> Useful bits</h2>
+<div class="standard" id='magicparlabel-106'>Below are some standard notation used as default in the notes except in cases that is defined otherwise. </div>
 
-<ul class="itemize" id='magicparlabel-105'><li class="itemize_item"><math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-107'><li class="itemize_item"><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>q</mi><mo>-</mo>
   </mrow>
@@ -2024,13 +2030,13 @@ Consider the multiple linear regression problem
  </mrow></math></li>
 </ul>
 
-<div class="standard" id='magicparlabel-110'><br />
+<div class="standard" id='magicparlabel-112'><br />
 
 </div>
 
-<div class="standard" id='magicparlabel-111'>Also some standard formulas.</div>
+<div class="standard" id='magicparlabel-113'>Also some standard formulas.</div>
 
-<ul class="itemize" id='magicparlabel-112'><li class="itemize_item">Jensens' inequality: If If <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-114'><li class="itemize_item">Jensens' inequality: If If <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
    <msup>
@@ -2174,7 +2180,7 @@ Consider the multiple linear regression problem
  </mrow></math>. </li>
 </ul>
 
-<div class="standard" id='magicparlabel-114'><br />
+<div class="standard" id='magicparlabel-116'><br />
 
 </div>
 

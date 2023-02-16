@@ -273,7 +273,7 @@ grad_risk_fun <- function(w,z,n) {
 ```
 
 
-## Task (to do)  
+## Task (Computer practical exercise)  
 
 Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples). Do this by using the command 'grad_risk_fun' provided above.
 
@@ -284,7 +284,7 @@ gr
 ```
 
 
-## Task (to do)  
+## Task (Computer practical exercise)  
 
 Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
 
@@ -304,7 +304,7 @@ gr
 
 # Task: Gradient descent
 
-## Task 
+## Task (Computer practical exercise)  
 
 Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
@@ -366,7 +366,7 @@ while ( Qstop == 0 ) {
 
 
 
-## Task 
+## Task (Computer practical exercise)  
 
 Plot the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$
 
@@ -380,7 +380,7 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task 
+## Task (Computer practical exercise)  
 
 Repeat previous task to run GD by changing the values of $\eta$ in the range $(0.001,1.0)$. 
 
@@ -419,7 +419,7 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-## Task 
+## Task (Computer practical exercise)  
 
 Repeat previous couple of tasks to run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
 
@@ -477,7 +477,7 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task 
+## Task (Exercise for homework practice)   
 
 Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
@@ -524,7 +524,7 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task 
+## Task (Exercise for homework practice)   
 
 Repeat the task above by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
 
@@ -575,7 +575,7 @@ abline(h=w_true[2], col='red')
 
 
 
-# AdaGrad  
+# AdaGrad  (Exercise for homework practice)   
 
 Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
 
@@ -591,7 +591,7 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task 
+## Task (Exercise for homework practice)   
 
 Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
 
@@ -641,7 +641,7 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task 
+## Task (Exercise for homework practice)   
 
 Code an batch AdaGrad algorithm with $\eta_{t}$ and batch size $m$ that returns the chain of $\{w^{(t)}\}$. 
 
@@ -694,7 +694,7 @@ abline(h=w_true[2], col='red')
 
 
 
-# Batch Stochastic Gradient Descent with projection
+# Batch Stochastic Gradient Descent with projection  (Exercise for homework practice)   
 
 Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
 
@@ -715,7 +715,7 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 ```
 
 
-## Task 
+## Task (Exercise for homework practice)   
 
 
 Compute $w^{*}$ from the minimization problem 
@@ -781,7 +781,7 @@ out$solution
 ```
 
 
-## Task 
+## Task (Exercise for homework practice)   
 
 Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
@@ -864,7 +864,7 @@ abline(h=w_true[2], col='red')
 
 # Stochastic Variance Reduced Gradient Descent (SVRG)  
 
-## Task
+## Task  (Exercise for homework practice)   
 
 Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
 
@@ -933,7 +933,7 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-## Task
+## Task (Exercise for homework practice)   
 
 Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
 

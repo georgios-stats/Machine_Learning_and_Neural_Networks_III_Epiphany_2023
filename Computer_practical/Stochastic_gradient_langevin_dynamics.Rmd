@@ -152,7 +152,7 @@ set.seed(0)
 w_true <- as.numeric(glm(z_obs[,3]~ 1 + z_obs[,2],family = "binomial" )$coefficients)
 ```
 
-## Task
+## Task (given)  
 
 The predictive rule $h_{w}\left(x\right)$ is 
 
@@ -184,7 +184,7 @@ w\sim\text{N}_{d}\left(\mu=0.0,V=I_{d}\right) & \text{( prior distribution)}
 
 We consider $d=2$, $V=100 I_{2}$, and $\mu=0.0$.
 
-## Task 
+## Task (given)  
 
 The log PDF of the sampling distribution is 
 
@@ -205,7 +205,7 @@ log_sampling_pdf <- function(z, w) {
 }
 ```
 
-## Task 
+## Task (given)  
 
 The log PDF of the prior distribution is 
 
@@ -252,7 +252,7 @@ learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 ) {
 ```
 
 
-## Task (to do)  
+## Task  (Computer practical exercise)  
 
 Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=(-0.1,1.5)^\top$ (at the 1st example; i.e. $z_{1}$).  
 
@@ -286,7 +286,7 @@ gr
 ```
 
 
-## Task  
+## Task   (Computer practical exercise)  
 
 Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
@@ -361,7 +361,7 @@ while ( (Qterm != 1) ) {
 ```
 
 
-## Task 
+## Task  (Computer practical exercise)  
 
 Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration.  
 
@@ -375,7 +375,7 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-## Task  
+## Task   (Computer practical exercise)  
 
 Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced.  
 
@@ -390,7 +390,7 @@ You may use the R function 'grad{numDeriv}' to numerically compute the gradient;
 If the gradient explodes apply gradient clipping/scaling with threshold $C=10.0$, as 
 
 \[
-w^{(t+1)}=w^{(t)}+\eta_{t}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\text{clip}\left(\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
+w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
 \]
  where 
 \[
@@ -473,7 +473,7 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task 
+## Task  (Computer practical exercise)  
 
 Let's go back to the code without using the clipping gradient.  
 
@@ -486,7 +486,7 @@ w_chain_output <- w_chain[T_bunrin:Tmax,]
 
 
 
-## Task 
+## Task  (Computer practical exercise)  
 
 Plot the histograms plots of output chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ for the estimation of the marginal posterior distributions of the dimensions of $w$. 
 
@@ -496,7 +496,7 @@ hist(w_chain_output[,1])
 hist(w_chain_output[,2]) 
 ```
 
-## Task 
+## Task  (Exercise for homework practice)   
 
 To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator 
 
@@ -512,7 +512,7 @@ w_est
 ```
 
 
-## Task 
+## Task  (Exercise for homework practice)   
 
 To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator 
 
@@ -534,7 +534,7 @@ w_est
 ```
 
 
-## Task  
+## Task   (Exercise for homework practice)   
 
 Use the prediction rule  
 
@@ -640,7 +640,7 @@ set.seed(0)
 hist(z_obs)
 ```
 
-## Task 
+## Task  (Exercise for homework practice)   
 
 The PDF of the sampling distribution is  
 
@@ -662,7 +662,7 @@ log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 25) {
 ```
 
 
-## Task 
+## Task  (Exercise for homework practice)   
 
 The PDF of the prior distribution is Normal with mean $\mu=0.0$ and variance $s^{2}=100$. 
 
@@ -712,7 +712,7 @@ learning_rate <- function(t, T_0  , T_1  , C_0  , s_0   ) {
 ```
 
 
-## Task (to do)  
+## Task (Exercise for homework practice)   
 
 Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=4.0$ (at the 1st example; i.e. $z_{1}$).  
 
@@ -734,7 +734,7 @@ gr
 
 
 
-## Task  
+## Task   (Exercise for homework practice)   
 
 Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=?$, and temperature $\tau=?$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=?$, and constant $C_{0}=?$.  
 

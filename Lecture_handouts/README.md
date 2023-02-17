@@ -63,3 +63,7 @@ Stochastic gradient descent
 Stochastic gradient Langevin dynamics  
 
 + [04.Stochastic_gradient_Langevine_dynamics.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/04.Stochastic_gradient_Langevine_dynamics.pdf)  
+
+Artificial Neural Networks  
+
++ [05.Artificial_neural_networks.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/05.Artificial_neural_networks.pdf)  

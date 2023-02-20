@@ -1,0 +1,698 @@
+---
+title: "Artificial Neural Networks"
+subtitle: "Introductory analysis via NNET"
+author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
+output:
+  html_notebook: 
+    number_sections: true
+  word_document: default
+  html_document:
+    df_print: paged
+    number_sections: true
+  pdf_document: default
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
+  - \usepackage{amsmath}
+---
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- Copyright 2023 Georgios Karagiannis -->
+
+<!-- georgios.karagiannis@durham.ac.uk -->
+<!-- Associate Professor -->
+<!-- Department of Mathematical Sciences, Durham University, Durham,  UK  -->
+
+<!-- This file is part of Machine Learning and Neural Networks III (MATH3431) -->
+<!-- which is the material of the course (MATH3431 Machine Learning and Neural Networks III) -->
+<!-- taught by Georgios P. Katagiannis in the Department of Mathematical Sciences   -->
+<!-- in the University of Durham  in Michaelmas term in 2019 -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation version 3 of the License. -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with Machine_Learning_and_Neural_Networks_III_Epiphany_2023  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+
+
+[Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
+
+```{r}
+rm(list=ls())
+```
+
+
+---
+
+***Aim***
+
+Students will become able to:  
+
++ practice in R,  
+
++ implement Feed Forward Neural Network with R package nnet in R.   
+
+---
+
+***Reading material***
+
+
++ Lecture notes:  
+    + Handouts 0, 1, 2, and 3 
+
++ Reference for *R*:  
+    + [Cheat sheet with basic commands](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)   
+
++ Reference of *rmarkdown* (optional):  
+    + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)  
+    + [R Markdown Reference Guide](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
+    + [knitr options](https://yihui.name/knitr/options)
+
++ Reference for *Latex* (optional):  
+    + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
+
+---
+
+***New software***   
+
++ R package `base` functions:    
+    + `set.seed{base}` 
+
++ R package `nloptr` functions:    
+    + `nloptr{nloptr}` 
+    
++ R package `numDeriv` functions:    
+    + `grad{numDeriv}` 
+
+```{r}
+# call libraries
+library(numDeriv)
+library(nloptr)
+```
+
+---
+
+
+```{r, results="hide"}
+# Load R package for printing
+library(knitr)
+```
+
+```{r, results="hide"}
+# Set a seed of the randon number generator
+set.seed(2023)
+```
+
+# Familiarity with analysis with feed-forward Neural Networks with nnet
+
+We will use the R package nnet. It is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/](https://cran.r-project.org/web/packages/nnet/)  
+
+The reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/nnet.pdf](https://cran.r-project.org/web/packages/nnet/nnet.pdf)  
+
+Details
+
++ nnet fits single-hidden-layer neural network, possibly with skip-layer connections.  
+
+## Task: Install nnnet (given)  
+
+```{r, results="hide"}
+## build version (recommended)
+#install.packages("nnet")
+## linux build
+#install.packages("https://cran.r-project.org/src/contrib/nnet_7.3-18.tar.gz", repos = NULL, type = "source")
+## windows build
+#install.packages("https://cran.r-project.org/bin/windows/contrib/4.3/nnet_7.3-18.zip", repos = NULL, type = "source")
+```
+## Task: Load the R package nnet (given)  
+
+```{r}
+library(nnet)
+```
+
+## Task: Check out R package nnet commands ( to be done at home )  
+
+From the reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/nnet.pdf](https://cran.r-project.org/web/packages/nnet/nnet.pdf) 
+
+in particular:  nnet{nnet}, predict.nnet{nnet}, which.is.max{nnet}, and multinom{nnet}.
+
+# NN on regression problem with 1 output  
+
+This is the "Case 1. (Regression problem)" from the "Handout 5: Artificial neural networks".  
+
+The similarity is about the problem to be addressed. Different predictor rules or loss functions may be used.  
+
+## Task: Load ozone{faraway} data (given)  
+
+We use OZON data from the textbook  
+
++ Faraway, J. J. (2016). Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models. Chapman and Hall/CRC.  
+
+A study the relationship between atmospheric ozone concentration and meteorology in the Los Angeles Basin in 1976. A number of cases with missing variables have been removed for simplicity.  
+
+A data frame with 330 observations on the following 10 variables.
+
+Install and load the R package "faraway".  
+
+```{r, results="hide"}
+## build version (recommended)
+#install.packages("faraway")
+## linux build
+#install.packages("https://cran.r-project.org/src/contrib/faraway_1.0.8.tar.gz", repos = NULL, type = "source")
+## windows build
+#install.packages("https://cran.r-project.org/bin/windows/contrib/4.3/faraway_1.0.8.zip", repos = NULL, type = "source")
+library("faraway")
+```
+
+Load the data set ozone{faraway}, and read the description by "?ozone".  
+
+```{r}
+data(ozone)
+?ozone
+```
+
+
+## Task: First attempt (to be done in the computer practical class) 
+
+We wish to model as a neural network the predictive rule $h_{w}\left(x\right)$ that  
+
++ receives as input features the variables temp, ibh, ibt, from the ozone{faraway} dataset,  
+
++ and predicts (returns) as output the variable O3 from the ozone{faraway} dataset.  
+
+By using the R function nnet{nnet} fit a feed forward neural network with: 
+
++ one hidden layer, 
+
++ $2$ units in the hidden layer; i.e. $T=2$.  	
+
++ the predictive rule is $h_{w}\left(x\right)=o_{T}\left(x\right)=\sigma_{T}\left(\alpha_{T}\left(x\right)\right)$  
+
++ the output activation function is linear; i.e. the identity function $\sigma_{T}\left(a\right)=a$.  
+
+As inputs, we consider the variables temp, ibh, ibt, from the ozone{faraway} dataset.  
+
+Help: 
+
++ You may use the command nnet{nnet} with arguments formula, data, size, linout, 
+
+
+```{r}
+nn.out.1 <- nnet(O3 ~ temp + ibh + ibt, ozone, size=2, linout=T)
+```
+## Task: First attempt to fit (to be done in the computer practical class) 
+
+Compute the error function  
+
+\[
+\text{EF}\left(w|z\right)=\sum_{i=1}^{n}\left(h_{w}\left(x_{i}\right)-y_{i}\right)^{2}
+\]
+
+where we denote the training dataset as usual by $\left\{ z_{i}=\left(x_{i},y_{i}\right)\right\}$.  
+
+Compare the generated EF to the RSS  
+
+\[
+\text{RSS}=\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}
+\]
+
+Do it below. 
+
+```{r}
+EF <- sum((nn.out.1$fitted.values-ozone$O3)^2)
+EF  
+RSS  <- sum((ozone$O3-mean(ozone$O3))^2)
+RSS
+```
+How EF and RSS compare? You may observe that they are close --thats bad news; WHY?.  
+
+## Task: Rescale inputs (to be done in the computer practical class)
+
+The problem with the above NN, may be that the seeds in the SGD used to learn the weights of the NN where "bad". We can try different. 
+
+Observe that the examples of $x$ are in very different scales.  Run:
+
+```{r}
+apply(ozone,2,sd)
+```
+Rescale the ozone{faraway} data to have mean zero and variance one, by using the command scale{base}.  
+
+Save the rescaled data in the object "ozone.rescaled".   
+
+Check again if they have realy been rescaled.  
+
+Do it below:  
+
+```{r}
+ozone.rescaled <- scale(ozone) 
+apply(ozone.rescaled,2,mean)
+apply(ozone.rescaled,2,sd)
+```
+## Task: Re-fit the NN (to be done in the computer practical class)
+
+Now use the rescaled ozine data in the object "ozone.rescaled".  
+
+Refit the NN $100$ times. 
+
++ Essentially, code a for loop fiting again-and-again the NN
+
+Each time start with different seed for the SGD learning algorithm  
+
++ you can just use the command set.seed( r )" before the command "nnet{nnet}" each time you refit the NN, where r is a different number each time.  
+
+Among all the fitted NN, find the one that produces the smallest EF  
+
+\[
+\text{EF}\left(w|z\right)=\sum_{i=1}^{n}\left(h_{w}\left(x_{i}\right)-y_{i}\right)^{2}
+\]
+
+and save the output of the corresponding nnet{nnet} call as your best fit in the object "nn.out.1.best". 
+
+Do it below 
+
+```{r, results="hide"}
+Nrealizations <- 100
+#
+nn.out.1.best <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T)
+#EF.best <- sum((nn.out.1.best$fitted.values-ozone[$O3],1])^2)
+EF.best <- nn.out.1.best$value
+#
+for (r in 1:Nrealizations) {
+  #
+  set.seed( r )
+  #
+  nn.out.1.new <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T)
+  EF.new <- nn.out.1.new$value
+  #
+  if (EF.new < EF.best) {
+   #
+    nn.out.1.best <- nn.out.1.new
+    #
+    EF.best <- EF.new
+  }
+}
+
+```
+
+Report your discovered best Error Function value, and compare it to the RSS computed earlier. 
+
+\[
+\text{RSS}=\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}
+\]
+
+Better now?   
+
+Do it below
+
+```{r}
+EF.best
+RSS  <- sum((ozone$O3-mean(ozone$O3))^2)
+RSS
+```
+## Task: Print the estimated weights (to be done in the computer practical class)
+
+Print the estimated weights of the fitted feed forward neural network.  
+
+Use the command "summary" as "summary( output object from nnet function )" 
+
+Do it below
+
+```{r}
+summary(nn.out.1.best)
+```
+Description of what you have gotten:  
+
++ i2->h1, refers to the link between the second input variable and the first hidden neuron.  
+
++ b refers to the bias, 
+
++ o refers to the output,  etc...
+
+## Task: Plot predictions (given)
+
+Plot the predicted "O3" values for "temp" in the range $(-3,3)$, while tha other two input variables are fixed to points "ibh=0", "ibt=0".  
+
++ Remember that your NN is trained on the scaled training data set.  
+
+  + You can get the mean and variance by using  
+  
+    + attributes(ozone.rescaled)$"scaled:center" and 
+  
+    + attributes(ozone.rescaled)$"scaled:scale"  
+
++ Create a data frame from all combinations of the supplied vectors; that is "temp" in the range $(-3,3)$, "ibh=0", "ibt=0".  
+
+  + Here, use the command "
+expand.grid {base}" as "expand.grid(temp=seq(-3,3,0.1),ibh=0,ibt=0)"  
+  
++ Create the x-axis values of the plot in the range $(-3,3)$ and re-scale them back to the actual scale
+    
++ Create the y-axis values of prediction of the plot and re-scale them back to the actual scale  
+
+  + you can use the command "predict"; check "?predict.nnet"  
+
+See the given code below: 
+
+
+```{r}
+#
+# Create the input object x that will be used in the function predict() 
+#
+xx <- expand.grid(temp=seq(-3,3,0.1),ibh=0,ibt=0)
+#
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$temp*ozscales['temp']+ozmeans['temp']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="Temp",ylab="O3")
+```
+
+## Task: Plot predictions (to be done in the computer practical class)
+
+Plot the predicted "O3" values for "ibh" in the range $(-3,3)$, while tha other two input variables are fixed to points "ibt=0", "temp=0".
+
+Essentially, do the same as above but with for "ibh" instead of tems, i.e. use 
+
++ xx <-expand.grid(temp=0,ibh=seq(-3,3,0.1),ibt=0)  
+
+```{r}
+#
+# Create the input object x that will be used in the function predict() 
+#
+xx <-expand.grid(temp=0,ibh=seq(-3,3,0.1),ibt=0)
+#
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$ibh*ozscales['ibh']+ozmeans['ibh']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="ibh",ylab="O3")
+```
+
+## Task: Plot predictions (to be done in the computer practical class)
+
+Plot the predicted "O3" values for "ibt" in the range $(-3,3)$, while tha other two input variables are fixed to points "ibh=0", "temp=0".
+
+Essentially, do the same as above but with for "ibt" instead of tems, i.e. use 
+
++ xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
+
+```{r}
+#
+# Create the input object x that will be used in the function predict() 
+#
+xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
+#
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$ibt*ozscales['ibt']+ozmeans['ibt']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="ibt",ylab="O3")
+```
+
+## Task: Perform the traingin with shrinckage  (to be done in the computer practical class)
+
+The observed  discontinuities in the plots may possibly be due to the unreasonably large weights in the NN. The NN tends to choose large weights in order to optimize the fit, but the predictions will be unstable, especially for extrapolation.  
+
+To address the above one can implement shrinkage methods, eg LASSO.  
+
+\[
+w^{*} =\underset{w\in\mathcal{H}}{\arg\min}\left(R_{g}\left(w\right)+\lambda|w|_2^2\right)\label{eq:dsghadfhafdb-1}
+\]
+\[
+w^{*} =\underset{w\in\mathcal{H}}{\arg\min}\left(\text{E}_{z\sim g}\left(\ell\left(w,z\right)+\lambda|w|_2^2\right)\right)
+\]
+
+Refit the NN $100$ times, each time using different seeds for the SGD.  
+
+You can use a LASSO shrinkage penalty, by using the argument "decay" in the function nnet{nnet}. Try decay=$0.001$.
+
+Save the output of the corresponding nnet{nnet} call as your best fit in the object "nn.out.1.decay.best". 
+
+Do it below 
+
+
+```{r, results="hide"}
+Nrealizations <- 100
+#
+nn.out.1.decay.best <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T)
+#EF.best <- sum((nn.out.1.best$fitted.values-ozone[$O3],1])^2)
+EF.decay.best <- nn.out.1.best$value
+#
+for (r in 1:Nrealizations) {
+  #
+  set.seed( r )
+  #
+  nn.out.1.new <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T, decay=0.001)
+  EF.new <- nn.out.1.new$value
+  #
+  if (EF.new < EF.best) {
+   #
+    nn.out.1.decay.best <- nn.out.1.new
+    #
+    EF.decay.best <- EF.new
+  }
+}
+
+```
+
+
+## Task: Summaries  (to be done in the computer practical class)
+
+Print the produced Error Function, and compare them to those you computed without the decay. Why do you think you observe this?    
+
+Print the estimated weights, and compare them to those you computed without the decay.  
+
+Do it below.  
+
+```{r}
+EF.decay.best
+```
+
+```{r}
+summary(nn.out.1.decay.best)
+```
+
+## Task: Prediction plots  (to be done in the computer practical class)
+
+Plot the predicted "O3" values for "ibt" in the range $(-3,3)$, while tha other two input variables are fixed to points "ibh=0", "temp=0".
+
+Essentially, do the same as above but with for "ibt" instead of tems, i.e. use 
+
++ xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
+
+Essentially copy / paste your code above and implemented on "nn.out.1.decay.best" instead on "nn.out.1.best"
+
+Do it below.
+
+```{r}
+#
+# Create the input object x that will be used in the function predict() 
+#
+xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
+#
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.decay.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$ibt*ozscales['ibt']+ozmeans['ibt']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="ibt",ylab="O3",
+     type="l")
+```
+
+
+You should observe that the line is now smoother as it was supposed to be.  
+
+
+# NN on classification problem with multiple classes
+
+This is the "Case 4. (Multi-class classification problem)" from the "Handout 5: Artificial neural networks".
+
+The similarity is about the problem to be addressed. Different predictor rules or loss functions may be used.
+
+## Task: Load iris {datasets}	 data (given) 
+
+Load the iris {datasets}	data, and print them.  
+
+```{r}
+data(iris)
+iris
+```
+
+## Task: Modify the data (given)
+
+Create an object "y" with the targets of the examples (dataset).  
+
+To do this use the function "class.ind{nnet}" to generate a class indicator function from a given factor. Function "class.ind" receives as arguments factor or vector of classes for cases, and returns a matrix which is zero except for the column corresponding to the class.  
+
+It is used in problems with classification problem with multiple classes, in order to create a suitable output for the function nnet{nnet}. Check "?class.ind".  
+
+
+```{r}
+y<- class.ind( c(rep("s", 50), rep("c", 50), rep("v", 50)) )
+```
+Create an object "x" with the features of the examples (dataset) that contains the variables; "Sepal.Length", "Sepal.Width", and "Petal.Length"
+
+```{r}
+x <-iris[,-c(4,5)] 
+```
+
+
+## Create a training dataset and a validatin data-set (given)  
+
+Get a random sub sample of the $y$ and $x$ of size $75$ to be used as a training data set. 
+
+Name the target part as "y_train",a nd the features part as "x_train". 
+
+```{r}
+ind <- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
+y_train <- y[ind,]
+x_train <- x[ind,]
+```
+
+The rest of the data set , use it as a validation data set. 
+
+Name the target part as "y_valid",a nd the features part as "x_valid". 
+
+```{r}
+y_valid <- y[-ind,]
+x_valid <- x[-ind,]
+```
+
+## Create a training dataset and a validatin data-set (to be done in the computer practical if time allows)  
+
+Train a NN to address the classification problem with purpose for a given feature "x" to be able to clasify it as setosa, versicolor, or virginica. 
+
+By using the R function nnet{nnet} fit a feed forward neural network with:
+
++ one hidden layer,
+
++  units in the hidden layer; i.e. $T=2$
+
++ the output activation function is softmax
+
++ use decay "decay=0.00001" -- the arguments of nnet
+
++ use maximum number of iterations for the SGD "maxit = 200" -- the arguments of nnet
+
+Do it below
+
+
+```{r}
+nnet.2.out <- nnet(x_train, y_train,  
+            size = 2, 
+            decay = 5e-4, 
+            maxit = 200)
+```
+
+## Predict (to be done in the computer practical if time allows)  
+
+
+Using the output from nnet{nnet}, predict / classify the features in the validation dataset, and compare with the actual classes.  
+
+You may use function "maxCol {base}"
+
+Do it below
+
+```{r}
+#predictions
+nnet.2.pred <- predict(nnet.2.out, x_valid)
+max.col(nnet.2.pred)
+#actual labels
+max.col(y_valid)
+# compare
+match = mean(max.col(nnet.2.pred)==max.col(y_valid))
+match 
+```
+
+
+

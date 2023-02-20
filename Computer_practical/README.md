@@ -75,6 +75,12 @@ Stochastic learning methods SGLD (Computer practical 2)
 
 -   Complete : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_gradient_langevin_dynamics.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_gradient_langevin_dynamics.Rmd)  
 
+Artificial Neural Networks (Computer practical 3)
+
+-   Tasks : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks_tasks.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks_tasks.Rmd)  
+
+-   Complete : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks.Rmd)  
+
 ------------------------------------------------------------------------
 
 Reference list

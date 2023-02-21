@@ -7562,7 +7562,7 @@ Popular shrinkage terms <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></li>
 </ul>
 </div>
-<h3 class="subsection" id='magicparlabel-292'><span class="subsection_label">4.3</span> Stochastic gradient implementation</h3>
+<h2 class="section" id='magicparlabel-292'><span class="section_label">5</span> Stochastic gradient implementation for training NN</h2>
 
 <div class="standard" id='magicparlabel-293'><br />
 
@@ -7983,7 +7983,7 @@ Practical guidelines for the use of SGD in the learning problem of NN:</div>
  </mrow></math></li>
 </ol>
 </div>
-<h2 class="section" id='magicparlabel-311'><span class="section_label">5</span> Error backpropagation (to compute <math xmlns="http://www.w3.org/1998/Math/MathML">
+<h3 class="subsection" id='magicparlabel-311'><span class="subsection_label">5.1</span> Error backpropagation (to compute <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -7998,7 +7998,7 @@ Practical guidelines for the use of SGD in the learning problem of NN:</div>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>)</h2>
+ </mrow></math>)</h3>
 
 <div class="note" id='magicparlabel-312'><div class="note_item"><span class="note_label">Note 56.</span>
 The error backpropagation procedure is an efficient algorithm for the computation of the gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -8451,14 +8451,10 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 
    <mrow>
     <mfrac>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
      </mrow>
      <mrow>
-      <mrow>
-       <mstyle mathvariant='normal'><mi>d</mi>
-       </mstyle>
+      <mrow><mi> &part; </mi>
        <msub>
         <mrow><mi>w</mi>
         </mrow>
@@ -8723,73 +8719,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 </dd><dt class="description_label">Backward&nbsp;pass</dt>
 <dd class="description_item"><i> &nbsp;</i>
 
-<ol class="enumerate" id='magicparlabel-344'><li class="enumerate_item"><i>For <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>q</mi>
-  </mrow>
- </mrow></math></i>
-<div class="plain_layout" id='magicparlabel-345'><i>&emsp;&emsp;Set<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-349'>Eg <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msub>
-    <mrow><mi> &delta; </mi>
-    </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
-    </mrow>
-   </msub><mo>=</mo>
-   <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
-    </mrow>
-    <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
-      <msub>
-       <mrow><mi>o</mi>
-       </mrow>
-       <mrow>
-        <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-        </mrow>
-       </mrow>
-      </msub>
-     </mrow>
-    </mrow>
-   </mfrac>
-   <msub>
-    <mrow><mi> &ell; </mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <msub>
-    <mrow><mi>o</mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>=</mo>
-   <msub>
-    <mrow><mi>o</mi>
-    </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
-    </mrow>
-   </msub><mo>-</mo>
-   <msub>
-    <mrow><mi>y</mi>
-    </mrow>
-    <mrow><mi>k</mi>
-    </mrow>
-   </msub>
-  </mrow>
- </mrow></math> if <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-344'><li class="enumerate_item"><i>Set<div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-353'>Eg if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -8840,49 +8770,73 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msup>
   </mrow>
- </mrow></math></div>
-</div></div>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> then <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
     <mrow><mi> &delta; </mi>
     </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
+    <mrow><mi>T</mi>
     </mrow>
    </msub><mo>=</mo>
-   <msub>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
-
+   <mfrac>
+    <mrow>
      <mrow>
-      <mfrac>
-       <mrow>
-        <mstyle mathvariant='normal'><mi>d</mi>
-        </mstyle>
-       </mrow>
-       <mrow>
-        <mrow>
-         <mstyle mathvariant='normal'><mi>d</mi>
-         </mstyle><mi> &xi; </mi>
-        </mrow>
-       </mrow>
-      </mfrac>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
       <msub>
        <mrow><mi> &ell; </mi>
        </mrow>
        <mrow><mi>T</mi>
        </mrow>
-      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi> &xi; </mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+      </msub>
      </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
-
     </mrow>
     <mrow>
-     <mrow><mi> &xi; </mi><mo>=</mo>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow><mi>T</mi>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow><mi>T</mi>
+    </mrow>
+   </msub><mo>-</mo><mi>y</mi>
+  </mrow>
+ </mrow></math> , or otherwise <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>o</mi>
        </mrow>
@@ -8893,15 +8847,88 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
       </msub>
      </mrow>
     </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow><mi>T</mi>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow>
+     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
+     </mrow>
+    </mrow>
+   </msub><mo>-</mo>
+   <msub>
+    <mrow><mi>y</mi>
+    </mrow>
+    <mrow><mi>k</mi>
+    </mrow>
    </msub>
   </mrow>
- </mrow></math></i></div>
-</li><li class="enumerate_item"><i>For <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>k</mi><mo>-</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>q</mi>
+  </mrow>
+ </mrow></math></div>
+</div></div>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &delta; </mi>
+    </mrow>
+    <mrow><mi>T</mi>
+    </mrow>
+   </msub><mo>=</mo>
+   <mfrac>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow><mi>T</mi>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math></i></li>
+<li class="enumerate_item"><i>For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mi>T</mi><mo>-</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mn>1</mn>
   </mrow>
  </mrow></math></i>
-<div class="plain_layout" id='magicparlabel-351'><i>&emsp;&emsp;For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-359'><i>&emsp;&emsp;For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo>
    <msub>
@@ -8913,7 +8940,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math></i></div>
 
-<div class="plain_layout" id='magicparlabel-352'><i>&emsp;&emsp;&emsp;&emsp;Compute: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-360'><i>&emsp;&emsp;&emsp;&emsp;Compute: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -8974,7 +9001,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 </li></ol>
 </dd><dt class="description_label">Output</dt>
 <dd class="description_item"><i> &nbsp;</i>
-<div class="plain_layout" id='magicparlabel-354'><i>for each edge <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-362'><i>for each edge <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -9003,18 +9030,14 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> </i></div>
 
-<div class="plain_layout" id='magicparlabel-355'><i>&emsp;&emsp;Set, <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-363'><i>&emsp;&emsp;Set, <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+    <mrow><mi> &part; </mi>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>w</mi>
        </mrow>
@@ -9061,7 +9084,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math></i></div>
 
-<div class="plain_layout" id='magicparlabel-356'><i>for <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-364'><i>for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo>
    <msub>
@@ -9089,11 +9112,11 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div></div>
 
 
-<div class="standard" id='magicparlabel-357'><br />
+<div class="standard" id='magicparlabel-365'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-358'><div class="remark_item"><span class="remark_label">Remark 63.</span>
+<div class="remark" id='magicparlabel-366'><div class="remark_item"><span class="remark_label">Remark 63.</span>
 Several sources in the literature use the notation <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -9104,9 +9127,7 @@ Several sources in the literature use the notation <math display="block" xmlns="
       </mrow><mo stretchy="true">&tilde;</mo>
      </mover>
     </mrow>
-    <mrow>
-     <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
-     </mrow>
+    <mrow><mi>t</mi>
     </mrow>
    </msub><mo>:</mo><mo>=</mo>
    <mfrac>
@@ -9129,9 +9150,59 @@ Several sources in the literature use the notation <math display="block" xmlns="
       <msub>
        <mrow><mi> &alpha; </mi>
        </mrow>
-       <mrow>
-        <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
-        </mrow>
+       <mrow><mi>t</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo>=</mo>
+   <mfrac>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>t</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow><mi>t</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac>
+   <mfrac>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow><mi>t</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi> &alpha; </mi>
+       </mrow>
+       <mrow><mi>t</mi>
        </mrow>
       </msub>
      </mrow>
@@ -9144,9 +9215,7 @@ Several sources in the literature use the notation <math display="block" xmlns="
    <msub>
     <mrow><mi> &delta; </mi>
     </mrow>
-    <mrow>
-     <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
-     </mrow>
+    <mrow><mi>t</mi>
     </mrow>
    </msub><mo>=</mo>
    <mfrac>
@@ -9169,9 +9238,7 @@ Several sources in the literature use the notation <math display="block" xmlns="
       <msub>
        <mrow><mi>o</mi>
        </mrow>
-       <mrow>
-        <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
-        </mrow>
+       <mrow><mi>t</mi>
        </mrow>
       </msub>
      </mrow>
@@ -9180,146 +9247,15 @@ Several sources in the literature use the notation <math display="block" xmlns="
   </mrow>
  </mrow></math> used in Algorithm <a href="#alg__Error_backpropagation_">62</a>. Then the backward pass and output steps in Algorithm <a href="#alg__Error_backpropagation_">62</a> can be equivalently restated as</div>
 <div class="remark_item">
-<div class='Boxed'><dl class='description' id='magicparlabel-367'><dt class="description_label">Backward&nbsp;pass</dt>
+<div class='Boxed'><dl class='description' id='magicparlabel-375'><dt class="description_label">Backward&nbsp;pass</dt>
 <dd class="description_item"> &nbsp;
 
-<ol class="enumerate" id='magicparlabel-368'><li class="enumerate_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>q</mi>
-  </mrow>
- </mrow></math>
-
-<ol class="enumerate" id='magicparlabel-369'><li class="enumerate_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-376'><li class="enumerate_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mi>T</mi>
   </mrow>
  </mrow></math>, 
-<div class="plain_layout" id='magicparlabel-370'>&emsp;&emsp;For <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo>
-   <msub>
-    <mrow><mi>k</mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub>
-  </mrow>
- </mrow></math></div>
-
-<div class="plain_layout" id='magicparlabel-371'>&emsp;&emsp;&emsp;&emsp;Set<div class="foot"><span class="foot_label">4</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-375'>Eg <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msub>
-    <mrow><mi> &delta; </mi>
-    </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
-    </mrow>
-   </msub><mo>=</mo>
-   <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
-    </mrow>
-    <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
-      <msub>
-       <mrow><mi>o</mi>
-       </mrow>
-       <mrow>
-        <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-        </mrow>
-       </mrow>
-      </msub>
-     </mrow>
-    </mrow>
-   </mfrac>
-   <msub>
-    <mrow><mi> &ell; </mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <msub>
-    <mrow><mi>o</mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>=</mo>
-   <msub>
-    <mrow><mi>o</mi>
-    </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
-    </mrow>
-   </msub><mo>-</mo>
-   <msub>
-    <mrow><mi>y</mi>
-    </mrow>
-    <mrow><mi>k</mi>
-    </mrow>
-   </msub>
-  </mrow>
- </mrow></math> if <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <mrow><mi>w</mi><mo>,</mo><mi>z</mi>
-   </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>=</mo>
-   <mfrac>
-    <mrow><mn>1</mn>
-    </mrow>
-    <mrow><mn>2</mn>
-    </mrow>
-   </mfrac>
-   <msubsup>
-    <mrow><mo> &sum; </mo>
-    </mrow>
-    <mrow>
-     <mrow><mi>k</mi><mo>=</mo><mn>1</mn>
-     </mrow>
-    </mrow>
-    <mrow><mi>q</mi>
-    </mrow>
-   </msubsup>
-   <msup>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-     <mrow>
-      <msub>
-       <mrow><mi>h</mi>
-       </mrow>
-       <mrow><mi>k</mi>
-       </mrow>
-      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>x</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>-</mo>
-      <msub>
-       <mrow><mi>y</mi>
-       </mrow>
-       <mrow><mi>k</mi>
-       </mrow>
-      </msub>
-     </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-    </mrow>
-    <mrow><mn>2</mn>
-    </mrow>
-   </msup>
-  </mrow>
- </mrow></math></div>
-</div></div>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-381'>&emsp;&emsp;Set: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -9329,37 +9265,35 @@ Several sources in the literature use the notation <math display="block" xmlns="
       </mrow><mo stretchy="true">&tilde;</mo>
      </mover>
     </mrow>
-    <mrow>
-     <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-     </mrow>
+    <mrow><mi>T</mi>
     </mrow>
    </msub><mo>=</mo>
    <mfrac>
     <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
     </mrow>
     <mrow>
      <mrow>
       <mstyle mathvariant='normal'><mi>d</mi>
       </mstyle>
       <msub>
-       <mrow><mi>o</mi>
+       <mrow><mi> &alpha; </mi>
        </mrow>
-       <mrow>
-        <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-        </mrow>
+       <mrow><mi>T</mi>
        </mrow>
       </msub>
      </mrow>
     </mrow>
-   </mfrac>
-   <msub>
-    <mrow><mi> &ell; </mi>
-    </mrow>
-    <mrow><mi>T</mi>
-    </mrow>
-   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
    <msub>
     <mrow><mi>o</mi>
@@ -9369,57 +9303,14 @@ Several sources in the literature use the notation <math display="block" xmlns="
    </msub>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-   <msub>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
-
-     <mrow>
-      <mfrac>
-       <mrow>
-        <mstyle mathvariant='normal'><mi>d</mi>
-        </mstyle>
-       </mrow>
-       <mrow>
-        <mrow>
-         <mstyle mathvariant='normal'><mi>d</mi>
-         </mstyle><mi> &xi; </mi>
-        </mrow>
-       </mrow>
-      </mfrac>
-      <msub>
-       <mrow><mi> &sigma; </mi>
-       </mrow>
-       <mrow><mi>T</mi>
-       </mrow>
-      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi> &xi; </mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-     </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
-
-    </mrow>
-    <mrow>
-     <mrow><mi> &xi; </mi><mo>=</mo>
-      <msub>
-       <mrow><mi> &alpha; </mi>
-       </mrow>
-       <mrow>
-        <mrow><mi>T</mi><mo>,</mo><mi>k</mi>
-        </mrow>
-       </mrow>
-      </msub>
-     </mrow>
-    </mrow>
-   </msub>
   </mrow>
  </mrow></math></div>
-</li></ol>
 </li><li class="enumerate_item">For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mi>T</mi><mo>-</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mn>1</mn>
   </mrow>
  </mrow></math>
-<div class="plain_layout" id='magicparlabel-377'>&emsp;&emsp;For <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-391'>&emsp;&emsp;For <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo>
    <msub>
@@ -9431,7 +9322,7 @@ Several sources in the literature use the notation <math display="block" xmlns="
   </mrow>
  </mrow></math></div>
 
-<div class="plain_layout" id='magicparlabel-378'>&emsp;&emsp;&emsp;&emsp;Compute: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-392'>&emsp;&emsp;&emsp;&emsp;Compute: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -9507,7 +9398,7 @@ Several sources in the literature use the notation <math display="block" xmlns="
 </dd><dt class="description_label">Output</dt>
 <dd class="description_item"> &nbsp;
 
-<ul class="itemize" id='magicparlabel-380'><li class="itemize_item">for each edge <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-394'><li class="itemize_item">for each edge <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -9535,18 +9426,14 @@ Several sources in the literature use the notation <math display="block" xmlns="
    </mstyle>
   </mrow>
  </mrow></math> 
-<div class="plain_layout" id='magicparlabel-381'>&emsp;&emsp;Set <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="plain_layout" id='magicparlabel-395'>&emsp;&emsp;Set <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+    <mrow><mi> &part; </mi>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>w</mi>
        </mrow>
@@ -9590,11 +9477,11 @@ Several sources in the literature use the notation <math display="block" xmlns="
 </div></div>
 </div>
 
-<div class="standard" id='magicparlabel-382'><br />
+<div class="standard" id='magicparlabel-396'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-383'><div class="example_item"><span class="example_label">Example 64.</span>
+<div class="example" id='magicparlabel-397'><div class="example_item"><span class="example_label">Example 64.</span>
 Consider the multi-output regression problem, assume a predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -9866,13 +9753,13 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
  </mrow></math>.</div>
 </div>
 
-<div class="solution_" id='magicparlabel-384'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-398'><div class="solution__item"><span class="solution__label">Solution.</span>
 &nbsp;</div>
 
-<dl class='description' id='magicparlabel-385'><dt class="description_label">Forward&nbsp;pass</dt>
+<dl class='description' id='magicparlabel-399'><dt class="description_label">Forward&nbsp;pass</dt>
 <dd class="description_item"> 
 
-<dl class='description' id='magicparlabel-386'><dt class="description_label">Set</dt>
+<dl class='description' id='magicparlabel-400'><dt class="description_label">Set</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -9899,7 +9786,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
 <dt class="description_label">Compute</dt>
 <dd class="description_item"> 
 
-<dl class='description' id='magicparlabel-388'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
+<dl class='description' id='magicparlabel-402'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn>
   </mrow>
@@ -9910,7 +9797,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-389'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-403'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -9985,7 +9872,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-392'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-406'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -10071,7 +9958,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
 </dl>
 </dd></dl>
 </dd></dl>
-<div class="standard" id='magicparlabel-395'>Note that <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-409'>Note that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mfrac>
@@ -10143,10 +10030,10 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   </mrow>
  </mrow></math>. </div>
 
-<dl class='description' id='magicparlabel-396'><dt class="description_label">Backward&nbsp;pass</dt>
+<dl class='description' id='magicparlabel-410'><dt class="description_label">Backward&nbsp;pass</dt>
 <dd class="description_item"> 
 
-<dl class='description' id='magicparlabel-397'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
+<dl class='description' id='magicparlabel-411'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>2</mn>
   </mrow>
@@ -10157,7 +10044,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-398'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-412'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -10174,14 +10061,10 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
     </mrow>
    </msub><mo>=</mo>
    <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+    <mrow><mi> &part; </mi>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi> &alpha; </mi>
        </mrow>
@@ -10199,6 +10082,116 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
     <mrow><mi>T</mi>
     </mrow>
    </msub><mo>=</mo>
+   <msubsup>
+    <mrow><mo> &sum; </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi>j</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>q</mi>
+    </mrow>
+   </msubsup>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>j</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>j</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi> &alpha; </mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo>=</mo>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi> &ell; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>o</mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi> &alpha; </mi>
+       </mrow>
+       <mrow>
+        <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+        </mrow>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo>=</mo>
    <msub>
     <mrow><mi>h</mi>
     </mrow>
@@ -10225,7 +10218,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-400'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-414'><dt class="description_label">comp</dt>
 <dd class="description_item"> &nbsp;<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -10389,13 +10382,16 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
   <mrow>
    <mfrac>
     <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+     <mrow><mi> &part; </mi><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>w</mi><mo>,</mo><mi>z</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>w</mi>
        </mrow>
@@ -10406,7 +10402,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac><mi> &ell; </mi><mo>=</mo>
+   </mfrac><mo>=</mo>
    <msub>
     <mrow>
      <mover>
@@ -10431,13 +10427,16 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
    </mstyle><mspace width="6px" /><mspace width="6px" />
    <mfrac>
     <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+     <mrow><mi> &part; </mi><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>w</mi><mo>,</mo><mi>z</mi>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>w</mi>
        </mrow>
@@ -10448,7 +10447,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac><mi> &ell; </mi><mo>=</mo>
+   </mfrac><mo>=</mo>
    <msub>
     <mrow>
      <mover>
@@ -10473,13 +10472,13 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
  </mrow></math></dd>
 </dl>
 </div>
-<h3 class="subsection" id='magicparlabel-402'><span class="subsection_label">5.1</span> Design of Error back-propagation (Algorithm <a href="#alg__Error_backpropagation_">62</a>)</h3>
+<h3 class="subsection" id='magicparlabel-416'><span class="subsection_label">5.2</span> Design of Error back-propagation (Algorithm <a href="#alg__Error_backpropagation_">62</a>)</h3>
 
-<div class="standard" id='magicparlabel-403'><br />
+<div class="standard" id='magicparlabel-417'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-404'><div class="notation_item"><span class="notation_label">Notation 65.</span>
+<div class="notation" id='magicparlabel-418'><div class="notation_item"><span class="notation_label">Notation 65.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -10544,11 +10543,11 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-405'><br />
+<div class="standard" id='magicparlabel-419'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-406'><div class="notation_item"><span class="notation_label">Notation 66.</span>
+<div class="notation" id='magicparlabel-420'><div class="notation_item"><span class="notation_label">Notation 66.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -10630,11 +10629,11 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-407'><br />
+<div class="standard" id='magicparlabel-421'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-408'><div class="notation_item"><span class="notation_label">Notation 67.</span>
+<div class="notation" id='magicparlabel-422'><div class="notation_item"><span class="notation_label">Notation 67.</span>
 We introduce notation, such that if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &sigma; </mi><mo>:</mo>
@@ -10705,11 +10704,11 @@ We introduce notation, such that if <math xmlns="http://www.w3.org/1998/Math/Mat
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-409'><br />
+<div class="standard" id='magicparlabel-423'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-410'><div class="notation_item"><span class="notation_label">Notation 68.</span>
+<div class="notation" id='magicparlabel-424'><div class="notation_item"><span class="notation_label">Notation 68.</span>
 The vector of the outputs <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -10809,11 +10808,11 @@ The vector of the outputs <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-411'><br />
+<div class="standard" id='magicparlabel-425'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-412'><div class="notation_item"><span class="notation_label">Notation 69.</span>
+<div class="notation" id='magicparlabel-426'><div class="notation_item"><span class="notation_label">Notation 69.</span>
 The vector of activations, aka vector of the inputs, of the neurons of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -10849,11 +10848,11 @@ The vector of activations, aka vector of the inputs, of the neurons of <math xml
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-413'><br />
+<div class="standard" id='magicparlabel-427'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-414'><div class="note_item"><span class="note_label">Note 70.</span>
+<div class="note" id='magicparlabel-428'><div class="note_item"><span class="note_label">Note 70.</span>
 Hence, <a id="eq__5" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -10945,11 +10944,11 @@ Hence, <a id="eq__5" />
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-415'><br />
+<div class="standard" id='magicparlabel-429'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-416'><div class="notation_item"><span class="notation_label">Notation 71.</span>
+<div class="notation" id='magicparlabel-430'><div class="notation_item"><span class="notation_label">Notation 71.</span>
 To facilitate differential calculus, let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -11210,11 +11209,11 @@ To facilitate differential calculus, let <math xmlns="http://www.w3.org/1998/Mat
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-417'><br />
+<div class="standard" id='magicparlabel-431'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-418'><div class="note_item"><span class="note_label">Note 72.</span>
+<div class="note" id='magicparlabel-432'><div class="note_item"><span class="note_label">Note 72.</span>
 Hence, from <a href="#eq__5">(5.1)</a> and <a href="#eq__4">(5.2)</a>, it is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -11297,11 +11296,11 @@ Hence, from <a href="#eq__5">(5.1)</a> and <a href="#eq__4">(5.2)</a>, it is <ma
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-419'><br />
+<div class="standard" id='magicparlabel-433'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-420'><div class="note_item"><span class="note_label">Note 73.</span>
+<div class="note" id='magicparlabel-434'><div class="note_item"><span class="note_label">Note 73.</span>
 By chain rule it is <a id="eq__6" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -11524,11 +11523,11 @@ By chain rule it is <a id="eq__6" />
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-425'><br />
+<div class="standard" id='magicparlabel-439'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-426'><div class="notation_item"><span class="notation_label">Notation 74.</span>
+<div class="notation" id='magicparlabel-440'><div class="notation_item"><span class="notation_label">Notation 74.</span>
 Let as define<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -11575,11 +11574,11 @@ Let as define<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> and name them as `errors'. </div>
 </div>
 
-<div class="standard" id='magicparlabel-427'><br />
+<div class="standard" id='magicparlabel-441'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-428'><div class="note_item"><span class="note_label">Note 75.</span>
+<div class="note" id='magicparlabel-442'><div class="note_item"><span class="note_label">Note 75.</span>
 Then <a href="#eq__6">(5.3)</a>, becomes<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -11769,11 +11768,11 @@ Then <a href="#eq__6">(5.3)</a>, becomes<math display="block" xmlns="http://www.
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-429'><br />
+<div class="standard" id='magicparlabel-443'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-430'><div class="note_item"><span class="note_label">Note 76.</span>
+<div class="note" id='magicparlabel-444'><div class="note_item"><span class="note_label">Note 76.</span>
 I will find a way to compute <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
@@ -12214,11 +12213,11 @@ I will find a way to compute <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-431'><br />
+<div class="standard" id='magicparlabel-445'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-432'><div class="note_item"><span class="note_label">Note 77.</span>
+<div class="note" id='magicparlabel-446'><div class="note_item"><span class="note_label">Note 77.</span>
 Hence, for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>T</mi>
@@ -12344,9 +12343,7 @@ Hence, for <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mrow>
    <mfrac>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+     <mrow><mi> &part; </mi><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
       <mrow><mi>w</mi><mo>,</mo><mi>z</mi>
       </mrow>
@@ -12355,9 +12352,7 @@ Hence, for <math xmlns="http://www.w3.org/1998/Math/MathML">
      </mrow>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>w</mi>
        </mrow>
@@ -12405,11 +12400,316 @@ Hence, for <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math></div>
 </div>
-<div class="standard" id='magicparlabel-433'><br />
-</div>
-<h2 class="section" id='magicparlabel-434'><span class="section_label">A</span> About graphs</h2>
 
-<div class="definition" id='magicparlabel-435'><div class="definition_item"><span class="definition_label">Definition 78.</span>
+<div class="remark" id='magicparlabel-447'><div class="remark_item"><span class="remark_label">Remark 78.</span>
+Error back-propagation idea can also be used to efficiently compute the gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi> &nabla; </mi>
+    </mrow>
+    <mrow><mi>x</mi>
+    </mrow>
+   </msub><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> of the loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>w</mi><mo>,</mo><mi>z</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>x</mi><mo>,</mo><mi>y</mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> with respect to the inputs <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>x</mi>
+ </mrow></math>. The idea is the same, use chain rule to find a recursive procedure. </div>
+</div>
+<h3 class="subsection" id='magicparlabel-448'><span class="subsection_label">5.3</span> Computation of the Hessian for preconditioning </h3>
+
+<div class="note" id='magicparlabel-449'><div class="note_item"><span class="note_label">Note 79.</span>
+Recall (Handout 3, Algorithm <a href="#alg_Stochastic_Gradient_descent_2">alg:Stochastic-Gradient-descent-2</a>), that SGD may be improved by using a suitable preconditioner <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>P</mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> as<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>t</mi><mo>+</mo><mn>1</mn>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msup><mo>=</mo>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msup><mo>-</mo>
+   <msub>
+    <mrow><mi> &eta; </mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>P</mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi> &nabla; </mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msup><mo>,</mo>
+    <msup>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> such a preconditioner can be the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>P</mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub><mo>:</mo><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>H</mi>
+       </mrow>
+       <mrow><mi>t</mi>
+       </mrow>
+      </msub><mo>+</mo><mi> &epsi; </mi>
+      <msub>
+       <mrow><mi>I</mi>
+       </mrow>
+       <mrow><mi>d</mi>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mo>-</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>H</mi>
+   </mrow>
+   <mrow><mi>t</mi>
+   </mrow>
+  </msub>
+ </mrow></math> is the Hessian of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msup><mo>,</mo>
+    <msup>
+     <mrow><mi>z</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &epsi; </mi><mo>&gt;</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-450'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-451'><div class="note_item"><span class="note_label">Note 80.</span>
+The computation of the Hessian can be done by error propagation <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+     <msub>
+      <mrow><mi>H</mi>
+      </mrow>
+      <mrow><mi>t</mi>
+      </mrow>
+     </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo>=</mo>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+     <mrow>
+      <mfrac>
+       <mrow>
+        <msup>
+         <mrow><mi> &part; </mi>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+        </msup>
+       </mrow>
+       <mrow>
+        <mrow><mi> &part; </mi>
+         <msub>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mi>i</mi>
+          </mrow>
+         </msub><mi> &part; </mi>
+         <msub>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mi>j</mi>
+          </mrow>
+         </msub>
+        </mrow>
+       </mrow>
+      </mfrac><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>w</mi><mo>=</mo>
+      <msup>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+      </msup>
+     </mrow>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> We will not go further to exact computations. </div>
+</div>
+
+<div class="standard" id='magicparlabel-452'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-453'><div class="note_item"><span class="note_label">Note 81.</span>
+The exact computation of the Hessian <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>H</mi>
+   </mrow>
+   <mrow><mi>t</mi>
+   </mrow>
+  </msub>
+ </mrow></math> of the loss <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &sdot; </mo><mo>,</mo><mi>z</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> in NN setting is computationally expensive and hence approximations are often used (with hope to work well). One can implement the general purpose AdaGrad (Section <a href="#subsec_Adaptive_Stochastic_Gradient">subsec:Adaptive-Stochastic-Gradient</a>, Handout 3). In what follows we present other alternatives tailored to the NN model.</div>
+<div class="note_item">(...)</div>
+</div>
+
+<div class="standard" id='magicparlabel-455'><br />
+
+</div>
+
+<div class="standard" id='magicparlabel-456'><br />
+</div>
+<h2 class="section" id='magicparlabel-457'><span class="section_label">A</span> About graphs</h2>
+
+<div class="definition" id='magicparlabel-458'><div class="definition_item"><span class="definition_label">Definition 82.</span>
 A directed graph is an ordered pair <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -12427,7 +12727,7 @@ A directed graph is an ordered pair <math xmlns="http://www.w3.org/1998/Math/Mat
   </mrow>
  </mrow></math> comprising </div>
 
-<ul class="itemize" id='magicparlabel-441'><li class="itemize_item">a set of nodes <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-464'><li class="itemize_item">a set of nodes <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>V</mi>
   </mstyle>
@@ -12456,11 +12756,11 @@ A directed graph is an ordered pair <math xmlns="http://www.w3.org/1998/Math/Mat
 </ul>
 </div>
 
-<div class="standard" id='magicparlabel-443'><br />
+<div class="standard" id='magicparlabel-466'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-444'><div class="definition_item"><span class="definition_label">Definition 79.</span>
+<div class="definition" id='magicparlabel-467'><div class="definition_item"><span class="definition_label">Definition 83.</span>
 An edge-weighted graph or a network is a graph <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -12493,22 +12793,22 @@ An edge-weighted graph or a network is a graph <math xmlns="http://www.w3.org/19
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-445'><br />
+<div class="standard" id='magicparlabel-468'><br />
 
 </div>
 
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-451'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/pictures/directed-graph.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-474'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/pictures/directed-graph.pdf' alt='image: ' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Figure A.1:  A directed graph</span></div>
 
 
 </div>
 
-<h2 class="section" id='magicparlabel-457'><span class="section_label">B</span> About Partial derivatives</h2>
+<h2 class="section" id='magicparlabel-480'><span class="section_label">B</span> About Partial derivatives</h2>
 
-<div class="note" id='magicparlabel-458'><div class="note_item"><span class="note_label">Note 80.</span>
+<div class="note" id='magicparlabel-481'><div class="note_item"><span class="note_label">Note 84.</span>
 Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
@@ -12526,7 +12826,7 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="definition" id='magicparlabel-459'><div class="definition_item"><span class="definition_label">Definition 81.</span>
+<div class="definition" id='magicparlabel-482'><div class="definition_item"><span class="definition_label">Definition 85.</span>
 <a id="def_The_partial_derivative" />
 The partial derivative of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -12825,12 +13125,12 @@ The partial derivative of <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>-th location. </div>
 </div>
 
-<div class="standard" id='magicparlabel-460'><br />
+<div class="standard" id='magicparlabel-483'><br />
 
 </div>
 
-<div class="remark" id='magicparlabel-461'><div class="remark_item"><span class="remark_label">Remark 82.</span>
-Essentially, Definition <a href="#def_The_partial_derivative">81</a> says that the partial derivative of <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="remark" id='magicparlabel-484'><div class="remark_item"><span class="remark_label">Remark 86.</span>
+Essentially, Definition <a href="#def_The_partial_derivative">85</a> says that the partial derivative of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
    <msup>
@@ -12980,9 +13280,9 @@ Essentially, Definition <a href="#def_The_partial_derivative">81</a> says that t
  <mrow><mn>0</mn>
  </mrow></math>. </div>
 </div>
-<h2 class="section" id='magicparlabel-462'><span class="section_label">C</span> About Jacobian</h2>
+<h2 class="section" id='magicparlabel-485'><span class="section_label">C</span> About Jacobian</h2>
 
-<div class="note" id='magicparlabel-463'><div class="note_item"><span class="note_label">Note 83.</span>
+<div class="note" id='magicparlabel-486'><div class="note_item"><span class="note_label">Note 87.</span>
 Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
@@ -13006,11 +13306,11 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-464'><br />
+<div class="standard" id='magicparlabel-487'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-465'><div class="note_item"><span class="note_label">Note 84.</span>
+<div class="note" id='magicparlabel-488'><div class="note_item"><span class="note_label">Note 88.</span>
 The Jacobian of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
  </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -13113,11 +13413,11 @@ The Jacobian of <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-466'><br />
+<div class="standard" id='magicparlabel-489'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-467'><div class="note_item"><span class="note_label">Note 85.</span>
+<div class="note" id='magicparlabel-490'><div class="note_item"><span class="note_label">Note 89.</span>
 To align with standard notation in statistics, we will use the notation<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -13171,14 +13471,14 @@ To align with standard notation in statistics, we will use the notation<math dis
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-468'><br />
+<div class="standard" id='magicparlabel-491'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-469'><div class="note_item"><span class="note_label">Note 86.</span>
+<div class="note" id='magicparlabel-492'><div class="note_item"><span class="note_label">Note 90.</span>
 Some properties</div>
 
-<ul class="itemize" id='magicparlabel-470'><li class="itemize_item">Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-493'><li class="itemize_item">Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>w</mi>
@@ -13432,7 +13732,7 @@ Some properties</div>
 </ul>
 </div>
 
-<div class="example" id='magicparlabel-472'><div class="example_item"><span class="example_label">Example 87.</span>
+<div class="example" id='magicparlabel-495'><div class="example_item"><span class="example_label">Example 91.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>g</mi><mo>:</mo>
@@ -13503,7 +13803,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>. </div>
 
-<dl class='description' id='magicparlabel-473'><dt class="description_label">Hint</dt>
+<dl class='description' id='magicparlabel-496'><dt class="description_label">Hint</dt>
 <dd class="description_item"> Adopt notation <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &sigma; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -13549,7 +13849,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </dd>
 </dl>
 
-<div class="solution_" id='magicparlabel-474'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-497'><div class="solution__item"><span class="solution__label">Solution.</span>
 It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -13954,7 +14254,7 @@ It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-483'><br />
+<div class="standard" id='magicparlabel-506'><br />
 
 </div>
 </body>

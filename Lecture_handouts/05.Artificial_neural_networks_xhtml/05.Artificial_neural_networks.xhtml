@@ -329,7 +329,7 @@ div.Boxed {
 </ul>
 </li><li class="enumerate_item">Bishop, C. M. (1995). Neural networks for pattern recognition. Oxford university press.
 
-<ul class="itemize" id='magicparlabel-52'><li class="itemize_item">Ch. 4 The multi-layer perceptron</li>
+<ul class="itemize" id='magicparlabel-52'><li class="itemize_item">Ch. 4 The multi-layer perceptron </li>
 </ul>
 </li><li class="enumerate_item">LeCun, Y., Bottou, L., Orr, G. B., &amp; Müller, K. R. (2002). Efficient backprop. In Neural networks: Tricks of the trade (pp. 9-50). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
 </ol>
@@ -9931,7 +9931,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
     <mrow><mi>o</mi>
     </mrow>
     <mrow>
-     <mrow><mn>2</mn><mo>,</mo><mi>j</mi>
+     <mrow><mo>,</mo><mi>j</mi>
      </mrow>
     </mrow>
    </msub>
@@ -10070,7 +10070,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
  </mrow></math>
 
 <dl class='description' id='magicparlabel-412'><dt class="description_label">comp</dt>
-<dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
+<dd class="description_item"> &nbsp;<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -10140,7 +10140,18 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow>
+     <mrow><mn>2</mn><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
    <mfrac>
     <mrow>
      <mrow><mi> &part; </mi>
@@ -10166,7 +10177,18 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac><mo>=</mo>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi> &alpha; </mi>
+    </mrow>
+    <mrow>
+     <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+     </mrow>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
    <mfrac>
     <mrow>
      <mrow><mi> &part; </mi>
@@ -10190,7 +10212,18 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>o</mi>
+    </mrow>
+    <mrow>
+     <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+     </mrow>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
    <mfrac>
     <mrow>
      <mrow><mi> &part; </mi>
@@ -10216,7 +10249,18 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       </msub>
      </mrow>
     </mrow>
-   </mfrac><mo>=</mo>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi> &alpha; </mi>
+    </mrow>
+    <mrow>
+     <mrow><mn>2</mn><mo>,</mo><mi>k</mi>
+     </mrow>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
    <msub>
     <mrow><mi>h</mi>
     </mrow>
@@ -10319,7 +10363,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       <mrow><mi>w</mi>
       </mrow>
       <mrow>
-       <mrow><mn>2</mn><mo>,</mo><mi>k</mi><mo>,</mo><mi>j</mi>
+       <mrow><mn>2</mn><mo>,</mo><mi>j</mi><mo>,</mo><mi>k</mi>
        </mrow>
       </mrow>
      </msub>
@@ -10379,7 +10423,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
       <mrow><mi>w</mi>
       </mrow>
       <mrow>
-       <mrow><mn>2</mn><mo>,</mo><mi>k</mi><mo>,</mo><mi>j</mi>
+       <mrow><mn>2</mn><mo>,</mo><mi>j</mi><mo>,</mo><mi>k</mi>
        </mrow>
       </mrow>
      </msub>
@@ -10530,7 +10574,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mstyle mathvariant='double-struck'><mi>R</mi>
    </mstyle>
   </mrow>
- </mrow></math> be the the loss function of the sub-network defined by layers <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> be the loss function of the sub-network defined by layers <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <mrow>
@@ -12625,7 +12669,7 @@ Recall (Handout 3, Algorithm <a href="#alg_Stochastic_Gradient_descent_2">alg:St
 </div>
 
 <div class="note" id='magicparlabel-451'><div class="note_item"><span class="note_label">Note 80.</span>
-The computation of the Hessian can be done by error propagation <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+The computation of the Hessian can be done by using error propagation ideas as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -13991,6 +14035,27 @@ Some properties</div>
     <mrow><mi>n</mi>
     </mrow>
    </msup>
+  </mrow>
+ </mrow></math>. Then <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mfrac>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle><mi>f</mi>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow>
+      <mstyle mathvariant='normal'><mi>d</mi>
+      </mstyle><mi>w</mi>
+     </mrow>
+    </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>A</mi>
   </mrow>
  </mrow></math>. </li>
 <li class="itemize_item">Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">

@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="GENERATOR" content="LyX 2.3.6" />
+<meta name="GENERATOR" content="LyX 2.3.6.1" />
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title>LyX Document</title>
 <style type='text/css'>
@@ -872,7 +872,7 @@ A Feed-Forward Neural Network (FFNN) or else multi-layer perceptron is a special
  </mrow></math>. (See Figure <a href="#fig_Feed_forward_neural">2.1</a>). </div>
 </div>
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-108'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/pictures/ffnn-pic.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-108'><img style='width:90%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ral_Networks_III_Handouts_pictures_ffnn-pic.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ral_Networks_III_Handouts_pictures_ffnn-pic.png' />
 </div>
 
 <div class="plain_layout" id='magicparlabel-109'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 2.1:  <a id="fig_Feed_forward_neural" />
@@ -1940,7 +1940,7 @@ The feed-forward NN formula in a layer by layer manner is performed (defined) ac
 </div>
 
 <div class="note" id='magicparlabel-153'><div class="note_item"><span class="note_label">Note 23.</span>
-Depth of the NN is the number of the layers <math xmlns="http://www.w3.org/1998/Math/MathML">
+Depth of the NN is the number of the layers excluding the input layer; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>T</mi>
  </mrow></math>.</div>
 </div>
@@ -2045,7 +2045,7 @@ The neural network can be fully specified by the quadruplet <math xmlns="http://
 </div>
 
 <div class="example" id='magicparlabel-163'><div class="example_item"><span class="example_label">Example 28.</span>
-Figure <a href="#fig_Feed_forward_neural">2.1</a> denotes a NN with depth 2, size 11, width 5. The neuro with no incoming edges has<math xmlns="http://www.w3.org/1998/Math/MathML">
+Figure <a href="#fig_Feed_forward_neural">2.1</a> denotes a NN with depth 2, size 11, width 5. The neuro with no incoming edges has <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -8984,18 +8984,43 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
      <mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>j</mi>
      </mrow>
     </mrow>
-   </msub><mi> &sigma; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
+   </msub>
    <msub>
-    <mrow><mi> &alpha; </mi>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+     <mrow>
+      <mfrac>
+       <mrow>
+        <mstyle mathvariant='normal'><mi>d</mi>
+        </mstyle>
+       </mrow>
+       <mrow>
+        <mrow>
+         <mstyle mathvariant='normal'><mi>d</mi>
+         </mstyle><mi>a</mi>
+        </mrow>
+       </mrow>
+      </mfrac><mi> &sigma; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
     </mrow>
     <mrow>
-     <mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>j</mi>
+     <mrow><mi>a</mi><mo>=</mo>
+      <msub>
+       <mrow><mi> &alpha; </mi>
+       </mrow>
+       <mrow>
+        <mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>j</mi>
+        </mrow>
+       </mrow>
+      </msub>
      </mrow>
     </mrow>
    </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
   </mrow>
  </mrow></math></i></div>
 </li></ol>
@@ -9823,7 +9848,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
     <mrow><mi>w</mi>
     </mrow>
     <mrow>
-     <mrow><mn>1</mn><mo>,</mo><mi>i</mi><mo>,</mo><mi>j</mi>
+     <mrow><mn>1</mn><mo>,</mo><mi>j</mi><mo>,</mo><mi>i</mi>
      </mrow>
     </mrow>
    </msub>
@@ -10199,7 +10224,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
     </mrow>
    </msub><mo>-</mo>
    <msub>
-    <mrow><mi>x</mi>
+    <mrow><mi>y</mi>
     </mrow>
     <mrow><mi>k</mi>
     </mrow>
@@ -10610,7 +10635,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
      <mrow><mi>v</mi>
      </mrow>
      <mrow>
-      <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
+      <mrow><mi>t</mi><mo>-</mo><mn>1</mn><mo>,</mo><mi>j</mi>
       </mrow>
      </mrow>
     </msub><mo>,</mo>
@@ -10618,7 +10643,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
      <mrow><mi>v</mi>
      </mrow>
      <mrow>
-      <mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>i</mi>
+      <mrow><mi>t</mi><mo>,</mo><mi>i</mi>
       </mrow>
      </mrow>
     </msub>
@@ -12800,7 +12825,7 @@ An edge-weighted graph or a network is a graph <math xmlns="http://www.w3.org/19
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-474'><img src='/home/georgios/Dropbox/Teaching/2023.term2.Machine_Learning_and_Neural_Networks_III/Handouts/pictures/directed-graph.pdf' alt='image: ' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-474'><img style='width:50%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____tworks_III_Handouts_pictures_directed-graph.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____tworks_III_Handouts_pictures_directed-graph.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Figure A.1:  A directed graph</span></div>
 
 
@@ -13280,9 +13305,465 @@ Essentially, Definition <a href="#def_The_partial_derivative">85</a> says that t
  <mrow><mn>0</mn>
  </mrow></math>. </div>
 </div>
-<h2 class="section" id='magicparlabel-485'><span class="section_label">C</span> About Jacobian</h2>
 
-<div class="note" id='magicparlabel-486'><div class="note_item"><span class="note_label">Note 87.</span>
+<div class="standard" id='magicparlabel-485'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-486'><div class="example_item"><span class="example_label">Example 87.</span>
+Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>f</mi>
+ </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>1</mn>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msubsup>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msubsup><mo>+</mo>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub>
+   <msubsup>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+    <mrow><mn>3</mn>
+    </mrow>
+   </msubsup>
+  </mrow>
+ </mrow></math>. Comput is partial derivatives at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>a</mi><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mn>2</mn><mo>,</mo><mn>3</mn>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi><mi>f</mi>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mfrac>
+    <mrow>
+     <mrow><mi> &part; </mi><mi>f</mi>
+     </mrow>
+    </mrow>
+    <mrow>
+     <mrow><mi> &part; </mi>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub>
+     </mrow>
+    </mrow>
+   </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. </div>
+
+<div class="solution_" id='magicparlabel-487'><div class="solution__item"><span class="solution__label">Solution.</span>
+It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow>
+     <mfrac>
+      <mrow>
+       <mrow><mi> &part; </mi><mi>f</mi>
+       </mrow>
+      </mrow>
+      <mrow>
+       <mrow><mi> &part; </mi>
+        <msub>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>1</mn>
+         </mrow>
+        </msub>
+       </mrow>
+      </mrow>
+     </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow>
+        <mfrac>
+         <mrow>
+          <mrow><mi> &part; </mi><mi>f</mi>
+          </mrow>
+         </mrow>
+         <mrow>
+          <mrow><mi> &part; </mi>
+           <msub>
+            <mrow><mi>x</mi>
+            </mrow>
+            <mrow><mn>1</mn>
+            </mrow>
+           </msub>
+          </mrow>
+         </mrow>
+        </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow>
+        <mfrac>
+         <mrow>
+          <mstyle mathvariant='normal'><mi>d</mi>
+          </mstyle>
+         </mrow>
+         <mrow>
+          <mrow>
+           <mstyle mathvariant='normal'><mi>d</mi>
+           </mstyle>
+           <msub>
+            <mrow><mi>x</mi>
+            </mrow>
+            <mrow><mn>1</mn>
+            </mrow>
+           </msub>
+          </mrow>
+         </mrow>
+        </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+        <mrow>
+         <msubsup>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+         </msubsup><mo>+</mo>
+         <msub>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+         </msub>
+         <msubsup>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+          <mrow><mn>3</mn>
+          </mrow>
+         </msubsup>
+        </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow><mn>2</mn>
+        <msub>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>1</mn>
+         </mrow>
+        </msub><mo>+</mo>
+        <msubsup>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+         <mrow><mn>3</mn>
+         </mrow>
+        </msubsup>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub>
+    </mrow>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mrow/>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo><mn>2</mn>
+     <msub>
+      <mrow><mi>a</mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub><mo>+</mo>
+     <msubsup>
+      <mrow><mi>a</mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+      <mrow><mn>3</mn>
+      </mrow>
+     </msubsup><mo>=</mo><mn>4</mn><mo>+</mo><mn>27</mn><mo>=</mo><mn>31</mn>
+    </mrow>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd>
+    <mrow>
+     <mfrac>
+      <mrow>
+       <mrow><mi> &part; </mi><mi>f</mi>
+       </mrow>
+      </mrow>
+      <mrow>
+       <mrow><mi> &part; </mi>
+        <msub>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+        </msub>
+       </mrow>
+      </mrow>
+     </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow>
+        <mfrac>
+         <mrow>
+          <mrow><mi> &part; </mi><mi>f</mi>
+          </mrow>
+         </mrow>
+         <mrow>
+          <mrow><mi> &part; </mi>
+           <msub>
+            <mrow><mi>x</mi>
+            </mrow>
+            <mrow><mn>2</mn>
+            </mrow>
+           </msub>
+          </mrow>
+         </mrow>
+        </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow>
+        <mfrac>
+         <mrow>
+          <mstyle mathvariant='normal'><mi>d</mi>
+          </mstyle>
+         </mrow>
+         <mrow>
+          <mrow>
+           <mstyle mathvariant='normal'><mi>d</mi>
+           </mstyle>
+           <msub>
+            <mrow><mi>x</mi>
+            </mrow>
+            <mrow><mn>2</mn>
+            </mrow>
+           </msub>
+          </mrow>
+         </mrow>
+        </mfrac><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+        <mrow>
+         <msubsup>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+         </msubsup><mo>+</mo>
+         <msub>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+         </msub>
+         <msubsup>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+          <mrow><mn>3</mn>
+          </mrow>
+         </msubsup>
+        </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub><mo>=</mo>
+     <msub>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>.</mo>
+
+       <mrow><mn>2</mn>
+        <msub>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>1</mn>
+         </mrow>
+        </msub>
+        <msubsup>
+         <mrow><mi>x</mi>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+        </msubsup>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+      </mrow>
+      <mrow>
+       <mrow><mi>x</mi><mo>=</mo><mi>a</mi>
+       </mrow>
+      </mrow>
+     </msub>
+    </mrow>
+   </mtd>
+  </mtr>
+  <mtr>
+   <mtd><mrow/>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo><mn>2</mn>
+     <msub>
+      <mrow><mi>a</mi>
+      </mrow>
+      <mrow><mn>1</mn>
+      </mrow>
+     </msub>
+     <msubsup>
+      <mrow><mi>a</mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msubsup><mo>=</mo><mn>4</mn><mo>+</mo><mn>27</mn><mo>=</mo><mn>72</mn>
+    </mrow>
+   </mtd>
+  </mtr>
+ </mtable></math></div>
+</div>
+</div>
+<h2 class="section" id='magicparlabel-488'><span class="section_label">C</span> About Jacobian</h2>
+
+<div class="note" id='magicparlabel-489'><div class="note_item"><span class="note_label">Note 88.</span>
 Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo>:</mo>
@@ -13306,11 +13787,11 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-487'><br />
+<div class="standard" id='magicparlabel-490'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-488'><div class="note_item"><span class="note_label">Note 88.</span>
+<div class="note" id='magicparlabel-491'><div class="note_item"><span class="note_label">Note 89.</span>
 The Jacobian of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
  </mrow></math> at <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -13413,11 +13894,11 @@ The Jacobian of <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-489'><br />
+<div class="standard" id='magicparlabel-492'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-490'><div class="note_item"><span class="note_label">Note 89.</span>
+<div class="note" id='magicparlabel-493'><div class="note_item"><span class="note_label">Note 90.</span>
 To align with standard notation in statistics, we will use the notation<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -13471,14 +13952,14 @@ To align with standard notation in statistics, we will use the notation<math dis
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-491'><br />
+<div class="standard" id='magicparlabel-494'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-492'><div class="note_item"><span class="note_label">Note 90.</span>
+<div class="note" id='magicparlabel-495'><div class="note_item"><span class="note_label">Note 91.</span>
 Some properties</div>
 
-<ul class="itemize" id='magicparlabel-493'><li class="itemize_item">Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-496'><li class="itemize_item">Let functions <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>w</mi>
@@ -13732,7 +14213,7 @@ Some properties</div>
 </ul>
 </div>
 
-<div class="example" id='magicparlabel-495'><div class="example_item"><span class="example_label">Example 91.</span>
+<div class="example" id='magicparlabel-498'><div class="example_item"><span class="example_label">Example 92.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>g</mi><mo>:</mo>
@@ -13803,7 +14284,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>. </div>
 
-<dl class='description' id='magicparlabel-496'><dt class="description_label">Hint</dt>
+<dl class='description' id='magicparlabel-499'><dt class="description_label">Hint</dt>
 <dd class="description_item"> Adopt notation <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &sigma; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -13849,7 +14330,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </dd>
 </dl>
 
-<div class="solution_" id='magicparlabel-497'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-500'><div class="solution__item"><span class="solution__label">Solution.</span>
 It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -14254,7 +14735,7 @@ It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-506'><br />
+<div class="standard" id='magicparlabel-509'><br />
 
 </div>
 </body>

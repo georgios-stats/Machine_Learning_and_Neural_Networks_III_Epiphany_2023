@@ -1,6 +1,6 @@
 ---
 title: "Stochastic gradient Langevin dynamics"
-subtitle: "Logistic regression and Mixture model"
+subtitle: "...on a binary clasification problem"
 author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
 output:
   html_notebook: 
@@ -60,11 +60,13 @@ Students will become able to:
 
 + practice in R,  
 
-+ implement SGLD algorithm in R with possibility to extend to other programming languadges  
++ implement SGLD algorithm in R  
 
-+ recap logistic regression, Normal mixture model  
++ recap logistic regression, Normal mixture model (optionally)  
 
-In the computer room, students will practice on the logistic regression example. Students are suggested to practice on the Mixture model example where the straightforward implementation of the SGLD is meant to fail.  
+In the computer room, students will practice on the binary classification problem. 
+
+Students are suggested to practice on the Mixture model example at home where the straightforward implementation of the SGLD is meant to fail.  
 
 ---
 
@@ -77,14 +79,13 @@ In the computer room, students will practice on the logistic regression example.
 + Reference for *R*:  
     + [Cheat sheet with basic commands](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)   
 
-+ Reference of *rmarkdown* (optional):  
++ Reference of *rmarkdown* (optional, supplementary material):  
     + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)  
     + [R Markdown Reference Guide](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
     + [knitr options](https://yihui.name/knitr/options)
 
-+ Reference for *Latex* (optional):  
++ Reference for *Latex* (optional, supplementary material):  
     + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
-
 ---
 
 ***New software***   
@@ -119,11 +120,17 @@ set.seed(2023)
 ```
 
 
-# Application: Logistic regression 
+# Application: Binary classification problem  {-}
 
-Consider the Logistic regression problem with input $x\in\mathbb{R}$ and output/labels $y\in\{0,1\}$. 
+Consider the binary classification problem with input $x\in\mathbb{R}$ and output/labels $y\in\{0,1\}$. 
 
-Consider there is available a dataset  $$\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}$$ , with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.  
+Consider there is available a data set  
+
+$$
+\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}
+$$
+
+with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.  
 
 The dataset $\mathcal{S}_{n}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
 
@@ -141,7 +148,11 @@ data_generating_model <- function(n,w) {
 }
 ```
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=10^{6}$.  Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+Let the dataset $\mathcal{S}_{n}$ has size $n=10^{6}$.  
+
+Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
+
+The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
 ```{r}
 n_obs <- 10^(6)
@@ -152,7 +163,6 @@ set.seed(0)
 w_true <- as.numeric(glm(z_obs[,3]~ 1 + z_obs[,2],family = "binomial" )$coefficients)
 ```
 
-## Task (given)  
 
 The predictive rule $h_{w}\left(x\right)$ is 
 
@@ -184,15 +194,13 @@ w\sim\text{N}_{d}\left(\mu=0.0,V=I_{d}\right) & \text{( prior distribution)}
 
 We consider $d=2$, $V=100 I_{2}$, and $\mu=0.0$.
 
-## Task (given)  
-
 The log PDF of the sampling distribution is 
 
 \[
 \log\left(f\left(y|w\right)\right)=y\log\left(h_{w}\left(x\right)\right)+\left(1-y\right)\log\left(1-h_{w}\left(x\right)\right)
 \]
 
-Write an R function 'log_sampling_pdf(z, w)' for the log PDF of the sampling distribution
+Here is coded the R function 'log_sampling_pdf(z, w)' for the log PDF of the sampling distribution
 
 ```{r}
 log_sampling_pdf <- function(z, w) {
@@ -205,15 +213,15 @@ log_sampling_pdf <- function(z, w) {
 }
 ```
 
-## Task (given)  
-
 The log PDF of the prior distribution is 
 
 \[
 \log\left(f\left(w\right)\right)=-\frac{d}{2}\log\left(2\pi\right)-\frac{1}{2}\left|V\right|-\frac{1}{2}\left(\beta-\mu\right)^{\top}V^{-1}\left(\beta-\mu\right)
 \]
 
-Code in R a function 'log_prior_pdf(w, mu= rep(0, length(w)), Sig2 = 1000*diag(length(w)) )' for the log PDF of the prior distribution of $w$ with mean default values $0.0$ and variance matrix default values $V=\text{diag}(1000,...,1000)$. You may use the R function ' dmvnorm\{mvtnorm\} '
+Here is coded tha R function **log_prior_pdf(w, mu= rep(0, length(w)), Sig2 = 1000*diag(length(w)) )** for the log PDF of the prior distribution of $w$ with mean default values $0.0$ and variance matrix default values $V=\text{diag}(1000,...,1000)$. 
+
+You may use the R function **dmvnorm{mvtnorm}**
 
 ```{r}
 log_prior_pdf <- function(w, mu, Sig2 ) {
@@ -223,9 +231,9 @@ log_prior_pdf <- function(w, mu, Sig2 ) {
 ```
 
 
-## Task (given)  
+# Stochastic Gradient Langevin Dynamics (SGLD)
 
-Code in R, the learning rate function  learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 )  
+Consider the learning rate function   
 
 \[
 \eta_{t}=
@@ -237,6 +245,8 @@ C_{0}, & t \le T_{0} \\
 \]
 
 for some constants $C_0$ and $\varsigma\in(0.5,1]$.  
+
+The R coded function **learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 )**  is given below   
 
 ```{r}
 learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 ) {
@@ -252,51 +262,17 @@ learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 ) {
 ```
 
 
-## Task  (Computer practical exercise)  
+## Task   (for the computer practical)   
 
-Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=(-0.1,1.5)^\top$ (at the 1st example; i.e. $z_{1}$).  
+Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1 n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
-
-E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
-
-```{r}
-aux_fun <- function(w, z = z_obs[1,]) {
-  return( log_sampling_pdf(z, w) ) 
-}
-#
-w <- c(-0.1,1.5)
-#
-gr <- numDeriv::grad( aux_fun, w )
-#
-gr
-```
-
-```{r}
-grad_log_sampling_pdf <- function(w,z) {
-  d <- length(w)
-  x = z[1:d]
-  y = z[d+1]
-  h <- prediction_rule(x,w)
-  grd <- -(h-y)*x
-  return (grd)
-}
-gr <- grad_log_sampling_pdf(w = c(-0.1,1.5),z = z_obs[1,])
-gr
-```
-
-
-## Task   (Computer practical exercise)  
-
-Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
-
-The learning rate can be constant around $C_{0}=10^{-6}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant $C_{0}=10^{-6}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate).  
+Consider a learning rate which is constant around $C_{0}=10^{-6}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant  $C_{0}=10^{-6}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate).  
 
 The termination criterion is when the total number of iterations excesses $T_{\text{max}}= 10^{3}$. 
 
 Seed with $w^{(0)}=(-1,0)^\top$.   
 
-You may use the R function 'grad{numDeriv}' to numerically compute the gradient; e.g. numDeriv::grad( erf_fun, w ) . Try ?grad for more info.  
+You may use the R function **grad{numDeriv}** to numerically compute the gradient; e.g. **numDeriv::grad( erf_fun, w )**. Try **?grad** for more info.  
 
 
 ```{r}
@@ -361,9 +337,9 @@ while ( (Qterm != 1) ) {
 ```
 
 
-## Task  (Computer practical exercise)  
+## Task (for the computer practical)   
 
-Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration.  
+Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
 If you are not happy with the convergence, feel free to tune the algorithmic parameters in the previous code properly, and run it again.  
 
@@ -375,11 +351,11 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-## Task   (Computer practical exercise)  
+## Task (for the computer practical)   
 
 Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=0.1n$, and temperature $\tau=1.0$ that returns the chain of all the  $\{w^{(t)}\}$ produced.  
 
-The learning rate can be constant around $C_{0}=10^{-2}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant $C_{0}=10^{-2}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate). 
+The learning rate can be constant around $C_{0}=10^{-2}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$ with constant $C_{0}=10^{-2}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate). 
 
 The termination criterion is when the total number of iterations excesses $T_{\text{max}}=10^{3}$. 
 
@@ -473,7 +449,7 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task  (Computer practical exercise)  
+## Task (for the computer practical)   
 
 Let's go back to the code without using the clipping gradient.  
 
@@ -486,7 +462,7 @@ w_chain_output <- w_chain[T_bunrin:Tmax,]
 
 
 
-## Task  (Computer practical exercise)  
+## Task (for the computer practical)   
 
 Plot the histograms plots of output chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ for the estimation of the marginal posterior distributions of the dimensions of $w$. 
 
@@ -496,7 +472,7 @@ hist(w_chain_output[,1])
 hist(w_chain_output[,2]) 
 ```
 
-## Task  (Exercise for homework practice)   
+## Task  (for homework practice)   
 
 To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator 
 
@@ -507,34 +483,13 @@ To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator
 based on SGLD output chain.
 
 ```{r}
-w_est = colMeans(w_chain_output)
+w_est = mean(rowMeans(w_chain_output))
 w_est
 ```
 
 
-## Task  (Exercise for homework practice)   
 
-To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator 
-
-\[
-\widehat{w_{1}+w_{2}}=\sum_{t=1}^{T}\frac{\eta_{t}}{\sum_{t=1}^{T}\eta_{t'}}\left(w_{1}^{(t)}+w_{2}^{(t)}\right)
-\]
-
-based on SGLD output chain.
-
-```{r}
-T <- dim(w_chain_output)[1]
-weight_eta <- c()
-for (i in 1:T) {
-  weight_eta <- c(weight_eta, learning_rate(T_bunrin+t), T_0 = eta_T0, eta_T1 = 500, C_0 = eta_C, s_0 = eta_s)
-}
-weight_eta <- weight_eta/sum(weight_eta)
-w_est = colMeans(w_chain_output,weight_eta)
-w_est
-```
-
-
-## Task   (Exercise for homework practice)   
+## Task   (for homework practice)   
 
 Use the prediction rule  
 
@@ -593,14 +548,19 @@ hist(h_chain)
 
 
 
-# Mixture model (Homework challenge)  
+# Mixture model  (for homework practice)   
 
 ```{r}
 rm( list = ls() )
 ```
 
-The following example is given as a homework practice. The problem is non convex, there are two modes (maxima) (true values) in the posterior distribution. You will see that you will not be able to visit both of the models (maxima) with one run.  You may need to perform several runs starting your algorithm from different seeds $w^{(0)}$.  
+The following example is given as a homework practice.   
 
+The problem is non convex, there are two modes (maxima) (true values) in the posterior distribution. 
+
+You will see that you will not be able to visit both of the models (maxima) with one run.  
+
+You may need to perform several runs starting your algorithm from different seeds $w^{(0)}$.  
 
 Consider the Bayesian model below
 
@@ -629,8 +589,12 @@ data_generating_model <- function(n,w) {
 
 By inspecting the sampling distribution $f(z|w)$, you will find out that the true values here are $w=5$ and $w=15$ as both of them satisfy the likelihood.  
 
+Let the dataset $\mathcal{S}_{n}$ has size $n=10^({}$.  
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=10^({}$.  Assume that the real values for the parameter $w$ is $w_{\text{true}}\in\{5,15\}$.  The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+Assume that the real values for the parameter $w$ is $w_{\text{true}}\in\{5,15\}$.  
+
+The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+
 ```{r}
 n_obs <- 10^(6)
 w_true <- 5 
@@ -640,7 +604,7 @@ set.seed(0)
 hist(z_obs)
 ```
 
-## Task  (Exercise for homework practice)   
+## Task    (for homework practice)   
 
 The PDF of the sampling distribution is  
 
@@ -662,7 +626,7 @@ log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 25) {
 ```
 
 
-## Task  (Exercise for homework practice)   
+## Task   (for homework practice)   
 
 The PDF of the prior distribution is Normal with mean $\mu=0.0$ and variance $s^{2}=100$. 
 
@@ -712,7 +676,7 @@ learning_rate <- function(t, T_0  , T_1  , C_0  , s_0   ) {
 ```
 
 
-## Task (Exercise for homework practice)   
+## Task  (for homework practice)   
 
 Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=4.0$ (at the 1st example; i.e. $z_{1}$).  
 
@@ -734,7 +698,7 @@ gr
 
 
 
-## Task   (Exercise for homework practice)   
+## Task  (for homework practice)   
 
 Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=?$, and temperature $\tau=?$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=?$, and constant $C_{0}=?$.  
 

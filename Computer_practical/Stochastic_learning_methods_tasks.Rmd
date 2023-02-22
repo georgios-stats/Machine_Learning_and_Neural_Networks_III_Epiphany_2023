@@ -1,15 +1,15 @@
 ---
 title: "Stochastic learning methods"
-subtitle: "Logistic regression"
+subtitle: "...on a binary classification problem"
 author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
 output:
   html_notebook: 
     number_sections: true
   word_document: default
-  pdf_document: default
   html_document:
     df_print: paged
     number_sections: true
+  pdf_document: default
 header-includes: 
   - \usepackage{tikz}
   - \usepackage{pgfplots}
@@ -52,18 +52,15 @@ rm(list=ls())
 ```
 
 
-
 ---
 
 ***Aim***
 
-Students will become able to:  
-
 + practice in R,  
 
-+ implement GD, batch/online SGD, AdaGrad, SGD with projection, SVRG algorithms in R with possibility to extend to other programming languadges  
++ implement GD, batch/online SGD, AdaGrad, SGD with projection, SVRG algorithms in R
 
-+ refresh logistic regression, with Ridge penalty  
++ refresh logistic regression, with Ridge penalty from term 1  
 
 ---
 
@@ -76,12 +73,12 @@ Students will become able to:
 + Reference for *R*:  
     + [Cheat sheet with basic commands](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)   
 
-+ Reference of *rmarkdown* (optional):  
++ Reference of *rmarkdown* (optional, supplementary material):  
     + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)  
     + [R Markdown Reference Guide](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
     + [knitr options](https://yihui.name/knitr/options)
 
-+ Reference for *Latex* (optional):  
++ Reference for *Latex* (optional, supplementary material):  
     + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
 
 ---
@@ -99,11 +96,15 @@ Students will become able to:
 
 ```{r}
 # call libraries
+#install.packages("numDeriv")
 library(numDeriv)
+#install.packages("nloptr")
 library(nloptr)
 ```
 
----
+---  
+
+***Initialize R***  
 
 
 ```{r, results="hide"}
@@ -111,23 +112,40 @@ library(nloptr)
 library(knitr)
 ```
 
-```{r, results="hide"}
+```{r}
 # Set a seed of the randon number generator
 set.seed(2023)
 ```
 
 
-# Application: Logistic regression    {-}
+# Application: Binary classification problem {-}
 
-Consider the Logistic regression problem with input $x\in\mathbb{R}$ and output/labels $y\in\{0,1\}$. The prediction rule is $$h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}$$, where $w\in\mathbb{R}^{2}$ is the unknown parameter we wish to learn, and hence we can consider that the hypothesis class is $$\mathcal{H}=\{w\in\mathbb{R}^{2}\}$$.  
+Consider the binary classification problem with input $x\in\mathbb{R}$ and output/labels $y\in\{0,1\}$.  
 
-Consider there is available a dataset  $$\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}$$ , with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.  Recall that the sampling distribution is  
-$$
+The prediction rule is 
+\[
+h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
+\] 
+where $w\in\mathbb{R}^{2}$ is the unknown parameter we wish to learn, and hence we can consider that the hypothesis class is 
+
+\[
+\mathcal{H}=\{w\in\mathbb{R}^{2}\}
+\]  
+
+Consider there is available a dataset  
+\[
+\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}
+\]  
+
+with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.  
+
+Recall that the sampling distribution is  
+\[
 y|w \sim \text{Bernulli}(h_{w}(x)) \\
 h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
-$$
+\]
 
-The dataset $\mathcal{S}_{n}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
+The dataset $\mathcal{S}_{n}=\{z_i=(x_i,y_i)\}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
 
 ```{r}
 data_generating_model <- function(n,w) {
@@ -141,8 +159,12 @@ data_generating_model <- function(n,w) {
 }
 ```
 
+Let the dataset $\mathcal{S}_{n}$ has size $n=500$.  
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=500$.  Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
+
+The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+
 ```{r}
 set.seed(2023)
 n_obs <- 500
@@ -151,32 +173,14 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
+The prediction rule is 
+\[
+h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
+\]  
 
+where $w\in\mathbb{R}^{2}$.
 
-The likelihood function is 
-$$
-f\left(y|w\right)=\prod_{i=1}^{n}\left(h_{i}\right)^{y_{i}}\left(1-h_{i}\right)^{1-y_{i}}
-$$
-
-We consider a loss function as 
-$$
-\ell\left(w,z=\left(x,y\right)\right)=-y\log\left(h(x)\right)-\left(1-y\right)\log\left(1-h(x)\right)
-$$
-
-The Risk function under the data generation model $g$ is 
-$$
-\begin{align*}
-R_{g}\left(w\right)= & \text{E}\left(\ell\left(w,z=\left(x,y\right)\right)\right)\\
-= & \text{E}\left(-y\log\left(h\left(w;x\right)\right)-\left(1-y\right)\log\left(1-h\left(w;x\right)\right)\right)
-\end{align*}
-$$
-
-
-## Task (given) {-}
-
-The prediction rule is $$h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}$$, where $w\in\mathbb{R}^{2}$
-
-Write a function `prediction_rule(x,w)' that returns the rule $h$ where $x$ is the input argument and $w$ is the unknown parameter.
+The function **prediction_rule(x,w)** that returns the rule $h$ where $x$ is the input argument and $w$ is the unknown parameter is given below.  
 
 ```{r}
 prediction_rule <- function(x,w) {
@@ -186,16 +190,18 @@ prediction_rule <- function(x,w) {
 }
 ```
 
-
-
-## Task (given) {-}
-
-
-The loss function as 
+The likelihood function is 
 $$
+f\left(y|w\right)=\prod_{i=1}^{n}\left(h_{i}\right)^{y_{i}}\left(1-h_{i}\right)^{1-y_{i}}
+$$
+
+We consider a loss function as   
+
+\[
 \ell\left(w,z=\left(x,y\right)\right)=-y\log\left(h(x)\right)-\left(1-y\right)\log\left(1-h(x)\right)
-$$
-Write a function `loss_fun(w,z)' that computes the loss function, where $z=(x,y)$ is one example (observation) and $w$ is the unknown parameter. 
+\]
+
+The code for the loss function is provided below as **loss_fun(w,z)** that computes the loss function, where $z=(x,y)$ is one example (observation) and $w$ is the unknown parameter. 
 
 ```{r}
 loss_fun <- function(w,z) {
@@ -207,17 +213,24 @@ loss_fun <- function(w,z) {
 }
 ```
 
-## Task (given) {-}
+The Risk function under the data generation model $g$ is 
+
+\[
+\begin{align*}
+R_{g}\left(w\right)= & \text{E}\left(\ell\left(w,z=\left(x,y\right)\right)\right)\\
+= & \text{E}\left(-y\log\left(h\left(w;x\right)\right)-\left(1-y\right)\log\left(1-h\left(w;x\right)\right)\right)
+\end{align*}
+\]
 
 The Empirical risk function is
-$$
+\[
 \begin{align*}
 \hat{R}_{S}\left(w\right) & \frac{1}{n}\sum_{i=1}^{n}\ell\left(w,z_{i}=\left(x_{i},y_{i}\right)\right)\\
 = & -\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}\log\left(h(w;x_{i})\right)+\left(1-y\right)\log\left(1-h(w;x_{i})\right)\right)
 \end{align*}
-$$
+\]
 
-Write a function `empirical_risk_fun(w,z,n)' that computes the empirical risk, where $z=(x,y)$ is an example, $w$ is the unknown parameter, and $n$ is the data size. 
+The function **empirical_risk_fun(w,z,n)** computes the empirical risk, where $z=(x,y)$ is an example, $w$ is the unknown parameter, and $n$ is the data size is given below. 
 
 ```{r}
 empirical_risk_fun <- function(w,z,n) {
@@ -232,9 +245,17 @@ empirical_risk_fun <- function(w,z,n) {
 }
 ```
 
-## Task (given) {-}
+# Stochastic gradient descent preparation {-}  
 
-Write a function `learning_rate(t,t0)' that computes the learning rate sequence $$\eta_{t}=\frac{t_0}{t}$$ where $t$ is the iteration stage and $t_0$ is a constant. Use $t_0=3$ as default value.  
+## Task (given)  
+
+Code a function **learning_rate(t,t0)** that computes the learning rate sequence 
+\[
+\eta_{t}=\frac{t_0}{t}
+\]  
+where $t$ is the iteration stage and $t_0$ is a constant. 
+
+Use $t_0=3$ as default value.  
 
 ```{r}
 learning_rate <-function(t,t0=3) {
@@ -243,9 +264,10 @@ learning_rate <-function(t,t0=3) {
 }
 ```
 
-## Task (given) {-}
 
-Code the function 'grad_loss_fun(w,z)' that returns the gradient of the loss function at parameter value w, and at example value z. 
+## Task (given) 
+
+Code the function **grad_loss_fun(w,z)** that returns the gradient of the loss function at parameter value $w$, and at example value $z=(x,y)$.   
 
 ```{r}
 grad_loss_fun <- function(w,z) {
@@ -257,9 +279,9 @@ grad_loss_fun <- function(w,z) {
 }
 ```
 
-## Task (given) {-}
+## Task (given) 
 
-Code the function 'grad_risk_fun <- function(w,z,n)' that returns the gradient of the risk function at parameter value $w$, and using the dataset $z$ of size $n\times 2$ .  
+Code the function **grad_risk_fun <- function(w,z,n)** that returns the gradient of the risk function at parameter value $w$, and using the data set $z$ of size $n\times 2$.    
 
 ```{r}
 grad_risk_fun <- function(w,z,n) {
@@ -273,48 +295,84 @@ grad_risk_fun <- function(w,z,n) {
 
 ```
 
-## Task (Computer practical exercise)  
 
-Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples). Do this by using the command 'grad_risk_fun' provided above.
+## Task (for the computer practical)   
+
+Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$.  
+
+Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples). 
+
+Do this by using the command 'grad_risk_fun' provided above.
 
 ```{r}
-w <- c(-0.1,1.5)
-gr <- grad_risk_fun (w, z=z_obs, n=n_obs) 
-gr
+#
+#
+#
 ```
 
-
-## Task (Computer practical exercise)  
+## Task (for the computer practical)  
 
 Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
 
 E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
 
 ```{r}
-w <- c(-0.1,1.5)
 #
-erf_fun <- function(w, z = z_obs, n=n_obs) {
-  return( empirical_risk_fun(w, z, n) ) 
-}
 #
-gr <- numDeriv::grad( erf_fun, w )
 #
-gr
 ```
 
-# Task: Gradient descent
+# Gradient descent  
 
-## Task (Computer practical exercise)  
+## Task (for the computer practical)  
 
 Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-The termination criterion is when the total number of iterations excesses $T=1000$. 
+The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=1000$. 
 
-Seed with $w^{(0)}=(-0.3,3)^\top$.   
+Use seed $w^{(0)}=(-0.3,3)^\top$.   
 
-You may use the R function 'grad{numDeriv}' to numerically compute the gradient; e.g. numDeriv::grad( erf_fun, w ) . Try ?grad for more info.
+You may use the R function **grad{numDeriv}** to numerically compute the gradient;  
 
-Alternatively, you can you the corresponding function grad_risk_fun provide above. 
++ e.g. numDeriv::grad( erf_fun, w ) .  
+
++ Try ?grad for more info. 
+
+```{r}
+#
+#
+#
+```
+
+
+
+
+##  Task (for the computer practical)  
+
+Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.   
+
+```{r}
+#
+#
+#
+```
+
+Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.  
+
+```{r}
+#
+#
+#
+```
+
+
+## Task (for the computer practical)  
+
+Re-run the previous GD by changing the algorithminc parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
+
+Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.    
+
+If necessary change the termination criterion to consider more or less iterations.  
 
 
 ```{r}
@@ -323,36 +381,11 @@ Alternatively, you can you the corresponding function grad_risk_fun provide abov
 #
 ```
 
-## Task (Computer practical exercise)  
+## Task (for homework practice)   
 
-Plot the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$
+Re run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
 
-
-```{r}
-#
-#
-#
-```
-
-## Task (Computer practical exercise)  
-
-Repeat previous task to run GD by changing the values of $\eta$ in the range $(0.001,1.0)$. 
-
-Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$.  
-
-If necessary change the termination criterio to consider more or less iterations.
-
-```{r}
-#
-#
-#
-```
-
-## Task (Computer practical exercise)  
-
-Repeat previous couple of tasks to run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
-
-Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$.  
+Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
 If necessary change the termination criterion to consider more or less iterations.
 
@@ -363,9 +396,10 @@ If necessary change the termination criterion to consider more or less iteration
 #
 ```
 
+
 # Batch Stochastic Gradient Descent 
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
+Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
 
 Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
 
@@ -379,9 +413,9 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task (Exercise for homework practice)   
+## Task (for the computer practical)  
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
 
@@ -394,9 +428,9 @@ The termination criterion is when the total number of iterations excesses $T=100
 ```
 
 
-## Task (Exercise for homework practice)   
+## Task (for homework practice)   
 
-Repeat the task above by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
+Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
 
 Plot the produced chains of $\{w^{(t)}\}$. 
 
@@ -411,7 +445,7 @@ What is the impact of the the learning rate $eta$ and that of the batch size $m$
 
 
 
-# AdaGrad  
+# AdaGrad  (for homework practice)     
 
 Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
 
@@ -427,7 +461,7 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task (Exercise for homework practice)   
+## Task (for homework practice)   
 
 Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
 
@@ -442,7 +476,7 @@ The termination criterion is when the total number of iterations excesses $T=100
 ```
 
 
-## Task (Exercise for homework practice)   
+## Task (for homework practice)   
 
 Code an batch AdaGrad algorithm with $\eta_{t}$ and batch size $m$ that returns the chain of $\{w^{(t)}\}$. 
 
@@ -460,11 +494,11 @@ The termination criterion is when the total number of iterations excesses $T=100
 
 
 
-# Batch Stochastic Gradient Descent with projection
+# Batch Stochastic Gradient Descent with projection  (for homework practice)   
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
+Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
 
-The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+The data set containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
 Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
 
@@ -479,6 +513,7 @@ w_true <- c(0,1)
 z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
+
 
 ## Task (Exercise for homework practice)   
 
@@ -535,15 +570,16 @@ Write your code below
 #
 ```
 
-## Task (Exercise for homework practice)   
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}$, that returns the chain of $\{w^{(t)}\}$. 
+## Task  (for homework practice)     
+
+Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
 
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=5000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
 
-You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr .
+You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
 
 
 ```{r}
@@ -571,14 +607,13 @@ eval_jac_g0 <- function( x, w_now ) {
 #
 ```
 
-
 ---
 
-# Stochastic Variance Reduced Gradient Descent (SVRG)  
+# Stochastic Variance Reduced Gradient Descent (SVRG)  (for homework practice)   
 
-## Task (Exercise for homework practice)   
+## Task  (for homework practice)    
 
-Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.01$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
+Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
 
 Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
 
@@ -595,7 +630,7 @@ Produce the trace plots of the produced chains $\{w^(t)\}$.
 #
 ```
 
-## Task (Exercise for homework practice)   
+## Task (for homework practice)    
 
 Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
 
@@ -606,6 +641,7 @@ Repeat the above task by changing the parameters $\kappa$ in order to see how ch
 #
 #
 ```
+
 
 
 

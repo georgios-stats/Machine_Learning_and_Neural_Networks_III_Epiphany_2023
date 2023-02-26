@@ -83,7 +83,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 
 Please visit:  
 
-+ [Download instructions](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Download_instructions.md)
++ [Download instructions](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Download_instructions.md#how-to-download-and-use-it)
 
 
 ------------------------------------------------------------------------

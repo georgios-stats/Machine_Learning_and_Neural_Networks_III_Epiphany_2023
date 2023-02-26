@@ -30,6 +30,8 @@
 
 <!-- -------------------------------------------------------------------------------- -->
 
+[Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023#details)
+
 ------------------------------------------------------------------------
 
 # How to download and use it:

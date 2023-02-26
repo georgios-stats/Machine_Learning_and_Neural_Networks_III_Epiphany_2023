@@ -45,7 +45,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 
 ### Lectures
 
--   '[Lecture_handouts](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/master/Lecture_handouts#details-about-lecture-material)' folder contains the material used in your lectures and problem classes
+-   '[Lecture_handouts](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts#details-about-lecture-material)' folder contains the material used in your lectures and problem classes
 
 ### Computer practicals
 
@@ -53,7 +53,7 @@ This repository contains the teaching material for the module ***MATH3431 Machin
 
 ### Excercises
 
--   '[Exercises](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/master/Exercises#details-about-exercise-material)' folder contains the material used for your practice at home
+-   '[Exercises](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Exercises#details-about-exercise-material)' folder contains the material used for your practice at home
 
 <!--
 ### Additional reading material

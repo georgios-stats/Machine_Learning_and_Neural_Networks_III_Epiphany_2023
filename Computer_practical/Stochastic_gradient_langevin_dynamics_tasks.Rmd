@@ -483,12 +483,12 @@ The PDF of the sampling distribution is
 f\left(z_{i}|w\right)=p_{1}\text{N}\left(z_{i}|w,\sigma^{2}\right)+\left(1-p_{2}\right)\text{N}\left(z_{i}|\phi-w,\sigma^{2}\right)
 \]
 
-Code a function `log_sampling_pdf(z, w, p1 = 0.5, phi=20, sig2 = 25)' that returns as a value the PDF of sampling distribution in log scale for a single example $z$.  
+Code a function `log_sampling_pdf(z, w, p1 = 0.5, phi=20, sig2 = 5)' that returns as a value the PDF of sampling distribution in log scale for a single example $z$.  
 
 You may use the function  dnorm{stats} .
 
 ```{r}
-log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 25) {
+log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 5) {
   log_sampling_pdf <- p1*dnorm(z, mean = w, sd = sqrt(sig2), log = FALSE)
   log_sampling_pdf <- log_sampling_pdf + (1-p1)*dnorm(z, mean = phi-w, sd = sqrt(sig2), log = FALSE)
   log_sampling_pdf <- log(log_sampling_pdf) ;

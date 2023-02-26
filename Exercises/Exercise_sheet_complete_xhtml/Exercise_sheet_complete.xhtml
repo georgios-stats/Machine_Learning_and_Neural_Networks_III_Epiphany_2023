@@ -73,6 +73,22 @@ margin-left: 3ex;
 text-align: left;
 
 }
+div.algorithm_ {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.algorithm__label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
 div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; border-right: solid black 1ex; padding: 0.5ex; }
 div.Boxed {
 	border: solid thick black;
@@ -108,7 +124,7 @@ div.float-caption {
 <div class="standard" id='magicparlabel-9'>&nbsp;</div>
 <h1 class="part" id='magicparlabel-10'><span class="part_label">Part I</span> Stochastic learning</h1>
 
-<div class="exercise" id='magicparlabel-11'><div class="exercise_item"><span class="exercise_label">Exercise #.1.</span>
+<div class="exercise" id='magicparlabel-11'><div class="exercise_item"><span class="exercise_label">Exercise 1.</span>
 <a id="exer___" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -341,7 +357,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="exercise" id='magicparlabel-30'><div class="exercise_item"><span class="exercise_label">Exercise #.2.</span>
+<div class="exercise" id='magicparlabel-30'><div class="exercise_item"><span class="exercise_label">Exercise 2.</span>
 <a id="exer____1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -612,7 +628,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="exercise" id='magicparlabel-49'><div class="exercise_item"><span class="exercise_label">Exercise #.3.</span>
+<div class="exercise" id='magicparlabel-49'><div class="exercise_item"><span class="exercise_label">Exercise 3.</span>
 <a id="exer____2" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -878,7 +894,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="exercise" id='magicparlabel-69'><div class="exercise_item"><span class="exercise_label">Exercise #.4.</span>
+<div class="exercise" id='magicparlabel-69'><div class="exercise_item"><span class="exercise_label">Exercise 4.</span>
 <a id="exer____2_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -929,7 +945,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 <div class="solution_" id='magicparlabel-78'><div class="solution__item"><span class="solution__label">Solution.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewpBdilY1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewWRnQYI1.png" alt="Mathematical Equation" />
 </span>
  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1041,7 +1057,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>.</div>
 
 
-<div class="standard" id='magicparlabel-83'><span style = "text-align: center;"><img src="lyxpreviewwYCnbr1.png" alt="Mathematical Equation" />
+<div class="standard" id='magicparlabel-83'><span style = "text-align: center;"><img src="lyxpreviewTUbHOh1.png" alt="Mathematical Equation" />
 </span>
  It is for all <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1202,7 +1218,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="exercise" id='magicparlabel-96'><div class="exercise_item"><span class="exercise_label">Exercise #.5.</span>
+<div class="exercise" id='magicparlabel-96'><div class="exercise_item"><span class="exercise_label">Exercise 5.</span>
 <a id="exer____2_1_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -1516,7 +1532,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 <div class="standard" style='text-align: center;' id='magicparlabel-115'>The following is given as a homework (Formative assessment 1)</div>
 
-<div class="exercise" id='magicparlabel-116'><div class="exercise_item"><span class="exercise_label">Exercise #.6.</span>
+<div class="exercise" id='magicparlabel-116'><div class="exercise_item"><span class="exercise_label">Exercise 6.</span>
 <a id="exer____2_1_1_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
@@ -4100,13 +4116,445 @@ Write down the algorithm of online AdaGrad (Adaptive Stochastic Gradient Descent
 </ul>
 </li><li class="enumerate_item">&nbsp;
 
-<ol class="enumerate" id='magicparlabel-217'><li class="enumerate_item">The R code can be found in the link <span class="flex_url">https://raw.githubusercontent.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/main/Exercises/supplementary/q6.R</span></li>
+<div class="algorithm_" id='magicparlabel-217'><div class="algorithm__item"><span class="algorithm__label">Algorithm.</span>
+For <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>...</mn>
+  </mrow>
+ </mrow></math> iterate:</div>
+
+<ol class="enumerate" id='magicparlabel-218'><li class="enumerate_item"><i><a id="enu_sample___and" />
+ get a random sub-sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <mrow>
+   <msubsup>
+    <mrow>
+     <mover>
+      <mrow><mi>z</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msubsup><mo>;</mo><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math> of size <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>m</mi>
+ </mrow></math> with or without replacement from the complete data-set <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow>
+    <mstyle mathvariant='script'><mi>S</mi>
+    </mstyle>
+   </mrow>
+   <mrow><mi>n</mi>
+   </mrow>
+  </msub>
+ </mrow></math>.</i></li>
+<li class="enumerate" style='text-align: left;'><i>compute <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow><mi>t</mi><mo>+</mo><mn>1</mn>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msup><mo>=</mo>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msup><mo>-</mo>
+   <msub>
+    <mrow><mi> &eta; </mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>v</mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub><mo>,</mo>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>v</mi>
+    </mrow>
+    <mrow><mi>t</mi>
+    </mrow>
+   </msub><mo>=</mo>
+   <mfrac>
+    <mrow><mn>1</mn>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </mfrac>
+   <msubsup>
+    <mrow><mo> &sum; </mo>
+    </mrow>
+    <mrow>
+     <mrow><mi>j</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>v</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow>
+     <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub>
+  </mrow>
+ </mrow></math> and <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow>
+     <mover>
+      <mrow><mi>v</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow>
+     <mrow><mi>t</mi><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+   <mtable>
+    <mtr>
+     <mtd>
+      <mrow><mn>2</mn><mi> &lambda; </mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>y</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup>
+       <msup>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+         <msup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msup>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup><mo>&gt;</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+    <mtr>
+     <mtd>
+      <mrow><mn>2</mn><mi> &lambda; </mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>y</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup>
+       <msup>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+         <msup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msup>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup><mo>=</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+    <mtr>
+     <mtd>
+      <mrow><mo>-</mo>
+       <mfrac>
+        <mrow><mn>1</mn>
+        </mrow>
+        <mrow><mi>m</mi>
+        </mrow>
+       </mfrac>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>y</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup><mo>+</mo><mn>2</mn><mi> &lambda; </mi>
+       <msup>
+        <mrow><mi>w</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo>,</mo>
+      </mrow>
+     </mtd>
+     <mtd>
+      <mrow>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>y</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup>
+       <msup>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+         <msup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msup>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+        <mrow><mi> &top; </mi>
+        </mrow>
+       </msup>
+       <msubsup>
+        <mrow>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&tilde;</mo>
+         </mover>
+        </mrow>
+        <mrow><mi>j</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msubsup><mo>&lt;</mo><mn>1</mn>
+      </mrow>
+     </mtd>
+    </mtr>
+   </mtable>
+  </mrow>
+ </mrow></math>where I denote <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msubsup>
+    <mrow>
+     <mover>
+      <mrow><mi>z</mi>
+      </mrow><mo stretchy="true">&tilde;</mo>
+     </mover>
+    </mrow>
+    <mrow><mi>j</mi>
+    </mrow>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+   </msubsup><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msubsup>
+     <mrow>
+      <mover>
+       <mrow><mi>x</mi>
+       </mrow><mo stretchy="true">&tilde;</mo>
+      </mover>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msubsup><mo>,</mo>
+    <msubsup>
+     <mrow>
+      <mover>
+       <mrow><mi>y</mi>
+       </mrow><mo stretchy="true">&tilde;</mo>
+      </mover>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mrow>
+    </msubsup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>.</i></li>
+<li class="enumerate" style='text-align: left;'><i>terminate if a termination criterion is satisfied</i></li>
+</ol>
+</div>
+</li><li class="enumerate_item">&nbsp;
+
+<ol class="enumerate" id='magicparlabel-234'><li class="enumerate_item">The R code can be found in the link <span class="flex_url">https://raw.githubusercontent.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/main/Exercises/supplementary/q6.R</span></li>
 <li class="enumerate_item">The figures are presented below
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-228'> <span class='float-caption-Standard float-caption float-caption-standard'>Figure 1:  trace plots</span></div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-232'><img style='width:40%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_1_chain.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_1_chain.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-245'> <span class='float-caption-Standard float-caption float-caption-standard'>Figure 1:  trace plots</span></div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-249'><img style='width:40%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_1_chain.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_1_chain.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msubsup>
@@ -4124,7 +4572,7 @@ Write down the algorithm of online AdaGrad (Adaptive Stochastic Gradient Descent
 
 
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-241'><img style='width:40%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_2_chain.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_2_chain.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-258'><img style='width:40%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_2_chain.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____I_Exercises_pool_supplementary_Q6_w_2_chain.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msubsup>
@@ -4165,15 +4613,15 @@ Write down the algorithm of online AdaGrad (Adaptive Stochastic Gradient Descent
 
 </div>
 </div>
-<div class="standard" id='magicparlabel-258'><hr />
+<div class="standard" id='magicparlabel-275'><hr />
 
 </div>
 
-<div class="exercise" id='magicparlabel-263'><div class="exercise_item"><span class="exercise_label">Exercise #.7.</span>
+<div class="exercise" id='magicparlabel-280'><div class="exercise_item"><span class="exercise_label">Exercise 7.</span>
 <a id="exer____2_1_1_1_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
- </mrow></math>)<div class="standard" id='magicparlabel-265'>Assume a Bayesian model<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>)<div class="standard" id='magicparlabel-282'>Assume a Bayesian model<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -4599,7 +5047,7 @@ Write down the algorithm of online AdaGrad (Adaptive Stochastic Gradient Descent
 
 
 
-<div class="solution_" id='magicparlabel-271'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-288'><div class="solution__item"><span class="solution__label">Solution.</span>
 It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -5148,41 +5596,44 @@ It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 </div>
-<div class="standard" id='magicparlabel-277'><hr />
+<div class="standard" id='magicparlabel-294'><hr />
 
 </div>
-<h1 class="part" id='magicparlabel-282'><span class="part_label">Part II</span> Artificial Neural Networks</h1>
+<h1 class="part" id='magicparlabel-299'><span class="part_label">Part II</span> Artificial Neural Networks</h1>
 
-<div class="exercise" id='magicparlabel-283'><div class="exercise_item"><span class="exercise_label">Exercise #.8.</span>
+<div class="exercise" id='magicparlabel-300'><div class="exercise_item"><span class="exercise_label">Exercise 8.</span>
 <a id="exer____2_1_1_1_1_1_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
  </mrow></math>) Students are encouraged to practice on the Exercises 5.1-5.28 from the textbook </div>
+</div>
 
-<ul class="itemize" id='magicparlabel-284'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning (Vol. 4, No. 4, p. 738). New York: Springer.</li>
+<ul class="itemize" id='magicparlabel-301'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning (Vol. 4, No. 4, p. 738). New York: Springer.</li>
 </ul>
-<div class="exercise_item">available from </div>
 
-<ul class="itemize" id='magicparlabel-286'><li class="itemize_item"><span class="flex_url">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</span></li>
+<div class="exercise" id='magicparlabel-302'><div class="exercise_item"><span class="exercise_label">Exercise 9.</span>
+available from </div>
+
+<ul class="itemize" id='magicparlabel-303'><li class="itemize_item"><span class="flex_url">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</span></li>
 <li class="itemize_item">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</li>
 </ul>
 <div class="exercise_item">The solutions are available from</div>
 
-<ul class="itemize" id='magicparlabel-293'><li class="itemize_item"><span class="flex_url">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/05/prml-web-sol-2009-09-08.pdf</span></li>
+<ul class="itemize" id='magicparlabel-310'><li class="itemize_item"><span class="flex_url">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/05/prml-web-sol-2009-09-08.pdf</span></li>
 <li class="itemize_item">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/05/prml-web-sol-2009-09-08.pdf</li>
 </ul>
 </div>
-<div class="standard" id='magicparlabel-299'><hr />
+<div class="standard" id='magicparlabel-316'><hr />
 
 </div>
 
-<div class="standard" style='text-align: center;' id='magicparlabel-304'>The following is given as a homework (Formative assessment 2)</div>
+<div class="standard" style='text-align: center;' id='magicparlabel-321'>The following is given as a homework (Formative assessment 2)</div>
 
-<div class="exercise" id='magicparlabel-305'><div class="exercise_item"><span class="exercise_label">Exercise #.9.</span>
+<div class="exercise" id='magicparlabel-322'><div class="exercise_item"><span class="exercise_label">Exercise 10.</span>
 <a id="exer____2_1_1_1_1_1" />
 (<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &starf; </mo>
- </mrow></math>)<div class="standard" id='magicparlabel-307'>Consider the multi-class classification problem, with a predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>)<div class="standard" id='magicparlabel-324'>Consider the multi-class classification problem, with a predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -5620,7 +6071,7 @@ It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>q</mi>
  </mrow></math> are known quantities. </div>
 
-<dl class='description' id='magicparlabel-308'><dt class="description_label">Hint</dt>
+<dl class='description' id='magicparlabel-325'><dt class="description_label">Hint</dt>
 <dd class="description_item"> You may use <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -5661,7 +6112,7 @@ It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></dd>
 </dl>
 
-<ol class="enumerate" id='magicparlabel-309'><li class="enumerate_item">Perform the forward pass of the back-propagation procedure to compute the activations which may be denoted as <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-326'><li class="enumerate_item">Perform the forward pass of the back-propagation procedure to compute the activations which may be denoted as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -5827,13 +6278,13 @@ It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 </ol>
 
 
-<div class="solution_" id='magicparlabel-326'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-343'><div class="solution__item"><span class="solution__label">Solution.</span>
 &nbsp;</div>
 </div>
 
 </div>
 </div>
-<div class="standard" id='magicparlabel-353'><hr />
+<div class="standard" id='magicparlabel-370'><hr />
 
 </div>
 </body>

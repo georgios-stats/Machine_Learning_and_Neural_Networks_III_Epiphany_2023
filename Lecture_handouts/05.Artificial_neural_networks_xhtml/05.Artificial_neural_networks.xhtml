@@ -2046,7 +2046,7 @@ The neural network can be fully specified by the quadruplet <math xmlns="http://
 </div>
 
 <div class="example" id='magicparlabel-163'><div class="example_item"><span class="example_label">Example 28.</span>
-Figure <a href="#fig_Feed_forward_neural">2.1</a> denotes a NN with depth 2, size 11, width 5. The neuro with no incoming edges has <math xmlns="http://www.w3.org/1998/Math/MathML">
+Figure <a href="#fig_Feed_forward_neural">2.1</a> denotes a NN with depth 2, size 11, width 5. The neuron with no incoming edges has <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -9694,33 +9694,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
 <mi>a</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>=</mo><mo> tanh </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <mfrac>
-    <mrow>
-     <mrow><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>a</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>-</mo><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-      <mrow><mo>-</mo><mi>a</mi>
-      </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-     </mrow>
-    </mrow>
-    <mrow>
-     <mrow><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>a</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-      <mrow><mo>-</mo><mi>a</mi>
-      </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-     </mrow>
-    </mrow>
-   </mfrac>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
@@ -9944,7 +9918,7 @@ Consider the multi-output regression problem, assume a predictive rule <math xml
      <mrow><mi>j</mi><mo>=</mo><mn>1</mn>
      </mrow>
     </mrow>
-    <mrow><mi>d</mi>
+    <mrow><mi>c</mi>
     </mrow>
    </msubsup>
    <msub>
@@ -12697,7 +12671,15 @@ Recall (Handout 3, Algorithm <a href="#alg_Stochastic_Gradient_descent_2">alg:St
 </div>
 
 <div class="note" id='magicparlabel-451'><div class="note_item"><span class="note_label">Note 80.</span>
-The computation of the Hessian can be done by using error propagation ideas as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+The computation of the Hessian <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>H</mi>
+   </mrow>
+   <mrow><mi>t</mi>
+   </mrow>
+  </msub>
+ </mrow></math> can be done by using error propagation ideas for<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -12794,7 +12776,7 @@ The exact computation of the Hessian <math xmlns="http://www.w3.org/1998/Math/Ma
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> in NN setting is computationally expensive and hence approximations are often used (with hope to work well). One can implement the general purpose AdaGrad (Section <a href="#subsec_Adaptive_Stochastic_Gradient">subsec:Adaptive-Stochastic-Gradient</a>, Handout 3). In what follows we present other alternatives tailored to the NN model.</div>
+ </mrow></math> in NN setting can be computationally expensive and hence approximations are often used (with hope to work well). One can implement the general purpose AdaGrad (Section <a href="#subsec_Adaptive_Stochastic_Gradient">subsec:Adaptive-Stochastic-Gradient</a>, Handout 3). In what follows we present other alternatives tailored to the NN model.</div>
 </div>
 
 <div class="standard" id='magicparlabel-454'><br />
@@ -12890,7 +12872,8 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
   </mrow>
  </mrow></math>. Then the Hessian of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &ell; </mi>
- </mrow></math> is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is <a id="eq__17" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd><mi>H</mi>
@@ -12975,6 +12958,8 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
     </mrow>
+   </mtd>
+   <mtd>(5.4)
    </mtd>
   </mtr>
   <mtr>
@@ -13077,6 +13062,8 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
      </msup>
     </mrow>
    </mtd>
+   <mtd>
+   </mtd>
   </mtr>
  </mtable></math>We can expect that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -13146,7 +13133,7 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>. Hence we can consider approximation <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Hence a reasonable approximation can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd><mi>H</mi>
@@ -13201,7 +13188,18 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
    <mtd><mrow/>
    </mtd>
    <mtd>
-    <mrow><mo>=</mo>
+    <mrow><mover accent='false'><mo>=</mo>
+     <mrow>
+      <msub>
+       <mrow><mi> &sigma; </mi>
+       </mrow>
+       <mrow><mi>T</mi>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>a</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>a</mi>
+     </mrow></mover>
      <msub>
       <mrow><mi> &nabla; </mi>
       </mrow>
@@ -13422,7 +13420,7 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
      </msup>
     </mrow>
    </mtd>
-   <mtd>(5.4)
+   <mtd>(5.5)
    </mtd>
   </mtr>
  </mtable></math></div>
@@ -13445,7 +13443,7 @@ Consider the regression problem with predictive rule <math xmlns="http://www.w3.
     </mrow>
    </mrow>
   </msubsup>
- </mrow></math> of <a href="#eq__7">(5.4)</a> I can utilize Woodbury identity<div class="marginal"><div class="plain_layout" id='magicparlabel-461'>No need to 
+ </mrow></math> of <a href="#eq__7">(5.5)</a> I can utilize Woodbury identity<div class="marginal"><div class="plain_layout" id='magicparlabel-461'>No need to 
 <br />
 
 memorize 
@@ -13550,7 +13548,32 @@ identity</div>
    <mrow><mi>n</mi>
    </mrow>
   </msub>
- </mrow></math>. I have <a id="eq__8" />
+ </mrow></math>. Given <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>v</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo>
+   <msub>
+    <mrow><mi> &nabla; </mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>h</mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, it is <a id="eq__8" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -13704,7 +13727,7 @@ identity</div>
      </msup>
     </mrow>
    </mtd>
-   <mtd>(5.5)
+   <mtd>(5.6)
    </mtd>
   </mtr>
   <mtr>
@@ -13827,7 +13850,7 @@ identity</div>
  <mrow>
   <mrow><mi> &epsi; </mi><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math> small, and iterate <a href="#eq__8">(5.5)</a>.</div>
+ </mrow></math> small, and iterate <a href="#eq__8">(5.6)</a>.</div>
 </div>
 
 <div class="standard" id='magicparlabel-462'><br />
@@ -13835,7 +13858,7 @@ identity</div>
 </div>
 
 <div class="note" id='magicparlabel-463'><div class="note_item"><span class="note_label">Note 84.</span>
-With the same manner one can proceed to compute the corresponding approximations for the classification problems, or problems with different loss functions. </div>
+Likewise and by modifying <a href="#eq__17">(5.4)</a>, one can compute the corresponding approximations for the classification problems or problems with different loss functions. </div>
 </div>
 
 <div class="standard" id='magicparlabel-464'><br />
@@ -14034,7 +14057,7 @@ Assume there is available a training set of examples (data-set) <math xmlns="htt
     </mtd>
    </mtr>
   </mtable>
- </mrow></math>Here the sampling distribution is specified either according to the experimental design (how <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>where the sampling distribution is specified either according to the experimental design (how <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -14074,7 +14097,7 @@ Regarding prior it is often, <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> for some small <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &lambda; </mi>
- </mrow></math> indicating uncertainty about weights, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> controlling prior uncertainty about weights, i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mn>50</mn>%
   </mrow>

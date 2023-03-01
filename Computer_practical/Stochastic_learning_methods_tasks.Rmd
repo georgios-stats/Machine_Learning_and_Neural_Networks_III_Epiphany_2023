@@ -573,7 +573,7 @@ Write your code below
 
 ## Task  (for homework practice)     
 
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.05$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
+Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.1$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
 

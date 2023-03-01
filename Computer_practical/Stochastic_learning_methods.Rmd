@@ -795,11 +795,11 @@ out$solution
 
 ## Task  (for homework practice)     
 
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.05$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
+Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.1$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
 
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,0.3)^\top$.   
 
 You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
 
@@ -825,7 +825,7 @@ eval_jac_g0 <- function( x, w_now ) {
 
 ```{r}
 m <- 1
-eta <- 0.05
+eta <- 0.1
 Tmax <- 1000
 w_seed <- c(-0.3,3.0)
 

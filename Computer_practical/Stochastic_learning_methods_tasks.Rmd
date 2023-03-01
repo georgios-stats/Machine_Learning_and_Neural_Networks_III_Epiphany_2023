@@ -326,9 +326,9 @@ E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more inf
 
 ## Task (for the computer practical)  
 
-Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
+Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.5$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=1000$. 
+The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=300$. 
 
 Use seed $w^{(0)}=(-0.3,3)^\top$.   
 
@@ -368,7 +368,7 @@ Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.
 
 ## Task (for the computer practical)  
 
-Re-run the previous GD by changing the algorithminc parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
+Re-run the previous GD by changing the algorithmic parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
 
 Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.    
 
@@ -383,7 +383,7 @@ If necessary change the termination criterion to consider more or less iteration
 
 ## Task (for homework practice)   
 
-Re run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
+Re run GD by using a learning rate sequence of the form $\eta_t = t_0/t$ for different values of $t_0>0$ that you will choose.  
 
 Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
@@ -415,11 +415,11 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task (for the computer practical)  
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.    
 
 ```{r}
 #
@@ -463,11 +463,11 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task (for homework practice)   
 
-Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
+Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$.  
 
 Use $\epsilon=10^{-6}$
 
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.    
 
 ```{r}
 #
@@ -484,7 +484,7 @@ Experiment by changing the values of $\eta_{t}$  and $m$. See how the oscillatio
 
 Use $\epsilon=10^{-6}$
 
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.      
 
 ```{r}
 #
@@ -573,11 +573,11 @@ Write your code below
 
 ## Task  (for homework practice)     
 
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
+Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.05$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
 
-The termination criterion is when the total number of iterations excesses $T=5000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
 
 You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
 
@@ -611,17 +611,27 @@ eval_jac_g0 <- function( x, w_now ) {
 
 # Stochastic Variance Reduced Gradient Descent (SVRG)  (for homework practice)   
 
+We use a smaller data size
+
+```{r}
+set.seed(2023)
+n_obs <- 100000
+w_true <- c(0,1)  
+z_obs <- data_generating_model(n = n_obs, w = w_true)
+w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
+```
+
 ## Task  (for homework practice)    
 
-Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
+Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
 
 Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
 
 The sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
+The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
 
-Produce the trace plots of the produced chains $\{w^(t)\}$.  
+Produce the trace plots of the produced chains $\{w^(t)\}$.   
 
 
 ```{r}

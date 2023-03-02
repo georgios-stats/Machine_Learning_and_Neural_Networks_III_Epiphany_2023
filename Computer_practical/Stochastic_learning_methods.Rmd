@@ -332,9 +332,9 @@ gr
 
 ## Task (for the computer practical)  
 
-Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.5$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
+Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=300$. 
+The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=1000$. 
 
 Use seed $w^{(0)}=(-0.3,3)^\top$.   
 
@@ -346,8 +346,8 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 
 ```{r}
-eta <- 0.5
-Tmax <- 300
+eta <- 0.1
+Tmax <- 1000
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -356,7 +356,6 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   erf_fun <- function(w, z = z_obs, n=n_obs) {
     return( empirical_risk_fun(w, z, n) ) 
@@ -420,14 +419,38 @@ If necessary change the termination criterion to consider more or less iteration
 
 
 ```{r}
-#
-#
-#
+eta <- 0.5
+Tmax <- 1000
+w_seed <- c(-0.3,3)
+w <- w_seed
+w_chain <- c()
+Qstop <- 0 
+t <- 0
+while ( Qstop == 0 ) {
+  # counter
+  t <- t +  1
+  # step 1: update  
+  #eta <- learning_rate( t )
+  erf_fun <- function(w, z = z_obs, n=n_obs) {
+    return( empirical_risk_fun(w, z, n) ) 
+  }
+  w <- w - eta * numDeriv::grad( erf_fun, w )
+  #w <- w - eta * grad_risk_fun( w, z_obs, n_obs )
+  w_chain <- rbind(w_chain, w)
+  # step 2: check for rtermination terminate
+  if ( t>= Tmax ) {
+    Qstop <- 1
+  }
+}
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
 ## Task (for homework practice)   
 
-Re run GD by using a learning rate sequence of the form $\eta_t = t_0/t$ for different values of $t_0>0$ that you will choose.  
+Re run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
 
 Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
@@ -439,7 +462,7 @@ learning_rate <- function(t,t0) {
   return(t0/t)
 }
 t0<- 10
-Tmax <- 300
+Tmax <- 1000
 w_seed <- c(-0.3,3.0)
 w <- w_seed
 w_chain <- c()
@@ -448,7 +471,6 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   eta <- learning_rate( t, t0 )
   erf_fun <- function(w, z = z_obs, n=n_obs) {
@@ -487,16 +509,16 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task (for the computer practical)  
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 m <- 10
-eta <- 0.5
-Tmax <- 300
+eta <- 0.1
+Tmax <- 1000
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -505,7 +527,6 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -535,17 +556,17 @@ abline(h=w_true[2], col='red')
 
 ## Task (for homework practice)   
 
-Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.
+Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
 
 Plot the produced chains of $\{w^{(t)}\}$. 
 
-What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?  
+What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?
 
 
 ```{r}
-m <- 80
-eta <- 0.5
-Tmax <- 300
+m <- 10
+eta <- 0.1
+Tmax <- 1000
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -554,7 +575,6 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -581,9 +601,8 @@ abline(h=w_true[1], col='red')
 #
 plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
-# 
 ```
-ANSWER; As discussed in the lectures, the bigger the batch size the smaller the variation of the gradient, hence the error is smaller.  
+
 
 
 # AdaGrad  (for homework practice)     
@@ -604,15 +623,16 @@ w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficie
 
 ## Task (for homework practice)   
 
-Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$.   
+Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
+
 Use $\epsilon=10^{-6}$
 
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 m <- 1
 eta <- 1.0
-Tmax <- 500
+Tmax <- 1000
 w_seed <- c(-0.3,3.0)
 w <- w_seed
 w_chain <- c()
@@ -623,7 +643,6 @@ eps <- 10^(-6)
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -660,12 +679,12 @@ Experiment by changing the values of $\eta_{t}$  and $m$. See how the oscillatio
 
 Use $\epsilon=10^{-6}$
 
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 m <- 100
 eta <- 1.0
-Tmax <- 500
+Tmax <- 1000
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -676,7 +695,6 @@ eps <- 10^(-6)
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -795,11 +813,11 @@ out$solution
 
 ## Task  (for homework practice)     
 
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.1$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
+Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
 
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,0.3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=5000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
 
 You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
 
@@ -825,8 +843,8 @@ eval_jac_g0 <- function( x, w_now ) {
 
 ```{r}
 m <- 1
-eta <- 0.1
-Tmax <- 1000
+eta <- 0.01
+Tmax <- 5000
 w_seed <- c(-0.3,3.0)
 
 w <- w_seed
@@ -836,7 +854,6 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -878,34 +895,24 @@ abline(h=w_true[2], col='red')
 
 # Stochastic Variance Reduced Gradient Descent (SVRG)  (for homework practice)   
 
-We use a smaller datasize
-
-```{r}
-set.seed(2023)
-n_obs <- 100000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
-
 ## Task  (for homework practice)    
 
-Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
+Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
 
 Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
 
 The sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
+The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
 
 Produce the trace plots of the produced chains $\{w^(t)\}$.  
 
 
 ```{r}
 m <- 1
-eta <- 0.5
-Tmax <- 500
-kappa <- 100
+eta <- 0.1
+Tmax <- 1000
+kappa <- 10000
 Qstop <- 0 
 t <- 0
 #
@@ -922,7 +929,6 @@ cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #control variate
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -952,8 +958,10 @@ while ( Qstop == 0 ) {
     Qstop <- 1
   }
 }
-plot(w_chain[,1], type='l') #+ abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') #+abline(h=w_true[2], col='red')
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
 ## Task (for homework practice)    
@@ -961,15 +969,12 @@ plot(w_chain[,2], type='l') #+abline(h=w_true[2], col='red')
 Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
 
 
+
 ```{r}
-#
-# The following is supposed to take veery long time to run. It is provided only for illustration purposes.  
-# In the assesments the requested tasks will take less time.
-#
 m <- 1
-eta <- 0.5
-Tmax <- 500
-kappa <- 10
+eta <- 0.1
+Tmax <- 1000
+kappa <- 10000
 Qstop <- 0 
 t <- 0
 #
@@ -986,7 +991,6 @@ cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #control variate
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
-  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -1016,8 +1020,9 @@ while ( Qstop == 0 ) {
     Qstop <- 1
   }
 }
-plot(w_chain[,1], type='l') #+abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') #+abline(h=w_true[2], col='red')
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
-ANSWER: As we discussed int eh lectures, reducing $\kappa$, increases the number of snapshots, reduces the variance in the gradients, reduces the variance of the trace, and hence aims at making the upper bound of the error smaller.  

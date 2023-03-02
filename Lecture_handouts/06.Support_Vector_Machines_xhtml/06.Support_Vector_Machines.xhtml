@@ -111,6 +111,22 @@ font-variant: normal;
 font-size: medium;
 
 }
+div.assumption {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.assumption_label {
+font-weight: bold;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+
+}
 div.algorithm {
 font-style: italic;
 font-variant: normal;
@@ -185,6 +201,7 @@ div.float-caption {
 	padding: 1ex;
 	margin: 1ex;
 }
+div.Frameless { margin: 1em; }
 
 
 </style>
@@ -235,7 +252,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>w</mi><mo> &ne; </mo><mn>0</mn>
   </mrow>
- </mrow></math>. Hyperplane of space <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Hyperplane in space <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -272,7 +289,13 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mstyle>
  </mrow></math> in two half-spaces <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+  <mrow>
+   <msub>
+    <mrow><mi>S</mi>
+    </mrow>
+    <mrow><mo>+</mo>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
    <mrow><mi>x</mi><mo> &isin; </mo>
     <msup>
@@ -289,7 +312,13 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> and <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><mi>S</mi><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+  <mrow>
+   <msub>
+    <mrow><mi>S</mi>
+    </mrow>
+    <mrow><mo>-</mo>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
    <mrow><mi>x</mi><mo> &isin; </mo>
     <msup>
@@ -342,7 +371,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
   </mrow>
  </mrow></math> defined as 
-<div style = "text-align: center;"><img src="lyxpreviewadDuNf1.png" alt="Mathematical Equation" />
+<div style = "text-align: center;"><img src="lyxpreviewngxACD1.png" alt="Mathematical Equation" />
 </div>
  where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>b</mi>
@@ -354,7 +383,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 
 <div class="definition" id='magicparlabel-58'><div class="definition_item"><span class="definition_label">Definition 4.</span>
-Each <math xmlns="http://www.w3.org/1998/Math/MathML">
+Each <b>halfspace hypothesis</b> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>H</mi>
@@ -416,7 +445,7 @@ Each <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
- </mrow></math> as this is the only parameter need to fully determine it.</div>
+ </mrow></math> as this setting determines it.</div>
 </div>
 
 <div class="note" id='magicparlabel-59'><div class="note_item"><span class="note_label">Note 5.</span>
@@ -494,10 +523,10 @@ Each <math xmlns="http://www.w3.org/1998/Math/MathML">
 
 </div>
 
-<div class="note" id='magicparlabel-61'><div class="note_item"><span class="note_label">Note 6.</span>
+<div class="definition" id='magicparlabel-61'><div class="definition_item"><span class="definition_label">Definition 6.</span>
 The training set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>S</mi>
- </mrow></math> is linearly separable if there exists a halfspace <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is <b>linearly separable</b> if there exists a halfspace <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
   <mrow><mi>w</mi><mo>,</mo><mi>b</mi>
@@ -755,39 +784,82 @@ Let the loss be <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></div>
 </div>
 
-<div class="example" id='magicparlabel-64'><div class="example_item"><span class="example_label">Example 8.</span>
+<div class="standard" id='magicparlabel-64'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-65'><div class="definition_item"><span class="definition_label">Definition 8.</span>
+<b>Margin of a hyper-plane</b> with respect to a training set is defined to be the minimal distance between a point in the training set and the hyper-plane.</div>
+</div>
+
+<div class="note" id='magicparlabel-66'><div class="note_item"><span class="note_label">Note 9.</span>
+Support Vector Machines (SVM) aims at learning the maximum margin separating hyperplane Figure (<a href="#fig__1">1.1</a>; Right). The rational is that if a hyperplane has a large margin, then it will still separate the training set even if we slightly perturb each instance.</div>
+</div>
+
+<div class="standard" id='magicparlabel-67'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-68'><div class="example_item"><span class="example_label">Example 10.</span>
 Figure (<a href="#fig__1">1.1</a>; Left) shows two different separating hyper-planes for the same data set, Figure (<a href="#fig__1">1.1</a>; Right) shows the maximum margin hyper-plane: the margin <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &gamma; </mi>
- </mrow></math> is the distance from the hyper-plane (solid line) to the closest points in either class (which touch the parallel dotted lines). It is reasonable to prefer as a predictive rule the hyperplane on the right.  <div class='float-figure'><div class="plain_layout" id='magicparlabel-68'><img style='width:50%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____s_figures_06_Support_Vector_Machines_margin.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____s_figures_06_Support_Vector_Machines_margin.png' />
+ </mrow></math> is the distance from the hyper-plane (solid line) to the closest points in either class (which touch the parallel dotted lines). It is reasonable to prefer as a predictive rule the hyperplane on the right.  <div class='float-figure'><div class="plain_layout" id='magicparlabel-72'><img style='width:50%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____s_figures_06_Support_Vector_Machines_margin.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____s_figures_06_Support_Vector_Machines_margin.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Figure 1.1:  <a id="fig__1" />
 </span></div>
 </div>
 </div>
 </div>
+<h2 class="section" id='magicparlabel-77'><span class="section_label">2</span> Hard Support Vector Machine </h2>
 
-<div class="standard" id='magicparlabel-73'><br />
-
-</div>
-
-<div class="definition" id='magicparlabel-74'><div class="definition_item"><span class="definition_label">Definition 9.</span>
-<b>Margin of a hyper-plane</b> with respect to a training set is defined to be the minimal distance between a point in the training set and the hyper-plane.</div>
-</div>
-
-<div class="note" id='magicparlabel-75'><div class="note_item"><span class="note_label">Note 10.</span>
-Support Vector Machines (SVM) aims at learning the maximum margin separating hyperplane. The rational is that if a hyperplane has a large margin, then it will still separate the training set even if we slightly perturb each instance.</div>
-</div>
-<h2 class="section" id='magicparlabel-76'><span class="section_label">2</span> Hard Support Vector Machine </h2>
-
-<div class="note" id='magicparlabel-77'><div class="note_item"><span class="note_label">Note 11.</span>
+<div class="note" id='magicparlabel-78'><div class="note_item"><span class="note_label">Note 11.</span>
 <a id="note_Hard_SVM_is_the" />
 Hard Support Vector Machine (Hard-SVM) is the learning rule in which we return an ERM hyperplane that separates the training set with the largest possible margin.</div>
 </div>
 
-<div class="standard" id='magicparlabel-78'><br />
+<div class="assumption" id='magicparlabel-79'><div class="assumption_item"><span class="assumption_label">Assumption 12.</span>
+<a id="assu_Assume_the_training" />
+Assume the training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>S</mi><mo>=</mo>
+   <msubsup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub><mo>,</mo>
+      <msub>
+       <mrow><mi>y</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup>
+  </mrow>
+ </mrow></math> is linearly separable.</div>
+</div>
+
+<div class="standard" id='magicparlabel-80'><br />
 
 </div>
 
-<div class="algorithm" id='magicparlabel-79'><div class="algorithm_item"><span class="algorithm_label">Algorithm 12.</span>
+<div class="algorithm" id='magicparlabel-81'><div class="algorithm_item"><span class="algorithm_label">Algorithm 13.</span>
 <a id="alg__Hard_SVM__Given_a" />
 &nbsp;(Hard-SVM) Given a linearly separable training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -824,7 +896,7 @@ Hard Support Vector Machine (Hard-SVM) is the learning rule in which we return a
    </msubsup>
   </mrow>
  </mrow></math> the Hard-SVM rule for the binary classification problem is:</div>
-<div class="standard" id='magicparlabel-80'><i>Solve <a id="eq__2" />
+<div class="standard" id='magicparlabel-82'><i>Solve <a id="eq__2" />
 <a id="eq__3" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -872,7 +944,7 @@ Hard Support Vector Machine (Hard-SVM) is the learning rule in which we return a
   <mtr>
    <mtd>
     <mstyle mathvariant='normal'>
-     <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi>
+     <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi><mo>:</mo><mspace width="6px" /><mspace width="6px" /><mspace width="6px" />
      </mrow>
     </mstyle>
    </mtd>
@@ -902,7 +974,7 @@ Hard Support Vector Machine (Hard-SVM) is the learning rule in which we return a
   </mtr>
  </mtable></math></i></div>
 
-<div class="standard" id='magicparlabel-81'><i>Scale <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-83'><i>Scale <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mover>
@@ -955,19 +1027,19 @@ Hard Support Vector Machine (Hard-SVM) is the learning rule in which we return a
  </mrow></math></i></div>
 </div>
 
-<div class="standard" id='magicparlabel-82'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-83'><div class="note_item"><span class="note_label">Note 13.</span>
-Following we show why Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> serves it purpose. </div>
-</div>
-
 <div class="standard" id='magicparlabel-84'><br />
 
 </div>
 
-<div class="fact" id='magicparlabel-85'><div class="fact_item"><span class="fact_label">Fact 14.</span>
+<div class="note" id='magicparlabel-85'><div class="note_item"><span class="note_label">Note 14.</span>
+Following we show why Algorithm <a href="#alg__Hard_SVM__Given_a">13</a> produces a Hard-SVM hyperplane stated in Note <a href="#note_Hard_SVM_is_the">11</a>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-86'><br />
+
+</div>
+
+<div class="fact" id='magicparlabel-87'><div class="fact_item"><span class="fact_label">Fact 15.</span>
 <a id="fact_The_distance_between" />
 The distance between a point <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>x</mi>
@@ -994,27 +1066,48 @@ The distance between a point <math xmlns="http://www.w3.org/1998/Math/MathML">
 
  </mrow></math>.</div>
 
-<div class="proof" id='magicparlabel-86'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-88'><div class="proof_item"><span class="proof_label">Proof.</span>
 We skip it.</div>
 </div>
 </div>
 
-<div class="note" id='magicparlabel-87'><div class="note_item"><span class="note_label">Note 15.</span>
-Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searches for the hyperplane with minimum norm <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-89'><div class='Frameless'><div class="plain_layout" id='magicparlabel-93'><div class='Frameless' style='width: 60%; '><div class="note" id='magicparlabel-97'><div class="note_item"><span class="note_label">Note 16.</span>
+On the right, see the geometry of Algorithm <a href="#alg__Hard_SVM__Given_a">13</a>. </div>
+</div>
+
+<div class="plain_layout" id='magicparlabel-98'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-99'><div class="note_item"><span class="note_label">Note 17.</span>
+Hard-SVM selects two parallel hyperplanes that separate the two classes of data so that the distance between them is as large as possible. The predictive hyperplane (rule) is the hyperplane that lies halfway between them.</div>
+</div>
+
+<div class="plain_layout" id='magicparlabel-100'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-101'><div class="note_item"><span class="note_label">Note 18.</span>
+Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">13</a> searches for the hyperplane with minimum norm <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>w</mi>
- </mrow></math> among all those that separate the data and have distance not less than <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> among all those that separate the data and have distance greater or equal to <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mn>1</mn>
- </mrow></math>.</div>
+ </mrow></math>. </div>
+</div>
+</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class='Frameless' style='width: 40%; '><div class="plain_layout" id='magicparlabel-105'><img style='width:100%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gures_06_Support_Vector_Machines_SVM_margin.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gures_06_Support_Vector_Machines_SVM_margin.png' />
+</div>
+</div></div>
+</div></div>
+
+
+<div class="standard" id='magicparlabel-106'><br />
+
 </div>
 
-<div class="standard" id='magicparlabel-88'><br />
+<div class="proof" id='magicparlabel-107'><div class="proof_item"><span class="proof_label">Proof.</span>
+(Sketch of the proof of Algorithm <a href="#alg__Hard_SVM__Given_a">13</a>)&nbsp; </div>
 
-</div>
-
-<div class="proof" id='magicparlabel-89'><div class="proof_item"><span class="proof_label">Proof.</span>
-(Sketch of the proof of Algorithm <a href="#alg__Hard_SVM__Given_a">12</a>)&nbsp; </div>
-
-<ol class="enumerate" id='magicparlabel-90'><li class="enumerate_item">Based on Note <a href="#note_Hard_SVM_is_the">11</a>, and Fact <a href="#fact_The_distance_between">14</a>, the closest point in the training set to the separating hyperplane has distance <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-108'><li class="enumerate_item">Based on Note <a href="#note_Hard_SVM_is_the">11</a>, and Fact <a href="#fact_The_distance_between">15</a>, the closest point in the training set to the separating hyperplane has distance <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1039,6 +1132,7 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
 
   </mrow>
  </mrow></math> hence, by definition, the Hard-SVM hypothesis should be such as <a id="eq_" />
+<a id="eq__6" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -1108,14 +1202,16 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
   <mtr>
    <mtd>
     <mstyle mathvariant='normal'>
-     <mstyle mathvariant='normal'>
-      <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi>
-      </mrow>
-     </mstyle>
+     <mrow>
+      <mstyle mathvariant='normal'>
+       <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi>
+       </mrow>
+      </mstyle><mspace width="6px" /><mspace width="6px" />
+     </mrow>
     </mstyle>
    </mtd>
    <mtd>
-    <mrow>
+    <mrow><mspace width="6px" />
      <msub>
       <mrow><mi>y</mi>
       </mrow>
@@ -1135,11 +1231,11 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
 <mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="6px" /><mspace width="6px" /><mi> &forall; </mi><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
     </mrow>
    </mtd>
-   <mtd>
+   <mtd>(2.4)
    </mtd>
   </mtr>
  </mtable></math> </li>
-<li class="enumerate_item">If there is a solution in <a href="#eq_">(2.3)</a> then <a href="#eq_">(2.3)</a> is equivalent to <a id="eq__1" />
+<li class="enumerate_item">If there is a solution in <a href="#eq_">(2.4)</a> then <a href="#eq_">(2.4)</a> is equivalent to <a id="eq__1" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -1209,11 +1305,11 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
 
     </mrow>
    </mtd>
-   <mtd>(2.4)
+   <mtd>(2.5)
    </mtd>
   </mtr>
  </mtable></math></li>
-<li class="enumerate_item">Next we show that <a href="#eq__1">2.4</a> is equivalent to the output of Algorithm <a href="#alg__Hard_SVM__Given_a">12</a>; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
+<li class="enumerate_item">Next we show that <a href="#eq__1">2.5</a> is equivalent to the output of Algorithm <a href="#alg__Hard_SVM__Given_a">13</a>; i.e. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1248,7 +1344,7 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
 
   </mrow>
  </mrow></math>. 
-<div class="standard" id='magicparlabel-93'>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-111'>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msup>
@@ -1597,42 +1693,42 @@ Essentially Hard-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a">12</a> searc
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
- </mrow></math> is the optimal solution of <a href="#eq__1">(2.4)</a>.</div>
+ </mrow></math> is the optimal solution of <a href="#eq__1">(2.5)</a>.</div>
 </li></ol>
 </div>
 
-<div class="standard" id='magicparlabel-94'><br />
+<div class="standard" id='magicparlabel-112'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-95'><div class="definition_item"><span class="definition_label">Definition 16.</span>
-Homogeneous halfspaces in SVM is the case where the halfspaces pass from the origin; that is when the bias term in <a href="#eq__3">2.2</a> is zero <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="definition" id='magicparlabel-113'><div class="definition_item"><span class="definition_label">Definition 19.</span>
+<b>Homogeneous halfspaces</b> in SVM is the case where the halfspaces pass from the origin; that is when the bias term in <a href="#eq__3">2.2</a> is zero <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>b</mi><mo>=</mo><mn>0</mn>
   </mrow>
  </mrow></math>. </div>
 </div>
-<h2 class="section" id='magicparlabel-96'><span class="section_label">3</span> Soft Support Vector Machine </h2>
+<h2 class="section" id='magicparlabel-114'><span class="section_label">3</span> Soft Support Vector Machine </h2>
 
-<div class="note" id='magicparlabel-97'><div class="note_item"><span class="note_label">Note 17.</span>
-Hard-SVM assumes the strong assumption that the training set is linearly separable.</div>
+<div class="note" id='magicparlabel-115'><div class="note_item"><span class="note_label">Note 20.</span>
+Hard-SVM assumes the strong Assumption <a href="#assu_Assume_the_training">12</a> that the training set is linearly separable, that might not always the case, and hence there is need to derive a procedure that weakens this assumption.</div>
 </div>
 
-<div class="standard" id='magicparlabel-98'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-99'><div class="note_item"><span class="note_label">Note 18.</span>
-Soft Support Vector Machine (Soft-SVM) aims to relax the strong assumption of Hard-SVM that the training set is linearly separable, with purpose to be extend the scope of application. Soft-SVM is given below. </div>
-</div>
-
-<div class="standard" id='magicparlabel-100'><br />
+<div class="standard" id='magicparlabel-116'><br />
 
 </div>
 
-<div class="algorithm" id='magicparlabel-101'><div class="algorithm_item"><span class="algorithm_label">Algorithm 19.</span>
+<div class="note" id='magicparlabel-117'><div class="note_item"><span class="note_label">Note 21.</span>
+Soft Support Vector Machine (Soft-SVM) aims to relax the strong assumption of Hard-SVM that the training set is linearly separable <a href="#eq__6">(2.4)</a> with purpose to be extend the scope of application. Soft-SVM is given below. I.e., Soft-SVM does not assume Assumption <a href="#assu_Assume_the_training">12</a>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-118'><br />
+
+</div>
+
+<div class="algorithm" id='magicparlabel-119'><div class="algorithm_item"><span class="algorithm_label">Algorithm 22.</span>
 <a id="alg__Hard_SVM__Given_a_1" />
-&nbsp;(Soft-SVM) Given a linearly separable training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
+&nbsp;(Soft-SVM) Given a training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>S</mi><mo>=</mo>
    <msubsup>
@@ -1666,8 +1762,8 @@ Soft Support Vector Machine (Soft-SVM) aims to relax the strong assumption of Ha
     </mrow>
    </msubsup>
   </mrow>
- </mrow></math> the Hard-SVM rule for the binary classification problem is:</div>
-<div class="standard" id='magicparlabel-102'><i>Solve <a id="eq__2_1" />
+ </mrow></math> the Soft-SVM rule for the binary classification problem is:</div>
+<div class="standard" id='magicparlabel-120'><i>Solve <a id="eq__2_1" />
 <a id="eq__3_1" />
 <a id="eq__5" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -1752,10 +1848,12 @@ Soft Support Vector Machine (Soft-SVM) aims to relax the strong assumption of Ha
   </mtr>
   <mtr>
    <mtd>
-    <mstyle mathvariant='normal'>
-     <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi>
-     </mrow>
-    </mstyle>
+    <mrow>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>s</mi><mi>u</mi><mi>b</mi><mi>j</mi><mi>e</mi><mi>c</mi><mi>t</mi>&nbsp;<mi>t</mi><mi>o</mi><mo>:</mo><mspace width="6px" /><mspace width="6px" />
+      </mrow>
+     </mstyle><mspace width="6px" />
+    </mrow>
    </mtd>
    <mtd>
     <mrow>
@@ -1818,7 +1916,7 @@ Soft Support Vector Machine (Soft-SVM) aims to relax the strong assumption of Ha
  </mtable></math></i></div>
 </div>
 
-<div class="note" id='magicparlabel-103'><div class="note_item"><span class="note_label">Note 20.</span>
+<div class="note" id='magicparlabel-121'><div class="note_item"><span class="note_label">Note 23.</span>
 To relax the linearly separable training set assumption, Soft-SVM relies on replacing the &ldquo;harder&rdquo; constraint <a href="#eq__3">(2.2)</a> with the &ldquo;softer&rdquo; one in <a href="#eq__3_1">3.3</a> through the introduction of non-negative unknown quantities <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msubsup>
@@ -1852,11 +1950,11 @@ To relax the linearly separable training set assumption, Soft-SVM relies on repl
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-104'><br />
+<div class="standard" id='magicparlabel-122'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-105'><div class="proposition_item"><span class="proposition_label">Proposition 21.</span>
+<div class="proposition" id='magicparlabel-123'><div class="proposition_item"><span class="proposition_label">Proposition 24.</span>
 <a id="prop_Consider_the_hinge" />
 Consider the hinge loss function <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1938,7 +2036,7 @@ Consider the hinge loss function <math display="block" xmlns="http://www.w3.org/
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> Then the solution of Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a> is equivalent to the regularization problem <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> Then the solution of Algorithm <a href="#alg__Hard_SVM__Given_a_1">22</a> is equivalent to the regularization problem <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1998,8 +2096,8 @@ Consider the hinge loss function <math display="block" xmlns="http://www.w3.org/
   </mrow>
  </mrow></math></div>
 
-<div class="proof" id='magicparlabel-106'><div class="proof_item"><span class="proof_label">Proof.</span>
-In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__4" />
+<div class="proof" id='magicparlabel-124'><div class="proof_item"><span class="proof_label">Proof.</span>
+In Algorithm <a href="#alg__Hard_SVM__Given_a_1">22</a>, we consider <a id="eq__4" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -2073,7 +2171,7 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
- </mrow></math> fixed and focus on the inside minimization. From <a href="#eq__3_1">3.3</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> fixed and focus on the inside minimization. From <a href="#eq__3_1">(3.3)</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2112,7 +2210,7 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>, and from <a href="#eq__5">3.3</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, and from <a href="#eq__5">(3.3)</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2163,7 +2261,7 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
     </mrow>
    </msub><mo> &ge; </mo><mn>0</mn>
   </mrow>
- </mrow></math> from <a href="#eq__5">3.3</a>. If <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> from <a href="#eq__5">(3.3)</a> and I need to minimize <a href="#eq__4">(3.4)</a> wrt m\xi . If <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2184,7 +2282,7 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo> &le; </mo><mn>1</mn>
   </mrow>
- </mrow></math>, the best assignment in <a href="#eq__4">3.4</a> is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, the best assignment in <a href="#eq__4">(3.4)</a> is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2223,7 +2321,7 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
     </mrow>
    </msub><mo>=</mo><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <mrow><mn>1</mn><mo>-</mo>
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo>
     <msub>
      <mrow><mi>y</mi>
      </mrow>
@@ -2249,20 +2347,20 @@ In Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a>, we consider <a id="eq__
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-107'><br />
+<div class="standard" id='magicparlabel-125'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-108'><div class="note_item"><span class="note_label">Note 22.</span>
+<div class="note" id='magicparlabel-126'><div class="note_item"><span class="note_label">Note 25.</span>
 Hence the Soft-SVM is a binary classification problem with hinge loss function and regularization term biasing toward low norm separators. </div>
 </div>
 
-<div class="standard" id='magicparlabel-109'><br />
+<div class="standard" id='magicparlabel-127'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-110'><div class="note_item"><span class="note_label">Note 23.</span>
-Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a_1">19</a> can be learned via a variation of batch SGD, eg online SGD (batch size <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="note" id='magicparlabel-128'><div class="note_item"><span class="note_label">Note 26.</span>
+Given Proposition <a href="#prop_Consider_the_hinge">24</a>, Soft-SVM in Algorithm <a href="#alg__Hard_SVM__Given_a_1">22</a> can be learned via any variation of SGD, eg online SGD (batch size <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>m</mi><mo>=</mo><mn>1</mn>
   </mrow>
@@ -2314,7 +2412,34 @@ Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorit
    <mtable>
     <mtr>
      <mtd>
-      <mrow><mi>y</mi><mo> &lang; </mo><mi> &piv; </mi><mo>,</mo><mi> &chi; </mi><mo> &rang; </mo>
+      <mrow>
+       <msup>
+        <mrow><mi>y</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo> &lang; </mo>
+       <msup>
+        <mrow><mi> &piv; </mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo>,</mo>
+       <msup>
+        <mrow><mi> &chi; </mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo> &rang; </mo>
       </mrow>
      </mtd>
      <mtd>
@@ -2322,13 +2447,49 @@ Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorit
        <mstyle mathvariant='normal'>
         <mrow><mi>i</mi><mi>f</mi>
         </mrow>
-       </mstyle><mspace width="6px" /><mi>y</mi><mo> &lang; </mo><mi> &piv; </mi><mo>,</mo><mi> &chi; </mi><mo> &rang; </mo><mo> &ge; </mo><mn>1</mn>
+       </mstyle><mspace width="6px" />
+       <msup>
+        <mrow><mi>y</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo> &lang; </mo><mi> &piv; </mi><mo>,</mo>
+       <msup>
+        <mrow><mi> &chi; </mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup><mo> &rang; </mo><mo> &ge; </mo><mn>1</mn>
       </mrow>
      </mtd>
     </mtr>
     <mtr>
      <mtd>
-      <mrow><mo>-</mo><mi>y</mi><mi> &chi; </mi>
+      <mrow><mo>-</mo>
+       <msup>
+        <mrow><mi>y</mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup>
+       <msup>
+        <mrow><mi> &chi; </mi>
+        </mrow>
+        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+        </mrow>
+       </msup>
       </mrow>
      </mtd>
      <mtd>
@@ -2346,7 +2507,25 @@ Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorit
    <msup>
     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-     <mrow><mi>b</mi><mo>,</mo><mi>w</mi>
+     <mrow>
+      <msup>
+       <mrow><mi>b</mi>
+       </mrow>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+      </msup><mo>,</mo>
+      <msup>
+       <mrow><mi>w</mi>
+       </mrow>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+      </msup>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -2361,7 +2540,16 @@ Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorit
    <msup>
     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-     <mrow><mn>1</mn><mo>,</mo><mi>x</mi>
+     <mrow><mn>1</mn><mo>,</mo>
+      <msup>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+       </mrow>
+      </msup>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -2372,16 +2560,151 @@ Given Proposition <a href="#prop_Consider_the_hinge">21</a>, Soft-SVM in Algorit
   </mrow>
  </mrow></math>. </div>
 </div>
+<h2 class="section" id='magicparlabel-134'><span class="section_label">A</span> Recall</h2>
+<div class="standard" id='magicparlabel-135'>The following is part of &ldquo; Handout 1: Elements of convex learning problems&rdquo;</div>
 
-<div class="standard" id='magicparlabel-111'><br />
+<div class="definition" id='magicparlabel-136'><div class="definition_item"><span class="definition_label">Definition 27.</span>
+Convex learning problem is a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo>,</mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>,</mo><mi> &ell; </mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math> that the hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>H</mi>
+  </mstyle>
+ </mrow></math> is a convex set, and the loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &ell; </mi>
+ </mrow></math> is a convex function for each example <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-137'><br />
 
 </div>
 
-<div class="algorithm" id='magicparlabel-112'><div class="algorithm_item"><span class="algorithm_label">Algorithm 24.</span>
-(SGD for Soft-SVM)</div>
+<div class="definition" id='magicparlabel-138'><div class="definition_item"><span class="definition_label">Definition 28.</span>
+Convex-Lipschitz-Bounded Learning Problem <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo>,</mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>,</mo><mi> &ell; </mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math> with parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &rho; </mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>B</mi>
+ </mrow></math>, is called the learning problem whose the hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>H</mi>
+  </mstyle>
+ </mrow></math> is a convex set, for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi>B</mi>
+  </mrow>
+ </mrow></math>, and the loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &sdot; </mo><mo>,</mo><mi>z</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is convex and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &rho; </mi>
+ </mrow></math>-Lischitz function for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-113'><br />
+<div class="standard" id='magicparlabel-139'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-140'><div class="definition_item"><span class="definition_label">Definition 29.</span>
+Convex-Smooth-Bounded Learning Problem <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle><mo>,</mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle><mo>,</mo><mi> &ell; </mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math> with parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>B</mi>
+ </mrow></math>, is called the learning problem whose the hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>H</mi>
+  </mstyle>
+ </mrow></math> is a convex set, for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mi>w</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+<mo> &le; </mo><mi>B</mi>
+  </mrow>
+ </mrow></math>, and the loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &sdot; </mo><mo>,</mo><mi>z</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is convex, nonnegative, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math>-smooth function for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>Z</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-141'><br />
 
 </div>
 </body>

@@ -67,3 +67,9 @@ Stochastic gradient Langevin dynamics
 Artificial Neural Networks  
 
 + [05.Artificial_neural_networks.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/05.Artificial_neural_networks.pdf)  
+
+Support Vector Machines  
+
++ [06.Support_Vector_Machines.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/06.Support_Vector_Machines.pdf)  
+
+

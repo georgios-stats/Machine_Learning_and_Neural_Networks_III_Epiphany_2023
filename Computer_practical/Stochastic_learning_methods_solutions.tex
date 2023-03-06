@@ -1,0 +1,978 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Stochastic learning methods},
+  pdfauthor={Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Stochastic learning methods}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{\ldots on a binary classification problem}
+\author{Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural
+Networks III}
+\date{}
+
+\begin{document}
+\maketitle
+
+\href{https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical\#aim}{Back
+to README}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{\emph{Aim}}
+
+\begin{itemize}
+\item
+  practice in R,
+\item
+  implement GD, batch/online SGD, AdaGrad, SGD with projection, SVRG
+  algorithms in R
+\item
+  refresh logistic regression, with Ridge penalty from term 1
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{\emph{Reading material}}
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture notes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Handouts 0, 1, 2, and 3
+  \end{itemize}
+\item
+  Reference for \emph{R}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf}{Cheat
+    sheet with basic commands}
+  \end{itemize}
+\item
+  Reference of \emph{rmarkdown} (optional, supplementary material):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{R
+    Markdown cheatsheet}\\
+  \item
+    \href{http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf}{R
+    Markdown Reference Guide}\\
+  \item
+    \href{https://yihui.name/knitr/options}{knitr options}
+  \end{itemize}
+\item
+  Reference for \emph{Latex} (optional, supplementary material):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://wch.github.io/latexsheet/latexsheet-a4.pdf}{Latex
+    Cheat Sheet}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{\emph{New software}}
+
+\begin{itemize}
+\tightlist
+\item
+  R package \texttt{base} functions:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{set.seed\{base\}}
+  \end{itemize}
+\item
+  R package \texttt{nloptr} functions:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{nloptr\{nloptr\}}
+  \end{itemize}
+\item
+  R package \texttt{numDeriv} functions:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{grad\{numDeriv\}}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# call libraries}
+\CommentTok{\#install.packages("numDeriv")}
+\KeywordTok{library}\NormalTok{(numDeriv)}
+\CommentTok{\#install.packages("nloptr")}
+\KeywordTok{library}\NormalTok{(nloptr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{\emph{Initialize R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load R package for printing}
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set a seed of the randon number generator}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2023}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{application-binary-classification-problem}{%
+\section*{Application: Binary classification
+problem}\label{application-binary-classification-problem}}
+\addcontentsline{toc}{section}{Application: Binary classification
+problem}
+
+Consider the binary classification problem with input \(x\in\mathbb{R}\)
+and output/labels \(y\in\{0,1\}\).
+
+The prediction rule is \[
+h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
+\] where \(w\in\mathbb{R}^{2}\) is the unknown parameter we wish to
+learn, and hence we can consider that the hypothesis class is
+
+\[
+\mathcal{H}=\{w\in\mathbb{R}^{2}\}
+\]
+
+Consider there is available a dataset\\
+\[
+\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}
+\]
+
+with \(y_{i}\in\{0,1\}\) and \(x_{i}\in\mathbb{R}\).
+
+Recall that the sampling distribution is\\
+\[
+y|w \sim \text{Bernulli}(h_{w}(x)) \\
+h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
+\]
+
+The dataset \(\mathcal{S}_{n}=\{z_i=(x_i,y_i)\}\) is generated from the
+data generation probability \(g(\cdot)\) provided below as a routine. We
+pretend that we do not know \(g(\cdot)\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_generating\_model \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(n,w) \{}
+\NormalTok{  z \textless{}{-}}\StringTok{ }\KeywordTok{rep}\NormalTok{( }\OtherTok{NaN}\NormalTok{, }\DataTypeTok{times=}\NormalTok{n}\OperatorTok{*}\DecValTok{2}\NormalTok{ )}
+\NormalTok{  z \textless{}{-}}\StringTok{ }\KeywordTok{matrix}\NormalTok{(z, }\DataTypeTok{nrow =}\NormalTok{ n, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  z[,}\DecValTok{1}\NormalTok{] \textless{}{-}}\StringTok{ }\KeywordTok{runif}\NormalTok{(n, }\DataTypeTok{min =} \DecValTok{{-}10}\NormalTok{, }\DataTypeTok{max =} \DecValTok{10}\NormalTok{)}
+\NormalTok{  p \textless{}{-}}\StringTok{ }\NormalTok{w[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{w[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{z[,}\DecValTok{1}\NormalTok{] }
+\NormalTok{  p \textless{}{-}}\StringTok{ }\KeywordTok{exp}\NormalTok{(p) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\KeywordTok{exp}\NormalTok{(p))}
+\NormalTok{  z[,}\DecValTok{2}\NormalTok{] \textless{}{-}}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(n, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ p)}
+  \KeywordTok{return}\NormalTok{(z)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Let the dataset \(\mathcal{S}_{n}\) has size \(n=500\).
+
+Assume that the real values for the unknown parameters \(w\) is
+\(w_{\text{true}}=(0.0,1.0)^\top\).
+
+The dataset containing the examples to train the model are generated
+below, and stores in the array \(z_{\text{obs}}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2023}\NormalTok{)}
+\NormalTok{n\_obs \textless{}{-}}\StringTok{ }\DecValTok{500}
+\NormalTok{w\_true \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)  }
+\NormalTok{z\_obs \textless{}{-}}\StringTok{ }\KeywordTok{data\_generating\_model}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n\_obs, }\DataTypeTok{w =}\NormalTok{ w\_true) }
+\NormalTok{w\_true \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{glm}\NormalTok{(z\_obs[,}\DecValTok{2}\NormalTok{]}\OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\OperatorTok{+}\StringTok{ }\NormalTok{z\_obs[,}\DecValTok{1}\NormalTok{],}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{ )}\OperatorTok{$}\NormalTok{coefficients)}
+\end{Highlighting}
+\end{Shaded}
+
+The prediction rule is \[
+h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
+\]
+
+where \(w\in\mathbb{R}^{2}\).
+
+The function \textbf{prediction\_rule(x,w)} that returns the rule \(h\)
+where \(x\) is the input argument and \(w\) is the unknown parameter is
+given below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prediction\_rule \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,w) \{}
+\NormalTok{  h \textless{}{-}}\StringTok{ }\NormalTok{w[}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{w[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{x}
+\NormalTok{  h \textless{}{-}}\StringTok{ }\KeywordTok{exp}\NormalTok{(h) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\FloatTok{1.0} \OperatorTok{+}\StringTok{ }\KeywordTok{exp}\NormalTok{(h) )}
+  \KeywordTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The likelihood function is \[
+f\left(y|w\right)=\prod_{i=1}^{n}\left(h_{i}\right)^{y_{i}}\left(1-h_{i}\right)^{1-y_{i}}
+\]
+
+We consider a loss function as
+
+\[
+\ell\left(w,z=\left(x,y\right)\right)=-y\log\left(h(x)\right)-\left(1-y\right)\log\left(1-h(x)\right)
+\]
+
+The code for the loss function is provided below as
+\textbf{loss\_fun(w,z)} that computes the loss function, where
+\(z=(x,y)\) is one example (observation) and \(w\) is the unknown
+parameter.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{loss\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w,z) \{}
+\NormalTok{  x =}\StringTok{ }\NormalTok{z[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  y =}\StringTok{ }\NormalTok{z[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  h \textless{}{-}}\StringTok{ }\KeywordTok{prediction\_rule}\NormalTok{(x,w)}
+\NormalTok{  ell \textless{}{-}}\StringTok{ }\OperatorTok{{-}}\NormalTok{y}\OperatorTok{*}\KeywordTok{log}\NormalTok{(h) }\OperatorTok{{-}}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{y)}\OperatorTok{*}\KeywordTok{log}\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{h)}
+  \KeywordTok{return}\NormalTok{ (ell)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The Risk function under the data generation model \(g\) is
+
+\[
+\begin{align*}
+R_{g}\left(w\right)= & \text{E}\left(\ell\left(w,z=\left(x,y\right)\right)\right)\\
+= & \text{E}\left(-y\log\left(h\left(w;x\right)\right)-\left(1-y\right)\log\left(1-h\left(w;x\right)\right)\right)
+\end{align*}
+\]
+
+The Empirical risk function is \[
+\begin{align*}
+\hat{R}_{S}\left(w\right) & \frac{1}{n}\sum_{i=1}^{n}\ell\left(w,z_{i}=\left(x_{i},y_{i}\right)\right)\\
+= & -\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}\log\left(h(w;x_{i})\right)+\left(1-y\right)\log\left(1-h(w;x_{i})\right)\right)
+\end{align*}
+\]
+
+The function \textbf{empirical\_risk\_fun(w,z,n)} computes the empirical
+risk, where \(z=(x,y)\) is an example, \(w\) is the unknown parameter,
+and \(n\) is the data size is given below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{empirical\_risk\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w,z,n) \{}
+\NormalTok{  x =}\StringTok{ }\NormalTok{z[,}\DecValTok{1}\NormalTok{]}
+\NormalTok{  y =}\StringTok{ }\NormalTok{z[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{  R \textless{}{-}}\StringTok{ }\FloatTok{0.0}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n) \{}
+\NormalTok{    R \textless{}{-}}\StringTok{ }\NormalTok{R }\OperatorTok{+}\StringTok{ }\KeywordTok{loss\_fun}\NormalTok{(w,z[i,])}
+\NormalTok{  \}}
+\NormalTok{  R \textless{}{-}}\StringTok{ }\NormalTok{R }\OperatorTok{/}\StringTok{ }\NormalTok{n}
+  \KeywordTok{return}\NormalTok{ (R)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{preparation-for-the-stochastic-gradient-descent}{%
+\section*{Preparation for the (Stochastic) Gradient
+Descent}\label{preparation-for-the-stochastic-gradient-descent}}
+\addcontentsline{toc}{section}{Preparation for the (Stochastic) Gradient
+Descent}
+
+Code a function \textbf{learning\_rate(t,t0)} that computes the learning
+rate sequence \[
+\eta_{t}=\frac{t_0}{t}
+\]\\
+where \(t\) is the iteration stage and \(t_0\) is a constant.
+
+Use \(t_0=3\) as default value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{learning\_rate \textless{}{-}}\ControlFlowTok{function}\NormalTok{(t,}\DataTypeTok{t0=}\DecValTok{3}\NormalTok{) \{}
+\NormalTok{  eta \textless{}{-}}\StringTok{ }\NormalTok{t0 }\OperatorTok{/}\StringTok{ }\NormalTok{t}
+  \KeywordTok{return}\NormalTok{( eta )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-given}{%
+\subsection{Task (given)}\label{task-given}}
+
+Code the function \textbf{grad\_loss\_fun(w,z)} that returns the
+gradient of the loss function at parameter value \(w\), and at example
+value \(z=(x,y)\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grad\_loss\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w,z) \{}
+\NormalTok{  x =}\StringTok{ }\NormalTok{z[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  y =}\StringTok{ }\NormalTok{z[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  h \textless{}{-}}\StringTok{ }\KeywordTok{prediction\_rule}\NormalTok{(x,w)}
+\NormalTok{  grd \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(h}\OperatorTok{{-}}\NormalTok{y, (h}\OperatorTok{{-}}\NormalTok{y)}\OperatorTok{*}\NormalTok{x)}
+  \KeywordTok{return}\NormalTok{ (grd)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-given-1}{%
+\subsection{Task (given)}\label{task-given-1}}
+
+Code the function \textbf{grad\_risk\_fun \textless- function(w,z,n)}
+that returns the gradient of the risk function at parameter value \(w\),
+and using the data set \(z\) of size \(n\times 2\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grad\_risk\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w,z,n) \{}
+\NormalTok{  grd \textless{}{-}}\StringTok{ }\FloatTok{0.0}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n) \{}
+\NormalTok{    grd \textless{}{-}}\StringTok{ }\NormalTok{grd }\OperatorTok{+}\StringTok{ }\KeywordTok{grad\_loss\_fun}\NormalTok{(w,z[i,])}
+\NormalTok{  \}}
+\NormalTok{  grd \textless{}{-}}\StringTok{ }\NormalTok{grd }\OperatorTok{/}\StringTok{ }\NormalTok{n}
+  \KeywordTok{return}\NormalTok{ (grd)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-do-it-in-the-computer-practical}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical}}
+
+Compute the gradient of the empirical risk function at point
+\(w=(-0.1,1.5)^\top\).
+
+Use the whole dataset \(\{z_{i};i=1,...,n\}\) (set of examples).
+
+Do this by using the command `grad\_risk\_fun' provided above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.1}\NormalTok{,}\FloatTok{1.5}\NormalTok{)}
+\NormalTok{gr \textless{}{-}}\StringTok{ }\KeywordTok{grad\_risk\_fun}\NormalTok{ (w, }\DataTypeTok{z=}\NormalTok{z\_obs, }\DataTypeTok{n=}\NormalTok{n\_obs) }
+\NormalTok{gr}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.005427957  0.045414831
+\end{verbatim}
+
+\hypertarget{task-do-it-in-the-computer-practical-1}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-1}}
+
+Compute the gradient of the empirical risk function at point
+\(w=(-0.3,3)^\top\). Use the whole dataset \(\{z_{i};i=1,...,n\}\) (set
+of examples). Do this by using the function `grad\{numDeriv\}' from the
+R package numDeriv.
+
+E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for
+more info.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.1}\NormalTok{,}\FloatTok{1.5}\NormalTok{)}
+\CommentTok{\#}
+\NormalTok{erf\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w, }\DataTypeTok{z =}\NormalTok{ z\_obs, }\DataTypeTok{n=}\NormalTok{n\_obs) \{}
+  \KeywordTok{return}\NormalTok{( }\KeywordTok{empirical\_risk\_fun}\NormalTok{(w, z, n) ) }
+\NormalTok{\}}
+\CommentTok{\#}
+\NormalTok{gr \textless{}{-}}\StringTok{ }\NormalTok{numDeriv}\OperatorTok{::}\KeywordTok{grad}\NormalTok{( erf\_fun, w )}
+\CommentTok{\#}
+\NormalTok{gr}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.005427957  0.045414831
+\end{verbatim}
+
+\hypertarget{gradient-descent}{%
+\section{Gradient descent}\label{gradient-descent}}
+
+\hypertarget{task-do-it-in-the-computer-practical-2}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-2}}
+
+Code a Gradient Descent (GD) algorithm with constant learning rate
+\(\eta_{t}=0.5\) that returns the chain of all the \(\{w^{(t)}\}\)
+produced.
+
+The termination criterion is such that the iterations stop when the the
+total number of iterations excesses \(T=300\).
+
+Use seed \(w^{(0)}=(-0.3,3)^\top\).
+
+You may use the R function \textbf{grad\{numDeriv\}} to numerically
+compute the gradient;
+
+\begin{itemize}
+\item
+  e.g.~numDeriv::grad( erf\_fun, w ) .
+\item
+  Try ?grad for more info.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eta \textless{}{-}}\StringTok{ }\FloatTok{0.5}
+\NormalTok{Tmax \textless{}{-}}\StringTok{ }\DecValTok{300}
+\NormalTok{w\_seed \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{w \textless{}{-}}\StringTok{ }\NormalTok{w\_seed}
+\NormalTok{w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{Qstop \textless{}{-}}\StringTok{ }\DecValTok{0} 
+\NormalTok{t \textless{}{-}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{while}\NormalTok{ ( Qstop }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+  \CommentTok{\# counter}
+\NormalTok{  t \textless{}{-}}\StringTok{ }\NormalTok{t }\OperatorTok{+}\StringTok{  }\DecValTok{1}
+  \KeywordTok{cat}\NormalTok{( t ) ; }\KeywordTok{cat}\NormalTok{( }\StringTok{\textquotesingle{} \textquotesingle{}}\NormalTok{ ) }\CommentTok{\#\# counter added for display reasons}
+  \CommentTok{\# step 1: update  }
+\NormalTok{  erf\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w, }\DataTypeTok{z =}\NormalTok{ z\_obs, }\DataTypeTok{n=}\NormalTok{n\_obs) \{}
+    \KeywordTok{return}\NormalTok{( }\KeywordTok{empirical\_risk\_fun}\NormalTok{(w, z, n) ) }
+\NormalTok{  \}}
+\NormalTok{  w \textless{}{-}}\StringTok{ }\NormalTok{w }\OperatorTok{{-}}\StringTok{ }\NormalTok{eta }\OperatorTok{*}\StringTok{ }\NormalTok{numDeriv}\OperatorTok{::}\KeywordTok{grad}\NormalTok{( erf\_fun, w )}
+\NormalTok{  w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(w\_chain, w)}
+  \CommentTok{\# step 2: check for termination terminate}
+  \ControlFlowTok{if}\NormalTok{ ( t}\OperatorTok{\textgreater{}=}\StringTok{ }\NormalTok{Tmax ) \{}
+\NormalTok{    Qstop \textless{}{-}}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# eta \textless{}{-} 0.1}
+\CommentTok{\# Tmax \textless{}{-} 1000}
+\CommentTok{\# w\_seed \textless{}{-} c({-}0.1,1.5)}
+\CommentTok{\# w \textless{}{-} w\_seed}
+\CommentTok{\# w\_chain \textless{}{-} c()}
+\CommentTok{\# Qstop \textless{}{-} 0 }
+\CommentTok{\# t \textless{}{-} 0}
+\CommentTok{\# while ( Qstop == 0 ) \{}
+\CommentTok{\#   \# counter}
+\CommentTok{\#   t \textless{}{-} t +  1}
+\CommentTok{\#   \#eta \textless{}{-} learning\_rate( t )}
+\CommentTok{\#   \# step 1: update }
+\CommentTok{\#   w \textless{}{-} w {-} eta * grad\_risk\_fun( w, z\_obs, n\_obs )}
+\CommentTok{\#   w\_chain \textless{}{-} rbind(w\_chain, w)}
+\CommentTok{\#   \# step 2: check for termination terminate}
+\CommentTok{\#   if ( t\textgreater{}= Tmax ) \{}
+\CommentTok{\#     Qstop \textless{}{-} 1}
+\CommentTok{\#   \}}
+\CommentTok{\# \}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-do-it-in-the-computer-practical-3}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-3}}
+
+Plot the chain \(\{w_1^{(t)}\}\) against the iteration \(t\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+Plot the chain \(\{w_2^{(t)}\}\) against the iteration \(t\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\hypertarget{task-do-it-in-the-computer-practical-4}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-4}}
+
+Re-run the previous GD by changing the algorithminc parameter values for
+\(\eta\) for some in the range \((0.001,1.0)\).
+
+Check how the algorithm behaves by ploting the chains \(\{w_1^{(t)}\}\)
+and \(\{w_2^{(t)}\}\) against the iteration \(t\).
+
+If necessary change the termination criterion to consider more or less
+iterations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\CommentTok{\#}
+\CommentTok{\#}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-for-homework-practice}{%
+\subsection{Task (for homework
+practice)}\label{task-for-homework-practice}}
+
+Re run GD by using a learning rate sequence of the form
+\(\eta_t = t_0/t\) for different values of \(t_0>0\) that you will
+choose.
+
+Check how the algorithm behaves by plotting the chains \(\{w_1^{(t)}\}\)
+and \(\{w_2^{(t)}\}\) against the iteration \(t\).
+
+If necessary change the termination criterion to consider more or less
+iterations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{learning\_rate \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(t,t0) \{}
+  \KeywordTok{return}\NormalTok{(t0}\OperatorTok{/}\NormalTok{t)}
+\NormalTok{\}}
+\NormalTok{t0\textless{}{-}}\StringTok{ }\DecValTok{10}
+\NormalTok{Tmax \textless{}{-}}\StringTok{ }\DecValTok{300}
+\NormalTok{w\_seed \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.3}\NormalTok{,}\FloatTok{3.0}\NormalTok{)}
+\NormalTok{w \textless{}{-}}\StringTok{ }\NormalTok{w\_seed}
+\NormalTok{w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{Qstop \textless{}{-}}\StringTok{ }\DecValTok{0} 
+\NormalTok{t \textless{}{-}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{while}\NormalTok{ ( Qstop }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+  \CommentTok{\# counter}
+\NormalTok{  t \textless{}{-}}\StringTok{ }\NormalTok{t }\OperatorTok{+}\StringTok{  }\DecValTok{1}
+  \KeywordTok{cat}\NormalTok{( t ) ; }\KeywordTok{cat}\NormalTok{( }\StringTok{\textquotesingle{} \textquotesingle{}}\NormalTok{ ) }\CommentTok{\#\# counter added for display reasons}
+  \CommentTok{\# step 1: update  }
+\NormalTok{  eta \textless{}{-}}\StringTok{ }\KeywordTok{learning\_rate}\NormalTok{( t, t0 )}
+\NormalTok{  erf\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w, }\DataTypeTok{z =}\NormalTok{ z\_obs, }\DataTypeTok{n=}\NormalTok{n\_obs) \{}
+    \KeywordTok{return}\NormalTok{( }\KeywordTok{empirical\_risk\_fun}\NormalTok{(w, z, n) ) }
+\NormalTok{  \}}
+\NormalTok{  w \textless{}{-}}\StringTok{ }\NormalTok{w }\OperatorTok{{-}}\StringTok{ }\NormalTok{eta }\OperatorTok{*}\StringTok{ }\NormalTok{numDeriv}\OperatorTok{::}\KeywordTok{grad}\NormalTok{( erf\_fun, w )}
+  \CommentTok{\#w \textless{}{-} w {-} eta * grad\_risk\_fun( w, z\_obs, n\_obs )}
+\NormalTok{  w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(w\_chain, w)}
+  \CommentTok{\# step 2: check for rtermination terminate}
+  \ControlFlowTok{if}\NormalTok{ ( t}\OperatorTok{\textgreater{}=}\StringTok{ }\NormalTok{Tmax ) \{}
+\NormalTok{    Qstop \textless{}{-}}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-20-2.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\hypertarget{batch-stochastic-gradient-descent}{%
+\section{Batch Stochastic Gradient
+Descent}\label{batch-stochastic-gradient-descent}}
+
+Let the data set \(\mathcal{S}_{n}\) has size \(n=1000000\).
+
+Assume that the real values for the unknown parameters \(w\) is
+\(w_{\text{true}}=(0.0,1.0)^\top\).
+
+The dataset containing the examples to train the model are generated
+below, and stored in the array \(z_{\text{obs}}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2023}\NormalTok{)}
+\NormalTok{n\_obs \textless{}{-}}\StringTok{ }\DecValTok{1000000}
+\NormalTok{w\_true \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)  }
+\NormalTok{z\_obs \textless{}{-}}\StringTok{ }\KeywordTok{data\_generating\_model}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n\_obs, }\DataTypeTok{w =}\NormalTok{ w\_true)}
+\NormalTok{w\_true \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{glm}\NormalTok{(z\_obs[,}\DecValTok{2}\NormalTok{]}\OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\OperatorTok{+}\StringTok{ }\NormalTok{z\_obs[,}\DecValTok{1}\NormalTok{],}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{ )}\OperatorTok{$}\NormalTok{coefficients)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{task-do-it-in-the-computer-practical-5}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-5}}
+
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning
+rate \(\eta_{t}=0.5\) and batch size \(m=10\) that returns the chain of
+\(\{w^{(t)}\}\).
+
+The batch sampling may be performed as a sampling with replacement (see
+?sample.int).
+
+The termination criterion is when the total number of iterations
+excesses \(T=300\). Seed with \(w^{(0)}=(-0.3,3)^\top\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m \textless{}{-}}\StringTok{ }\DecValTok{10}
+\NormalTok{eta \textless{}{-}}\StringTok{ }\FloatTok{0.5}
+\NormalTok{Tmax \textless{}{-}}\StringTok{ }\DecValTok{300}
+\NormalTok{w\_seed \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{w \textless{}{-}}\StringTok{ }\NormalTok{w\_seed}
+\NormalTok{w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{Qstop \textless{}{-}}\StringTok{ }\DecValTok{0} 
+\NormalTok{t \textless{}{-}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{while}\NormalTok{ ( Qstop }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+  \CommentTok{\# counter}
+\NormalTok{  t \textless{}{-}}\StringTok{ }\NormalTok{t }\OperatorTok{+}\StringTok{  }\DecValTok{1}
+  \KeywordTok{cat}\NormalTok{( t ) ; }\KeywordTok{cat}\NormalTok{( }\StringTok{\textquotesingle{} \textquotesingle{}}\NormalTok{ ) }\CommentTok{\#\# counter added for display reasons}
+  \CommentTok{\# step 1: update  }
+\NormalTok{  J \textless{}{-}}\StringTok{ }\KeywordTok{sample.int}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n\_obs, }\DataTypeTok{size =}\NormalTok{ m, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (m}\OperatorTok{==}\DecValTok{1}\NormalTok{) \{}
+\NormalTok{    zbatch \textless{}{-}}\StringTok{ }\KeywordTok{matrix}\NormalTok{(z\_obs[J,],}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    zbatch \textless{}{-}}\StringTok{ }\NormalTok{z\_obs[J,]}
+\NormalTok{  \}}
+  \CommentTok{\#eta \textless{}{-} learning\_rate( t )}
+\NormalTok{  erf\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w, }\DataTypeTok{z =}\NormalTok{ zbatch, }\DataTypeTok{n=}\NormalTok{m) \{}
+    \KeywordTok{return}\NormalTok{( }\KeywordTok{empirical\_risk\_fun}\NormalTok{(w, z, n) ) }
+\NormalTok{  \}}
+\NormalTok{  w \textless{}{-}}\StringTok{ }\NormalTok{w }\OperatorTok{{-}}\StringTok{ }\NormalTok{eta }\OperatorTok{*}\StringTok{ }\NormalTok{numDeriv}\OperatorTok{::}\KeywordTok{grad}\NormalTok{( erf\_fun, w )}
+  \CommentTok{\#w \textless{}{-} w {-} eta * grad\_risk\_fun( w, zbatch, m )}
+\NormalTok{  w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(w\_chain, w)}
+  \CommentTok{\# step 2: check for rtermination terminate}
+  \ControlFlowTok{if}\NormalTok{ ( t}\OperatorTok{\textgreater{}=}\StringTok{ }\NormalTok{Tmax ) \{}
+\NormalTok{    Qstop \textless{}{-}}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-22-2.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\hypertarget{task-do-it-in-the-computer-practical-6}{%
+\subsection{Task (do it in the computer
+practical)}\label{task-do-it-in-the-computer-practical-6}}
+
+Re run the batch SGD by experimenting and changing the values of the
+learning rate \(\eta\) and that of the batch size \(m\).
+
+Plot the produced chains of \(\{w^{(t)}\}\).
+
+What is the impact of the the learning rate \(eta\) and that of the
+batch size \(m\) to the noise and the speed of the convergence ?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m \textless{}{-}}\StringTok{ }\DecValTok{80}
+\NormalTok{eta \textless{}{-}}\StringTok{ }\FloatTok{0.5}
+\NormalTok{Tmax \textless{}{-}}\StringTok{ }\DecValTok{300}
+\NormalTok{w\_seed \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{w \textless{}{-}}\StringTok{ }\NormalTok{w\_seed}
+\NormalTok{w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{()}
+\NormalTok{Qstop \textless{}{-}}\StringTok{ }\DecValTok{0} 
+\NormalTok{t \textless{}{-}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{while}\NormalTok{ ( Qstop }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{ ) \{}
+  \CommentTok{\# counter}
+\NormalTok{  t \textless{}{-}}\StringTok{ }\NormalTok{t }\OperatorTok{+}\StringTok{  }\DecValTok{1}
+  \KeywordTok{cat}\NormalTok{( t ) ; }\KeywordTok{cat}\NormalTok{( }\StringTok{\textquotesingle{} \textquotesingle{}}\NormalTok{ ) }\CommentTok{\#\# counter added for display reasons}
+  \CommentTok{\# step 1: update  }
+\NormalTok{  J \textless{}{-}}\StringTok{ }\KeywordTok{sample.int}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n\_obs, }\DataTypeTok{size =}\NormalTok{ m, }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (m}\OperatorTok{==}\DecValTok{1}\NormalTok{) \{}
+\NormalTok{    zbatch \textless{}{-}}\StringTok{ }\KeywordTok{matrix}\NormalTok{(z\_obs[J,],}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    zbatch \textless{}{-}}\StringTok{ }\NormalTok{z\_obs[J,]}
+\NormalTok{  \}}
+  \CommentTok{\#eta \textless{}{-} learning\_rate( t )}
+\NormalTok{  erf\_fun \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(w, }\DataTypeTok{z =}\NormalTok{ zbatch, }\DataTypeTok{n=}\NormalTok{m) \{}
+    \KeywordTok{return}\NormalTok{( }\KeywordTok{empirical\_risk\_fun}\NormalTok{(w, z, n) ) }
+\NormalTok{  \}}
+\NormalTok{  w \textless{}{-}}\StringTok{ }\NormalTok{w }\OperatorTok{{-}}\StringTok{ }\NormalTok{eta }\OperatorTok{*}\StringTok{ }\NormalTok{numDeriv}\OperatorTok{::}\KeywordTok{grad}\NormalTok{( erf\_fun, w )}
+  \CommentTok{\#w \textless{}{-} w {-} eta * grad\_risk\_fun( w, zbatch, m )}
+\NormalTok{  w\_chain \textless{}{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(w\_chain, w)}
+  \CommentTok{\# step 2: check for rtermination terminate}
+  \ControlFlowTok{if}\NormalTok{ ( t}\OperatorTok{\textgreater{}=}\StringTok{ }\NormalTok{Tmax ) \{}
+\NormalTok{    Qstop \textless{}{-}}\StringTok{ }\DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{1}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#}
+\KeywordTok{plot}\NormalTok{(w\_chain[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\NormalTok{w\_true[}\DecValTok{2}\NormalTok{], }\DataTypeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Stochastic_learning_methods_solutions_files/figure-latex/unnamed-chunk-23-2.pdf}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# }
+\end{Highlighting}
+\end{Shaded}
+
+ANSWER; As discussed in the lectures, the bigger the batch size the
+smaller the variation of the gradient, hence the error is smaller.
+
+\hypertarget{additional-tasks}{%
+\subsection{Additional tasks}\label{additional-tasks}}
+
+\hypertarget{adagrad}{%
+\subsubsection{AdaGrad}\label{adagrad}}
+
+What would you do it you wish the learning rate to be automatically
+adjusted?
+
+Practice on the following variation.
+
+\begin{itemize}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_tasks.nb.html}{LINK
+  TO TASKS}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_solutions.nb.html}{LINK
+  TO SOLUTIONS}
+\end{itemize}
+
+\hypertarget{projection}{%
+\subsubsection{Projection}\label{projection}}
+
+What would you do if the parametric space / hypothesis class is
+constrained?
+
+Practice on the following variation.
+
+\begin{itemize}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_tasks.nb.html}{LINK
+  TO TASKS}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_solutions.nb.html}{LINK
+  TO SOLUTIONS}
+\end{itemize}
+
+\hypertarget{variance-reduction}{%
+\subsubsection{Variance reduction}\label{variance-reduction}}
+
+What would you do it you wanted to reduce the variance of the stochastic
+gradient?
+
+Practice on the following variation.
+
+\begin{itemize}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_tasks.nb.html}{LINK
+  TO TASKS}
+\item
+  \href{http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_solutions.nb.html}{LINK
+  TO SOLUTIONS}
+\end{itemize}
+
+\end{document}

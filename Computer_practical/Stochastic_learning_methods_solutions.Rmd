@@ -245,9 +245,7 @@ empirical_risk_fun <- function(w,z,n) {
 }
 ```
 
-# Stochastic gradient descent preparation {-}  
-
-## Task (given)  
+# Preparation for the (Stochastic) Gradient Descent {-}  
 
 Code a function **learning_rate(t,t0)** that computes the learning rate sequence 
 \[
@@ -292,11 +290,10 @@ grad_risk_fun <- function(w,z,n) {
   grd <- grd / n
   return (grd)
 }
-
 ```
 
 
-## Task (for the computer practical)    
+## Task (do it in the computer practical)    
 
 Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$.  
 
@@ -310,7 +307,7 @@ gr <- grad_risk_fun (w, z=z_obs, n=n_obs)
 gr
 ```
 
-## Task (for the computer practical)   
+## Task (do it in the computer practical)    
 
 Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
 
@@ -330,11 +327,11 @@ gr
 
 # Gradient descent  
 
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
-Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.1$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
+Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.5$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
-The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=1000$. 
+The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=300$. 
 
 Use seed $w^{(0)}=(-0.3,3)^\top$.   
 
@@ -344,10 +341,9 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 + Try ?grad for more info. 
 
-
 ```{r}
-eta <- 0.1
-Tmax <- 1000
+eta <- 0.5
+Tmax <- 300
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -356,6 +352,7 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   erf_fun <- function(w, z = z_obs, n=n_obs) {
     return( empirical_risk_fun(w, z, n) ) 
@@ -392,7 +389,7 @@ while ( Qstop == 0 ) {
 # }
 ```
 
-##  Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.   
 
@@ -408,8 +405,7 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Re-run the previous GD by changing the algorithminc parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
 
@@ -417,52 +413,26 @@ Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2
 
 If necessary change the termination criterion to consider more or less iterations.  
 
-
 ```{r}
-eta <- 0.5
-Tmax <- 1000
-w_seed <- c(-0.3,3)
-w <- w_seed
-w_chain <- c()
-Qstop <- 0 
-t <- 0
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = z_obs, n=n_obs) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  w <- w - eta * numDeriv::grad( erf_fun, w )
-  #w <- w - eta * grad_risk_fun( w, z_obs, n_obs )
-  w_chain <- rbind(w_chain, w)
-  # step 2: check for rtermination terminate
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
+#
+#
+#
 ```
 
 ## Task (for homework practice)   
 
-Re run GD by using a learning rate sequence of the form $\eta_t = t0/t$ for different values of $t_0>0$ that you will choose.  
+Re run GD by using a learning rate sequence of the form $\eta_t = t_0/t$ for different values of $t_0>0$ that you will choose.  
 
-Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
+Check how the algorithm behaves by plotting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
 If necessary change the termination criterion to consider more or less iterations.
-
 
 ```{r}
 learning_rate <- function(t,t0) {
   return(t0/t)
 }
 t0<- 10
-Tmax <- 1000
+Tmax <- 300
 w_seed <- c(-0.3,3.0)
 w <- w_seed
 w_chain <- c()
@@ -471,6 +441,7 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   eta <- learning_rate( t, t0 )
   erf_fun <- function(w, z = z_obs, n=n_obs) {
@@ -490,7 +461,6 @@ plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
 ```
 
-
 # Batch Stochastic Gradient Descent 
 
 Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
@@ -507,18 +477,18 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 m <- 10
-eta <- 0.1
-Tmax <- 1000
+eta <- 0.5
+Tmax <- 300
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -527,6 +497,7 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -554,19 +525,19 @@ abline(h=w_true[2], col='red')
 ```
 
 
-## Task (for homework practice)   
+## Task (do it in the computer practical)    
 
-Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
+Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.
 
 Plot the produced chains of $\{w^{(t)}\}$. 
 
-What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?
+What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?  
 
 
 ```{r}
-m <- 10
-eta <- 0.1
-Tmax <- 1000
+m <- 80
+eta <- 0.5
+Tmax <- 300
 w_seed <- c(-0.3,3)
 w <- w_seed
 w_chain <- c()
@@ -575,6 +546,7 @@ t <- 0
 while ( Qstop == 0 ) {
   # counter
   t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # step 1: update  
   J <- sample.int(n = n_obs, size = m, replace = TRUE)
   if (m==1) {
@@ -601,428 +573,42 @@ abline(h=w_true[1], col='red')
 #
 plot(w_chain[,2], type='l') +
 abline(h=w_true[2], col='red')
+# 
 ```
+ANSWER; As discussed in the lectures, the bigger the batch size the smaller the variation of the gradient, hence the error is smaller.  
 
 
+## Additional tasks  
 
-# AdaGrad  (for homework practice)     
-
-Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
-
-Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
-
-The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
-
-```{r}
-set.seed(2023)
-n_obs <- 1000000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
-
-## Task (for homework practice)   
-
-Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$. 
-
-Use $\epsilon=10^{-6}$
-
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
-
-```{r}
-m <- 1
-eta <- 1.0
-Tmax <- 1000
-w_seed <- c(-0.3,3.0)
-w <- w_seed
-w_chain <- c()
-Qstop <- 0 
-t <- 0
-G <- rep(0.0,times=length(w))
-eps <- 10^(-6)
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  J <- sample.int(n = n_obs, size = m, replace = TRUE)
-  if (m==1) {
-    zbatch <- matrix(z_obs[J,],1,2)
-  } else {
-    zbatch <- z_obs[J,]
-  }
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = zbatch, n=m) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  g <- numDeriv::grad( erf_fun, w )
-  G <- G + g^2
-  w <- w - eta * (1.0/sqrt(G+eps)) * g
-  #w <- w - eta * grad_risk_fun( w, zbatch, m )
-  w_chain <- rbind(w_chain, w)
-  # step 2: check for rtermination terminate
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
-```
-
-
-## Task (for homework practice)   
-
-Code an batch AdaGrad algorithm with $\eta_{t}$ and batch size $m$ that returns the chain of $\{w^{(t)}\}$. 
-
-Experiment by changing the values of $\eta_{t}$  and $m$. See how the oscillations and the convergence of the chain$\{w^{(t)}\}$ behaves.
-
-Use $\epsilon=10^{-6}$
-
-The termination criterion is when the total number of iterations excesses $T=10000$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
-
-```{r}
-m <- 100
-eta <- 1.0
-Tmax <- 1000
-w_seed <- c(-0.3,3)
-w <- w_seed
-w_chain <- c()
-Qstop <- 0 
-t <- 0
-G <- rep(0.0,times=length(w))
-eps <- 10^(-6)
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  J <- sample.int(n = n_obs, size = m, replace = TRUE)
-  if (m==1) {
-    zbatch <- matrix(z_obs[J,],1,2)
-  } else {
-    zbatch <- z_obs[J,]
-  }
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = zbatch, n=m) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  g <- numDeriv::grad( erf_fun, w )
-  G <- G + g^2
-  w <- w - eta * (1.0/sqrt(G+eps)) * g
-  #w <- w - eta * grad_risk_fun( w, zbatch, m )
-  w_chain <- rbind(w_chain, w)
-  # step 2: check for rtermination terminate
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
-```
-
+### AdaGrad  
 
-
-# Batch Stochastic Gradient Descent with projection  (for homework practice)   
-
-Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
-
-The data set containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
-
-Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
-
-Assume that the hypothesis class is restricted such as $\mathcal{H}=\{w\in\mathbb{R}^{2}:|w|_2 \le 2.0\} $
-
-You may use the function 
-
-```{r}
-set.seed(2023)
-n_obs <- 1000000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
-
-
-## Task (Exercise for homework practice)   
-
-
-Compute $w^{*}$ from the minimization problem 
-
-$$
-w^{*}=\arg\min_{w\in\mathcal{H}}\left( F(w) \right)
-$$
-where $F(w)=\left\Vert w-w' \right\Vert$, $w'=(-0.1,0.3)^\top$ and  $\mathcal{H}=\{w\in\mathbb{R}^{2}:|w|_2 \le 2.0\} $. 
-
-Use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.  
-
-A set of sufficient arguments for the function to run is given below.
-
-```{r}
-# out <- nloptr(x0=..,   
-#               eval_f=..., #   
-#               eval_grad_f=...,  
-#               eval_g_ineq = ...,  
-#               eval_jac_g_ineq = ...,   
-#               w_now=...,  
-#               opts = list("algorithm" = "NLOPT_LD_MMA",  
-#                           "xtol_rel"=1.0e-8)  
-# out$solution
-```
-
-
-The following functions are provided.
-
-```{r}
-#
-boundary <- 2.0 # this is the value |w|_{2}^{2} <= boundary
-# auxiliary functions to compute the projection
-eval_f0 <- function( w_proj, w_now ){ 
-  return( sqrt(sum((w_proj-w_now)^2)) )
-}
-eval_grad_f0 <- function( w, w_now ){ 
-  return( c( 2*(w[1]-w_now[1]), 2*(w[2]-w_now[2]) ) )
-}
-eval_g0 <- function( w_proj, w_now) {
-  return( sum(w_proj^2) -(boundary)^2 )
-}
-eval_jac_g0 <- function( x, w_now ) {
-  return(   c(2*w[1],2*w[2] )  )
-}
-```
-
-Write your code below
-
-```{r}
-#
-w <- c(-0.1,0.3)
-#
-out <- nloptr(x0=c(0.0,0.0),
-            eval_f=eval_f0,
-            eval_grad_f=eval_grad_f0,
-            eval_g_ineq = eval_g0,
-            eval_jac_g_ineq = eval_jac_g0, 
-            w_now=w,
-            opts = list("algorithm" = "NLOPT_LD_MMA",
-                        "xtol_rel"=1.0e-8) 
-            )
-out$solution
-```
-
-
-## Task  (for homework practice)     
-
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.01$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
-
-The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
-
-The termination criterion is when the total number of iterations excesses $T=5000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
-
-You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
-
-
-```{r}
-#
-boundary <- 2.0 # this is the value |w|_{2}^{2} <= boundary
-# auxiliary functions to compute the projection
-eval_f0 <- function( w_proj, w_now ){ 
-  return( sqrt(sum((w_proj-w_now)^2)) )
-}
-eval_grad_f0 <- function( w, w_now ){ 
-  return( c( 2*(w[1]-w_now[1]), 2*(w[2]-w_now[2]) ) )
-}
-eval_g0 <- function( w_proj, w_now) {
-  return( sum(w_proj^2) -(boundary)^2 )
-}
-eval_jac_g0 <- function( x, w_now ) {
-  return(   c(2*w[1],2*w[2] )  )
-}
-```
-
-
-```{r}
-m <- 1
-eta <- 0.01
-Tmax <- 5000
-w_seed <- c(-0.3,3.0)
-
-w <- w_seed
-w_chain <- c(w_seed)
-Qstop <- 0 
-t <- 0
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  J <- sample.int(n = n_obs, size = m, replace = TRUE)
-  if (m==1) {
-    zbatch <- matrix(z_obs[J,],1,2)
-  } else {
-    zbatch <- z_obs[J,]
-  }
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = zbatch, n=m) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  w <- w - eta * numDeriv::grad( erf_fun, w )
-  #w <- w - eta * grad_risk_fun( w, zbatch, m )
-  # step 1.5 projection
-  out <- nloptr(x0=c(0.0,0.0),
-              eval_f=eval_f0,
-              eval_grad_f=eval_grad_f0,
-              eval_g_ineq = eval_g0,
-              eval_jac_g_ineq = eval_jac_g0, 
-              w_now=w,
-              opts = list("algorithm" = "NLOPT_LD_MMA",
-                          "xtol_rel"=1.0e-8),
-  )
-  w <- out$solution
-  # record
-  w_chain <- rbind(w_chain, w)
-  # step 2: check for rtermination terminate
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
-```
-
----
-
-# Stochastic Variance Reduced Gradient Descent (SVRG)  (for homework practice)   
-
-## Task  (for homework practice)    
-
-Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.1$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
-
-Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
-
-The sampling may be performed as a sampling with replacement (see ?sample.int).  
-
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
-
-Produce the trace plots of the produced chains $\{w^(t)\}$.  
-
-
-```{r}
-m <- 1
-eta <- 0.1
-Tmax <- 1000
-kappa <- 10000
-Qstop <- 0 
-t <- 0
-#
-#seeds
-w_seed <- c(-0.3,3.0)
-w <- w_seed
-w_chain <- c()
-cv_w <- w  
-erf_fun <- function(w, z = z_obs, n=n_obs) {
-  return( empirical_risk_fun(w, z, n) ) 
-}
-cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #control variate
-#
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  J <- sample.int(n = n_obs, size = m, replace = TRUE)
-  if (m==1) {
-    zbatch <- matrix(z_obs[J,],1,2)
-  }
-  else {
-    zbatch <- z_obs[J,]
-  }
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = zbatch, n=m) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  w <- w - eta * (numDeriv::grad( erf_fun, w ) -numDeriv::grad( erf_fun, cv_w ) +cv_grad_risk )
-  #w <- w - eta * grad_risk_fun( w, zbatch, m )
-  # record
-  w_chain <- rbind(w_chain, w)
-  # control variate step
-  if ( (t %% kappa) == 0) {
-    cv_w <- w  
-    erf_fun <- function(w, z = z_obs, n=n_obs) {
-      return( empirical_risk_fun(w, z, n) ) 
-    }
-    cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #controle variate
-  }
-  # step 2: check for termination 
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
-```
-
-## Task (for homework practice)    
-
-Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
-
-
-
-```{r}
-m <- 1
-eta <- 0.1
-Tmax <- 1000
-kappa <- 10000
-Qstop <- 0 
-t <- 0
-#
-#seeds
-w_seed <- c(-0.3,3.0)
-w <- w_seed
-w_chain <- c()
-cv_w <- w  
-erf_fun <- function(w, z = z_obs, n=n_obs) {
-  return( empirical_risk_fun(w, z, n) ) 
-}
-cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #control variate
-#
-while ( Qstop == 0 ) {
-  # counter
-  t <- t +  1
-  # step 1: update  
-  J <- sample.int(n = n_obs, size = m, replace = TRUE)
-  if (m==1) {
-    zbatch <- matrix(z_obs[J,],1,2)
-  }
-  else {
-    zbatch <- z_obs[J,]
-  }
-  #eta <- learning_rate( t )
-  erf_fun <- function(w, z = zbatch, n=m) {
-    return( empirical_risk_fun(w, z, n) ) 
-  }
-  w <- w - eta * (numDeriv::grad( erf_fun, w ) -numDeriv::grad( erf_fun, cv_w ) +cv_grad_risk )
-  #w <- w - eta * grad_risk_fun( w, zbatch, m )
-  # record
-  w_chain <- rbind(w_chain, w)
-  # control variate step
-  if ( (t %% kappa) == 0) {
-    cv_w <- w  
-    erf_fun <- function(w, z = z_obs, n=n_obs) {
-      return( empirical_risk_fun(w, z, n) ) 
-    }
-    cv_grad_risk <- numDeriv::grad( erf_fun, cv_w ) #controle variate
-  }
-  # step 2: check for termination 
-  if ( t>= Tmax ) {
-    Qstop <- 1
-  }
-}
-plot(w_chain[,1], type='l') +
-abline(h=w_true[1], col='red')
-plot(w_chain[,2], type='l') +
-abline(h=w_true[2], col='red')
-```
+What would you do it you wish the learning rate to be automatically adjusted?    
+
+Practice on the following variation.  
+
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_tasks.nb.html)  
+
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_solutions.nb.html)  
+
+### Projection  
+
+What would you do if the parametric space / hypothesis class is constrained?  
+
+Practice on the following variation.  
+
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_tasks.nb.html)  
+
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_solutions.nb.html)  
+
+### Variance reduction  
+
+What would you do it you wanted to reduce the variance of the stochastic gradient?  
+
+Practice on the following variation.  
+
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_tasks.nb.html)  
+
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_solutions.nb.html) 
+
+
 

@@ -1,0 +1,251 @@
+---
+title: "Artificial Neural Networks"
+subtitle: "Introductory analysis via NNET"
+author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
+output:
+  html_notebook: 
+    number_sections: true
+  word_document: default
+  html_document:
+    df_print: paged
+    number_sections: true
+  pdf_document: default
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
+  - \usepackage{amsmath}
+---
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- Copyright 2023 Georgios Karagiannis -->
+
+<!-- georgios.karagiannis@durham.ac.uk -->
+<!-- Associate Professor -->
+<!-- Department of Mathematical Sciences, Durham University, Durham,  UK  -->
+
+<!-- This file is part of Machine Learning and Neural Networks III (MATH3431) -->
+<!-- which is the material of the course (MATH3431 Machine Learning and Neural Networks III) -->
+<!-- taught by Georgios P. Katagiannis in the Department of Mathematical Sciences   -->
+<!-- in the University of Durham  in Michaelmas term in 2019 -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation version 3 of the License. -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with Machine_Learning_and_Neural_Networks_III_Epiphany_2023  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+
+
+[Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
+
+```{r}
+rm(list=ls())
+```
+
+
+---
+
+***Aim***
+
+Students will become able to:  
+
++ practice in R,  
+
++ implement Feed Forward Neural Network with R package nnet in R.   
+
+---
+
+***Reading material***
+
+
++ Lecture notes:  
+    + [Handout 5: Artificial neural networks](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Lecture_handouts/05.Artificial_neural_networks.pdf)  
+    + [Ripley, B., Venables, W., & Ripley, M. B. (2016). Package ‘nnet’. R package version, 7(3-12), 700.](https://cran.r-project.org/web/packages/nnet/nnet.pdf)  
+
++ Reference for *R*:  
+    + [Cheat sheet with basic commands](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)   
+
++ Reference of *rmarkdown* (optional given as supplementary material):  
+    + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)  
+    + [R Markdown Reference Guide](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
+    + [knitr options](https://yihui.name/knitr/options)
+
++ Reference for *Latex* (optional given as supplementary material):  
+    + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
+
+---
+
+***New software***   
+
++ R package `base` functions:    
+    + `set.seed{base}` 
+
++ R package `nnet` functions:    
+    + `nnet{nnet}` , `class.ind{nnet}` , `predict{nnet}` , `which.is.max{nnet}` 
+
+---
+
+
+```{r, results="hide"}
+# Load R package for printing
+library(knitr)
+```
+
+```{r}
+# Set a seed of the randon number generator
+set.seed(2023)
+```
+
+# Familiarity with analysis with feed-forward Neural Networks with nnet
+
+We will use the R package nnet. It is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/](https://cran.r-project.org/web/packages/nnet/)  
+
+The reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/nnet.pdf](https://cran.r-project.org/web/packages/nnet/nnet.pdf)  
+
+Details
+
++ nnet fits single-hidden-layer neural network, possibly with skip-layer connections.  
+
+## Task: Install nnnet (given)  
+
+```{r}
+## build version (recommended)
+#install.packages("nnet")
+## linux build
+#install.packages("https://cran.r-project.org/src/contrib/nnet_7.3-18.tar.gz", repos = NULL, type = "source")
+## windows build
+#install.packages("https://cran.r-project.org/bin/windows/contrib/4.3/nnet_7.3-18.zip", repos = NULL, type = "source")
+```
+## Task: Load the R package nnet (given)  
+
+```{r}
+library(nnet)
+```
+
+## Task: About nnet commands (to be done at home)  
+
+Check out R package nnet commands from the reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/nnet/nnet.pdf](https://cran.r-project.org/web/packages/nnet/nnet.pdf) 
+
+in particular:  nnet{nnet}, predict.nnet{nnet}, which.is.max{nnet}, and class.ind{nnet}.
+
+
+# NN on classification problem with multiple classes  
+
+This is the **Case 4. (Multi-class classification problem)** from the "Handout 5: Artificial neural networks".
+
+The similarity is about the problem to be addressed. Different predictor rules or loss functions may be used.
+
+## Task: Load iris {datasets}	 data (given) 
+
+Load the iris {datasets}	data, and print them.  
+
+```{r}
+data(iris)
+iris
+```
+
+## Task: Modify the data (given)
+
+Create an object "y" with the targets of the examples (dataset).  
+
+To do this use the function "class.ind{nnet}" to generate a class indicator function from a given factor. Function "class.ind" receives as arguments factor or vector of classes for cases, and returns a matrix which is zero except for the column corresponding to the class.  
+
+It is used in problems with classification problem with multiple classes, in order to create a suitable output for the function nnet{nnet}. Check "?class.ind".  
+
+
+```{r}
+y<- class.ind( c(rep("s", 50), rep("c", 50), rep("v", 50)) )
+```
+Create an object "x" with the features of the examples (dataset) that contains the variables; "Sepal.Length", "Sepal.Width", and "Petal.Length"
+
+```{r}
+x <-iris[,-c(4,5)] 
+```
+
+
+## Create a training dataset and a validatin data-set  
+
+Get a random sub sample of the $y$ and $x$ of size $75$ to be used as a training data set. 
+
+Name the target part as "y_train",a nd the features part as "x_train". 
+
+```{r}
+ind <- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
+y_train <- y[ind,]
+x_train <- x[ind,]
+```
+
+The rest of the data set , use it as a validation data set. 
+
+Name the target part as "y_valid",a nd the features part as "x_valid". 
+
+```{r}
+y_valid <- y[-ind,]
+x_valid <- x[-ind,]
+```
+
+## Create a training dataset and a validatin data-set 
+
+Train a NN to address the classification problem with purpose for a given feature "x" to be able to clasify it as setosa, versicolor, or virginica. 
+
+By using the R function nnet{nnet} fit a feed forward neural network with:
+
++ one hidden layer,
+
++  units in the hidden layer; i.e. $T=2$
+
++ the output activation function is softmax
+
++ use decay "decay=0.00001" -- the arguments of nnet
+
++ use maximum number of iterations for the SGD "maxit = 200" -- the arguments of nnet
+
+Do it below
+
+
+```{r}
+nnet.2.out <- nnet(x_train, y_train,  
+            size = 2, 
+            decay = 5e-4, 
+            maxit = 200)
+```
+
+## Predict 
+
+
+Using the output from nnet{nnet}, predict / classify the features in the validation dataset, and compare with the actual classes.  
+
+You may use function "maxCol {base}"
+
+Do it below
+
+```{r}
+#predictions
+nnet.2.pred <- predict(nnet.2.out, x_valid)
+max.col(nnet.2.pred)
+#actual labels
+max.col(y_valid)
+# compare
+match = mean(max.col(nnet.2.pred)==max.col(y_valid))
+match 
+```
+
+
+
+
+

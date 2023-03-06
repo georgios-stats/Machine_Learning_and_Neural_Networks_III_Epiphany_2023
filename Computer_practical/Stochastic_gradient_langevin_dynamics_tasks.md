@@ -47,7 +47,8 @@ header-includes:
 
 [Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
 
-```{r}
+
+```r
 rm(list=ls())
 ```
 
@@ -100,7 +101,8 @@ Students are suggested to practice on the Mixture model example at home where th
     + dmvnorm{mvtnorm} 
     
 
-```{r}
+
+```r
 # call libraries
 library(numDeriv)
 library(mvtnorm)
@@ -109,12 +111,14 @@ library(mvtnorm)
 ---
 
 
-```{r, results="hide"}
+
+```r
 # Load R package for printing
 library(knitr)
 ```
 
-```{r}
+
+```r
 # Set a seed of the randon number generator
 set.seed(2023)
 ```
@@ -134,7 +138,8 @@ with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.
 
 The dataset $\mathcal{S}_{n}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
 
-```{r}
+
+```r
 data_generating_model <- function(n,w) {
   d <- 3
   z <- rep( NaN, times=n*d )
@@ -154,7 +159,8 @@ Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(
 
 The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
-```{r}
+
+```r
 n_obs <- 10^(6)
 w_true <- c(0,1)  
 set.seed(2023)
@@ -174,7 +180,8 @@ where $w\in\mathbb{R}^{2}$ is the unknown parameter we wish to learn. The hypoth
 
 Write a function `prediction_rule(x,w)' that returns the rule $h$ where $x$ is the input argument and $w$ is the unknown parameter.
 
-```{r}
+
+```r
 prediction_rule <- function(x,w) {
   h <- w[1]*x[1]+w[2]*x[2]
   h <- exp(h) / (1.0 + exp(h) )
@@ -202,7 +209,8 @@ The log PDF of the sampling distribution is
 
 Here is coded the R function 'log_sampling_pdf(z, w)' for the log PDF of the sampling distribution
 
-```{r}
+
+```r
 log_sampling_pdf <- function(z, w) {
   d <- length(w)
   x <- z[1:d] 
@@ -223,7 +231,8 @@ Here is coded tha R function **log_prior_pdf(w, mu= rep(0, length(w)), Sig2 = 10
 
 You may use the R function **dmvnorm{mvtnorm}**
 
-```{r}
+
+```r
 log_prior_pdf <- function(w, mu, Sig2 ) {
   log_pdf <- dmvnorm(w, mean = mu, sigma = Sig2, log = TRUE, checkSymmetry = TRUE)
   return( log_pdf )
@@ -248,7 +257,8 @@ for some constants $C_0$ and $\varsigma\in(0.5,1]$.
 
 The R coded function **learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 )**  is given below   
 
-```{r}
+
+```r
 learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 ) {
   if ( t <= T_0 ) {
     eta <- C_0
@@ -275,7 +285,8 @@ Seed with $w^{(0)}=(-1,0)^\top$.
 You may use the R function **grad{numDeriv}** to numerically compute the gradient; e.g. **numDeriv::grad( erf_fun, w )**. Try **?grad** for more info.  
 
 
-```{r}
+
+```r
 #
 #
 #
@@ -288,7 +299,8 @@ Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the i
 
 If you are not happy with the convergence, feel free to tune the algorithmic parameters in the previous code properly, and run it again.  
 
-```{r}
+
+```r
 #
 #
 #
@@ -317,13 +329,15 @@ w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J
 \]
  and $v$ is the gradient. 
 
-```{r}
+
+```r
 #
 #
 #
 ```
 
-```{r}
+
+```r
 #
 #
 #
@@ -336,7 +350,8 @@ Let's go back to the code without using the clipping gradient.
 
 Based on the above, copy the tail end of the generated chain $w^(t)$ after discarding the burn in, as 'w_chain_output'.  
 
-```{r}
+
+```r
 #
 #
 #
@@ -348,7 +363,8 @@ Based on the above, copy the tail end of the generated chain $w^(t)$ after disca
 
 Plot the histograms plots of output chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ for the estimation of the marginal posterior distributions of the dimensions of $w$. 
 
-```{r}
+
+```r
 #
 #
 #
@@ -364,7 +380,8 @@ To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator
 
 based on SGLD output chain.
 
-```{r}
+
+```r
 #
 #
 #
@@ -389,7 +406,8 @@ Particularly, compute the point estimate
 \]
 
 
-```{r}
+
+```r
 #
 #
 #
@@ -403,7 +421,8 @@ Now, compute the point estimate
 
 by just plugin in the estimate $\hat{w}$. 
 
-```{r}
+
+```r
 #
 #
 #
@@ -411,7 +430,8 @@ by just plugin in the estimate $\hat{w}$.
 
 Now, estimate the pdf of the prediction rule at the example with feature $x_\text{new}=c(1, 0.5)$ (to represent the uncertainty) by using a histogram  
 
-```{r}
+
+```r
 #
 #
 #

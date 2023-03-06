@@ -47,7 +47,8 @@ header-includes:
 
 [Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
 
-```{r}
+
+```r
 rm(list=ls())
 ```
 
@@ -94,7 +95,8 @@ rm(list=ls())
 + R package `numDeriv` functions:    
     + `grad{numDeriv}` 
 
-```{r}
+
+```r
 # call libraries
 #install.packages("numDeriv")
 library(numDeriv)
@@ -107,12 +109,14 @@ library(nloptr)
 ***Initialize R***  
 
 
-```{r, results="hide"}
+
+```r
 # Load R package for printing
 library(knitr)
 ```
 
-```{r}
+
+```r
 # Set a seed of the randon number generator
 set.seed(2023)
 ```
@@ -147,7 +151,8 @@ h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
 
 The dataset $\mathcal{S}_{n}=\{z_i=(x_i,y_i)\}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
 
-```{r}
+
+```r
 data_generating_model <- function(n,w) {
   z <- rep( NaN, times=n*2 )
   z <- matrix(z, nrow = n, ncol = 2)
@@ -165,7 +170,8 @@ Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(
 
 The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
-```{r}
+
+```r
 set.seed(2023)
 n_obs <- 500
 w_true <- c(0,1)  
@@ -182,7 +188,8 @@ where $w\in\mathbb{R}^{2}$.
 
 The function **prediction_rule(x,w)** that returns the rule $h$ where $x$ is the input argument and $w$ is the unknown parameter is given below.  
 
-```{r}
+
+```r
 prediction_rule <- function(x,w) {
   h <- w[1]+w[2]*x
   h <- exp(h) / (1.0 + exp(h) )
@@ -203,7 +210,8 @@ We consider a loss function as
 
 The code for the loss function is provided below as **loss_fun(w,z)** that computes the loss function, where $z=(x,y)$ is one example (observation) and $w$ is the unknown parameter. 
 
-```{r}
+
+```r
 loss_fun <- function(w,z) {
   x = z[1]
   y = z[2]
@@ -232,7 +240,8 @@ The Empirical risk function is
 
 The function **empirical_risk_fun(w,z,n)** computes the empirical risk, where $z=(x,y)$ is an example, $w$ is the unknown parameter, and $n$ is the data size is given below. 
 
-```{r}
+
+```r
 empirical_risk_fun <- function(w,z,n) {
   x = z[,1]
   y = z[,2]
@@ -255,7 +264,8 @@ where $t$ is the iteration stage and $t_0$ is a constant.
 
 Use $t_0=3$ as default value.  
 
-```{r}
+
+```r
 learning_rate <-function(t,t0=3) {
   eta <- t0 / t
   return( eta )
@@ -267,7 +277,8 @@ learning_rate <-function(t,t0=3) {
 
 Code the function **grad_loss_fun(w,z)** that returns the gradient of the loss function at parameter value $w$, and at example value $z=(x,y)$.   
 
-```{r}
+
+```r
 grad_loss_fun <- function(w,z) {
   x = z[1]
   y = z[2]
@@ -281,7 +292,8 @@ grad_loss_fun <- function(w,z) {
 
 Code the function **grad_risk_fun <- function(w,z,n)** that returns the gradient of the risk function at parameter value $w$, and using the data set $z$ of size $n\times 2$.    
 
-```{r}
+
+```r
 grad_risk_fun <- function(w,z,n) {
   grd <- 0.0
   for (i in 1:n) {
@@ -301,7 +313,8 @@ Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).
 
 Do this by using the command 'grad_risk_fun' provided above.
 
-```{r}
+
+```r
 #
 #
 # 
@@ -313,7 +326,8 @@ Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. 
 
 E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
 
-```{r}
+
+```r
 #
 #
 # 
@@ -335,7 +349,8 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 + Try ?grad for more info. 
 
-```{r}
+
+```r
 #
 #
 # 
@@ -348,7 +363,8 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.   
 
-```{r}
+
+```r
 #
 #
 # 
@@ -356,7 +372,8 @@ Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.
 
 Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.  
 
-```{r}
+
+```r
 #
 #
 # 
@@ -370,7 +387,8 @@ Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2
 
 If necessary change the termination criterion to consider more or less iterations.  
 
-```{r}
+
+```r
 #
 #
 #
@@ -384,7 +402,8 @@ Check how the algorithm behaves by plotting the chains $\{w_1^{(t)}\}$ and $\{w_
 
 If necessary change the termination criterion to consider more or less iterations.
 
-```{r}
+
+```r
 #
 #
 # 
@@ -398,7 +417,8 @@ Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(
 
 The dataset containing the examples to train the model are generated below, and stored in the array $z_{\text{obs}}$.  
 
-```{r}
+
+```r
 set.seed(2023)
 n_obs <- 1000000
 w_true <- c(0,1)  
@@ -414,7 +434,8 @@ The batch sampling may be performed as a sampling with replacement (see ?sample.
 
 The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
-```{r}
+
+```r
 #
 #
 # 
@@ -430,7 +451,8 @@ Plot the produced chains of $\{w^{(t)}\}$.
 What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?  
 
 
-```{r}
+
+```r
 #
 #
 # 

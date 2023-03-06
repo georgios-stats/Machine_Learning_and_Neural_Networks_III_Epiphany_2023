@@ -226,7 +226,8 @@ R implementation:
 #
 #
 #
-```
+``` 
+
 
 ## Task: A naive training of NN (to be done in the computer practical class) 
 
@@ -267,7 +268,7 @@ You may observe that they are close --thats bad news; WHY?.
 ```
 
 
-## Task: Standardise inputs / outputs (given)  
+## Task: Standardise inputs / outputs (given)
 
 The problem with the above NN, may be that, in the nnet R package, the seeds (starting values) in the SGD used to learn the weights of the NN were "bad".  
 
@@ -337,6 +338,7 @@ Do it below
 #
 ```
 
+
 ## Task: Print the estimated weights (to be done in the computer practical class)
 
 Print the estimated weights of the fitted feed forward neural network.  
@@ -350,7 +352,6 @@ Do it below
 #
 #
 ```
-
 Description of what you have gotten:  
 
 + i2->h1, refers to the link between the second input variable and the first hidden neuron.  
@@ -359,7 +360,8 @@ Description of what you have gotten:
 
 + o refers to the output,  etc...  
 
-+ b->o refers to the weight on a NN edge linking an input neuron (constant input equalt to one) and an aoutput neuron and skipping the hidden layer. This is called skipping weight. This can be done, it is allowed in the FFNN, although it is often avoided.  
++ b->o refers to the weight on a NN edge linking an input neuron (constant input equalt to one) and an aoutput neuron and skipping the hidden layer. This is called skipping weight. This can be done, it is allowed in the FFNN, although it is often avoided. 
+
 
 ## Task: Plot predictions (given)
 
@@ -432,7 +434,7 @@ Essentially, do the same as above but with for **ibh** instead of **temp**, i.e.
 #
 ```
 
-## Task: Perform the training with shrinckage  (given as a homework)
+## Task: Plot predictions (to be done in the computer practical class)
 
 Plot the predicted "O3" values for **ibt** in the range $(-3,3)$, while the other two input variables **ibh** and **temp** are fixed to points **ibh=0**, **ibt=0**.  
 
@@ -446,7 +448,7 @@ Essentially, copy / past the code above and swap **ibt** and **temp**, i.e. use
 #
 ```
 
-## Task: Perform the training with shrinckage  (given as a homework)
+## Task: Perform the training with shrinckage  (to be done in the computer practical class)  
 
 The observed  discontinuities in the plots may possibly be due to the unreasonably large weights in the NN.  
 
@@ -479,7 +481,7 @@ Do it below
 ```
 
 
-## Task: Print the produced weights  (to be done in the computer practical class)
+## Task: Print the weights 
 
 Print the produced Error Function, and compare them to those you computed without the decay. Why do you think you observe this?    
 
@@ -499,7 +501,6 @@ Do it below.
 #
 ```
 
-
 ## Task: Prediction plots  (given as a homework)
 
 Plot the predicted, **O3** values for **ibt** in the range $(-3,3)$, while the other two input variables are fixed to points **ibh=0**, **temp=0**.
@@ -514,35 +515,8 @@ Do it below.
 
 ```{r}
 #
-# Create the input object x that will be used in the function predict() 
 #
-xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
 #
-# Make the predictions
-#
-pred.1.best <- predict(nn.out.1.decay.best,new=xx)
-#
-# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
-#
-# Here is how you get the mean and varances of the original data set
-#
-ozmeans <- attributes(ozone.rescaled)$"scaled:center"
-ozscales <- attributes(ozone.rescaled)$"scaled:scale"
-#
-# Apply the re-scaling back to the original data for the inputs
-#
-xx.rescaled <- xx$ibt*ozscales['ibt']+ozmeans['ibt']
-#
-# Apply the re-scaling back to the original data for the inputs
-#
-pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
-#
-# plot
-#
-plot(xx.rescaled,
-     pred.1.best.rescaled,
-     cex=2,xlab="ibt",ylab="O3",
-     type="l")
 ```
 
 
@@ -553,101 +527,18 @@ You should observe that the line is now smoother as it was supposed to be.
 
 ---  
 
-# NN on classification problem with multiple classes (given as a homework)  
 
-This is the **Case 4. (Multi-class classification problem)** from the "Handout 5: Artificial neural networks".
+## Additional tasks  
 
-The similarity is about the problem to be addressed. Different predictor rules or loss functions may be used.
+### Multi-class classification problem    
 
-## Task: Load iris {datasets}	 data (given) 
+How would you modify the above code to address a multi-class classification problem?  
 
-Load the iris {datasets}	data, and print them.  
+Practice on the following variation.  
 
-```{r}
-data(iris)
-iris
-```
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Artificial_Neural_Networks_MultiClassClassification_solutions.nb.html)  
 
-## Task: Modify the data (given)
-
-Create an object "y" with the targets of the examples (dataset).  
-
-To do this use the function "class.ind{nnet}" to generate a class indicator function from a given factor. Function "class.ind" receives as arguments factor or vector of classes for cases, and returns a matrix which is zero except for the column corresponding to the class.  
-
-It is used in problems with classification problem with multiple classes, in order to create a suitable output for the function nnet{nnet}. Check "?class.ind".  
-
-
-```{r}
-y<- class.ind( c(rep("s", 50), rep("c", 50), rep("v", 50)) )
-```
-Create an object "x" with the features of the examples (dataset) that contains the variables; "Sepal.Length", "Sepal.Width", and "Petal.Length"
-
-```{r}
-x <-iris[,-c(4,5)] 
-```
-
-
-## Create a training dataset and a validatin data-set (given)  
-
-Get a random sub sample of the $y$ and $x$ of size $75$ to be used as a training data set. 
-
-Name the target part as "y_train",a nd the features part as "x_train". 
-
-```{r}
-ind <- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
-y_train <- y[ind,]
-x_train <- x[ind,]
-```
-
-The rest of the data set , use it as a validation data set. 
-
-Name the target part as "y_valid",a nd the features part as "x_valid". 
-
-```{r}
-y_valid <- y[-ind,]
-x_valid <- x[-ind,]
-```
-
-## Create a training dataset and a validatin data-set (given as a homework)  
-
-Train a NN to address the classification problem with purpose for a given feature "x" to be able to clasify it as setosa, versicolor, or virginica. 
-
-By using the R function nnet{nnet} fit a feed forward neural network with:
-
-+ one hidden layer,
-
-+  units in the hidden layer; i.e. $T=2$
-
-+ the output activation function is softmax
-
-+ use decay "decay=0.00001" -- the arguments of nnet
-
-+ use maximum number of iterations for the SGD "maxit = 200" -- the arguments of nnet
-
-Do it below
-
-
-```{r}
-#
-#
-#
-```
-
-## Predict (given as a homework)  
-
-
-Using the output from nnet{nnet}, predict / classify the features in the validation dataset, and compare with the actual classes.  
-
-You may use function "maxCol {base}"
-
-Do it below
-
-
-```{r}
-#
-#
-#
-```
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Artificial_Neural_Networks_MultiClassClassification_tasks.nb.html)  
 
 
 

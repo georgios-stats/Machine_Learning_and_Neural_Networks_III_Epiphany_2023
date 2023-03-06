@@ -47,7 +47,8 @@ header-includes:
 
 [Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
 
-```{r}
+
+```r
 rm(list=ls())
 ```
 
@@ -100,7 +101,8 @@ Students are suggested to practice on the Mixture model example at home where th
     + dmvnorm{mvtnorm} 
     
 
-```{r}
+
+```r
 # call libraries
 library(numDeriv)
 library(mvtnorm)
@@ -109,12 +111,14 @@ library(mvtnorm)
 ---
 
 
-```{r, results="hide"}
+
+```r
 # Load R package for printing
 library(knitr)
 ```
 
-```{r}
+
+```r
 # Set a seed of the randon number generator
 set.seed(2023)
 ```
@@ -134,7 +138,8 @@ with $y_{i}\in\{0,1\}$ and $x_{i}\in\mathbb{R}$.
 
 The dataset $\mathcal{S}_{n}$ is  generated from the data generation probability $g(\cdot)$ provided below as a routine. We pretend that we do not know $g(\cdot)$. 
 
-```{r}
+
+```r
 data_generating_model <- function(n,w) {
   d <- 3
   z <- rep( NaN, times=n*d )
@@ -154,7 +159,8 @@ Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(
 
 The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
-```{r}
+
+```r
 n_obs <- 10^(6)
 w_true <- c(0,1)  
 set.seed(2023)
@@ -174,7 +180,8 @@ where $w\in\mathbb{R}^{2}$ is the unknown parameter we wish to learn. The hypoth
 
 Write a function `prediction_rule(x,w)' that returns the rule $h$ where $x$ is the input argument and $w$ is the unknown parameter.
 
-```{r}
+
+```r
 prediction_rule <- function(x,w) {
   h <- w[1]*x[1]+w[2]*x[2]
   h <- exp(h) / (1.0 + exp(h) )
@@ -202,7 +209,8 @@ The log PDF of the sampling distribution is
 
 Here is coded the R function 'log_sampling_pdf(z, w)' for the log PDF of the sampling distribution
 
-```{r}
+
+```r
 log_sampling_pdf <- function(z, w) {
   d <- length(w)
   x <- z[1:d] 
@@ -223,7 +231,8 @@ Here is coded tha R function **log_prior_pdf(w, mu= rep(0, length(w)), Sig2 = 10
 
 You may use the R function **dmvnorm{mvtnorm}**
 
-```{r}
+
+```r
 log_prior_pdf <- function(w, mu, Sig2 ) {
   log_pdf <- dmvnorm(w, mean = mu, sigma = Sig2, log = TRUE, checkSymmetry = TRUE)
   return( log_pdf )
@@ -248,7 +257,8 @@ for some constants $C_0$ and $\varsigma\in(0.5,1]$.
 
 The R coded function **learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 )**  is given below   
 
-```{r}
+
+```r
 learning_rate <- function(t, T_0 = 100, T_1 = 500, C_0 = 0.0001, s_0 = 0.5 ) {
   if ( t <= T_0 ) {
     eta <- C_0
@@ -275,10 +285,71 @@ Seed with $w^{(0)}=(-1,0)^\top$.
 You may use the R function **grad{numDeriv}** to numerically compute the gradient; e.g. **numDeriv::grad( erf_fun, w )**. Try **?grad** for more info.  
 
 
-```{r}
+
+```r
+Tmax <- 500
 #
+w_seed <- c(-1,0)
 #
+eta <- 10^(-6)
+eta_C <- eta
+eta_s <- 0.51
+eta_T0 <- 0.3*Tmax
+eta_T1 <- 0.6*Tmax
 #
+batch_size <- 1000
+#
+tau <- 1.0
+#
+# Set the seed
+w <- w_seed
+w_chain <- c(w)
+# iterate
+t <- 1
+Qterm <- 0
+#
+# iterate
+#
+while ( (Qterm != 1) ) {
+  # counter 
+  t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # learning rate
+  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
+  # sub-sample
+  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
+  # update
+  ## likelihood
+  grad_est_lik <- rep( 0.0, times=length(w) )
+  for (j in J) {
+    aux_fun <- function(w, z=z_obs[j,]){
+      gr <- log_sampling_pdf(z, w)
+      return(gr)
+    }
+    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
+  }
+  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
+  w <- w +eta*grad_est_lik ; 
+  ## prior
+  aux_fun <- function(w){
+    d <- length(w)
+    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
+    return(gr)
+  }
+  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  ## noise
+  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # termination criterion
+  if  ( t >= Tmax ) {
+    Qterm <- 1
+  }
+  # record the produced chain
+  w_chain <- rbind(w_chain,w)
+}
+```
+
+```
+## 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497 498 499 500
 ```
 
 
@@ -288,10 +359,28 @@ Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the i
 
 If you are not happy with the convergence, feel free to tune the algorithmic parameters in the previous code properly, and run it again.  
 
-```{r}
+
+```r
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+```
+
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
+
+```
+## integer(0)
+```
+
+```r
 #
-#
-#
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
+```
+
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-2.png)
+
+```
+## integer(0)
 ```
 
 ## Task (for the computer practical)   
@@ -317,16 +406,100 @@ w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J
 \]
  and $v$ is the gradient. 
 
-```{r}
+
+```r
+Tmax <- 500
 #
+w_seed <- c(-1,0)
 #
+eta <- 10^(-2)
+eta_C <- eta
+eta_s <- 0.51
+eta_T0 <- 0.3*Tmax
+eta_T1 <- 0.6*Tmax
 #
+batch_size <- 1000
+#
+tau <- 1.0
+#
+# Set the seed
+w <- w_seed
+w_chain_clipping <- c(w)
+# iterate
+t <- 1
+Qterm <- 0
+#
+clipping_threshold <- 10
+#
+# iterate
+#
+while ( (Qterm != 1) ) {
+  # counter 
+  t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # learning rate
+  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
+  # sub-sample
+  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
+  # update
+  ## likelihood
+  grad_est_lik <- rep( 0.0, times=length(w) )
+  for (j in J) {
+    aux_fun <- function(w, z=z_obs[j,]){
+      gr <- log_sampling_pdf(z, w)
+      return(gr)
+    }
+    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
+  }
+  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
+  # gradient clipping/rescaring
+  norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
+  grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
+  w <- w +eta*grad_est_lik ; 
+  ## prior
+  aux_fun <- function(w){
+    d <- length(w)
+    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
+    return(gr)
+  }
+  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  ## noise
+  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # termination criterion
+  if  ( t >= Tmax ) {
+    Qterm <- 1
+  }
+  # record the produced chain
+  w_chain_clipping <- rbind(w_chain_clipping,w)
+}
 ```
 
-```{r}
+```
+## 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497 498 499 500
+```
+
+
+```r
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+```
+
+![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png)
+
+```
+## integer(0)
+```
+
+```r
 #
-#
-#
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
+```
+
+![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-2.png)
+
+```
+## integer(0)
 ```
 
 
@@ -336,10 +509,10 @@ Let's go back to the code without using the clipping gradient.
 
 Based on the above, copy the tail end of the generated chain $w^(t)$ after discarding the burn in, as 'w_chain_output'.  
 
-```{r}
-#
-#
-#
+
+```r
+T_bunrin <- as.integer(0.6*Tmax)
+w_chain_output <- w_chain[T_bunrin:Tmax,]
 ```
 
 
@@ -348,11 +521,19 @@ Based on the above, copy the tail end of the generated chain $w^(t)$ after disca
 
 Plot the histograms plots of output chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ for the estimation of the marginal posterior distributions of the dimensions of $w$. 
 
-```{r}
-#
-#
-#
+
+```r
+hist(w_chain_output[,1]) 
 ```
+
+![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
+
+```r
+#
+hist(w_chain_output[,2]) 
+```
+
+![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-2.png)
 
 ## Task  
 
@@ -364,10 +545,14 @@ To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator
 
 based on SGLD output chain.
 
-```{r}
-#
-#
-#
+
+```r
+w_est = mean(rowMeans(w_chain_output))
+w_est
+```
+
+```
+## [1] 0.5049435
 ```
 
 
@@ -389,10 +574,20 @@ Particularly, compute the point estimate
 \]
 
 
-```{r}
-#
-#
-#
+
+```r
+x_new <- c(1,0.5)
+T <- dim(w_chain_output)[1]
+h_est <- 0.0 
+for (t in 1:T) {
+  h_est <- h_est + prediction_rule( x_new , w_chain_output[t,] )
+}
+h_est <- h_est / T
+h_est
+```
+
+```
+## [1] 0.6249346
 ```
 
 Now, compute the point estimate  
@@ -403,19 +598,34 @@ Now, compute the point estimate
 
 by just plugin in the estimate $\hat{w}$. 
 
-```{r}
-#
-#
-#
+
+```r
+x_new <- c(1,0.5)
+w_est <- colMeans(w_chain_output)
+h_est <- prediction_rule( x_new , w_est )
+h_est
+```
+
+```
+## [1] 0.6249354
 ```
 
 Now, estimate the pdf of the prediction rule at the example with feature $x_\text{new}=c(1, 0.5)$ (to represent the uncertainty) by using a histogram  
 
-```{r}
-#
-#
-#
+
+```r
+x_new <- c(1,0.5)
+T <- dim(w_chain_output)[1]
+h_chain <- c()
+for (t in 1:T) {
+  h_chain <- c( h_chain , 
+                prediction_rule( x_new , w_chain_output[t,] ) 
+                )
+}
+hist(h_chain)
 ```
+
+![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20-1.png)
 
 
 ## Additional tasks  

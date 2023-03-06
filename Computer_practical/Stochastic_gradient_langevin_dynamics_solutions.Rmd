@@ -268,7 +268,7 @@ Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m
 
 Consider a learning rate which is constant around $C_{0}=10^{-6}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$, and constant  $C_{0}=10^{-6}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate).  
 
-The termination criterion is when the total number of iterations excesses $T_{\text{max}}= 10^{3}$. 
+The termination criterion is when the total number of iterations excesses $T_{\text{max}}= 500$. 
 
 Seed with $w^{(0)}=(-1,0)^\top$.   
 
@@ -276,7 +276,7 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 
 ```{r}
-Tmax <- 10^(3)
+Tmax <- 500
 #
 w_seed <- c(-1,0)
 #
@@ -302,6 +302,7 @@ Qterm <- 0
 while ( (Qterm != 1) ) {
   # counter 
   t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # learning rate
   eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
   # sub-sample
@@ -357,7 +358,7 @@ Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m
 
 The learning rate can be constant around $C_{0}=10^{-2}$ for the $1/3$ of the run, then it can delay $\varsigma=0.51$ with constant $C_{0}=10^{-2}$, while in the final $1/3$ it can be constant to a small value. (use the aforesaid provided function for the learning rate). 
 
-The termination criterion is when the total number of iterations excesses $T_{\text{max}}=10^{3}$. 
+The termination criterion is when the total number of iterations excesses $T_{\text{max}}=500$. 
 
 Seed with $w^{(0)}=(-1,0)^\top$.   
 
@@ -375,7 +376,7 @@ w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J
  and $v$ is the gradient. 
 
 ```{r}
-Tmax <- 10^(3)
+Tmax <- 500
 #
 w_seed <- c(-1,0)
 #
@@ -403,6 +404,7 @@ clipping_threshold <- 10
 while ( (Qterm != 1) ) {
   # counter 
   t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
   # learning rate
   eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
   # sub-sample
@@ -472,7 +474,7 @@ hist(w_chain_output[,1])
 hist(w_chain_output[,2]) 
 ```
 
-## Task  (for homework practice)   
+## Task  
 
 To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator 
 
@@ -489,7 +491,7 @@ w_est
 
 
 
-## Task   (for homework practice)   
+## Task   
 
 Use the prediction rule  
 
@@ -547,245 +549,19 @@ hist(h_chain)
 ```
 
 
+## Additional tasks  
 
-# Mixture model  (for homework practice)   
+### Normal mixture model  
 
-```{r}
-rm( list = ls() )
-```
+This task is given as a supplementary material, for your information and your practice.  
 
-The following example is given as a homework practice.   
-
-The problem is non convex, there are two modes (maxima) (true values) in the posterior distribution. 
+What happens when the learning problem is non convex? Aka where there are multiple modes (maxima) (true values) in the posterior distribution?   
 
 You will see that you will not be able to visit both of the models (maxima) with one run.  
 
-You may need to perform several runs starting your algorithm from different seeds $w^{(0)}$.  
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_tasks.nb.html)  
 
-Consider the Bayesian model below
-
-\[
-\begin{cases}
-z_{i}|w\overset{\text{ind}}{\sim}p_{1}\text{N}\left(w,\sigma^{2}\right)+\left(1-p_{1}\right)\text{N}\left(\phi-w,\sigma^{2}\right);\,i=1,...,n & \text{ sampling distr. }\\
-w\sim\text{N}\left(\mu,s^{2}\right) & \text{ prior }
-\end{cases}
-\]
-
-with fixed parameters $\phi=20$, $p_{1}=0.5$, $\sigma^{2}=5$, $\mu=0.0$, and $s^{2}=100$
-
-```{r}
-data_generating_model <- function(n,w) {
-  z <- rep( NaN, times=n )
-  p1 <- 0.5 
-  p2 <- 1.0-p1
-  w <- 5
-  phi <-  20
-  sig2 <- 5
-  lab <- as.numeric(runif(n_obs)>p1)
-  z <- lab*rnorm(n, mean = w, sd = sqrt(sig2)) + (1-lab)*rnorm(n, mean = phi-w, sd = sqrt(sig2))
-  return(z)
-}
-```
-
-By inspecting the sampling distribution $f(z|w)$, you will find out that the true values here are $w=5$ and $w=15$ as both of them satisfy the likelihood.  
-
-Let the dataset $\mathcal{S}_{n}$ has size $n=10^({}$.  
-
-Assume that the real values for the parameter $w$ is $w_{\text{true}}\in\{5,15\}$.  
-
-The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
-
-```{r}
-n_obs <- 10^(6)
-w_true <- 5 
-set.seed(2023)
-z_obs <- data_generating_model(n = n_obs, w = w_true) 
-set.seed(0)
-hist(z_obs)
-```
-
-## Task    (for homework practice)   
-
-The PDF of the sampling distribution is  
-
-\[
-f\left(z_{i}|w\right)=p_{1}\text{N}\left(z_{i}|w,\sigma^{2}\right)+\left(1-p_{2}\right)\text{N}\left(z_{i}|\phi-w,\sigma^{2}\right)
-\]
-
-Code a function `log_sampling_pdf(z, w, p1 = 0.5, phi=20, sig2 = 5)' that returns as a value the PDF of sampling distribution in log scale for a single example $z$.  
-
-You may use the function  dnorm{stats} .
-
-```{r}
-log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 5) {
-  log_sampling_pdf <- p1*dnorm(z, mean = w, sd = sqrt(sig2), log = FALSE)
-  log_sampling_pdf <- log_sampling_pdf + (1-p1)*dnorm(z, mean = phi-w, sd = sqrt(sig2), log = FALSE)
-  log_sampling_pdf <- log(log_sampling_pdf) ;
-  return(log_sampling_pdf)
-}
-```
-
-
-## Task   (for homework practice)   
-
-The PDF of the prior distribution is Normal with mean $\mu=0.0$ and variance $s^{2}=100$. 
-
-\[
-f\left(w\right)=\text{N}\left(w|\mu=0.0,s^{2}=100\right)
-\]
-
-Code in R a function 'log_prior_pdf(w, mu= 0.0, sig2 = 100 )' for the log PDF of the prior distribution of $w$ with mean default values $0.0$ and variance  default values $1000$.
-
-You may use the function  dnorm{stats} .
-
-```{r}
-log_prior_pdf <- function(w, mu = 0.0, sig2 = 100 ) {
-  log_pdf <- dnorm(w, mean = mu, sd = sqrt(sig2), log = TRUE)
-  return( log_pdf )
-}
-```
-
-
-
-## Task (given)  
-
-Code in R, the learning rate function  learning_rate <- function(t, T_0  , T_1 = , C_0  , s_0   )   
-
-\[
-\eta_{t}=
-\begin{cases}
-C_{0}, & t \le T_{0} \\
-\frac{C_{0}}{(t-T_{0})^{\varsigma}}, & T_{0}+1 \le t \le T_{1}  \\
-\frac{C_{0}}{(T_{1}-T_{0})^{\varsigma}}, & T_{1}+1 \le t 
-\end{cases}
-\]
-
-for some constants $C_0$ and $\varsigma\in(0.5,1]$.  
-
-```{r}
-learning_rate <- function(t, T_0  , T_1  , C_0  , s_0   ) {
-  if ( t <= T_0 ) {
-    eta <- C_0
-  } else if ( (T_0+1 <= t) && (t <= T_1 ) ) {
-    eta <- C_0 / ( (t-T_0) ^ s_0 )
-  } else {
-    eta <- C_0 / ( (T_1-T_0) ^ s_0 )
-  }
-  return(eta)
-}
-```
-
-
-## Task  (for homework practice)   
-
-Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=4.0$ (at the 1st example; i.e. $z_{1}$).  
-
-Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
-
-E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
-
-```{r}
-w <- 4.0
-#
-aux_fun <- function(w, z = z_obs[1]) {
-  return( log_sampling_pdf(z, w) ) 
-}
-#
-gr <- numDeriv::grad( aux_fun, w )
-#
-gr
-```
-
-
-
-## Task  (for homework practice)   
-
-Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=?$, and temperature $\tau=?$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=?$, and constant $C_{0}=?$.  
-
-The termination criterion is when the total number of iterations excesses $T_{\text{max}}=?$. 
-
-Seed with $w^{(0)}=0$.   
-
-You may use the R function  grad{numDeriv}  to numerically compute the gradient; e.g.  numDeriv::grad( erf_fun, w ) . Try  ?grad  for more info.  
-
-After finishing your code, try to set the algorithmic parameters $m$, $\tau$, $\varsigma$, and constant $C_{0}$ and $T_{\text{max}}$, etc., with purpose to run the code and discover both modes. 
-
-Plot the trace plot and the histogram of the generated chain $\{w^{(t)}\}$. Did you visited both of the areas around the true values of $w$?. You may find out that the produced chain is prone to local trapping aka it is trapped to one mode and unable to cross the valley of low mass in order to visit the other mode. How to do modify GD, SGD, and SGLD in order to address such an issue, remains a challenge.  
-
-
-```{r}
-Tmax <- 3*10^(3)
-#
-w_seed <- 0.0
-#
-eta <- 10^(-2)
-eta_C <- eta
-eta_s <- 0.51
-eta_T0 <- 0.3*Tmax
-eta_T1 <- 0.6*Tmax
-#
-batch_size <- 1000
-#
-tau <- 1.0
-#
-# Set the seed
-w <- w_seed
-w_chain_clipping <- c(w)
-# iterate
-t <- 1
-Qterm <- 0
-#
-clipping_threshold <- 10
-#
-# iterate
-#
-while ( (Qterm != 1) ) {
-  # counter 
-  t <- t+1
-  # learning rate
-  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
-  # sub-sample
-  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
-  # update
-  ## likelihood
-  grad_est_lik <- rep( 0.0, times=length(w) )
-  for (j in J) {
-    aux_fun <- function(w, z=z_obs[j]){
-      gr <- log_sampling_pdf(z, w)
-      return(gr)
-    }
-    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
-  }
-  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
-  # gradient clipping/rescaring
-  norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
-  grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
-  w <- w +eta*grad_est_lik ; 
-  ## prior
-  aux_fun <- function(w){
-    d <- length(w)
-    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
-    return(gr)
-  }
-  w <- w +eta*numDeriv::grad(aux_fun, w) ;
-  ## noise
-  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
-  # termination criterion
-  if  ( t >= Tmax ) {
-    Qterm <- 1
-  }
-  # record the produced chain
-  w_chain_clipping <- rbind(w_chain_clipping,w)
-}
-```
-
-```{r}
-plot(w_chain_clipping, type = 'l')
-hist(w_chain_clipping)
-```
-
-
-
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_solutions.nb.html)  
 
 
 

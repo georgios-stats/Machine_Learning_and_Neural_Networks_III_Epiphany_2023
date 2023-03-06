@@ -245,9 +245,9 @@ empirical_risk_fun <- function(w,z,n) {
 }
 ```
 
-# Preparation for the (Stochastic) Gradient Descent {-}  
+# Stochastic gradient descent preparation {-}  
 
-Code a function **learning_rate(t,t0)** that computes the learning rate sequence 
+The function **learning_rate(t,t0)** computes the learning rate sequence 
 \[
 \eta_{t}=\frac{t_0}{t}
 \]  
@@ -263,9 +263,7 @@ learning_rate <-function(t,t0=3) {
 ```
 
 
-## Task (given) 
-
-Code the function **grad_loss_fun(w,z)** that returns the gradient of the loss function at parameter value $w$, and at example value $z=(x,y)$.   
+The code the function **grad_loss_fun(w,z)**   returns the gradient of the loss function at parameter value $w$, and at example value $z=(x,y)$.   
 
 ```{r}
 grad_loss_fun <- function(w,z) {
@@ -277,9 +275,9 @@ grad_loss_fun <- function(w,z) {
 }
 ```
 
-## Task (given) 
 
-Code the function **grad_risk_fun <- function(w,z,n)** that returns the gradient of the risk function at parameter value $w$, and using the data set $z$ of size $n\times 2$.    
+
+The code the function **grad_risk_fun <- function(w,z,n)**   returns the gradient of the risk function at parameter value $w$, and using the data set $z$ of size $n\times 2$.    
 
 ```{r}
 grad_risk_fun <- function(w,z,n) {
@@ -290,113 +288,28 @@ grad_risk_fun <- function(w,z,n) {
   grd <- grd / n
   return (grd)
 }
+
 ```
 
-
-## Task (do it in the computer practical)    
-
-Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$.  
+Computation of the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$.  
 
 Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples). 
 
-Do this by using the command 'grad_risk_fun' provided above.
-
 ```{r}
-#
-#
-# 
+w <- c(-0.1,1.5)
+gr <- grad_risk_fun (w, z=z_obs, n=n_obs) 
+gr
 ```
 
-## Task (do it in the computer practical)    
+ 
 
-Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
+# AdaGrad    
 
-E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
-
-```{r}
-#
-#
-# 
-```
-
-# Gradient descent  
-
-## Task (do it in the computer practical)    
-
-Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.5$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
-
-The termination criterion is such that the iterations stop when the the total number of iterations excesses $T=300$. 
-
-Use seed $w^{(0)}=(-0.3,3)^\top$.   
-
-You may use the R function **grad{numDeriv}** to numerically compute the gradient;  
-
-+ e.g. numDeriv::grad( erf_fun, w ) .  
-
-+ Try ?grad for more info. 
-
-```{r}
-#
-#
-# 
-```
-
-
-
-
-## Task (do it in the computer practical)    
-
-Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.   
-
-```{r}
-#
-#
-# 
-```
-
-Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.  
-
-```{r}
-#
-#
-# 
-```
-
-## Task (do it in the computer practical)    
-
-Re-run the previous GD by changing the algorithminc parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
-
-Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.    
-
-If necessary change the termination criterion to consider more or less iterations.  
-
-```{r}
-#
-#
-#
-```
-
-## Task (for homework practice)   
-
-Re run GD by using a learning rate sequence of the form $\eta_t = t_0/t$ for different values of $t_0>0$ that you will choose.  
-
-Check how the algorithm behaves by plotting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
-
-If necessary change the termination criterion to consider more or less iterations.
-
-```{r}
-#
-#
-# 
-```
-
-# Batch Stochastic Gradient Descent 
-
-Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
+Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
 
 Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
 
-The dataset containing the examples to train the model are generated below, and stored in the array $z_{\text{obs}}$.  
+The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
 
 ```{r}
 set.seed(2023)
@@ -406,67 +319,109 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task (do it in the computer practical)    
+## Task      
 
-Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
+Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$.   
+Use $\epsilon=10^{-6}$
 
-The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
-
-The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
+The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
-#
-#
-# 
+m <- 1
+eta <- 1.0
+Tmax <- 500
+w_seed <- c(-0.3,3.0)
+w <- w_seed
+w_chain <- c()
+Qstop <- 0 
+t <- 0
+G <- rep(0.0,times=length(w))
+eps <- 10^(-6)
+while ( Qstop == 0 ) {
+  # counter
+  t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # step 1: update  
+  J <- sample.int(n = n_obs, size = m, replace = TRUE)
+  if (m==1) {
+    zbatch <- matrix(z_obs[J,],1,2)
+  } else {
+    zbatch <- z_obs[J,]
+  }
+  #eta <- learning_rate( t )
+  erf_fun <- function(w, z = zbatch, n=m) {
+    return( empirical_risk_fun(w, z, n) ) 
+  }
+  g <- numDeriv::grad( erf_fun, w )
+  G <- G + g^2
+  w <- w - eta * (1.0/sqrt(G+eps)) * g
+  #w <- w - eta * grad_risk_fun( w, zbatch, m )
+  w_chain <- rbind(w_chain, w)
+  # step 2: check for rtermination terminate
+  if ( t>= Tmax ) {
+    Qstop <- 1
+  }
+}
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
 
-## Task (do it in the computer practical)    
+## Task      
 
-Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.
+Code an batch AdaGrad algorithm with $\eta_{t}$ and batch size $m$ that returns the chain of $\{w^{(t)}\}$. 
 
-Plot the produced chains of $\{w^{(t)}\}$. 
+Experiment by changing the values of $\eta_{t}$  and $m$. See how the oscillations and the convergence of the chain$\{w^{(t)}\}$ behaves.
 
-What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?  
+Use $\epsilon=10^{-6}$
 
+The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
-#
-#
-# 
+m <- 100
+eta <- 1.0
+Tmax <- 500
+w_seed <- c(-0.3,3)
+w <- w_seed
+w_chain <- c()
+Qstop <- 0 
+t <- 0
+G <- rep(0.0,times=length(w))
+eps <- 10^(-6)
+while ( Qstop == 0 ) {
+  # counter
+  t <- t +  1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # step 1: update  
+  J <- sample.int(n = n_obs, size = m, replace = TRUE)
+  if (m==1) {
+    zbatch <- matrix(z_obs[J,],1,2)
+  } else {
+    zbatch <- z_obs[J,]
+  }
+  #eta <- learning_rate( t )
+  erf_fun <- function(w, z = zbatch, n=m) {
+    return( empirical_risk_fun(w, z, n) ) 
+  }
+  g <- numDeriv::grad( erf_fun, w )
+  G <- G + g^2
+  w <- w - eta * (1.0/sqrt(G+eps)) * g
+  #w <- w - eta * grad_risk_fun( w, zbatch, m )
+  w_chain <- rbind(w_chain, w)
+  # step 2: check for rtermination terminate
+  if ( t>= Tmax ) {
+    Qstop <- 1
+  }
+}
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
-ANSWER; As discussed in the lectures, the bigger the batch size the smaller the variation of the gradient, hence the error is smaller.  
 
 
-## Additional tasks  
 
-### AdaGrad  
 
-What would you do it you wish the learning rate to be automatically adjusted?    
-
-Practice on the following variation.  
-
-+ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_tasks.nb.html)  
-
-+ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_solutions.nb.html)  
-
-### Projection  
-
-What would you do if the parametric space / hypothesis class is constrained?  
-
-Practice on the following variation.  
-
-+ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_tasks.nb.html)  
-
-+ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_solutions.nb.html)  
-
-### Variance reduction  
-
-What would you do it you wanted to reduce the variance of the stochastic gradient?  
-
-Practice on the following variation.  
-
-+ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_tasks.nb.html)  
-
-+ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_solutions.nb.html) 
 

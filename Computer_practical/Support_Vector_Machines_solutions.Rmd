@@ -1,0 +1,554 @@
+---
+title: "Support Vector Machines (SVM)"
+subtitle: "Introductory analysis via NNET"
+author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
+output:
+  html_notebook: 
+    number_sections: true
+  word_document: default
+  html_document:
+    df_print: paged
+    number_sections: true
+  pdf_document: default
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
+  - \usepackage{amsmath}
+---
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- Copyright 2023 Georgios Karagiannis -->
+
+<!-- georgios.karagiannis@durham.ac.uk -->
+<!-- Associate Professor -->
+<!-- Department of Mathematical Sciences, Durham University, Durham,  UK  -->
+
+<!-- This file is part of Machine Learning and Neural Networks III (MATH3431) -->
+<!-- which is the material of the course (MATH3431 Machine Learning and Neural Networks III) -->
+<!-- taught by Georgios P. Katagiannis in the Department of Mathematical Sciences   -->
+<!-- in the University of Durham  in Michaelmas term in 2019 -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation version 3 of the License. -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with Machine_Learning_and_Neural_Networks_III_Epiphany_2023  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+
+
+[Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
+
+```{r}
+rm(list=ls())
+```
+
+
+---
+
+***Aim***
+
+Students will become able to:  
+
++ practice in R,  
+
++ implement Support Vector Machine (classifiers) with R package **e1071** in R.   
+
+---
+
+***Reading material***
+
+
++ Lecture notes:  
+    + [Handout 6: Support Vector Machines](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Lecture_handouts/06.Support_Vector_Machines.pdf)  
+    
++ References for the R package (optional supplamentary material for your information)  
+    + [e1071 in R Cran](https://cran.r-project.org/web/packages/e1071/)  
+    + [e1071 Vignettes](https://cran.r-project.org/web/packages/e1071/vignettes/svmdoc.pdf)    
+    + [e1071 Vignettes](https://cran.r-project.org/web/packages/e1071/vignettes/svminternals.pdf)    
+
++ Reference for *R*:  
+    + [Cheat sheet with basic commands](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)   
+
++ Reference of *rmarkdown* (optional given as supplementary material):  
+    + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)  
+    + [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
+    + [knitr options](https://yihui.org/knitr/options/)
+
++ Reference for *Latex* (optional given as supplementary material):  
+    + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
+
+---
+
+***New software*** 
+
++ R package **e1071** functions:    
+    + **svm{e1071}** : Used to train SVM.  
+    + **predict{e1071}**: Using this method, we obtain predictions from the model, as well as decision values from the binary classifiers.
+    + **plot{e1071}** : Visualizing data, support vectors and decision boundaries, if provided.   
+    + **tune{e1071}** : Hyperparameter tuning uses tune() to perform a grid search over specified parameter ranges.
+
+---
+
+
+```{r, results="hide"}
+# Load R package for printing
+library(knitr)
+```
+
+```{r}
+# Set a seed of the randon number generator
+set.seed(2023)
+```
+
+# Familiarity with analysis with Support Vector Machine classifiers with e1071 R package
+
+We will use the R package e1071 It is available from  
+
++ [https://cran.r-project.org/web/packages/e1071/](https://cran.r-project.org/web/packages/e1071/)  
+
+The reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/e1071/e1071.pdf](https://cran.r-project.org/web/packages/e1071/e1071.pdf)  
+
+Details
+
++ **svm{e1071}** : Used to train SVM.  
+
++ **predict{e1071}**: Using this method, we obtain predictions from the model, as well as decision values from the binary classifiers.
+
++ **plot{e1071}** : Visualizing data, support vectors and decision boundaries, if provided.   
+
++ **tune{e1071}** : Hyperparameter tuning uses tune() to perform a grid search over specified parameter ranges. 
+
+## Task: Install e1071 
+ 
+```{r}
+## build version (recommended)
+#install.packages("e1071")
+## linux build
+#install.packages("https://cran.r-project.org/src/contrib/e1071_1.7-13.tar.gz", repos = NULL, type = "source")
+## windows build
+#install.packages("https://cran.r-project.org/bin/windows/contrib/4.2/e1071_1.7-13.zip", repos = NULL, type = "source")
+```
+## Task: Load the R package nnet (given)  
+
+```{r}
+library(e1071)
+```
+
+## Task: About e1071 commands 
+
+Check out R package **e1071** commands from the reference manual is available from  
+
++ [https://cran.r-project.org/web/packages/e1071/e1071.pdf](https://cran.r-project.org/web/packages/e1071/e1071.pdf) 
+
+in particular:  **svm{e1071}**, **predict{e1071}**, **plot{e1071}**, **tune{e1071}**  
+
++ Library **e1071** contains implementations for a number of statistical learning methods. 
+
++ R function **svm()** can be used to fit a support vector classifier when the argument **kernel = "linear"** is used.  
+
++ **cost** argument allows us to specify the cost of a violation to the margin.  
+
+  + It is the cost of constraints violation (default: 1)---it is the ‘C’-constant of the regularization term in the Lagrange formulation; as follows. 
+  \[
+  \begin{align}
+\left(w^{*},b^{*},\xi^{*}\right) & =\underset{\left(w,b,\xi\right)}{\arg\min}\left(\frac{1}{2} \left\Vert w\right\Vert _{2}^{2}+C\frac{1}{m}\sum_{i=1}^{m}\xi_{i}\right)\label{eq:-2-1}\\
+\text{subject to: , ,}\, & y_{i}\left(\langle w^{*},x_{i}\rangle+b^{*}\right)\ge1-\xi_{i},\,\,\forall i=1,...,m\label{eq:-3-1}\\
+ & \xi_{i}\ge0, , ,\forall i=1,...,m\label{eq:-5}
+\end{align}
+  \]
+  Note that we can consider that $C=\frac{1}{2\lambda}$ in Algorithm Soft-SVM in Handout 6: Support Vector Machines.   
+
+  + When the cost argument is small, then the margins will be wide and many support vectors will be on the margin or will violate the margin. When the cost argument is large, then the margins will be narrow and there will be few support vectors on the margin or violating the margin.  
+
+  + It is the cost of constraints violation (default: 1)---it is the ‘C’-constant of the regularization term in the Lagrange formulation.
+
+Below we demonstrate the use of this function on a two-dimensional example so that we can plot the resulting decision boundary.  
+
+---
+---
+
+# Support Vector Machine (Binary classification)  
+
+Consider the training data set of the examples given below:     
+
+Is it separable? 
+
+```{r}
+set.seed(1)
+x <- matrix(rnorm(20 * 2), ncol = 2)
+y <- c(rep(-1, 10), rep(1, 10))
+x[y == 1, ] <- x[y == 1, ] + 1
+plot(x, col = (3 - y))
+```
+Well the answer is No.  
+
+We must encode the response as a factor variable:  
+
+```{r}
+dat <- data.frame(x = x, y = as.factor(y))
+```
+
+
+
+## Task:  Fit the SVM classifier  
+
+To fit the SVM classifier use the R function **svm{e1071}** (check ?svm).  
+
+Use the arguments:  
+
++ **cost = 10**   
+
++ **kernel = "linear"** to set a linear link function (we will call it kernel in the next lectures).  
+
++ **scale = FALSE** to impose svm not to scale each feature to have mean zero or standard deviation one. 
+
+Save the output to object **svmfit**
+
+```{r}
+svmfit <- svm(y ~ ., 
+              data = dat, 
+              kernel = "linear", 
+              cost = 10, 
+              scale = FALSE)
+```
+
+## Task: Plot the support vector classifier obtained  
+
+Plot the support vector classifier obtained by using the R function **plot**.  
+
+Use it as **plot( my_obj , my_data )**  
+
+```{r}
+plot(svmfit, dat)
+```
+
+
+
+The region of feature space that will be assigned to the −1 class is shown in light yellow, and the region that will be assigned to the +1 class is shown in red.  
+
+The decision boundary between the two classes is linear (because of kernel = "linear")   
+
+
+### Task: Get the support vectors locations    
+
+Print **svmfit$index**  
+
+```{r}
+svmfit$index
+```
+## Print the summary  
+
+Use the R function **summary()** to print the basic information summary of the training. 
+
+```{r}
+summary(svmfit)
+```
+## Task: Play with cost argument  
+
+Re-fit the SVM classifier with the R function *svm{e1071}* with argument **cost=0.1** (aka smaller than before).  
+
+Save the output returned by R function **svm** as **svmfit**.  
+
+Plot it, and print the support vectors saved in **svmfit$index**.  
+
+What do you observe?  
+
+```{r}
+svmfit <- svm(y ~ ., data = dat, kernel = "linear", 
+    cost = 0.1, scale = FALSE)
+plot(svmfit, dat)
+svmfit$index
+
+# Now that a smaller value of the cost parameter is being used. 
+# We obtain a larger number of support vectors, because the margin is now wider. 
+# Unfortunately, the svm() function does not explicitly output the coefficients of 
+# the linear decision boundary obtained when the support vector classifier is fit, 
+# nor does it output the width of the margin.
+
+```
+
+## Task: Perform cross validation for tuning and model comparison  
+
+The e1071 library includes a built-in function, **tune{o1071}**.  
+
+Use the R function **tune{e1071}**, to perform cross-validation. Check **?tune**.    
+
+By default, tune() performs ten-fold cross-validation on a set of models of interest.  
+
+In order to use this function, we pass in relevant information about the set of models that are under consideration. 
+
+## Choose a preferable value for the argument **cost**. 
+
+Check via cross validation which is the best value for cost argument among in particular the values 0.001, 0.01, 0.1, 1, 5, 10, and 100.  
+
+First we compare different parametrizations of  svm clascifier each of them with different **cost** argument; in particular the values 0.001, 0.01, 0.1, 1, 5, 10, and 100.  
+
+Use the arguments:  
+
++ **METHOD=svm** for using the svm methodology  
+
++ **kernel = "linear"** for the link "y~1 +x1 +x2" to be linear wrt the regressors.     
+
++ **ranges = list(cost = c(0.001, 0.01, 0.1, 1, 5, 10, 100))** to test over a range of cost values
+
+Save the output in the object **tune.out **.
+
+```{r}
+set.seed(1) # keep me for consistency reasons
+#
+tune.out <- tune(METHOD=svm, 
+                 y ~ ., data = dat, 
+                 kernel = "linear", 
+                 ranges = list(cost = c(0.001, 0.01, 0.1, 1, 5, 10, 100))
+                 )
+```
+
+Use function **summary** to print the results.    
+
+Which value is the preferable one?  
+
+```{r}
+summary(tune.out)
+#
+#We see that cost = 0.1 results in the lowest cross-validation error rate.
+```
+
+## Print the results from the Cross Validation  
+
+The fit of the best model is saved in the value **tune.out$best.model** of the output of R function **tune()**.  
+
+Save it in the object **bestmod<-tune.out$best.model**.  
+
+Print the summary of **bestmod**. 
+
+```{r}
+bestmod<-tune.out$best.model
+summary(bestmod) 
+```
+## Task: Predictions  
+
+The **predict()** function can be used to predict the class label on a set of test observations, at any given value of the cost parameter. 
+
+Consider the following new data set.  
+
+```{r}
+xtest <- matrix(rnorm(20 * 2), ncol = 2)
+ytest <- sample(c(-1, 1), 20, rep = TRUE)
+xtest[ytest == 1, ] <- xtest[ytest == 1, ] + 1
+testdat <- data.frame(x = xtest, y = as.factor(ytest))
+```
+
+1. Predict the class labels of these test observations. 
+    
+    Use the best model obtained through cross-validation, aka **bestmod** in order to make predictions.  
+
+```{r}
+ypred <- predict(bestmod, testdat)
+```
+
+
+
+2. Compute the  SVM confusion matrix (miss-classification table)
+
+    Use the R function **table()**.  
+    
+How many correct classifications?  
+
+```{r}
+table(predict = ypred, truth = testdat$y)
+```
+
+3. Compute how many correct classifications I can get with **cost = 0.01**.  
+    
+    Use R function **svm** ; then **predict** ; then **table**.   
+
+
+```{r}
+svmfit <- svm(y ~ ., data = dat, kernel = "linear", 
+    cost = .01, scale = FALSE)
+ypred <- predict(svmfit, testdat)
+table(predict = ypred, truth = testdat$y)
+```
+
+
+
+## Task: Linearly separable cases.  
+
+Consider the case that the training data set is linearly separable. 
+Use the new provided data  
+    
+```{r}
+x[y == 1, ] <- x[y == 1, ] + 0.5
+plot(x, col = (y + 5) / 2, pch = 19)
+dat <- data.frame(x = x, y = as.factor(y))
+```
+
+Fit the support vector classifier.  
+
+Plot the resulting hyperplane, using a very large value of cost so that no observations are misclassified; eg **cost=1e5**.  
+
+
+```{r}
+# Work here 
+svmfit <- svm(y ~ ., 
+              data = dat, 
+              kernel = "linear", 
+    cost = 1e5)
+summary(svmfit)
+plot(svmfit, dat)
+#No training errors were made and 
+#only three support vectors were used. 
+```
+
+We can see from the figure that the margin is very narrow (because the observations that are not support vectors, indicated as circles, are very close to the decision boundary).  
+
+It seems likely that this model will perform poorly on test data.  
+
+We now try to fit the svm with a smaller value of cost **cost=1**.  
+
+```{r}
+svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1)
+summary(svmfit)
+plot(svmfit, dat)
+#
+#Using cost = 1, we misclassify a training observation, but we also obtain a much wider margin and make use of seven support vectors. 
+#
+#It seems likely that this model will perform better on test data than the model with cost = 1e5.
+```
+
+
+# Support Vector Machine with non-linear kernels.  
+
+
+In order to fit an SVM using a non-linear kernel, we once again use the **svm()** function. However, now we use a different value of the parameter `kernel`.  
+
+To fit an SVM with a polynomial kernel we use **kernel = "polynomial"**.  
+
+In Particular the polynomial kernel is:  
+
+\[
+(\gamma u^\top v+c_0)^d
+\]
+
+So we can use the arguments  
+
++ **degree** to specify a degree $d$ for the polynomial kernel.  
+
++ **gamma**, for $\gamma$ 
+
++ **coef0**, for $c_0$  
+
+
+We use the following non-separable data.  
+
+
+```{r}
+set.seed(1)
+N = 1000
+xx = rnorm(N)
+yy = 4 * xx^2 + 1 + rnorm(N)
+class = sample(N, N/2)
+yy[class] = yy[class] + 6
+yy[-class] = yy[-class] - 6
+x <- cbind(xx,yy)
+plot(x[class,1], x[class,2], col = "red", xlab = "X", ylab = "Y", ylim = c(-6, 30)) +
+points(x[-class,1], x[-class,2], col = "blue")
+#
+y = rep(-1, N)
+y[class] = 1
+data = data.frame(x = x, y = as.factor(y))
+train = sample(N, N/2)
+data_train = data[train, ]
+data_eval = data[-train, ]
+```
+
+Perhaps using a linear prediction rule (linear wrt the features) is not the best way to go.  
+
+See below.    
+
+```{r}
+svm_linear = svm(y ~ ., data = data_train, kernel = "linear", cost = 1)
+plot(svm_linear, data_train)
+```
+
+## Fit with polynomial kernel.  
+
+Fit the SVM classifier by using a polynomial kernel of degree $d=2$.   
+
+In Particular the polynomial kernel is:  
+
+\[
+(\gamma u^\top v+c_0)^d
+\]
+
+Use arguments  
+
++ **kernel = "polynomial"**, for the polynomial 
+
++ **degree=2**, for $d$ 
+
++ **gamma=2**, for $\gamma$ 
+
++ **coef0=0**, for $c_0$      
+
++ **cost = 1**  
+
+
+```{r}
+svmfit <- svm(y ~ ., 
+              data = data_train, 
+              kernel = "polynomial",  
+              degree = 2, 
+              gamma = 1,
+              coef0 = 0,
+              cost = 1, 
+              scale = FALSE)
+plot(svmfit, data_train)
+```
+
+## Cross validation  
+
+Choose appropriate values for the parameters of the polynomial kernel in the following ranges  
+
++ **cost = c(0.01, 0.05, 0.1)** 
+
++ **gamma = c(0.5,1,2.0)**  
+
++ **coef0 = c(0,1,2)**  
+
++ **degree = c(1,2,3)**   
+
+Use the function **tune**.  
+
+Print the results with function **summary**.  
+
+Which parametrization is preferable?  
+
+```{r}
+set.seed(1)
+tune.out <- tune(svm, y ~ ., data = data_train, 
+    kernel = "polynomial", 
+    ranges = list(
+      cost = c(0.01, 0.05, 0.1),
+      gamma = c(0.5,1,2.0),
+      coef0 = c(0,1,2),
+      degree = c(1,2,3)
+    )
+  )
+summary(tune.out)
+```
+
+
+---  
+

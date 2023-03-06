@@ -1,0 +1,301 @@
+---
+title: "Stochastic gradient Langevin dynamics"
+subtitle: "...on a binary clasification problem"
+author: "Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III"
+output:
+  html_notebook: 
+    number_sections: true
+  word_document: default
+  html_document:
+    df_print: paged
+    number_sections: true
+  pdf_document: default
+header-includes: 
+  - \usepackage{tikz}
+  - \usepackage{pgfplots}
+  - \usepackage{amsmath}
+---
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<!-- Copyright 2023 Georgios Karagiannis -->
+
+<!-- georgios.karagiannis@durham.ac.uk -->
+<!-- Associate Professor -->
+<!-- Department of Mathematical Sciences, Durham University, Durham,  UK  -->
+
+<!-- This file is part of Machine Learning and Neural Networks III (MATH3431) -->
+<!-- which is the material of the course (MATH3431 Machine Learning and Neural Networks III) -->
+<!-- taught by Georgios P. Katagiannis in the Department of Mathematical Sciences   -->
+<!-- in the University of Durham  in Michaelmas term in 2019 -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation version 3 of the License. -->
+
+<!-- Machine_Learning_and_Neural_Networks_III_Epiphany_2023 is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with Machine_Learning_and_Neural_Networks_III_Epiphany_2023  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- -------------------------------------------------------------------------------- -->
+
+
+
+[Back to README](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical#aim)
+
+```{r}
+rm(list=ls())
+```
+
+
+---
+
+***Aim***
+
+Students will become able to:  
+
++ practice in R,  
+
++ implement SGLD algorithm in R  
+
++ recap logistic regression, Normal mixture model (optionally)  
+
+In the computer room, students will practice on the binary classification problem. 
+
+Students are suggested to practice on the Mixture model example at home where the straightforward implementation of the SGLD is meant to fail.  
+
+---
+
+***Reading material***
+
+
++ Lecture notes:  
+    + Handouts 4 
+
++ Reference for *R*:  
+    + [Cheat sheet with basic commands](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)   
+
++ Reference of *rmarkdown* (optional, supplementary material):  
+    + [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)  
+    + [R Markdown Reference Guide](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)  
+    + [knitr options](https://yihui.name/knitr/options)
+
++ Reference for *Latex* (optional, supplementary material):  
+    + [Latex Cheat Sheet](https://wch.github.io/latexsheet/latexsheet-a4.pdf)  
+---
+
+***New software***   
+
++ R package base functions:    
+    + set.seed{base} 
+    
++ R package numDeriv functions:    
+    + grad{numDeriv}  
+    
++ R package mvtnorm functions:    
+    + dmvnorm{mvtnorm} 
+    
+
+```{r}
+# call libraries
+library(numDeriv)
+library(mvtnorm)
+```
+
+---
+
+
+```{r, results="hide"}
+# Load R package for printing
+library(knitr)
+```
+
+```{r}
+# Set a seed of the random number generator
+set.seed(2023)
+```
+
+# Mixture model  
+
+```{r}
+rm( list = ls() )
+```
+
+This task is given as a supplementary material, for your information. You can do it at home for practice.   
+
+The following example is given as a homework practice.   
+
+The problem is non convex, there are two modes (maxima) (true values) in the posterior distribution. 
+
+You will see that you will not be able to visit both of the models (maxima) with one run.  
+
+You may need to perform several runs starting your algorithm from different seeds $w^{(0)}$.  
+
+Consider the Bayesian model below
+
+\[
+\begin{cases}
+z_{i}|w\overset{\text{ind}}{\sim}p_{1}\text{N}\left(w,\sigma^{2}\right)+\left(1-p_{1}\right)\text{N}\left(\phi-w,\sigma^{2}\right);\,i=1,...,n & \text{ sampling distr. }\\
+w\sim\text{N}\left(\mu,s^{2}\right) & \text{ prior }
+\end{cases}
+\]
+
+with fixed parameters $\phi=20$, $p_{1}=0.5$, $\sigma^{2}=5$, $\mu=0.0$, and $s^{2}=100$
+
+```{r}
+data_generating_model <- function(n,w) {
+  z <- rep( NaN, times=n )
+  p1 <- 0.5 
+  p2 <- 1.0-p1
+  w <- 5
+  phi <-  20
+  sig2 <- 5
+  lab <- as.numeric(runif(n_obs)>p1)
+  z <- lab*rnorm(n, mean = w, sd = sqrt(sig2)) + (1-lab)*rnorm(n, mean = phi-w, sd = sqrt(sig2))
+  return(z)
+}
+```
+
+By inspecting the sampling distribution $f(z|w)$, you will find out that the true values here are $w=5$ and $w=15$ as both of them satisfy the likelihood.  
+
+Let the dataset $\mathcal{S}_{n}$ has size $n=10^({}$.  
+
+Assume that the real values for the parameter $w$ is $w_{\text{true}}\in\{5,15\}$.  
+
+The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
+
+```{r}
+n_obs <- 10^(6)
+w_true <- 5 
+set.seed(2023)
+z_obs <- data_generating_model(n = n_obs, w = w_true) 
+set.seed(0)
+hist(z_obs)
+```
+
+## Task    
+
+The PDF of the sampling distribution is  
+
+\[
+f\left(z_{i}|w\right)=p_{1}\text{N}\left(z_{i}|w,\sigma^{2}\right)+\left(1-p_{2}\right)\text{N}\left(z_{i}|\phi-w,\sigma^{2}\right)
+\]
+
+Code a function `log_sampling_pdf(z, w, p1 = 0.5, phi=20, sig2 = 5)' that returns as a value the PDF of sampling distribution in log scale for a single example $z$.  
+
+You may use the function  dnorm{stats} .
+
+```{r}
+log_sampling_pdf <- function(z, w, p1 = 0.5, phi=20, sig2 = 5) {
+  log_sampling_pdf <- p1*dnorm(z, mean = w, sd = sqrt(sig2), log = FALSE)
+  log_sampling_pdf <- log_sampling_pdf + (1-p1)*dnorm(z, mean = phi-w, sd = sqrt(sig2), log = FALSE)
+  log_sampling_pdf <- log(log_sampling_pdf) ;
+  return(log_sampling_pdf)
+}
+```
+
+
+## Task   
+
+The PDF of the prior distribution is Normal with mean $\mu=0.0$ and variance $s^{2}=100$. 
+
+\[
+f\left(w\right)=\text{N}\left(w|\mu=0.0,s^{2}=100\right)
+\]
+
+Code in R a function 'log_prior_pdf(w, mu= 0.0, sig2 = 100 )' for the log PDF of the prior distribution of $w$ with mean default values $0.0$ and variance  default values $1000$.
+
+You may use the function  dnorm{stats} .
+
+```{r}
+log_prior_pdf <- function(w, mu = 0.0, sig2 = 100 ) {
+  log_pdf <- dnorm(w, mean = mu, sd = sqrt(sig2), log = TRUE)
+  return( log_pdf )
+}
+```
+
+
+
+## Task 
+
+Below is given the learning rate function  learning_rate <- function(t, T_0  , T_1 = , C_0  , s_0   )   
+
+\[
+\eta_{t}=
+\begin{cases}
+C_{0}, & t \le T_{0} \\
+\frac{C_{0}}{(t-T_{0})^{\varsigma}}, & T_{0}+1 \le t \le T_{1}  \\
+\frac{C_{0}}{(T_{1}-T_{0})^{\varsigma}}, & T_{1}+1 \le t 
+\end{cases}
+\]
+
+for some constants $C_0$ and $\varsigma\in(0.5,1]$.  
+
+```{r}
+learning_rate <- function(t, T_0  , T_1  , C_0  , s_0   ) {
+  if ( t <= T_0 ) {
+    eta <- C_0
+  } else if ( (T_0+1 <= t) && (t <= T_1 ) ) {
+    eta <- C_0 / ( (t-T_0) ^ s_0 )
+  } else {
+    eta <- C_0 / ( (T_1-T_0) ^ s_0 )
+  }
+  return(eta)
+}
+```
+
+
+## Task     
+
+Compute the gradient of the log pdf of the sampling distribution with respect to $w$ at point $w=4.0$ (at the 1st example; i.e. $z_{1}$).  
+
+Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
+
+E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.
+
+```{r}
+#
+#
+#
+```
+
+
+
+## Task    
+
+Code a Stochastic Gradient Langevin Dynamics (SGLD) algorithm with batch size $m=?$, and temperature $\tau=?$ that returns the chain of all the  $\{w^{(t)}\}$ produced. The learning rate can be constant for the first half of the run, with a decay $\varsigma=?$, and constant $C_{0}=?$.  
+
+The termination criterion is when the total number of iterations excesses $T_{\text{max}}=?$. 
+
+Seed with $w^{(0)}=0$.   
+
+You may use the R function  grad{numDeriv}  to numerically compute the gradient; e.g.  numDeriv::grad( erf_fun, w ) . Try  ?grad  for more info.  
+
+After finishing your code, try to set the algorithmic parameters $m$, $\tau$, $\varsigma$, and constant $C_{0}$ and $T_{\text{max}}$, etc., with purpose to run the code and discover both modes. 
+
+Plot the trace plot and the histogram of the generated chain $\{w^{(t)}\}$. Did you visited both of the areas around the true values of $w$?. You may find out that the produced chain is prone to local trapping aka it is trapped to one mode and unable to cross the valley of low mass in order to visit the other mode. How to do modify GD, SGD, and SGLD in order to address such an issue, remains a challenge.  
+
+
+```{r}
+#
+#
+#
+```
+
+```{r}
+#
+#
+#
+```
+
+
+
+
+
+
+
+

@@ -245,9 +245,7 @@ empirical_risk_fun <- function(w,z,n) {
 }
 ```
 
-# Stochastic gradient descent preparation {-}  
-
-## Task (given)  
+# Preparation for the (Stochastic) Gradient Descent {-}  
 
 Code a function **learning_rate(t,t0)** that computes the learning rate sequence 
 \[
@@ -292,11 +290,10 @@ grad_risk_fun <- function(w,z,n) {
   grd <- grd / n
   return (grd)
 }
-
 ```
 
 
-## Task (for the computer practical)   
+## Task (do it in the computer practical)    
 
 Compute the gradient of the empirical risk function at point $w=(-0.1,1.5)^\top$.  
 
@@ -307,10 +304,10 @@ Do this by using the command 'grad_risk_fun' provided above.
 ```{r}
 #
 #
-#
+# 
 ```
 
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Compute the gradient of the empirical risk function at point $w=(-0.3,3)^\top$. Use the whole dataset $\{z_{i};i=1,...,n\}$ (set of examples).   Do this by using the function 'grad{numDeriv}' from the R package numDeriv. 
 
@@ -319,12 +316,12 @@ E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more inf
 ```{r}
 #
 #
-#
+# 
 ```
 
 # Gradient descent  
 
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Code a Gradient Descent (GD) algorithm with constant learning rate $\eta_{t}=0.5$ that returns the chain of all the  $\{w^{(t)}\}$ produced. 
 
@@ -341,20 +338,20 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 ```{r}
 #
 #
-#
+# 
 ```
 
 
 
 
-##  Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Plot the chain $\{w_1^{(t)}\}$ against the iteration $t$.   
 
 ```{r}
 #
 #
-#
+# 
 ```
 
 Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.  
@@ -362,18 +359,16 @@ Plot the chain $\{w_2^{(t)}\}$ against the iteration $t$.
 ```{r}
 #
 #
-#
+# 
 ```
 
+## Task (do it in the computer practical)    
 
-## Task (for the computer practical)  
-
-Re-run the previous GD by changing the algorithmic parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
+Re-run the previous GD by changing the algorithminc parameter values for $\eta$ for some in the range $(0.001,1.0)$.  
 
 Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.    
 
 If necessary change the termination criterion to consider more or less iterations.  
-
 
 ```{r}
 #
@@ -385,17 +380,15 @@ If necessary change the termination criterion to consider more or less iteration
 
 Re run GD by using a learning rate sequence of the form $\eta_t = t_0/t$ for different values of $t_0>0$ that you will choose.  
 
-Check how the algorithm behaves by ploting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
+Check how the algorithm behaves by plotting the chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the iteration $t$.  
 
 If necessary change the termination criterion to consider more or less iterations.
-
 
 ```{r}
 #
 #
-#
+# 
 ```
-
 
 # Batch Stochastic Gradient Descent 
 
@@ -413,245 +406,67 @@ z_obs <- data_generating_model(n = n_obs, w = w_true)
 w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
 ```
 
-## Task (for the computer practical)  
+## Task (do it in the computer practical)    
 
 Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=10$ that returns the chain of $\{w^{(t)}\}$.  
 
 The batch sampling may be performed as a sampling with replacement (see ?sample.int).  
 
-The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.    
+The termination criterion is when the total number of iterations excesses $T=300$. Seed with $w^{(0)}=(-0.3,3)^\top$.   
 
 ```{r}
 #
 #
-#
+# 
 ```
 
 
-## Task (for homework practice)   
+## Task (do it in the computer practical)    
 
-Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.  
+Re run the batch SGD by experimenting and changing the values of the learning rate $\eta$ and that of the batch size $m$.
 
 Plot the produced chains of $\{w^{(t)}\}$. 
 
-What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?
+What is the impact of the the learning rate $eta$ and that of the batch size $m$ to the noise and the speed of the convergence ?  
 
 
 ```{r}
 #
 #
-#
+# 
 ```
+ANSWER; As discussed in the lectures, the bigger the batch size the smaller the variation of the gradient, hence the error is smaller.  
 
 
+## Additional tasks  
 
-# AdaGrad  (for homework practice)     
+### AdaGrad  
 
-Let the dataset $\mathcal{S}_{n}$ has size $n=1000000$.  
+What would you do it you wish the learning rate to be automatically adjusted?    
 
-Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
+Practice on the following variation.  
 
-The dataset containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_tasks.nb.html)  
 
-```{r}
-set.seed(2023)
-n_obs <- 1000000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_solutions.nb.html)  
 
-## Task (for homework practice)   
+### Projection  
 
-Code an online AdaGrad algorithm with constant$\eta_{t}=1.0$ and batch size $m=1$ that returns the chain of $\{w^{(t)}\}$.  
+What would you do if the parametric space / hypothesis class is constrained?  
 
-Use $\epsilon=10^{-6}$
+Practice on the following variation.  
 
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.    
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_tasks.nb.html)  
 
-```{r}
-#
-#
-#
-```
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_solutions.nb.html)  
 
+### Variance reduction  
 
-## Task (for homework practice)   
+What would you do it you wanted to reduce the variance of the stochastic gradient?  
 
-Code an batch AdaGrad algorithm with $\eta_{t}$ and batch size $m$ that returns the chain of $\{w^{(t)}\}$. 
+Practice on the following variation.  
 
-Experiment by changing the values of $\eta_{t}$  and $m$. See how the oscillations and the convergence of the chain$\{w^{(t)}\}$ behaves.
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_tasks.nb.html)  
 
-Use $\epsilon=10^{-6}$
-
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.      
-
-```{r}
-#
-#
-#
-```
-
-
-
-# Batch Stochastic Gradient Descent with projection  (for homework practice)   
-
-Let the data set $\mathcal{S}_{n}$ has size $n=1000000$.  
-
-The data set containing the examples to train the model are generated below, and stores in the array $z_{\text{obs}}$.  
-
-Assume that the real values for the unknown parameters $w$ is $w_{\text{true}}=(0.0,1.0)^\top$.  
-
-Assume that the hypothesis class is restricted such as $\mathcal{H}=\{w\in\mathbb{R}^{2}:|w|_2 \le 2.0\} $
-
-You may use the function 
-
-```{r}
-set.seed(2023)
-n_obs <- 1000000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
-
-
-## Task (Exercise for homework practice)   
-
-
-Compute $w^{*}$ from the minimization problem 
-
-$$
-w^{*}=\arg\min_{w\in\mathcal{H}}\left( F(w) \right)
-$$
-where $F(w)=\left\Vert w-w' \right\Vert$, $w'=(-0.1,0.3)^\top$ and  $\mathcal{H}=\{w\in\mathbb{R}^{2}:|w|_2 \le 2.0\} $. 
-
-Use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.  
-
-A set of sufficient arguments for the function to run is given below.
-
-```{r}
-# out <- nloptr(x0=..,   
-#               eval_f=..., #   
-#               eval_grad_f=...,  
-#               eval_g_ineq = ...,  
-#               eval_jac_g_ineq = ...,   
-#               w_now=...,  
-#               opts = list("algorithm" = "NLOPT_LD_MMA",  
-#                           "xtol_rel"=1.0e-8)  
-# out$solution
-```
-
-
-The following functions are provided.
-
-```{r}
-#
-boundary <- 2.0 # this is the value |w|_{2}^{2} <= boundary
-# auxiliary functions to compute the projection
-eval_f0 <- function( w_proj, w_now ){ 
-  return( sqrt(sum((w_proj-w_now)^2)) )
-}
-eval_grad_f0 <- function( w, w_now ){ 
-  return( c( 2*(w[1]-w_now[1]), 2*(w[2]-w_now[2]) ) )
-}
-eval_g0 <- function( w_proj, w_now) {
-  return( sum(w_proj^2) -(boundary)^2 )
-}
-eval_jac_g0 <- function( x, w_now ) {
-  return(   c(2*w[1],2*w[2] )  )
-}
-```
-
-Write your code below
-
-```{r}
-#
-#
-#
-```
-
-
-## Task  (for homework practice)     
-
-Code a batch Stochastic Gradient Descent (SGD) algorithm with learning rate $\eta_{t}=0.1$, batch size $m=1$ and projection to $\mathcal{H}=\{w:|w|_2\le 2.0\}$, that returns the chain of $\{w^{(t)}\}$. 
-
-The batch sampling may be performed as a sampling with replacement (see ?sample.int). 
-
-The termination criterion is when the total number of iterations excesses $T=1000$. Seed with $w^{(0)}=(-0.1,0.3)^\top$.   
-
-You may use the function 'nloptr{nloptr}' from the R package 'nloptr'. Try ?nloptr for more information.
-
-
-```{r}
-#
-boundary <- 2.0 # this is the value |w|_{2}^{2} <= boundary
-# auxiliary functions to compute the projection
-eval_f0 <- function( w_proj, w_now ){ 
-  return( sqrt(sum((w_proj-w_now)^2)) )
-}
-eval_grad_f0 <- function( w, w_now ){ 
-  return( c( 2*(w[1]-w_now[1]), 2*(w[2]-w_now[2]) ) )
-}
-eval_g0 <- function( w_proj, w_now) {
-  return( sum(w_proj^2) -(boundary)^2 )
-}
-eval_jac_g0 <- function( x, w_now ) {
-  return(   c(2*w[1],2*w[2] )  )
-}
-```
-
-
-```{r}
-#
-#
-#
-```
-
----
-
-# Stochastic Variance Reduced Gradient Descent (SVRG)  (for homework practice)   
-
-We use a smaller data size
-
-```{r}
-set.seed(2023)
-n_obs <- 100000
-w_true <- c(0,1)  
-z_obs <- data_generating_model(n = n_obs, w = w_true)
-w_true <- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = "binomial" )$coefficients)
-```
-
-## Task  (for homework practice)    
-
-Code a Stochastic Variance Reduced Gradient (SVRG) Descent algorithm with learning rate $\eta_{t}=0.5$ and batch size $m=1$ (namely the online SGD version of it) that returns the chain of $\{w^{(t)}\}$.  
-
-Consider $\kappa=100$ as the SVRG parameter controlling the number of snapshots.   
-
-The sampling may be performed as a sampling with replacement (see ?sample.int).  
-
-The termination criterion is when the total number of iterations excesses $T=500$. Seed with $w^{(0)}=(-0.3,3)^\top$.  
-
-Produce the trace plots of the produced chains $\{w^(t)\}$.   
-
-
-```{r}
-#
-#
-#
-```
-
-## Task (for homework practice)    
-
-Repeat the above task by changing the parameters $\kappa$ in order to see how changing $\kappa$ affects the convergence and the noise of the chain. 
-
-
-
-```{r}
-#
-#
-#
-```
-
-
-
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_solutions.nb.html) 
 

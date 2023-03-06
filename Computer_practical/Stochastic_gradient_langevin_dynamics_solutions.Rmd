@@ -559,9 +559,12 @@ What happens when the learning problem is non convex? Aka where there are multip
 
 You will see that you will not be able to visit both of the models (maxima) with one run.  
 
-+ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_tasks.nb.html)  
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_tasks.nb.html)  
 
-+ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_solutions.nb.html)  
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_gradient_langevin_dynamics_NMM_solutions.nb.html)  
+
+
+
 
 
 

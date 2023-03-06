@@ -644,9 +644,9 @@ How would you modify the above code to address a multi-class classification prob
 
 Practice on the following variation.  
 
-+ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Artificial_Neural_Networks_MultiClassClassification_solutions.nb.html)  
++ [LINK TO TASKS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks_Artificial_Neural_Networks_MultiClassClassification_tasks.nb.html)  
 
-+ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Artificial_Neural_Networks_MultiClassClassification_tasks.nb.html)  
++ [LINK TO SOLUTIONS](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Artificial_Neural_Networks_Artificial_Neural_Networks_MultiClassClassification_solutions.nb.html)  
 
 
 

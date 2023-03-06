@@ -12,7 +12,7 @@
 <meta name="author" content="Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III" />
 
 
-<title>Stochastic learning methods</title>
+<title>Artificial Neural Networks</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1756,8 +1756,8 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Stochastic learning methods</h1>
-<h3 class="subtitle">…on a binary classification problem</h3>
+<h1 class="title toc-ignore">Artificial Neural Networks</h1>
+<h3 class="subtitle">Introductory analysis via NNET</h3>
 <h4 class="author">Georgios P. Karagiannis @ MATH3431 Machine Learning and Neural Networks III</h4>
 
 </div>
@@ -1793,23 +1793,25 @@ pre code {
 <!-- rnb-text-begin -->
 <hr />
 <p><strong><em>Aim</em></strong></p>
+<p>Students will become able to:</p>
 <ul>
 <li><p>practice in R,</p></li>
-<li><p>implement GD, batch/online SGD, AdaGrad, SGD with projection, SVRG algorithms in R</p></li>
-<li><p>refresh logistic regression, with Ridge penalty from term 1</p></li>
+<li><p>implement Feed Forward Neural Network with R package nnet in R.</p></li>
 </ul>
 <hr />
 <p><strong><em>Reading material</em></strong></p>
 <ul>
 <li>Lecture notes:
 <ul>
-<li>Handouts 0, 1, 2, and 3</li>
+<li><a href="https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Lecture_handouts/05.Artificial_neural_networks.pdf">Handout 5: Artificial neural networks</a><br />
+</li>
+<li><a href="https://cran.r-project.org/web/packages/nnet/nnet.pdf">Ripley, B., Venables, W., &amp; Ripley, M. B. (2016). Package ‘nnet’. R package version, 7(3-12), 700.</a></li>
 </ul></li>
 <li>Reference for <em>R</em>:
 <ul>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf">Cheat sheet with basic commands</a></li>
 </ul></li>
-<li>Reference of <em>rmarkdown</em> (optional, supplementary material):
+<li>Reference of <em>rmarkdown</em> (optional given as supplementary material):
 <ul>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">R Markdown cheatsheet</a><br />
 </li>
@@ -1817,7 +1819,7 @@ pre code {
 </li>
 <li><a href="https://yihui.name/knitr/options">knitr options</a></li>
 </ul></li>
-<li>Reference for <em>Latex</em> (optional, supplementary material):
+<li>Reference for <em>Latex</em> (optional given as supplementary material):
 <ul>
 <li><a href="https://wch.github.io/latexsheet/latexsheet-a4.pdf">Latex Cheat Sheet</a></li>
 </ul></li>
@@ -1829,28 +1831,12 @@ pre code {
 <ul>
 <li><code>set.seed{base}</code></li>
 </ul></li>
-<li>R package <code>nloptr</code> functions:
+<li>R package <code>nnet</code> functions:
 <ul>
-<li><code>nloptr{nloptr}</code></li>
-</ul></li>
-<li>R package <code>numDeriv</code> functions:
-<ul>
-<li><code>grad{numDeriv}</code></li>
+<li><code>nnet{nnet}</code> , <code>class.ind{nnet}</code> , <code>predict{nnet}</code> , <code>which.is.max{nnet}</code></li>
 </ul></li>
 </ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgY2FsbCBsaWJyYXJpZXMiLCIjaW5zdGFsbC5wYWNrYWdlcyhcIm51bURlcml2XCIpIiwibGlicmFyeShudW1EZXJpdikiLCIjaW5zdGFsbC5wYWNrYWdlcyhcIm5sb3B0clwiKSIsImxpYnJhcnkobmxvcHRyKSJdfQ== -->
-<pre class="r"><code># call libraries
-#install.packages(&quot;numDeriv&quot;)
-library(numDeriv)
-#install.packages(&quot;nloptr&quot;)
-library(nloptr)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
 <hr />
-<p><strong><em>Initialize R</em></strong></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjpbIiMgTG9hZCBSIHBhY2thZ2UgZm9yIHByaW50aW5nIiwibGlicmFyeShrbml0cikiXX0= -->
@@ -1867,362 +1853,203 @@ set.seed(2023)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="application-binary-classification-problem" class="section level1 unnumbered">
-<h1 class="unnumbered">Application: Binary classification problem</h1>
-<p>Consider the binary classification problem with input <span class="math inline">\(x\in\mathbb{R}\)</span> and output/labels <span class="math inline">\(y\in\{0,1\}\)</span>.</p>
-<p>The prediction rule is <span class="math display">\[
-h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
-\]</span> where <span class="math inline">\(w\in\mathbb{R}^{2}\)</span> is the unknown parameter we wish to learn, and hence we can consider that the hypothesis class is</p>
-<p><span class="math display">\[
-\mathcal{H}=\{w\in\mathbb{R}^{2}\}
-\]</span></p>
-<p>Consider there is available a dataset<br />
-<span class="math display">\[
-\mathcal{S}_{n}=\left\{ z_{i}=\left(y_{i},x_{i}\right)\right\} _{i=1}^{n}
-\]</span></p>
-<p>with <span class="math inline">\(y_{i}\in\{0,1\}\)</span> and <span class="math inline">\(x_{i}\in\mathbb{R}\)</span>.</p>
-<p>Recall that the sampling distribution is<br />
-<span class="math display">\[
-y|w \sim \text{Bernulli}(h_{w}(x)) \\
-h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
-\]</span></p>
-<p>The dataset <span class="math inline">\(\mathcal{S}_{n}=\{z_i=(x_i,y_i)\}\)</span> is generated from the data generation probability <span class="math inline">\(g(\cdot)\)</span> provided below as a routine. We pretend that we do not know <span class="math inline">\(g(\cdot)\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZGF0YV9nZW5lcmF0aW5nX21vZGVsIDwtIGZ1bmN0aW9uKG4sdykge1xuICB6IDwtIHJlcCggTmFOLCB0aW1lcz1uKjIgKVxuICB6IDwtIG1hdHJpeCh6LCBucm93ID0gbiwgbmNvbCA9IDIpXG4gIHpbLDFdIDwtIHJ1bmlmKG4sIG1pbiA9IC0xMCwgbWF4ID0gMTApXG4gIHAgPC0gd1sxXSArIHdbMl0qelssMV0gXG4gIHAgPC0gZXhwKHApIC8gKDErZXhwKHApKVxuICB6WywyXSA8LSByYmlub20obiwgc2l6ZSA9IDEsIHByb2IgPSBwKVxuICByZXR1cm4oeilcbn0ifQ== -->
-<pre class="r"><code>data_generating_model &lt;- function(n,w) {
-  z &lt;- rep( NaN, times=n*2 )
-  z &lt;- matrix(z, nrow = n, ncol = 2)
-  z[,1] &lt;- runif(n, min = -10, max = 10)
-  p &lt;- w[1] + w[2]*z[,1] 
-  p &lt;- exp(p) / (1+exp(p))
-  z[,2] &lt;- rbinom(n, size = 1, prob = p)
-  return(z)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Let the dataset <span class="math inline">\(\mathcal{S}_{n}\)</span> has size <span class="math inline">\(n=500\)</span>.</p>
-<p>Assume that the real values for the unknown parameters <span class="math inline">\(w\)</span> is <span class="math inline">\(w_{\text{true}}=(0.0,1.0)^\top\)</span>.</p>
-<p>The dataset containing the examples to train the model are generated below, and stores in the array <span class="math inline">\(z_{\text{obs}}\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInNldC5zZWVkKDIwMjMpIiwibl9vYnMgPC0gNTAwIiwid190cnVlIDwtIGMoMCwxKSAgIiwiel9vYnMgPC0gZGF0YV9nZW5lcmF0aW5nX21vZGVsKG4gPSBuX29icywgdyA9IHdfdHJ1ZSkgIiwid190cnVlIDwtIGFzLm51bWVyaWMoZ2xtKHpfb2JzWywyXX4gMSsgel9vYnNbLDFdLGZhbWlseSA9IFwiYmlub21pYWxcIiApJGNvZWZmaWNpZW50cykiXX0= -->
-<pre class="r"><code>set.seed(2023)
-n_obs &lt;- 500
-w_true &lt;- c(0,1)  
-z_obs &lt;- data_generating_model(n = n_obs, w = w_true) 
-w_true &lt;- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = &quot;binomial&quot; )$coefficients)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>The prediction rule is <span class="math display">\[
-h_{w}(x) = \frac {\exp(w^\top x)}{1+\exp(w^\top x)}
-\]</span></p>
-<p>where <span class="math inline">\(w\in\mathbb{R}^{2}\)</span>.</p>
-<p>The function <strong>prediction_rule(x,w)</strong> that returns the rule <span class="math inline">\(h\)</span> where <span class="math inline">\(x\)</span> is the input argument and <span class="math inline">\(w\)</span> is the unknown parameter is given below.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoicHJlZGljdGlvbl9ydWxlIDwtIGZ1bmN0aW9uKHgsdykge1xuICBoIDwtIHdbMV0rd1syXSp4XG4gIGggPC0gZXhwKGgpIC8gKDEuMCArIGV4cChoKSApXG4gIHJldHVybiAoaClcbn0ifQ== -->
-<pre class="r"><code>prediction_rule &lt;- function(x,w) {
-  h &lt;- w[1]+w[2]*x
-  h &lt;- exp(h) / (1.0 + exp(h) )
-  return (h)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>The likelihood function is <span class="math display">\[
-f\left(y|w\right)=\prod_{i=1}^{n}\left(h_{i}\right)^{y_{i}}\left(1-h_{i}\right)^{1-y_{i}}
-\]</span></p>
-<p>We consider a loss function as</p>
-<p><span class="math display">\[
-\ell\left(w,z=\left(x,y\right)\right)=-y\log\left(h(x)\right)-\left(1-y\right)\log\left(1-h(x)\right)
-\]</span></p>
-<p>The code for the loss function is provided below as <strong>loss_fun(w,z)</strong> that computes the loss function, where <span class="math inline">\(z=(x,y)\)</span> is one example (observation) and <span class="math inline">\(w\)</span> is the unknown parameter.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoibG9zc19mdW4gPC0gZnVuY3Rpb24odyx6KSB7XG4gIHggPSB6WzFdXG4gIHkgPSB6WzJdXG4gIGggPC0gcHJlZGljdGlvbl9ydWxlKHgsdylcbiAgZWxsIDwtIC15KmxvZyhoKSAtICgxLXkpKmxvZygxLWgpXG4gIHJldHVybiAoZWxsKVxufSJ9 -->
-<pre class="r"><code>loss_fun &lt;- function(w,z) {
-  x = z[1]
-  y = z[2]
-  h &lt;- prediction_rule(x,w)
-  ell &lt;- -y*log(h) - (1-y)*log(1-h)
-  return (ell)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>The Risk function under the data generation model <span class="math inline">\(g\)</span> is</p>
-<p><span class="math display">\[
-\begin{align*}
-R_{g}\left(w\right)= &amp; \text{E}\left(\ell\left(w,z=\left(x,y\right)\right)\right)\\
-= &amp; \text{E}\left(-y\log\left(h\left(w;x\right)\right)-\left(1-y\right)\log\left(1-h\left(w;x\right)\right)\right)
-\end{align*}
-\]</span></p>
-<p>The Empirical risk function is <span class="math display">\[
-\begin{align*}
-\hat{R}_{S}\left(w\right) &amp; \frac{1}{n}\sum_{i=1}^{n}\ell\left(w,z_{i}=\left(x_{i},y_{i}\right)\right)\\
-= &amp; -\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}\log\left(h(w;x_{i})\right)+\left(1-y\right)\log\left(1-h(w;x_{i})\right)\right)
-\end{align*}
-\]</span></p>
-<p>The function <strong>empirical_risk_fun(w,z,n)</strong> computes the empirical risk, where <span class="math inline">\(z=(x,y)\)</span> is an example, <span class="math inline">\(w\)</span> is the unknown parameter, and <span class="math inline">\(n\)</span> is the data size is given below.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZW1waXJpY2FsX3Jpc2tfZnVuIDwtIGZ1bmN0aW9uKHcseixuKSB7XG4gIHggPSB6WywxXVxuICB5ID0gelssMl1cbiAgUiA8LSAwLjBcbiAgZm9yIChpIGluIDE6bikge1xuICAgIFIgPC0gUiArIGxvc3NfZnVuKHcseltpLF0pXG4gIH1cbiAgUiA8LSBSIC8gblxuICByZXR1cm4gKFIpXG59In0= -->
-<pre class="r"><code>empirical_risk_fun &lt;- function(w,z,n) {
-  x = z[,1]
-  y = z[,2]
-  R &lt;- 0.0
-  for (i in 1:n) {
-    R &lt;- R + loss_fun(w,z[i,])
-  }
-  R &lt;- R / n
-  return (R)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="preparation-for-the-stochastic-gradient-descent" class="section level1 unnumbered">
-<h1 class="unnumbered">Preparation for the (Stochastic) Gradient Descent</h1>
-<p>Code a function <strong>learning_rate(t,t0)</strong> that computes the learning rate sequence <span class="math display">\[
-\eta_{t}=\frac{t_0}{t}
-\]</span><br />
-where <span class="math inline">\(t\)</span> is the iteration stage and <span class="math inline">\(t_0\)</span> is a constant.</p>
-<p>Use <span class="math inline">\(t_0=3\)</span> as default value.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoibGVhcm5pbmdfcmF0ZSA8LWZ1bmN0aW9uKHQsdDA9Mykge1xuICBldGEgPC0gdDAgLyB0XG4gIHJldHVybiggZXRhIClcbn0ifQ== -->
-<pre class="r"><code>learning_rate &lt;-function(t,t0=3) {
-  eta &lt;- t0 / t
-  return( eta )
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<div id="task-given" class="section level2" number="0.1">
-<h2 number="0.1"><span class="header-section-number">0.1</span> Task (given)</h2>
-<p>Code the function <strong>grad_loss_fun(w,z)</strong> that returns the gradient of the loss function at parameter value <span class="math inline">\(w\)</span>, and at example value <span class="math inline">\(z=(x,y)\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ3JhZF9sb3NzX2Z1biA8LSBmdW5jdGlvbih3LHopIHtcbiAgeCA9IHpbMV1cbiAgeSA9IHpbMl1cbiAgaCA8LSBwcmVkaWN0aW9uX3J1bGUoeCx3KVxuICBncmQgPC0gYyhoLXksIChoLXkpKngpXG4gIHJldHVybiAoZ3JkKVxufSJ9 -->
-<pre class="r"><code>grad_loss_fun &lt;- function(w,z) {
-  x = z[1]
-  y = z[2]
-  h &lt;- prediction_rule(x,w)
-  grd &lt;- c(h-y, (h-y)*x)
-  return (grd)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-given-1" class="section level2" number="0.2">
-<h2 number="0.2"><span class="header-section-number">0.2</span> Task (given)</h2>
-<p>Code the function <strong>grad_risk_fun &lt;- function(w,z,n)</strong> that returns the gradient of the risk function at parameter value <span class="math inline">\(w\)</span>, and using the data set <span class="math inline">\(z\)</span> of size <span class="math inline">\(n\times 2\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ3JhZF9yaXNrX2Z1biA8LSBmdW5jdGlvbih3LHosbikge1xuICBncmQgPC0gMC4wXG4gIGZvciAoaSBpbiAxOm4pIHtcbiAgICBncmQgPC0gZ3JkICsgZ3JhZF9sb3NzX2Z1bih3LHpbaSxdKVxuICB9XG4gIGdyZCA8LSBncmQgLyBuXG4gIHJldHVybiAoZ3JkKVxufSJ9 -->
-<pre class="r"><code>grad_risk_fun &lt;- function(w,z,n) {
-  grd &lt;- 0.0
-  for (i in 1:n) {
-    grd &lt;- grd + grad_loss_fun(w,z[i,])
-  }
-  grd &lt;- grd / n
-  return (grd)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-do-it-in-the-computer-practical" class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Task (do it in the computer practical)</h2>
-<p>Compute the gradient of the empirical risk function at point <span class="math inline">\(w=(-0.1,1.5)^\top\)</span>.</p>
-<p>Use the whole dataset <span class="math inline">\(\{z_{i};i=1,...,n\}\)</span> (set of examples).</p>
-<p>Do this by using the command ‘grad_risk_fun’ provided above.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-do-it-in-the-computer-practical-1" class="section level2" number="0.4">
-<h2 number="0.4"><span class="header-section-number">0.4</span> Task (do it in the computer practical)</h2>
-<p>Compute the gradient of the empirical risk function at point <span class="math inline">\(w=(-0.3,3)^\top\)</span>. Use the whole dataset <span class="math inline">\(\{z_{i};i=1,...,n\}\)</span> (set of examples). Do this by using the function ‘grad{numDeriv}’ from the R package numDeriv.</p>
-<p>E.g., you can use it as numDeriv::grad( fun, w ). You can try ?grad for more info.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-</div>
-<div id="gradient-descent" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Gradient descent</h1>
-<div id="task-do-it-in-the-computer-practical-2" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Task (do it in the computer practical)</h2>
-<p>Code a Gradient Descent (GD) algorithm with constant learning rate <span class="math inline">\(\eta_{t}=0.5\)</span> that returns the chain of all the <span class="math inline">\(\{w^{(t)}\}\)</span> produced.</p>
-<p>The termination criterion is such that the iterations stop when the the total number of iterations excesses <span class="math inline">\(T=300\)</span>.</p>
-<p>Use seed <span class="math inline">\(w^{(0)}=(-0.3,3)^\top\)</span>.</p>
-<p>You may use the R function <strong>grad{numDeriv}</strong> to numerically compute the gradient;</p>
+<div id="familiarity-with-analysis-with-feed-forward-neural-networks-with-nnet" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Familiarity with analysis with feed-forward Neural Networks with nnet</h1>
+<p>We will use the R package nnet. It is available from</p>
 <ul>
-<li><p>e.g. numDeriv::grad( erf_fun, w ) .</p></li>
-<li><p>Try ?grad for more info.</p></li>
+<li><a href="https://cran.r-project.org/web/packages/nnet/">https://cran.r-project.org/web/packages/nnet/</a></li>
 </ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-do-it-in-the-computer-practical-3" class="section level2" number="1.2">
-<h2 number="1.2"><span class="header-section-number">1.2</span> Task (do it in the computer practical)</h2>
-<p>Plot the chain <span class="math inline">\(\{w_1^{(t)}\}\)</span> against the iteration <span class="math inline">\(t\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Plot the chain <span class="math inline">\(\{w_2^{(t)}\}\)</span> against the iteration <span class="math inline">\(t\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-do-it-in-the-computer-practical-4" class="section level2" number="1.3">
-<h2 number="1.3"><span class="header-section-number">1.3</span> Task (do it in the computer practical)</h2>
-<p>Re-run the previous GD by changing the algorithminc parameter values for <span class="math inline">\(\eta\)</span> for some in the range <span class="math inline">\((0.001,1.0)\)</span>.</p>
-<p>Check how the algorithm behaves by ploting the chains <span class="math inline">\(\{w_1^{(t)}\}\)</span> and <span class="math inline">\(\{w_2^{(t)}\}\)</span> against the iteration <span class="math inline">\(t\)</span>.</p>
-<p>If necessary change the termination criterion to consider more or less iterations.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyJdfQ== -->
-<pre class="r"><code>#
-#
-#</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-for-homework-practice" class="section level2" number="1.4">
-<h2 number="1.4"><span class="header-section-number">1.4</span> Task (for homework practice)</h2>
-<p>Re run GD by using a learning rate sequence of the form <span class="math inline">\(\eta_t = t_0/t\)</span> for different values of <span class="math inline">\(t_0&gt;0\)</span> that you will choose.</p>
-<p>Check how the algorithm behaves by plotting the chains <span class="math inline">\(\{w_1^{(t)}\}\)</span> and <span class="math inline">\(\{w_2^{(t)}\}\)</span> against the iteration <span class="math inline">\(t\)</span>.</p>
-<p>If necessary change the termination criterion to consider more or less iterations.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-</div>
-<div id="batch-stochastic-gradient-descent" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Batch Stochastic Gradient Descent</h1>
-<p>Let the data set <span class="math inline">\(\mathcal{S}_{n}\)</span> has size <span class="math inline">\(n=1000000\)</span>.</p>
-<p>Assume that the real values for the unknown parameters <span class="math inline">\(w\)</span> is <span class="math inline">\(w_{\text{true}}=(0.0,1.0)^\top\)</span>.</p>
-<p>The dataset containing the examples to train the model are generated below, and stored in the array <span class="math inline">\(z_{\text{obs}}\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInNldC5zZWVkKDIwMjMpIiwibl9vYnMgPC0gMTAwMDAwMCIsIndfdHJ1ZSA8LSBjKDAsMSkgICIsInpfb2JzIDwtIGRhdGFfZ2VuZXJhdGluZ19tb2RlbChuID0gbl9vYnMsIHcgPSB3X3RydWUpIiwid190cnVlIDwtIGFzLm51bWVyaWMoZ2xtKHpfb2JzWywyXX4gMSsgel9vYnNbLDFdLGZhbWlseSA9IFwiYmlub21pYWxcIiApJGNvZWZmaWNpZW50cykiXX0= -->
-<pre class="r"><code>set.seed(2023)
-n_obs &lt;- 1000000
-w_true &lt;- c(0,1)  
-z_obs &lt;- data_generating_model(n = n_obs, w = w_true)
-w_true &lt;- as.numeric(glm(z_obs[,2]~ 1+ z_obs[,1],family = &quot;binomial&quot; )$coefficients)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<div id="task-do-it-in-the-computer-practical-5" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Task (do it in the computer practical)</h2>
-<p>Code a batch Stochastic Gradient Descent (GD) algorithm with learning rate <span class="math inline">\(\eta_{t}=0.5\)</span> and batch size <span class="math inline">\(m=10\)</span> that returns the chain of <span class="math inline">\(\{w^{(t)}\}\)</span>.</p>
-<p>The batch sampling may be performed as a sampling with replacement (see ?sample.int).</p>
-<p>The termination criterion is when the total number of iterations excesses <span class="math inline">\(T=300\)</span>. Seed with <span class="math inline">\(w^{(0)}=(-0.3,3)^\top\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="task-do-it-in-the-computer-practical-6" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> Task (do it in the computer practical)</h2>
-<p>Re run the batch SGD by experimenting and changing the values of the learning rate <span class="math inline">\(\eta\)</span> and that of the batch size <span class="math inline">\(m\)</span>.</p>
-<p>Plot the produced chains of <span class="math inline">\(\{w^{(t)}\}\)</span>.</p>
-<p>What is the impact of the the learning rate <span class="math inline">\(eta\)</span> and that of the batch size <span class="math inline">\(m\)</span> to the noise and the speed of the convergence ?</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMiLCIjIiwiIyAiXX0= -->
-<pre class="r"><code>#
-#
-# </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>ANSWER; As discussed in the lectures, the bigger the batch size the smaller the variation of the gradient, hence the error is smaller.</p>
-</div>
-<div id="additional-tasks" class="section level2" number="2.3">
-<h2 number="2.3"><span class="header-section-number">2.3</span> Additional tasks</h2>
-<div id="adagrad" class="section level3" number="2.3.1">
-<h3 number="2.3.1"><span class="header-section-number">2.3.1</span> AdaGrad</h3>
-<p>What would you do it you wish the learning rate to be automatically adjusted?</p>
-<p>Practice on the following variation.</p>
+<p>The reference manual is available from</p>
 <ul>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_tasks.nb.html">LINK TO TASKS</a></p></li>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_AdaGrad_solutions.nb.html">LINK TO SOLUTIONS</a></p></li>
+<li><a href="https://cran.r-project.org/web/packages/nnet/nnet.pdf">https://cran.r-project.org/web/packages/nnet/nnet.pdf</a></li>
 </ul>
-</div>
-<div id="projection" class="section level3" number="2.3.2">
-<h3 number="2.3.2"><span class="header-section-number">2.3.2</span> Projection</h3>
-<p>What would you do if the parametric space / hypothesis class is constrained?</p>
-<p>Practice on the following variation.</p>
+<p>Details</p>
 <ul>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_tasks.nb.html">LINK TO TASKS</a></p></li>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_PrSG_solutions.nb.html">LINK TO SOLUTIONS</a></p></li>
+<li>nnet fits single-hidden-layer neural network, possibly with skip-layer connections.</li>
 </ul>
-</div>
-<div id="variance-reduction" class="section level3" number="2.3.3">
-<h3 number="2.3.3"><span class="header-section-number">2.3.3</span> Variance reduction</h3>
-<p>What would you do it you wanted to reduce the variance of the stochastic gradient?</p>
-<p>Practice on the following variation.</p>
-<ul>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_tasks.nb.html">LINK TO TASKS</a></p></li>
-<li><p><a href="http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Computer_practical/Stochastic_learning_methods_VRSG_solutions.nb.html">LINK TO SOLUTIONS</a></p></li>
-</ul>
+<div id="task-install-nnnet-given" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Task: Install nnnet (given)</h2>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiMjIGJ1aWxkIHZlcnNpb24gKHJlY29tbWVuZGVkKSIsIiNpbnN0YWxsLnBhY2thZ2VzKFwibm5ldFwiKSIsIiMjIGxpbnV4IGJ1aWxkIiwiI2luc3RhbGwucGFja2FnZXMoXCJodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9zcmMvY29udHJpYi9ubmV0XzcuMy0xOC50YXIuZ3pcIiwgcmVwb3MgPSBOVUxMLCB0eXBlID0gXCJzb3VyY2VcIikiLCIjIyB3aW5kb3dzIGJ1aWxkIiwiI2luc3RhbGwucGFja2FnZXMoXCJodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9iaW4vd2luZG93cy9jb250cmliLzQuMy9ubmV0XzcuMy0xOC56aXBcIiwgcmVwb3MgPSBOVUxMLCB0eXBlID0gXCJzb3VyY2VcIikiXX0= -->
+<pre class="r"><code>## build version (recommended)
+#install.packages(&quot;nnet&quot;)
+## linux build
+#install.packages(&quot;https://cran.r-project.org/src/contrib/nnet_7.3-18.tar.gz&quot;, repos = NULL, type = &quot;source&quot;)
+## windows build
+#install.packages(&quot;https://cran.r-project.org/bin/windows/contrib/4.3/nnet_7.3-18.zip&quot;, repos = NULL, type = &quot;source&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
+<div id="task-load-the-r-package-nnet-given" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Task: Load the R package nnet (given)</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoibGlicmFyeShubmV0KSJ9 -->
+<pre class="r"><code>library(nnet)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="task-about-nnet-commands-to-be-done-at-home" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Task: About nnet commands (to be done at home)</h2>
+<p>Check out R package nnet commands from the reference manual is available from</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/nnet/nnet.pdf">https://cran.r-project.org/web/packages/nnet/nnet.pdf</a></li>
+</ul>
+<p>in particular: nnet{nnet}, predict.nnet{nnet}, which.is.max{nnet}, and class.ind{nnet}.</p>
+</div>
+</div>
+<div id="nn-on-classification-problem-with-multiple-classes" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> NN on classification problem with multiple classes</h1>
+<p>This is the <strong>Case 4. (Multi-class classification problem)</strong> from the “Handout 5: Artificial neural networks”.</p>
+<p>The similarity is about the problem to be addressed. Different predictor rules or loss functions may be used.</p>
+<div id="task-load-iris-datasets-data-given" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Task: Load iris {datasets} data (given)</h2>
+<p>Load the iris {datasets} data, and print them.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbImRhdGEoaXJpcykiLCJpcmlzIl19 -->
+<pre class="r"><code>data(iris)
+iris</code></pre>
+<!-- rnb-source-end -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"5.1","2":"3.5","3":"1.4","4":"0.2","5":"setosa"},{"1":"4.9","2":"3.0","3":"1.4","4":"0.2","5":"setosa"},{"1":"4.7","2":"3.2","3":"1.3","4":"0.2","5":"setosa"},{"1":"4.6","2":"3.1","3":"1.5","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.6","3":"1.4","4":"0.2","5":"setosa"},{"1":"5.4","2":"3.9","3":"1.7","4":"0.4","5":"setosa"},{"1":"4.6","2":"3.4","3":"1.4","4":"0.3","5":"setosa"},{"1":"5.0","2":"3.4","3":"1.5","4":"0.2","5":"setosa"},{"1":"4.4","2":"2.9","3":"1.4","4":"0.2","5":"setosa"},{"1":"4.9","2":"3.1","3":"1.5","4":"0.1","5":"setosa"},{"1":"5.4","2":"3.7","3":"1.5","4":"0.2","5":"setosa"},{"1":"4.8","2":"3.4","3":"1.6","4":"0.2","5":"setosa"},{"1":"4.8","2":"3.0","3":"1.4","4":"0.1","5":"setosa"},{"1":"4.3","2":"3.0","3":"1.1","4":"0.1","5":"setosa"},{"1":"5.8","2":"4.0","3":"1.2","4":"0.2","5":"setosa"},{"1":"5.7","2":"4.4","3":"1.5","4":"0.4","5":"setosa"},{"1":"5.4","2":"3.9","3":"1.3","4":"0.4","5":"setosa"},{"1":"5.1","2":"3.5","3":"1.4","4":"0.3","5":"setosa"},{"1":"5.7","2":"3.8","3":"1.7","4":"0.3","5":"setosa"},{"1":"5.1","2":"3.8","3":"1.5","4":"0.3","5":"setosa"},{"1":"5.4","2":"3.4","3":"1.7","4":"0.2","5":"setosa"},{"1":"5.1","2":"3.7","3":"1.5","4":"0.4","5":"setosa"},{"1":"4.6","2":"3.6","3":"1.0","4":"0.2","5":"setosa"},{"1":"5.1","2":"3.3","3":"1.7","4":"0.5","5":"setosa"},{"1":"4.8","2":"3.4","3":"1.9","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.0","3":"1.6","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.4","3":"1.6","4":"0.4","5":"setosa"},{"1":"5.2","2":"3.5","3":"1.5","4":"0.2","5":"setosa"},{"1":"5.2","2":"3.4","3":"1.4","4":"0.2","5":"setosa"},{"1":"4.7","2":"3.2","3":"1.6","4":"0.2","5":"setosa"},{"1":"4.8","2":"3.1","3":"1.6","4":"0.2","5":"setosa"},{"1":"5.4","2":"3.4","3":"1.5","4":"0.4","5":"setosa"},{"1":"5.2","2":"4.1","3":"1.5","4":"0.1","5":"setosa"},{"1":"5.5","2":"4.2","3":"1.4","4":"0.2","5":"setosa"},{"1":"4.9","2":"3.1","3":"1.5","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.2","3":"1.2","4":"0.2","5":"setosa"},{"1":"5.5","2":"3.5","3":"1.3","4":"0.2","5":"setosa"},{"1":"4.9","2":"3.6","3":"1.4","4":"0.1","5":"setosa"},{"1":"4.4","2":"3.0","3":"1.3","4":"0.2","5":"setosa"},{"1":"5.1","2":"3.4","3":"1.5","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.5","3":"1.3","4":"0.3","5":"setosa"},{"1":"4.5","2":"2.3","3":"1.3","4":"0.3","5":"setosa"},{"1":"4.4","2":"3.2","3":"1.3","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.5","3":"1.6","4":"0.6","5":"setosa"},{"1":"5.1","2":"3.8","3":"1.9","4":"0.4","5":"setosa"},{"1":"4.8","2":"3.0","3":"1.4","4":"0.3","5":"setosa"},{"1":"5.1","2":"3.8","3":"1.6","4":"0.2","5":"setosa"},{"1":"4.6","2":"3.2","3":"1.4","4":"0.2","5":"setosa"},{"1":"5.3","2":"3.7","3":"1.5","4":"0.2","5":"setosa"},{"1":"5.0","2":"3.3","3":"1.4","4":"0.2","5":"setosa"},{"1":"7.0","2":"3.2","3":"4.7","4":"1.4","5":"versicolor"},{"1":"6.4","2":"3.2","3":"4.5","4":"1.5","5":"versicolor"},{"1":"6.9","2":"3.1","3":"4.9","4":"1.5","5":"versicolor"},{"1":"5.5","2":"2.3","3":"4.0","4":"1.3","5":"versicolor"},{"1":"6.5","2":"2.8","3":"4.6","4":"1.5","5":"versicolor"},{"1":"5.7","2":"2.8","3":"4.5","4":"1.3","5":"versicolor"},{"1":"6.3","2":"3.3","3":"4.7","4":"1.6","5":"versicolor"},{"1":"4.9","2":"2.4","3":"3.3","4":"1.0","5":"versicolor"},{"1":"6.6","2":"2.9","3":"4.6","4":"1.3","5":"versicolor"},{"1":"5.2","2":"2.7","3":"3.9","4":"1.4","5":"versicolor"},{"1":"5.0","2":"2.0","3":"3.5","4":"1.0","5":"versicolor"},{"1":"5.9","2":"3.0","3":"4.2","4":"1.5","5":"versicolor"},{"1":"6.0","2":"2.2","3":"4.0","4":"1.0","5":"versicolor"},{"1":"6.1","2":"2.9","3":"4.7","4":"1.4","5":"versicolor"},{"1":"5.6","2":"2.9","3":"3.6","4":"1.3","5":"versicolor"},{"1":"6.7","2":"3.1","3":"4.4","4":"1.4","5":"versicolor"},{"1":"5.6","2":"3.0","3":"4.5","4":"1.5","5":"versicolor"},{"1":"5.8","2":"2.7","3":"4.1","4":"1.0","5":"versicolor"},{"1":"6.2","2":"2.2","3":"4.5","4":"1.5","5":"versicolor"},{"1":"5.6","2":"2.5","3":"3.9","4":"1.1","5":"versicolor"},{"1":"5.9","2":"3.2","3":"4.8","4":"1.8","5":"versicolor"},{"1":"6.1","2":"2.8","3":"4.0","4":"1.3","5":"versicolor"},{"1":"6.3","2":"2.5","3":"4.9","4":"1.5","5":"versicolor"},{"1":"6.1","2":"2.8","3":"4.7","4":"1.2","5":"versicolor"},{"1":"6.4","2":"2.9","3":"4.3","4":"1.3","5":"versicolor"},{"1":"6.6","2":"3.0","3":"4.4","4":"1.4","5":"versicolor"},{"1":"6.8","2":"2.8","3":"4.8","4":"1.4","5":"versicolor"},{"1":"6.7","2":"3.0","3":"5.0","4":"1.7","5":"versicolor"},{"1":"6.0","2":"2.9","3":"4.5","4":"1.5","5":"versicolor"},{"1":"5.7","2":"2.6","3":"3.5","4":"1.0","5":"versicolor"},{"1":"5.5","2":"2.4","3":"3.8","4":"1.1","5":"versicolor"},{"1":"5.5","2":"2.4","3":"3.7","4":"1.0","5":"versicolor"},{"1":"5.8","2":"2.7","3":"3.9","4":"1.2","5":"versicolor"},{"1":"6.0","2":"2.7","3":"5.1","4":"1.6","5":"versicolor"},{"1":"5.4","2":"3.0","3":"4.5","4":"1.5","5":"versicolor"},{"1":"6.0","2":"3.4","3":"4.5","4":"1.6","5":"versicolor"},{"1":"6.7","2":"3.1","3":"4.7","4":"1.5","5":"versicolor"},{"1":"6.3","2":"2.3","3":"4.4","4":"1.3","5":"versicolor"},{"1":"5.6","2":"3.0","3":"4.1","4":"1.3","5":"versicolor"},{"1":"5.5","2":"2.5","3":"4.0","4":"1.3","5":"versicolor"},{"1":"5.5","2":"2.6","3":"4.4","4":"1.2","5":"versicolor"},{"1":"6.1","2":"3.0","3":"4.6","4":"1.4","5":"versicolor"},{"1":"5.8","2":"2.6","3":"4.0","4":"1.2","5":"versicolor"},{"1":"5.0","2":"2.3","3":"3.3","4":"1.0","5":"versicolor"},{"1":"5.6","2":"2.7","3":"4.2","4":"1.3","5":"versicolor"},{"1":"5.7","2":"3.0","3":"4.2","4":"1.2","5":"versicolor"},{"1":"5.7","2":"2.9","3":"4.2","4":"1.3","5":"versicolor"},{"1":"6.2","2":"2.9","3":"4.3","4":"1.3","5":"versicolor"},{"1":"5.1","2":"2.5","3":"3.0","4":"1.1","5":"versicolor"},{"1":"5.7","2":"2.8","3":"4.1","4":"1.3","5":"versicolor"},{"1":"6.3","2":"3.3","3":"6.0","4":"2.5","5":"virginica"},{"1":"5.8","2":"2.7","3":"5.1","4":"1.9","5":"virginica"},{"1":"7.1","2":"3.0","3":"5.9","4":"2.1","5":"virginica"},{"1":"6.3","2":"2.9","3":"5.6","4":"1.8","5":"virginica"},{"1":"6.5","2":"3.0","3":"5.8","4":"2.2","5":"virginica"},{"1":"7.6","2":"3.0","3":"6.6","4":"2.1","5":"virginica"},{"1":"4.9","2":"2.5","3":"4.5","4":"1.7","5":"virginica"},{"1":"7.3","2":"2.9","3":"6.3","4":"1.8","5":"virginica"},{"1":"6.7","2":"2.5","3":"5.8","4":"1.8","5":"virginica"},{"1":"7.2","2":"3.6","3":"6.1","4":"2.5","5":"virginica"},{"1":"6.5","2":"3.2","3":"5.1","4":"2.0","5":"virginica"},{"1":"6.4","2":"2.7","3":"5.3","4":"1.9","5":"virginica"},{"1":"6.8","2":"3.0","3":"5.5","4":"2.1","5":"virginica"},{"1":"5.7","2":"2.5","3":"5.0","4":"2.0","5":"virginica"},{"1":"5.8","2":"2.8","3":"5.1","4":"2.4","5":"virginica"},{"1":"6.4","2":"3.2","3":"5.3","4":"2.3","5":"virginica"},{"1":"6.5","2":"3.0","3":"5.5","4":"1.8","5":"virginica"},{"1":"7.7","2":"3.8","3":"6.7","4":"2.2","5":"virginica"},{"1":"7.7","2":"2.6","3":"6.9","4":"2.3","5":"virginica"},{"1":"6.0","2":"2.2","3":"5.0","4":"1.5","5":"virginica"},{"1":"6.9","2":"3.2","3":"5.7","4":"2.3","5":"virginica"},{"1":"5.6","2":"2.8","3":"4.9","4":"2.0","5":"virginica"},{"1":"7.7","2":"2.8","3":"6.7","4":"2.0","5":"virginica"},{"1":"6.3","2":"2.7","3":"4.9","4":"1.8","5":"virginica"},{"1":"6.7","2":"3.3","3":"5.7","4":"2.1","5":"virginica"},{"1":"7.2","2":"3.2","3":"6.0","4":"1.8","5":"virginica"},{"1":"6.2","2":"2.8","3":"4.8","4":"1.8","5":"virginica"},{"1":"6.1","2":"3.0","3":"4.9","4":"1.8","5":"virginica"},{"1":"6.4","2":"2.8","3":"5.6","4":"2.1","5":"virginica"},{"1":"7.2","2":"3.0","3":"5.8","4":"1.6","5":"virginica"},{"1":"7.4","2":"2.8","3":"6.1","4":"1.9","5":"virginica"},{"1":"7.9","2":"3.8","3":"6.4","4":"2.0","5":"virginica"},{"1":"6.4","2":"2.8","3":"5.6","4":"2.2","5":"virginica"},{"1":"6.3","2":"2.8","3":"5.1","4":"1.5","5":"virginica"},{"1":"6.1","2":"2.6","3":"5.6","4":"1.4","5":"virginica"},{"1":"7.7","2":"3.0","3":"6.1","4":"2.3","5":"virginica"},{"1":"6.3","2":"3.4","3":"5.6","4":"2.4","5":"virginica"},{"1":"6.4","2":"3.1","3":"5.5","4":"1.8","5":"virginica"},{"1":"6.0","2":"3.0","3":"4.8","4":"1.8","5":"virginica"},{"1":"6.9","2":"3.1","3":"5.4","4":"2.1","5":"virginica"},{"1":"6.7","2":"3.1","3":"5.6","4":"2.4","5":"virginica"},{"1":"6.9","2":"3.1","3":"5.1","4":"2.3","5":"virginica"},{"1":"5.8","2":"2.7","3":"5.1","4":"1.9","5":"virginica"},{"1":"6.8","2":"3.2","3":"5.9","4":"2.3","5":"virginica"},{"1":"6.7","2":"3.3","3":"5.7","4":"2.5","5":"virginica"},{"1":"6.7","2":"3.0","3":"5.2","4":"2.3","5":"virginica"},{"1":"6.3","2":"2.5","3":"5.0","4":"1.9","5":"virginica"},{"1":"6.5","2":"3.0","3":"5.2","4":"2.0","5":"virginica"},{"1":"6.2","2":"3.4","3":"5.4","4":"2.3","5":"virginica"},{"1":"5.9","2":"3.0","3":"5.1","4":"1.8","5":"virginica"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="task-modify-the-data-given" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Task: Modify the data (given)</h2>
+<p>Create an object “y” with the targets of the examples (dataset).</p>
+<p>To do this use the function “class.ind{nnet}” to generate a class indicator function from a given factor. Function “class.ind” receives as arguments factor or vector of classes for cases, and returns a matrix which is zero except for the column corresponding to the class.</p>
+<p>It is used in problems with classification problem with multiple classes, in order to create a suitable output for the function nnet{nnet}. Check “?class.ind”.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoieTwtIGNsYXNzLmluZCggYyhyZXAoXCJzXCIsIDUwKSwgcmVwKFwiY1wiLCA1MCksIHJlcChcInZcIiwgNTApKSApIn0= -->
+<pre class="r"><code>y&lt;- class.ind( c(rep(&quot;s&quot;, 50), rep(&quot;c&quot;, 50), rep(&quot;v&quot;, 50)) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Create an object “x” with the features of the examples (dataset) that contains the variables; “Sepal.Length”, “Sepal.Width”, and “Petal.Length”</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoieCA8LWlyaXNbLC1jKDQsNSldICJ9 -->
+<pre class="r"><code>x &lt;-iris[,-c(4,5)] </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="create-a-training-dataset-and-a-validatin-data-set" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Create a training dataset and a validatin data-set</h2>
+<p>Get a random sub sample of the <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> of size <span class="math inline">\(75\)</span> to be used as a training data set.</p>
+<p>Name the target part as “y_train”,a nd the features part as “x_train”.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbImluZCA8LSBjKHNhbXBsZSgxOjUwLDI1KSwgc2FtcGxlKDUxOjEwMCwyNSksIHNhbXBsZSgxMDE6MTUwLDI1KSkiLCJ5X3RyYWluIDwtIHlbaW5kLF0iLCJ4X3RyYWluIDwtIHhbaW5kLF0iXX0= -->
+<pre class="r"><code>ind &lt;- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
+y_train &lt;- y[ind,]
+x_train &lt;- x[ind,]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>The rest of the data set , use it as a validation data set.</p>
+<p>Name the target part as “y_valid”,a nd the features part as “x_valid”.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbInlfdmFsaWQgPC0geVstaW5kLF0iLCJ4X3ZhbGlkIDwtIHhbLWluZCxdIl19 -->
+<pre class="r"><code>y_valid &lt;- y[-ind,]
+x_valid &lt;- x[-ind,]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="create-a-training-dataset-and-a-validatin-data-set-1" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Create a training dataset and a validatin data-set</h2>
+<p>Train a NN to address the classification problem with purpose for a given feature “x” to be able to clasify it as setosa, versicolor, or virginica.</p>
+<p>By using the R function nnet{nnet} fit a feed forward neural network with:</p>
+<ul>
+<li><p>one hidden layer,</p></li>
+<li><p>units in the hidden layer; i.e. <span class="math inline">\(T=2\)</span></p></li>
+<li><p>the output activation function is softmax</p></li>
+<li><p>use decay “decay=0.00001” – the arguments of nnet</p></li>
+<li><p>use maximum number of iterations for the SGD “maxit = 200” – the arguments of nnet</p></li>
+</ul>
+<p>Do it below</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoibm5ldC4yLm91dCA8LSBubmV0KHhfdHJhaW4sIHlfdHJhaW4sICBcbiAgICAgICAgICAgIHNpemUgPSAyLCBcbiAgICAgICAgICAgIGRlY2F5ID0gNWUtNCwgXG4gICAgICAgICAgICBtYXhpdCA9IDIwMCkifQ== -->
+<pre class="r"><code>nnet.2.out &lt;- nnet(x_train, y_train,  
+            size = 2, 
+            decay = 5e-4, 
+            maxit = 200)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIyB3ZWlnaHRzOiAgMTdcbmluaXRpYWwgIHZhbHVlIDY1LjI0ODgxNyBcbml0ZXIgIDEwIHZhbHVlIDE0LjAwMTUwN1xuaXRlciAgMjAgdmFsdWUgNS4xNjgyMTlcbml0ZXIgIDMwIHZhbHVlIDQuMDQ0ODM4XG5pdGVyICA0MCB2YWx1ZSAzLjU5MDcwNlxuaXRlciAgNTAgdmFsdWUgMy4zNDQ2Mjdcbml0ZXIgIDYwIHZhbHVlIDMuMjk0MDU2XG5pdGVyICA3MCB2YWx1ZSAzLjIxMTE2M1xuaXRlciAgODAgdmFsdWUgMy4yMDE3ODVcbml0ZXIgIDkwIHZhbHVlIDMuMTk0OTc2XG5pdGVyIDEwMCB2YWx1ZSAzLjE5MzI5OFxuaXRlciAxMTAgdmFsdWUgMy4xOTIyMzJcbml0ZXIgMTIwIHZhbHVlIDMuMTkxODYzXG5pdGVyIDEzMCB2YWx1ZSAzLjE5MTgyMlxuaXRlciAxNDAgdmFsdWUgMy4xOTE3OTVcbml0ZXIgMTUwIHZhbHVlIDMuMTkxNzkzXG5maW5hbCAgdmFsdWUgMy4xOTE3OTIgXG5jb252ZXJnZWRcbiJ9 -->
+<pre><code># weights:  17
+initial  value 65.248817 
+iter  10 value 14.001507
+iter  20 value 5.168219
+iter  30 value 4.044838
+iter  40 value 3.590706
+iter  50 value 3.344627
+iter  60 value 3.294056
+iter  70 value 3.211163
+iter  80 value 3.201785
+iter  90 value 3.194976
+iter 100 value 3.193298
+iter 110 value 3.192232
+iter 120 value 3.191863
+iter 130 value 3.191822
+iter 140 value 3.191795
+iter 150 value 3.191793
+final  value 3.191792 
+converged</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="predict" class="section level2" number="2.5">
+<h2 number="2.5"><span class="header-section-number">2.5</span> Predict</h2>
+<p>Using the output from nnet{nnet}, predict / classify the features in the validation dataset, and compare with the actual classes.</p>
+<p>You may use function “maxCol {base}”</p>
+<p>Do it below</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiNwcmVkaWN0aW9ucyIsIm5uZXQuMi5wcmVkIDwtIHByZWRpY3Qobm5ldC4yLm91dCwgeF92YWxpZCkiLCJtYXguY29sKG5uZXQuMi5wcmVkKSJdfQ== -->
+<pre class="r"><code>#predictions
+nnet.2.pred &lt;- predict(nnet.2.out, x_valid)
+max.col(nnet.2.pred)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDNcblszOV0gMSAxIDEgMyAxIDEgMSAxIDEgMSAxIDEgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgM1xuIn0= -->
+<pre><code> [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 3
+[39] 1 1 1 3 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiNhY3R1YWwgbGFiZWxzIiwibWF4LmNvbCh5X3ZhbGlkKSJdfQ== -->
+<pre class="r"><code>#actual labels
+max.col(y_valid)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDIgMiAyIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDFcblszOV0gMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgMyAzIDMgM1xuIn0= -->
+<pre><code> [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1
+[39] 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiMgY29tcGFyZSIsIm1hdGNoID0gbWVhbihtYXguY29sKG5uZXQuMi5wcmVkKT09bWF4LmNvbCh5X3ZhbGlkKSkiLCJtYXRjaCAiXX0= -->
+<pre class="r"><code># compare
+match = mean(max.col(nnet.2.pred)==max.col(y_valid))
+match </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuOTczMzMzM1xuIn0= -->
+<pre><code>[1] 0.9733333</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU3RvY2hhc3RpYyBsZWFybmluZyBtZXRob2RzIgpzdWJ0aXRsZTogIi4uLm9uIGEgYmluYXJ5IGNsYXNzaWZpY2F0aW9uIHByb2JsZW0iCmF1dGhvcjogIkdlb3JnaW9zIFAuIEthcmFnaWFubmlzIEAgTUFUSDM0MzEgTWFjaGluZSBMZWFybmluZyBhbmQgTmV1cmFsIE5ldHdvcmtzIElJSSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6IAogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCiAgd29yZF9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfZG9jdW1lbnQ6CiAgICBkZl9wcmludDogcGFnZWQKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogIHBkZl9kb2N1bWVudDogZGVmYXVsdApoZWFkZXItaW5jbHVkZXM6IAogIC0gXHVzZXBhY2thZ2V7dGlren0KICAtIFx1c2VwYWNrYWdle3BnZnBsb3RzfQogIC0gXHVzZXBhY2thZ2V7YW1zbWF0aH0KLS0tCgo8IS0tIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIC0tPgoKPCEtLSBDb3B5cmlnaHQgMjAyMyBHZW9yZ2lvcyBLYXJhZ2lhbm5pcyAtLT4KCjwhLS0gZ2Vvcmdpb3Mua2FyYWdpYW5uaXNAZHVyaGFtLmFjLnVrIC0tPgo8IS0tIEFzc29jaWF0ZSBQcm9mZXNzb3IgLS0+CjwhLS0gRGVwYXJ0bWVudCBvZiBNYXRoZW1hdGljYWwgU2NpZW5jZXMsIER1cmhhbSBVbml2ZXJzaXR5LCBEdXJoYW0sICBVSyAgLS0+Cgo8IS0tIFRoaXMgZmlsZSBpcyBwYXJ0IG9mIE1hY2hpbmUgTGVhcm5pbmcgYW5kIE5ldXJhbCBOZXR3b3JrcyBJSUkgKE1BVEgzNDMxKSAtLT4KPCEtLSB3aGljaCBpcyB0aGUgbWF0ZXJpYWwgb2YgdGhlIGNvdXJzZSAoTUFUSDM0MzEgTWFjaGluZSBMZWFybmluZyBhbmQgTmV1cmFsIE5ldHdvcmtzIElJSSkgLS0+CjwhLS0gdGF1Z2h0IGJ5IEdlb3JnaW9zIFAuIEthdGFnaWFubmlzIGluIHRoZSBEZXBhcnRtZW50IG9mIE1hdGhlbWF0aWNhbCBTY2llbmNlcyAgIC0tPgo8IS0tIGluIHRoZSBVbml2ZXJzaXR5IG9mIER1cmhhbSAgaW4gTWljaGFlbG1hcyB0ZXJtIGluIDIwMTkgLS0+Cgo8IS0tIE1hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMyBpcyBmcmVlIHNvZnR3YXJlOiB5b3UgY2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQvb3IgbW9kaWZ5IC0tPgo8IS0tIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5IC0tPgo8IS0tIHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb24gdmVyc2lvbiAzIG9mIHRoZSBMaWNlbnNlLiAtLT4KCjwhLS0gTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsIC0tPgo8IS0tIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5UWTsgd2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mIC0tPgo8IS0tIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUgLS0+CjwhLS0gR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4gLS0+Cgo8IS0tIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIC0tPgo8IS0tIGFsb25nIHdpdGggTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzICBJZiBub3QsIHNlZSA8aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2VzLz4uIC0tPgoKPCEtLSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAtLT4KCgoKW0JhY2sgdG8gUkVBRE1FXShodHRwczovL2dpdGh1Yi5jb20vZ2Vvcmdpb3Mtc3RhdHMvTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzL3RyZWUvbWFpbi9Db21wdXRlcl9wcmFjdGljYWwjYWltKQoKYGBge3J9CnJtKGxpc3Q9bHMoKSkKYGBgCgoKLS0tCgoqKipBaW0qKioKCisgcHJhY3RpY2UgaW4gUiwgIAoKKyBpbXBsZW1lbnQgR0QsIGJhdGNoL29ubGluZSBTR0QsIEFkYUdyYWQsIFNHRCB3aXRoIHByb2plY3Rpb24sIFNWUkcgYWxnb3JpdGhtcyBpbiBSCgorIHJlZnJlc2ggbG9naXN0aWMgcmVncmVzc2lvbiwgd2l0aCBSaWRnZSBwZW5hbHR5IGZyb20gdGVybSAxICAKCi0tLQoKKioqUmVhZGluZyBtYXRlcmlhbCoqKgoKCisgTGVjdHVyZSBub3RlczogIAogICAgKyBIYW5kb3V0cyAwLCAxLCAyLCBhbmQgMyAKCisgUmVmZXJlbmNlIGZvciAqUio6ICAKICAgICsgW0NoZWF0IHNoZWV0IHdpdGggYmFzaWMgY29tbWFuZHNdKGh0dHBzOi8vd3d3LnJzdHVkaW8uY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE2LzEwL3ItY2hlYXQtc2hlZXQtMy5wZGYpICAgCgorIFJlZmVyZW5jZSBvZiAqcm1hcmtkb3duKiAob3B0aW9uYWwsIHN1cHBsZW1lbnRhcnkgbWF0ZXJpYWwpOiAgCiAgICArIFtSIE1hcmtkb3duIGNoZWF0c2hlZXRdKGh0dHBzOi8vd3d3LnJzdHVkaW8uY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE2LzAzL3JtYXJrZG93bi1jaGVhdHNoZWV0LTIuMC5wZGYpICAKICAgICsgW1IgTWFya2Rvd24gUmVmZXJlbmNlIEd1aWRlXShodHRwOi8vNDQycjU4a2M4a2UxeTM4ZjYyc3NiMjA4LXdwZW5naW5lLm5ldGRuYS1zc2wuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE1LzAzL3JtYXJrZG93bi1yZWZlcmVuY2UucGRmKSAgCiAgICArIFtrbml0ciBvcHRpb25zXShodHRwczovL3lpaHVpLm5hbWUva25pdHIvb3B0aW9ucykKCisgUmVmZXJlbmNlIGZvciAqTGF0ZXgqIChvcHRpb25hbCwgc3VwcGxlbWVudGFyeSBtYXRlcmlhbCk6ICAKICAgICsgW0xhdGV4IENoZWF0IFNoZWV0XShodHRwczovL3djaC5naXRodWIuaW8vbGF0ZXhzaGVldC9sYXRleHNoZWV0LWE0LnBkZikgIAoKLS0tCgoqKipOZXcgc29mdHdhcmUqKiogICAKCisgUiBwYWNrYWdlIGBiYXNlYCBmdW5jdGlvbnM6ICAgIAogICAgKyBgc2V0LnNlZWR7YmFzZX1gIAoKKyBSIHBhY2thZ2UgYG5sb3B0cmAgZnVuY3Rpb25zOiAgICAKICAgICsgYG5sb3B0cntubG9wdHJ9YCAKICAgIAorIFIgcGFja2FnZSBgbnVtRGVyaXZgIGZ1bmN0aW9uczogICAgCiAgICArIGBncmFke251bURlcml2fWAgCgpgYGB7cn0KIyBjYWxsIGxpYnJhcmllcwojaW5zdGFsbC5wYWNrYWdlcygibnVtRGVyaXYiKQpsaWJyYXJ5KG51bURlcml2KQojaW5zdGFsbC5wYWNrYWdlcygibmxvcHRyIikKbGlicmFyeShubG9wdHIpCmBgYAoKLS0tICAKCioqKkluaXRpYWxpemUgUioqKiAgCgoKYGBge3IsIHJlc3VsdHM9ImhpZGUifQojIExvYWQgUiBwYWNrYWdlIGZvciBwcmludGluZwpsaWJyYXJ5KGtuaXRyKQpgYGAKCmBgYHtyfQojIFNldCBhIHNlZWQgb2YgdGhlIHJhbmRvbiBudW1iZXIgZ2VuZXJhdG9yCnNldC5zZWVkKDIwMjMpCmBgYAoKCiMgQXBwbGljYXRpb246IEJpbmFyeSBjbGFzc2lmaWNhdGlvbiBwcm9ibGVtIHstfQoKQ29uc2lkZXIgdGhlIGJpbmFyeSBjbGFzc2lmaWNhdGlvbiBwcm9ibGVtIHdpdGggaW5wdXQgJHhcaW5cbWF0aGJie1J9JCBhbmQgb3V0cHV0L2xhYmVscyAkeVxpblx7MCwxXH0kLiAgCgpUaGUgcHJlZGljdGlvbiBydWxlIGlzIApcWwpoX3t3fSh4KSA9IFxmcmFjIHtcZXhwKHdeXHRvcCB4KX17MStcZXhwKHdeXHRvcCB4KX0KXF0gCndoZXJlICR3XGluXG1hdGhiYntSfV57Mn0kIGlzIHRoZSB1bmtub3duIHBhcmFtZXRlciB3ZSB3aXNoIHRvIGxlYXJuLCBhbmQgaGVuY2Ugd2UgY2FuIGNvbnNpZGVyIHRoYXQgdGhlIGh5cG90aGVzaXMgY2xhc3MgaXMgCgpcWwpcbWF0aGNhbHtIfT1ce3dcaW5cbWF0aGJie1J9XnsyfVx9ClxdICAKCkNvbnNpZGVyIHRoZXJlIGlzIGF2YWlsYWJsZSBhIGRhdGFzZXQgIApcWwpcbWF0aGNhbHtTfV97bn09XGxlZnRceyB6X3tpfT1cbGVmdCh5X3tpfSx4X3tpfVxyaWdodClccmlnaHRcfSBfe2k9MX1ee259ClxdICAKCndpdGggJHlfe2l9XGluXHswLDFcfSQgYW5kICR4X3tpfVxpblxtYXRoYmJ7Un0kLiAgCgpSZWNhbGwgdGhhdCB0aGUgc2FtcGxpbmcgZGlzdHJpYnV0aW9uIGlzICAKXFsKeXx3IFxzaW0gXHRleHR7QmVybnVsbGl9KGhfe3d9KHgpKSBcXApoX3t3fSh4KSA9IFxmcmFjIHtcZXhwKHdeXHRvcCB4KX17MStcZXhwKHdeXHRvcCB4KX0KXF0KClRoZSBkYXRhc2V0ICRcbWF0aGNhbHtTfV97bn09XHt6X2k9KHhfaSx5X2kpXH0kIGlzICBnZW5lcmF0ZWQgZnJvbSB0aGUgZGF0YSBnZW5lcmF0aW9uIHByb2JhYmlsaXR5ICRnKFxjZG90KSQgcHJvdmlkZWQgYmVsb3cgYXMgYSByb3V0aW5lLiBXZSBwcmV0ZW5kIHRoYXQgd2UgZG8gbm90IGtub3cgJGcoXGNkb3QpJC4gCgpgYGB7cn0KZGF0YV9nZW5lcmF0aW5nX21vZGVsIDwtIGZ1bmN0aW9uKG4sdykgewogIHogPC0gcmVwKCBOYU4sIHRpbWVzPW4qMiApCiAgeiA8LSBtYXRyaXgoeiwgbnJvdyA9IG4sIG5jb2wgPSAyKQogIHpbLDFdIDwtIHJ1bmlmKG4sIG1pbiA9IC0xMCwgbWF4ID0gMTApCiAgcCA8LSB3WzFdICsgd1syXSp6WywxXSAKICBwIDwtIGV4cChwKSAvICgxK2V4cChwKSkKICB6WywyXSA8LSByYmlub20obiwgc2l6ZSA9IDEsIHByb2IgPSBwKQogIHJldHVybih6KQp9CmBgYAoKTGV0IHRoZSBkYXRhc2V0ICRcbWF0aGNhbHtTfV97bn0kIGhhcyBzaXplICRuPTUwMCQuICAKCkFzc3VtZSB0aGF0IHRoZSByZWFsIHZhbHVlcyBmb3IgdGhlIHVua25vd24gcGFyYW1ldGVycyAkdyQgaXMgJHdfe1x0ZXh0e3RydWV9fT0oMC4wLDEuMCleXHRvcCQuICAKClRoZSBkYXRhc2V0IGNvbnRhaW5pbmcgdGhlIGV4YW1wbGVzIHRvIHRyYWluIHRoZSBtb2RlbCBhcmUgZ2VuZXJhdGVkIGJlbG93LCBhbmQgc3RvcmVzIGluIHRoZSBhcnJheSAkel97XHRleHR7b2JzfX0kLiAgCgpgYGB7cn0Kc2V0LnNlZWQoMjAyMykKbl9vYnMgPC0gNTAwCndfdHJ1ZSA8LSBjKDAsMSkgIAp6X29icyA8LSBkYXRhX2dlbmVyYXRpbmdfbW9kZWwobiA9IG5fb2JzLCB3ID0gd190cnVlKSAKd190cnVlIDwtIGFzLm51bWVyaWMoZ2xtKHpfb2JzWywyXX4gMSsgel9vYnNbLDFdLGZhbWlseSA9ICJiaW5vbWlhbCIgKSRjb2VmZmljaWVudHMpCmBgYAoKVGhlIHByZWRpY3Rpb24gcnVsZSBpcyAKXFsKaF97d30oeCkgPSBcZnJhYyB7XGV4cCh3Xlx0b3AgeCl9ezErXGV4cCh3Xlx0b3AgeCl9ClxdICAKCndoZXJlICR3XGluXG1hdGhiYntSfV57Mn0kLgoKVGhlIGZ1bmN0aW9uICoqcHJlZGljdGlvbl9ydWxlKHgsdykqKiB0aGF0IHJldHVybnMgdGhlIHJ1bGUgJGgkIHdoZXJlICR4JCBpcyB0aGUgaW5wdXQgYXJndW1lbnQgYW5kICR3JCBpcyB0aGUgdW5rbm93biBwYXJhbWV0ZXIgaXMgZ2l2ZW4gYmVsb3cuICAKCmBgYHtyfQpwcmVkaWN0aW9uX3J1bGUgPC0gZnVuY3Rpb24oeCx3KSB7CiAgaCA8LSB3WzFdK3dbMl0qeAogIGggPC0gZXhwKGgpIC8gKDEuMCArIGV4cChoKSApCiAgcmV0dXJuIChoKQp9CmBgYAoKVGhlIGxpa2VsaWhvb2QgZnVuY3Rpb24gaXMgCiQkCmZcbGVmdCh5fHdccmlnaHQpPVxwcm9kX3tpPTF9XntufVxsZWZ0KGhfe2l9XHJpZ2h0KV57eV97aX19XGxlZnQoMS1oX3tpfVxyaWdodCleezEteV97aX19CiQkCgpXZSBjb25zaWRlciBhIGxvc3MgZnVuY3Rpb24gYXMgICAKClxbClxlbGxcbGVmdCh3LHo9XGxlZnQoeCx5XHJpZ2h0KVxyaWdodCk9LXlcbG9nXGxlZnQoaCh4KVxyaWdodCktXGxlZnQoMS15XHJpZ2h0KVxsb2dcbGVmdCgxLWgoeClccmlnaHQpClxdCgpUaGUgY29kZSBmb3IgdGhlIGxvc3MgZnVuY3Rpb24gaXMgcHJvdmlkZWQgYmVsb3cgYXMgKipsb3NzX2Z1bih3LHopKiogdGhhdCBjb21wdXRlcyB0aGUgbG9zcyBmdW5jdGlvbiwgd2hlcmUgJHo9KHgseSkkIGlzIG9uZSBleGFtcGxlIChvYnNlcnZhdGlvbikgYW5kICR3JCBpcyB0aGUgdW5rbm93biBwYXJhbWV0ZXIuIAoKYGBge3J9Cmxvc3NfZnVuIDwtIGZ1bmN0aW9uKHcseikgewogIHggPSB6WzFdCiAgeSA9IHpbMl0KICBoIDwtIHByZWRpY3Rpb25fcnVsZSh4LHcpCiAgZWxsIDwtIC15KmxvZyhoKSAtICgxLXkpKmxvZygxLWgpCiAgcmV0dXJuIChlbGwpCn0KYGBgCgpUaGUgUmlzayBmdW5jdGlvbiB1bmRlciB0aGUgZGF0YSBnZW5lcmF0aW9uIG1vZGVsICRnJCBpcyAKClxbClxiZWdpbnthbGlnbip9ClJfe2d9XGxlZnQod1xyaWdodCk9ICYgXHRleHR7RX1cbGVmdChcZWxsXGxlZnQodyx6PVxsZWZ0KHgseVxyaWdodClccmlnaHQpXHJpZ2h0KVxcCj0gJiBcdGV4dHtFfVxsZWZ0KC15XGxvZ1xsZWZ0KGhcbGVmdCh3O3hccmlnaHQpXHJpZ2h0KS1cbGVmdCgxLXlccmlnaHQpXGxvZ1xsZWZ0KDEtaFxsZWZ0KHc7eFxyaWdodClccmlnaHQpXHJpZ2h0KQpcZW5ke2FsaWduKn0KXF0KClRoZSBFbXBpcmljYWwgcmlzayBmdW5jdGlvbiBpcwpcWwpcYmVnaW57YWxpZ24qfQpcaGF0e1J9X3tTfVxsZWZ0KHdccmlnaHQpICYgXGZyYWN7MX17bn1cc3VtX3tpPTF9XntufVxlbGxcbGVmdCh3LHpfe2l9PVxsZWZ0KHhfe2l9LHlfe2l9XHJpZ2h0KVxyaWdodClcXAo9ICYgLVxmcmFjezF9e259XHN1bV97aT0xfV57bn1cbGVmdCh5X3tpfVxsb2dcbGVmdChoKHc7eF97aX0pXHJpZ2h0KStcbGVmdCgxLXlccmlnaHQpXGxvZ1xsZWZ0KDEtaCh3O3hfe2l9KVxyaWdodClccmlnaHQpClxlbmR7YWxpZ24qfQpcXQoKVGhlIGZ1bmN0aW9uICoqZW1waXJpY2FsX3Jpc2tfZnVuKHcseixuKSoqIGNvbXB1dGVzIHRoZSBlbXBpcmljYWwgcmlzaywgd2hlcmUgJHo9KHgseSkkIGlzIGFuIGV4YW1wbGUsICR3JCBpcyB0aGUgdW5rbm93biBwYXJhbWV0ZXIsIGFuZCAkbiQgaXMgdGhlIGRhdGEgc2l6ZSBpcyBnaXZlbiBiZWxvdy4gCgpgYGB7cn0KZW1waXJpY2FsX3Jpc2tfZnVuIDwtIGZ1bmN0aW9uKHcseixuKSB7CiAgeCA9IHpbLDFdCiAgeSA9IHpbLDJdCiAgUiA8LSAwLjAKICBmb3IgKGkgaW4gMTpuKSB7CiAgICBSIDwtIFIgKyBsb3NzX2Z1bih3LHpbaSxdKQogIH0KICBSIDwtIFIgLyBuCiAgcmV0dXJuIChSKQp9CmBgYAoKIyBQcmVwYXJhdGlvbiBmb3IgdGhlIChTdG9jaGFzdGljKSBHcmFkaWVudCBEZXNjZW50IHstfSAgCgpDb2RlIGEgZnVuY3Rpb24gKipsZWFybmluZ19yYXRlKHQsdDApKiogdGhhdCBjb21wdXRlcyB0aGUgbGVhcm5pbmcgcmF0ZSBzZXF1ZW5jZSAKXFsKXGV0YV97dH09XGZyYWN7dF8wfXt0fQpcXSAgCndoZXJlICR0JCBpcyB0aGUgaXRlcmF0aW9uIHN0YWdlIGFuZCAkdF8wJCBpcyBhIGNvbnN0YW50LiAKClVzZSAkdF8wPTMkIGFzIGRlZmF1bHQgdmFsdWUuICAKCmBgYHtyfQpsZWFybmluZ19yYXRlIDwtZnVuY3Rpb24odCx0MD0zKSB7CiAgZXRhIDwtIHQwIC8gdAogIHJldHVybiggZXRhICkKfQpgYGAKCgojIyBUYXNrIChnaXZlbikgCgpDb2RlIHRoZSBmdW5jdGlvbiAqKmdyYWRfbG9zc19mdW4odyx6KSoqIHRoYXQgcmV0dXJucyB0aGUgZ3JhZGllbnQgb2YgdGhlIGxvc3MgZnVuY3Rpb24gYXQgcGFyYW1ldGVyIHZhbHVlICR3JCwgYW5kIGF0IGV4YW1wbGUgdmFsdWUgJHo9KHgseSkkLiAgIAoKYGBge3J9CmdyYWRfbG9zc19mdW4gPC0gZnVuY3Rpb24odyx6KSB7CiAgeCA9IHpbMV0KICB5ID0gelsyXQogIGggPC0gcHJlZGljdGlvbl9ydWxlKHgsdykKICBncmQgPC0gYyhoLXksIChoLXkpKngpCiAgcmV0dXJuIChncmQpCn0KYGBgCgojIyBUYXNrIChnaXZlbikgCgpDb2RlIHRoZSBmdW5jdGlvbiAqKmdyYWRfcmlza19mdW4gPC0gZnVuY3Rpb24odyx6LG4pKiogdGhhdCByZXR1cm5zIHRoZSBncmFkaWVudCBvZiB0aGUgcmlzayBmdW5jdGlvbiBhdCBwYXJhbWV0ZXIgdmFsdWUgJHckLCBhbmQgdXNpbmcgdGhlIGRhdGEgc2V0ICR6JCBvZiBzaXplICRuXHRpbWVzIDIkLiAgICAKCmBgYHtyfQpncmFkX3Jpc2tfZnVuIDwtIGZ1bmN0aW9uKHcseixuKSB7CiAgZ3JkIDwtIDAuMAogIGZvciAoaSBpbiAxOm4pIHsKICAgIGdyZCA8LSBncmQgKyBncmFkX2xvc3NfZnVuKHcseltpLF0pCiAgfQogIGdyZCA8LSBncmQgLyBuCiAgcmV0dXJuIChncmQpCn0KYGBgCgoKIyMgVGFzayAoZG8gaXQgaW4gdGhlIGNvbXB1dGVyIHByYWN0aWNhbCkgICAgCgpDb21wdXRlIHRoZSBncmFkaWVudCBvZiB0aGUgZW1waXJpY2FsIHJpc2sgZnVuY3Rpb24gYXQgcG9pbnQgJHc9KC0wLjEsMS41KV5cdG9wJC4gIAoKVXNlIHRoZSB3aG9sZSBkYXRhc2V0ICRce3pfe2l9O2k9MSwuLi4sblx9JCAoc2V0IG9mIGV4YW1wbGVzKS4gCgpEbyB0aGlzIGJ5IHVzaW5nIHRoZSBjb21tYW5kICdncmFkX3Jpc2tfZnVuJyBwcm92aWRlZCBhYm92ZS4KCmBgYHtyfQojCiMKIyAKYGBgCgojIyBUYXNrIChkbyBpdCBpbiB0aGUgY29tcHV0ZXIgcHJhY3RpY2FsKSAgICAKCkNvbXB1dGUgdGhlIGdyYWRpZW50IG9mIHRoZSBlbXBpcmljYWwgcmlzayBmdW5jdGlvbiBhdCBwb2ludCAkdz0oLTAuMywzKV5cdG9wJC4gVXNlIHRoZSB3aG9sZSBkYXRhc2V0ICRce3pfe2l9O2k9MSwuLi4sblx9JCAoc2V0IG9mIGV4YW1wbGVzKS4gICBEbyB0aGlzIGJ5IHVzaW5nIHRoZSBmdW5jdGlvbiAnZ3JhZHtudW1EZXJpdn0nIGZyb20gdGhlIFIgcGFja2FnZSBudW1EZXJpdi4gCgpFLmcuLCB5b3UgY2FuIHVzZSBpdCBhcyBudW1EZXJpdjo6Z3JhZCggZnVuLCB3ICkuIFlvdSBjYW4gdHJ5ID9ncmFkIGZvciBtb3JlIGluZm8uCgpgYGB7cn0KIwojCiMgCmBgYAoKIyBHcmFkaWVudCBkZXNjZW50ICAKCiMjIFRhc2sgKGRvIGl0IGluIHRoZSBjb21wdXRlciBwcmFjdGljYWwpICAgIAoKQ29kZSBhIEdyYWRpZW50IERlc2NlbnQgKEdEKSBhbGdvcml0aG0gd2l0aCBjb25zdGFudCBsZWFybmluZyByYXRlICRcZXRhX3t0fT0wLjUkIHRoYXQgcmV0dXJucyB0aGUgY2hhaW4gb2YgYWxsIHRoZSAgJFx7d157KHQpfVx9JCBwcm9kdWNlZC4gCgpUaGUgdGVybWluYXRpb24gY3JpdGVyaW9uIGlzIHN1Y2ggdGhhdCB0aGUgaXRlcmF0aW9ucyBzdG9wIHdoZW4gdGhlIHRoZSB0b3RhbCBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlc3NlcyAkVD0zMDAkLiAKClVzZSBzZWVkICR3XnsoMCl9PSgtMC4zLDMpXlx0b3AkLiAgIAoKWW91IG1heSB1c2UgdGhlIFIgZnVuY3Rpb24gKipncmFke251bURlcml2fSoqIHRvIG51bWVyaWNhbGx5IGNvbXB1dGUgdGhlIGdyYWRpZW50OyAgCgorIGUuZy4gbnVtRGVyaXY6OmdyYWQoIGVyZl9mdW4sIHcgKSAuICAKCisgVHJ5ID9ncmFkIGZvciBtb3JlIGluZm8uIAoKYGBge3J9CiMKIwojIApgYGAKCgoKCiMjIFRhc2sgKGRvIGl0IGluIHRoZSBjb21wdXRlciBwcmFjdGljYWwpICAgIAoKUGxvdCB0aGUgY2hhaW4gJFx7d18xXnsodCl9XH0kIGFnYWluc3QgdGhlIGl0ZXJhdGlvbiAkdCQuICAgCgpgYGB7cn0KIwojCiMgCmBgYAoKUGxvdCB0aGUgY2hhaW4gJFx7d18yXnsodCl9XH0kIGFnYWluc3QgdGhlIGl0ZXJhdGlvbiAkdCQuICAKCmBgYHtyfQojCiMKIyAKYGBgCgojIyBUYXNrIChkbyBpdCBpbiB0aGUgY29tcHV0ZXIgcHJhY3RpY2FsKSAgICAKClJlLXJ1biB0aGUgcHJldmlvdXMgR0QgYnkgY2hhbmdpbmcgdGhlIGFsZ29yaXRobWluYyBwYXJhbWV0ZXIgdmFsdWVzIGZvciAkXGV0YSQgZm9yIHNvbWUgaW4gdGhlIHJhbmdlICQoMC4wMDEsMS4wKSQuICAKCkNoZWNrIGhvdyB0aGUgYWxnb3JpdGhtIGJlaGF2ZXMgYnkgcGxvdGluZyB0aGUgY2hhaW5zICRce3dfMV57KHQpfVx9JCBhbmQgJFx7d18yXnsodCl9XH0kIGFnYWluc3QgdGhlIGl0ZXJhdGlvbiAkdCQuICAgIAoKSWYgbmVjZXNzYXJ5IGNoYW5nZSB0aGUgdGVybWluYXRpb24gY3JpdGVyaW9uIHRvIGNvbnNpZGVyIG1vcmUgb3IgbGVzcyBpdGVyYXRpb25zLiAgCgpgYGB7cn0KIwojCiMKYGBgCgojIyBUYXNrIChmb3IgaG9tZXdvcmsgcHJhY3RpY2UpICAgCgpSZSBydW4gR0QgYnkgdXNpbmcgYSBsZWFybmluZyByYXRlIHNlcXVlbmNlIG9mIHRoZSBmb3JtICRcZXRhX3QgPSB0XzAvdCQgZm9yIGRpZmZlcmVudCB2YWx1ZXMgb2YgJHRfMD4wJCB0aGF0IHlvdSB3aWxsIGNob29zZS4gIAoKQ2hlY2sgaG93IHRoZSBhbGdvcml0aG0gYmVoYXZlcyBieSBwbG90dGluZyB0aGUgY2hhaW5zICRce3dfMV57KHQpfVx9JCBhbmQgJFx7d18yXnsodCl9XH0kIGFnYWluc3QgdGhlIGl0ZXJhdGlvbiAkdCQuICAKCklmIG5lY2Vzc2FyeSBjaGFuZ2UgdGhlIHRlcm1pbmF0aW9uIGNyaXRlcmlvbiB0byBjb25zaWRlciBtb3JlIG9yIGxlc3MgaXRlcmF0aW9ucy4KCmBgYHtyfQojCiMKIyAKYGBgCgojIEJhdGNoIFN0b2NoYXN0aWMgR3JhZGllbnQgRGVzY2VudCAKCkxldCB0aGUgZGF0YSBzZXQgJFxtYXRoY2Fse1N9X3tufSQgaGFzIHNpemUgJG49MTAwMDAwMCQuICAKCkFzc3VtZSB0aGF0IHRoZSByZWFsIHZhbHVlcyBmb3IgdGhlIHVua25vd24gcGFyYW1ldGVycyAkdyQgaXMgJHdfe1x0ZXh0e3RydWV9fT0oMC4wLDEuMCleXHRvcCQuICAKClRoZSBkYXRhc2V0IGNvbnRhaW5pbmcgdGhlIGV4YW1wbGVzIHRvIHRyYWluIHRoZSBtb2RlbCBhcmUgZ2VuZXJhdGVkIGJlbG93LCBhbmQgc3RvcmVkIGluIHRoZSBhcnJheSAkel97XHRleHR7b2JzfX0kLiAgCgpgYGB7cn0Kc2V0LnNlZWQoMjAyMykKbl9vYnMgPC0gMTAwMDAwMAp3X3RydWUgPC0gYygwLDEpICAKel9vYnMgPC0gZGF0YV9nZW5lcmF0aW5nX21vZGVsKG4gPSBuX29icywgdyA9IHdfdHJ1ZSkKd190cnVlIDwtIGFzLm51bWVyaWMoZ2xtKHpfb2JzWywyXX4gMSsgel9vYnNbLDFdLGZhbWlseSA9ICJiaW5vbWlhbCIgKSRjb2VmZmljaWVudHMpCmBgYAoKIyMgVGFzayAoZG8gaXQgaW4gdGhlIGNvbXB1dGVyIHByYWN0aWNhbCkgICAgCgpDb2RlIGEgYmF0Y2ggU3RvY2hhc3RpYyBHcmFkaWVudCBEZXNjZW50IChHRCkgYWxnb3JpdGhtIHdpdGggbGVhcm5pbmcgcmF0ZSAkXGV0YV97dH09MC41JCBhbmQgYmF0Y2ggc2l6ZSAkbT0xMCQgdGhhdCByZXR1cm5zIHRoZSBjaGFpbiBvZiAkXHt3XnsodCl9XH0kLiAgCgpUaGUgYmF0Y2ggc2FtcGxpbmcgbWF5IGJlIHBlcmZvcm1lZCBhcyBhIHNhbXBsaW5nIHdpdGggcmVwbGFjZW1lbnQgKHNlZSA/c2FtcGxlLmludCkuICAKClRoZSB0ZXJtaW5hdGlvbiBjcml0ZXJpb24gaXMgd2hlbiB0aGUgdG90YWwgbnVtYmVyIG9mIGl0ZXJhdGlvbnMgZXhjZXNzZXMgJFQ9MzAwJC4gU2VlZCB3aXRoICR3XnsoMCl9PSgtMC4zLDMpXlx0b3AkLiAgIAoKYGBge3J9CiMKIwojIApgYGAKCgojIyBUYXNrIChkbyBpdCBpbiB0aGUgY29tcHV0ZXIgcHJhY3RpY2FsKSAgICAKClJlIHJ1biB0aGUgYmF0Y2ggU0dEIGJ5IGV4cGVyaW1lbnRpbmcgYW5kIGNoYW5naW5nIHRoZSB2YWx1ZXMgb2YgdGhlIGxlYXJuaW5nIHJhdGUgJFxldGEkIGFuZCB0aGF0IG9mIHRoZSBiYXRjaCBzaXplICRtJC4KClBsb3QgdGhlIHByb2R1Y2VkIGNoYWlucyBvZiAkXHt3XnsodCl9XH0kLiAKCldoYXQgaXMgdGhlIGltcGFjdCBvZiB0aGUgdGhlIGxlYXJuaW5nIHJhdGUgJGV0YSQgYW5kIHRoYXQgb2YgdGhlIGJhdGNoIHNpemUgJG0kIHRvIHRoZSBub2lzZSBhbmQgdGhlIHNwZWVkIG9mIHRoZSBjb252ZXJnZW5jZSA/ICAKCgpgYGB7cn0KIwojCiMgCmBgYApBTlNXRVI7IEFzIGRpc2N1c3NlZCBpbiB0aGUgbGVjdHVyZXMsIHRoZSBiaWdnZXIgdGhlIGJhdGNoIHNpemUgdGhlIHNtYWxsZXIgdGhlIHZhcmlhdGlvbiBvZiB0aGUgZ3JhZGllbnQsIGhlbmNlIHRoZSBlcnJvciBpcyBzbWFsbGVyLiAgCgoKIyMgQWRkaXRpb25hbCB0YXNrcyAgCgojIyMgQWRhR3JhZCAgCgpXaGF0IHdvdWxkIHlvdSBkbyBpdCB5b3Ugd2lzaCB0aGUgbGVhcm5pbmcgcmF0ZSB0byBiZSBhdXRvbWF0aWNhbGx5IGFkanVzdGVkPyAgICAKClByYWN0aWNlIG9uIHRoZSBmb2xsb3dpbmcgdmFyaWF0aW9uLiAgCgorIFtMSU5LIFRPIFRBU0tTXShodHRwOi8vaHRtbHByZXZpZXcuZ2l0aHViLmlvLz9odHRwczovL2dpdGh1Yi5jb20vZ2Vvcmdpb3Mtc3RhdHMvTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzL3RyZWUvbWFpbi9Db21wdXRlcl9wcmFjdGljYWwvU3RvY2hhc3RpY19sZWFybmluZ19tZXRob2RzX0FkYUdyYWRfdGFza3MubmIuaHRtbCkgIAoKKyBbTElOSyBUTyBTT0xVVElPTlNdKGh0dHA6Ly9odG1scHJldmlldy5naXRodWIuaW8vP2h0dHBzOi8vZ2l0aHViLmNvbS9nZW9yZ2lvcy1zdGF0cy9NYWNoaW5lX0xlYXJuaW5nX2FuZF9OZXVyYWxfTmV0d29ya3NfSUlJX0VwaXBoYW55XzIwMjMvdHJlZS9tYWluL0NvbXB1dGVyX3ByYWN0aWNhbC9TdG9jaGFzdGljX2xlYXJuaW5nX21ldGhvZHNfQWRhR3JhZF9zb2x1dGlvbnMubmIuaHRtbCkgIAoKIyMjIFByb2plY3Rpb24gIAoKV2hhdCB3b3VsZCB5b3UgZG8gaWYgdGhlIHBhcmFtZXRyaWMgc3BhY2UgLyBoeXBvdGhlc2lzIGNsYXNzIGlzIGNvbnN0cmFpbmVkPyAgCgpQcmFjdGljZSBvbiB0aGUgZm9sbG93aW5nIHZhcmlhdGlvbi4gIAoKKyBbTElOSyBUTyBUQVNLU10oaHR0cDovL2h0bWxwcmV2aWV3LmdpdGh1Yi5pby8/aHR0cHM6Ly9naXRodWIuY29tL2dlb3JnaW9zLXN0YXRzL01hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMy90cmVlL21haW4vQ29tcHV0ZXJfcHJhY3RpY2FsL1N0b2NoYXN0aWNfbGVhcm5pbmdfbWV0aG9kc19QclNHX3Rhc2tzLm5iLmh0bWwpICAKCisgW0xJTksgVE8gU09MVVRJT05TXShodHRwOi8vaHRtbHByZXZpZXcuZ2l0aHViLmlvLz9odHRwczovL2dpdGh1Yi5jb20vZ2Vvcmdpb3Mtc3RhdHMvTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzL3RyZWUvbWFpbi9Db21wdXRlcl9wcmFjdGljYWwvU3RvY2hhc3RpY19sZWFybmluZ19tZXRob2RzX1ByU0dfc29sdXRpb25zLm5iLmh0bWwpICAKCiMjIyBWYXJpYW5jZSByZWR1Y3Rpb24gIAoKV2hhdCB3b3VsZCB5b3UgZG8gaXQgeW91IHdhbnRlZCB0byByZWR1Y2UgdGhlIHZhcmlhbmNlIG9mIHRoZSBzdG9jaGFzdGljIGdyYWRpZW50PyAgCgpQcmFjdGljZSBvbiB0aGUgZm9sbG93aW5nIHZhcmlhdGlvbi4gIAoKKyBbTElOSyBUTyBUQVNLU10oaHR0cDovL2h0bWxwcmV2aWV3LmdpdGh1Yi5pby8/aHR0cHM6Ly9naXRodWIuY29tL2dlb3JnaW9zLXN0YXRzL01hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMy90cmVlL21haW4vQ29tcHV0ZXJfcHJhY3RpY2FsL1N0b2NoYXN0aWNfbGVhcm5pbmdfbWV0aG9kc19WUlNHX3Rhc2tzLm5iLmh0bWwpICAKCisgW0xJTksgVE8gU09MVVRJT05TXShodHRwOi8vaHRtbHByZXZpZXcuZ2l0aHViLmlvLz9odHRwczovL2dpdGh1Yi5jb20vZ2Vvcmdpb3Mtc3RhdHMvTWFjaGluZV9MZWFybmluZ19hbmRfTmV1cmFsX05ldHdvcmtzX0lJSV9FcGlwaGFueV8yMDIzL3RyZWUvbWFpbi9Db21wdXRlcl9wcmFjdGljYWwvU3RvY2hhc3RpY19sZWFybmluZ19tZXRob2RzX1ZSU0dfc29sdXRpb25zLm5iLmh0bWwpIAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXJ0aWZpY2lhbCBOZXVyYWwgTmV0d29ya3MiCnN1YnRpdGxlOiAiSW50cm9kdWN0b3J5IGFuYWx5c2lzIHZpYSBOTkVUIgphdXRob3I6ICJHZW9yZ2lvcyBQLiBLYXJhZ2lhbm5pcyBAIE1BVEgzNDMxIE1hY2hpbmUgTGVhcm5pbmcgYW5kIE5ldXJhbCBOZXR3b3JrcyBJSUkiCm91dHB1dDoKICBodG1sX25vdGVib29rOiAKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICBwZGZfZG9jdW1lbnQ6IGRlZmF1bHQKaGVhZGVyLWluY2x1ZGVzOiAKICAtIFx1c2VwYWNrYWdle3Rpa3p9CiAgLSBcdXNlcGFja2FnZXtwZ2ZwbG90c30KICAtIFx1c2VwYWNrYWdle2Ftc21hdGh9Ci0tLQoKPCEtLSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAtLT4KCjwhLS0gQ29weXJpZ2h0IDIwMjMgR2Vvcmdpb3MgS2FyYWdpYW5uaXMgLS0+Cgo8IS0tIGdlb3JnaW9zLmthcmFnaWFubmlzQGR1cmhhbS5hYy51ayAtLT4KPCEtLSBBc3NvY2lhdGUgUHJvZmVzc29yIC0tPgo8IS0tIERlcGFydG1lbnQgb2YgTWF0aGVtYXRpY2FsIFNjaWVuY2VzLCBEdXJoYW0gVW5pdmVyc2l0eSwgRHVyaGFtLCAgVUsgIC0tPgoKPCEtLSBUaGlzIGZpbGUgaXMgcGFydCBvZiBNYWNoaW5lIExlYXJuaW5nIGFuZCBOZXVyYWwgTmV0d29ya3MgSUlJIChNQVRIMzQzMSkgLS0+CjwhLS0gd2hpY2ggaXMgdGhlIG1hdGVyaWFsIG9mIHRoZSBjb3Vyc2UgKE1BVEgzNDMxIE1hY2hpbmUgTGVhcm5pbmcgYW5kIE5ldXJhbCBOZXR3b3JrcyBJSUkpIC0tPgo8IS0tIHRhdWdodCBieSBHZW9yZ2lvcyBQLiBLYXRhZ2lhbm5pcyBpbiB0aGUgRGVwYXJ0bWVudCBvZiBNYXRoZW1hdGljYWwgU2NpZW5jZXMgICAtLT4KPCEtLSBpbiB0aGUgVW5pdmVyc2l0eSBvZiBEdXJoYW0gIGluIE1pY2hhZWxtYXMgdGVybSBpbiAyMDE5IC0tPgoKPCEtLSBNYWNoaW5lX0xlYXJuaW5nX2FuZF9OZXVyYWxfTmV0d29ya3NfSUlJX0VwaXBoYW55XzIwMjMgaXMgZnJlZSBzb2Z0d2FyZTogeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeSAtLT4KPCEtLSBpdCB1bmRlciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFzIHB1Ymxpc2hlZCBieSAtLT4KPCEtLSB0aGUgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uIHZlcnNpb24gMyBvZiB0aGUgTGljZW5zZS4gLS0+Cgo8IS0tIE1hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMyBpcyBkaXN0cmlidXRlZCBpbiB0aGUgaG9wZSB0aGF0IGl0IHdpbGwgYmUgdXNlZnVsLCAtLT4KPCEtLSBidXQgV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGllZCB3YXJyYW50eSBvZiAtLT4KPCEtLSBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlIC0tPgo8IS0tIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuIC0tPgoKPCEtLSBZb3Ugc2hvdWxkIGhhdmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSAtLT4KPCEtLSBhbG9uZyB3aXRoIE1hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMyAgSWYgbm90LCBzZWUgPGh0dHA6Ly93d3cuZ251Lm9yZy9saWNlbnNlcy8+LiAtLT4KCjwhLS0gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gLS0+CgoKCltCYWNrIHRvIFJFQURNRV0oaHR0cHM6Ly9naXRodWIuY29tL2dlb3JnaW9zLXN0YXRzL01hY2hpbmVfTGVhcm5pbmdfYW5kX05ldXJhbF9OZXR3b3Jrc19JSUlfRXBpcGhhbnlfMjAyMy90cmVlL21haW4vQ29tcHV0ZXJfcHJhY3RpY2FsI2FpbSkKCmBgYHtyfQpybShsaXN0PWxzKCkpCmBgYAoKCi0tLQoKKioqQWltKioqCgpTdHVkZW50cyB3aWxsIGJlY29tZSBhYmxlIHRvOiAgCgorIHByYWN0aWNlIGluIFIsICAKCisgaW1wbGVtZW50IEZlZWQgRm9yd2FyZCBOZXVyYWwgTmV0d29yayB3aXRoIFIgcGFja2FnZSBubmV0IGluIFIuICAgCgotLS0KCioqKlJlYWRpbmcgbWF0ZXJpYWwqKioKCgorIExlY3R1cmUgbm90ZXM6ICAKICAgICsgW0hhbmRvdXQgNTogQXJ0aWZpY2lhbCBuZXVyYWwgbmV0d29ya3NdKGh0dHBzOi8vZ2l0aHViLmNvbS9nZW9yZ2lvcy1zdGF0cy9NYWNoaW5lX0xlYXJuaW5nX2FuZF9OZXVyYWxfTmV0d29ya3NfSUlJX0VwaXBoYW55XzIwMjMvYmxvYi9tYWluL0xlY3R1cmVfaGFuZG91dHMvMDUuQXJ0aWZpY2lhbF9uZXVyYWxfbmV0d29ya3MucGRmKSAgCiAgICArIFtSaXBsZXksIEIuLCBWZW5hYmxlcywgVy4sICYgUmlwbGV5LCBNLiBCLiAoMjAxNikuIFBhY2thZ2Ug4oCYbm5ldOKAmS4gUiBwYWNrYWdlIHZlcnNpb24sIDcoMy0xMiksIDcwMC5dKGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3dlYi9wYWNrYWdlcy9ubmV0L25uZXQucGRmKSAgCgorIFJlZmVyZW5jZSBmb3IgKlIqOiAgCiAgICArIFtDaGVhdCBzaGVldCB3aXRoIGJhc2ljIGNvbW1hbmRzXShodHRwczovL3d3dy5yc3R1ZGlvLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAxNi8xMC9yLWNoZWF0LXNoZWV0LTMucGRmKSAgIAoKKyBSZWZlcmVuY2Ugb2YgKnJtYXJrZG93biogKG9wdGlvbmFsIGdpdmVuIGFzIHN1cHBsZW1lbnRhcnkgbWF0ZXJpYWwpOiAgCiAgICArIFtSIE1hcmtkb3duIGNoZWF0c2hlZXRdKGh0dHBzOi8vd3d3LnJzdHVkaW8uY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE2LzAzL3JtYXJrZG93bi1jaGVhdHNoZWV0LTIuMC5wZGYpICAKICAgICsgW1IgTWFya2Rvd24gUmVmZXJlbmNlIEd1aWRlXShodHRwOi8vNDQycjU4a2M4a2UxeTM4ZjYyc3NiMjA4LXdwZW5naW5lLm5ldGRuYS1zc2wuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE1LzAzL3JtYXJrZG93bi1yZWZlcmVuY2UucGRmKSAgCiAgICArIFtrbml0ciBvcHRpb25zXShodHRwczovL3lpaHVpLm5hbWUva25pdHIvb3B0aW9ucykKCisgUmVmZXJlbmNlIGZvciAqTGF0ZXgqIChvcHRpb25hbCBnaXZlbiBhcyBzdXBwbGVtZW50YXJ5IG1hdGVyaWFsKTogIAogICAgKyBbTGF0ZXggQ2hlYXQgU2hlZXRdKGh0dHBzOi8vd2NoLmdpdGh1Yi5pby9sYXRleHNoZWV0L2xhdGV4c2hlZXQtYTQucGRmKSAgCgotLS0KCioqKk5ldyBzb2Z0d2FyZSoqKiAgIAoKKyBSIHBhY2thZ2UgYGJhc2VgIGZ1bmN0aW9uczogICAgCiAgICArIGBzZXQuc2VlZHtiYXNlfWAgCgorIFIgcGFja2FnZSBgbm5ldGAgZnVuY3Rpb25zOiAgICAKICAgICsgYG5uZXR7bm5ldH1gICwgYGNsYXNzLmluZHtubmV0fWAgLCBgcHJlZGljdHtubmV0fWAgLCBgd2hpY2guaXMubWF4e25uZXR9YCAKCi0tLQoKCmBgYHtyLCByZXN1bHRzPSJoaWRlIn0KIyBMb2FkIFIgcGFja2FnZSBmb3IgcHJpbnRpbmcKbGlicmFyeShrbml0cikKYGBgCgpgYGB7cn0KIyBTZXQgYSBzZWVkIG9mIHRoZSByYW5kb24gbnVtYmVyIGdlbmVyYXRvcgpzZXQuc2VlZCgyMDIzKQpgYGAKCiMgRmFtaWxpYXJpdHkgd2l0aCBhbmFseXNpcyB3aXRoIGZlZWQtZm9yd2FyZCBOZXVyYWwgTmV0d29ya3Mgd2l0aCBubmV0CgpXZSB3aWxsIHVzZSB0aGUgUiBwYWNrYWdlIG5uZXQuIEl0IGlzIGF2YWlsYWJsZSBmcm9tICAKCisgW2h0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3dlYi9wYWNrYWdlcy9ubmV0L10oaHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvd2ViL3BhY2thZ2VzL25uZXQvKSAgCgpUaGUgcmVmZXJlbmNlIG1hbnVhbCBpcyBhdmFpbGFibGUgZnJvbSAgCgorIFtodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy93ZWIvcGFja2FnZXMvbm5ldC9ubmV0LnBkZl0oaHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvd2ViL3BhY2thZ2VzL25uZXQvbm5ldC5wZGYpICAKCkRldGFpbHMKCisgbm5ldCBmaXRzIHNpbmdsZS1oaWRkZW4tbGF5ZXIgbmV1cmFsIG5ldHdvcmssIHBvc3NpYmx5IHdpdGggc2tpcC1sYXllciBjb25uZWN0aW9ucy4gIAoKIyMgVGFzazogSW5zdGFsbCBubm5ldCAoZ2l2ZW4pICAKCmBgYHtyfQojIyBidWlsZCB2ZXJzaW9uIChyZWNvbW1lbmRlZCkKI2luc3RhbGwucGFja2FnZXMoIm5uZXQiKQojIyBsaW51eCBidWlsZAojaW5zdGFsbC5wYWNrYWdlcygiaHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvc3JjL2NvbnRyaWIvbm5ldF83LjMtMTgudGFyLmd6IiwgcmVwb3MgPSBOVUxMLCB0eXBlID0gInNvdXJjZSIpCiMjIHdpbmRvd3MgYnVpbGQKI2luc3RhbGwucGFja2FnZXMoImh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL2Jpbi93aW5kb3dzL2NvbnRyaWIvNC4zL25uZXRfNy4zLTE4LnppcCIsIHJlcG9zID0gTlVMTCwgdHlwZSA9ICJzb3VyY2UiKQpgYGAKIyMgVGFzazogTG9hZCB0aGUgUiBwYWNrYWdlIG5uZXQgKGdpdmVuKSAgCgpgYGB7cn0KbGlicmFyeShubmV0KQpgYGAKCiMjIFRhc2s6IEFib3V0IG5uZXQgY29tbWFuZHMgKHRvIGJlIGRvbmUgYXQgaG9tZSkgIAoKQ2hlY2sgb3V0IFIgcGFja2FnZSBubmV0IGNvbW1hbmRzIGZyb20gdGhlIHJlZmVyZW5jZSBtYW51YWwgaXMgYXZhaWxhYmxlIGZyb20gIAoKKyBbaHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvd2ViL3BhY2thZ2VzL25uZXQvbm5ldC5wZGZdKGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3dlYi9wYWNrYWdlcy9ubmV0L25uZXQucGRmKSAKCmluIHBhcnRpY3VsYXI6ICBubmV0e25uZXR9LCBwcmVkaWN0Lm5uZXR7bm5ldH0sIHdoaWNoLmlzLm1heHtubmV0fSwgYW5kIGNsYXNzLmluZHtubmV0fS4KCgojIE5OIG9uIGNsYXNzaWZpY2F0aW9uIHByb2JsZW0gd2l0aCBtdWx0aXBsZSBjbGFzc2VzICAKClRoaXMgaXMgdGhlICoqQ2FzZSA0LiAoTXVsdGktY2xhc3MgY2xhc3NpZmljYXRpb24gcHJvYmxlbSkqKiBmcm9tIHRoZSAiSGFuZG91dCA1OiBBcnRpZmljaWFsIG5ldXJhbCBuZXR3b3JrcyIuCgpUaGUgc2ltaWxhcml0eSBpcyBhYm91dCB0aGUgcHJvYmxlbSB0byBiZSBhZGRyZXNzZWQuIERpZmZlcmVudCBwcmVkaWN0b3IgcnVsZXMgb3IgbG9zcyBmdW5jdGlvbnMgbWF5IGJlIHVzZWQuCgojIyBUYXNrOiBMb2FkIGlyaXMge2RhdGFzZXRzfQkgZGF0YSAoZ2l2ZW4pIAoKTG9hZCB0aGUgaXJpcyB7ZGF0YXNldHN9CWRhdGEsIGFuZCBwcmludCB0aGVtLiAgCgpgYGB7cn0KZGF0YShpcmlzKQppcmlzCmBgYAoKIyMgVGFzazogTW9kaWZ5IHRoZSBkYXRhIChnaXZlbikKCkNyZWF0ZSBhbiBvYmplY3QgInkiIHdpdGggdGhlIHRhcmdldHMgb2YgdGhlIGV4YW1wbGVzIChkYXRhc2V0KS4gIAoKVG8gZG8gdGhpcyB1c2UgdGhlIGZ1bmN0aW9uICJjbGFzcy5pbmR7bm5ldH0iIHRvIGdlbmVyYXRlIGEgY2xhc3MgaW5kaWNhdG9yIGZ1bmN0aW9uIGZyb20gYSBnaXZlbiBmYWN0b3IuIEZ1bmN0aW9uICJjbGFzcy5pbmQiIHJlY2VpdmVzIGFzIGFyZ3VtZW50cyBmYWN0b3Igb3IgdmVjdG9yIG9mIGNsYXNzZXMgZm9yIGNhc2VzLCBhbmQgcmV0dXJucyBhIG1hdHJpeCB3aGljaCBpcyB6ZXJvIGV4Y2VwdCBmb3IgdGhlIGNvbHVtbiBjb3JyZXNwb25kaW5nIHRvIHRoZSBjbGFzcy4gIAoKSXQgaXMgdXNlZCBpbiBwcm9ibGVtcyB3aXRoIGNsYXNzaWZpY2F0aW9uIHByb2JsZW0gd2l0aCBtdWx0aXBsZSBjbGFzc2VzLCBpbiBvcmRlciB0byBjcmVhdGUgYSBzdWl0YWJsZSBvdXRwdXQgZm9yIHRoZSBmdW5jdGlvbiBubmV0e25uZXR9LiBDaGVjayAiP2NsYXNzLmluZCIuICAKCgpgYGB7cn0KeTwtIGNsYXNzLmluZCggYyhyZXAoInMiLCA1MCksIHJlcCgiYyIsIDUwKSwgcmVwKCJ2IiwgNTApKSApCmBgYApDcmVhdGUgYW4gb2JqZWN0ICJ4IiB3aXRoIHRoZSBmZWF0dXJlcyBvZiB0aGUgZXhhbXBsZXMgKGRhdGFzZXQpIHRoYXQgY29udGFpbnMgdGhlIHZhcmlhYmxlczsgIlNlcGFsLkxlbmd0aCIsICJTZXBhbC5XaWR0aCIsIGFuZCAiUGV0YWwuTGVuZ3RoIgoKYGBge3J9CnggPC1pcmlzWywtYyg0LDUpXSAKYGBgCgoKIyMgQ3JlYXRlIGEgdHJhaW5pbmcgZGF0YXNldCBhbmQgYSB2YWxpZGF0aW4gZGF0YS1zZXQgIAoKR2V0IGEgcmFuZG9tIHN1YiBzYW1wbGUgb2YgdGhlICR5JCBhbmQgJHgkIG9mIHNpemUgJDc1JCB0byBiZSB1c2VkIGFzIGEgdHJhaW5pbmcgZGF0YSBzZXQuIAoKTmFtZSB0aGUgdGFyZ2V0IHBhcnQgYXMgInlfdHJhaW4iLGEgbmQgdGhlIGZlYXR1cmVzIHBhcnQgYXMgInhfdHJhaW4iLiAKCmBgYHtyfQppbmQgPC0gYyhzYW1wbGUoMTo1MCwyNSksIHNhbXBsZSg1MToxMDAsMjUpLCBzYW1wbGUoMTAxOjE1MCwyNSkpCnlfdHJhaW4gPC0geVtpbmQsXQp4X3RyYWluIDwtIHhbaW5kLF0KYGBgCgpUaGUgcmVzdCBvZiB0aGUgZGF0YSBzZXQgLCB1c2UgaXQgYXMgYSB2YWxpZGF0aW9uIGRhdGEgc2V0LiAKCk5hbWUgdGhlIHRhcmdldCBwYXJ0IGFzICJ5X3ZhbGlkIixhIG5kIHRoZSBmZWF0dXJlcyBwYXJ0IGFzICJ4X3ZhbGlkIi4gCgpgYGB7cn0KeV92YWxpZCA8LSB5Wy1pbmQsXQp4X3ZhbGlkIDwtIHhbLWluZCxdCmBgYAoKIyMgQ3JlYXRlIGEgdHJhaW5pbmcgZGF0YXNldCBhbmQgYSB2YWxpZGF0aW4gZGF0YS1zZXQgCgpUcmFpbiBhIE5OIHRvIGFkZHJlc3MgdGhlIGNsYXNzaWZpY2F0aW9uIHByb2JsZW0gd2l0aCBwdXJwb3NlIGZvciBhIGdpdmVuIGZlYXR1cmUgIngiIHRvIGJlIGFibGUgdG8gY2xhc2lmeSBpdCBhcyBzZXRvc2EsIHZlcnNpY29sb3IsIG9yIHZpcmdpbmljYS4gCgpCeSB1c2luZyB0aGUgUiBmdW5jdGlvbiBubmV0e25uZXR9IGZpdCBhIGZlZWQgZm9yd2FyZCBuZXVyYWwgbmV0d29yayB3aXRoOgoKKyBvbmUgaGlkZGVuIGxheWVyLAoKKyAgdW5pdHMgaW4gdGhlIGhpZGRlbiBsYXllcjsgaS5lLiAkVD0yJAoKKyB0aGUgb3V0cHV0IGFjdGl2YXRpb24gZnVuY3Rpb24gaXMgc29mdG1heAoKKyB1c2UgZGVjYXkgImRlY2F5PTAuMDAwMDEiIC0tIHRoZSBhcmd1bWVudHMgb2Ygbm5ldAoKKyB1c2UgbWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBmb3IgdGhlIFNHRCAibWF4aXQgPSAyMDAiIC0tIHRoZSBhcmd1bWVudHMgb2Ygbm5ldAoKRG8gaXQgYmVsb3cKCgpgYGB7cn0Kbm5ldC4yLm91dCA8LSBubmV0KHhfdHJhaW4sIHlfdHJhaW4sICAKICAgICAgICAgICAgc2l6ZSA9IDIsIAogICAgICAgICAgICBkZWNheSA9IDVlLTQsIAogICAgICAgICAgICBtYXhpdCA9IDIwMCkKYGBgCgojIyBQcmVkaWN0IAoKClVzaW5nIHRoZSBvdXRwdXQgZnJvbSBubmV0e25uZXR9LCBwcmVkaWN0IC8gY2xhc3NpZnkgdGhlIGZlYXR1cmVzIGluIHRoZSB2YWxpZGF0aW9uIGRhdGFzZXQsIGFuZCBjb21wYXJlIHdpdGggdGhlIGFjdHVhbCBjbGFzc2VzLiAgCgpZb3UgbWF5IHVzZSBmdW5jdGlvbiAibWF4Q29sIHtiYXNlfSIKCkRvIGl0IGJlbG93CgpgYGB7cn0KI3ByZWRpY3Rpb25zCm5uZXQuMi5wcmVkIDwtIHByZWRpY3Qobm5ldC4yLm91dCwgeF92YWxpZCkKbWF4LmNvbChubmV0LjIucHJlZCkKI2FjdHVhbCBsYWJlbHMKbWF4LmNvbCh5X3ZhbGlkKQojIGNvbXBhcmUKbWF0Y2ggPSBtZWFuKG1heC5jb2wobm5ldC4yLnByZWQpPT1tYXguY29sKHlfdmFsaWQpKQptYXRjaCAKYGBgCgoKCgoK</div>
 
 
 
@@ -2269,7 +2096,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Stochastic_learning_methods_tasks.Rmd");
+  window.initializeSourceEmbed("Artificial_Neural_Networks_Artificial_Neural_Networks_MultiClassClassification_solutions.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

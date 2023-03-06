@@ -276,9 +276,65 @@ You may use the R function **grad{numDeriv}** to numerically compute the gradien
 
 
 ```{r}
+Tmax <- 500
 #
+w_seed <- c(-1,0)
 #
+eta <- 10^(-6)
+eta_C <- eta
+eta_s <- 0.51
+eta_T0 <- 0.3*Tmax
+eta_T1 <- 0.6*Tmax
 #
+batch_size <- 1000
+#
+tau <- 1.0
+#
+# Set the seed
+w <- w_seed
+w_chain <- c(w)
+# iterate
+t <- 1
+Qterm <- 0
+#
+# iterate
+#
+while ( (Qterm != 1) ) {
+  # counter 
+  t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # learning rate
+  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
+  # sub-sample
+  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
+  # update
+  ## likelihood
+  grad_est_lik <- rep( 0.0, times=length(w) )
+  for (j in J) {
+    aux_fun <- function(w, z=z_obs[j,]){
+      gr <- log_sampling_pdf(z, w)
+      return(gr)
+    }
+    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
+  }
+  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
+  w <- w +eta*grad_est_lik ; 
+  ## prior
+  aux_fun <- function(w){
+    d <- length(w)
+    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
+    return(gr)
+  }
+  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  ## noise
+  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # termination criterion
+  if  ( t >= Tmax ) {
+    Qterm <- 1
+  }
+  # record the produced chain
+  w_chain <- rbind(w_chain,w)
+}
 ```
 
 
@@ -289,9 +345,11 @@ Plot the trace plots of chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ against the i
 If you are not happy with the convergence, feel free to tune the algorithmic parameters in the previous code properly, and run it again.  
 
 ```{r}
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
 #
-#
-#
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
 ## Task (for the computer practical)   
@@ -318,15 +376,78 @@ w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J
  and $v$ is the gradient. 
 
 ```{r}
+Tmax <- 500
 #
+w_seed <- c(-1,0)
 #
+eta <- 10^(-2)
+eta_C <- eta
+eta_s <- 0.51
+eta_T0 <- 0.3*Tmax
+eta_T1 <- 0.6*Tmax
 #
+batch_size <- 1000
+#
+tau <- 1.0
+#
+# Set the seed
+w <- w_seed
+w_chain_clipping <- c(w)
+# iterate
+t <- 1
+Qterm <- 0
+#
+clipping_threshold <- 10
+#
+# iterate
+#
+while ( (Qterm != 1) ) {
+  # counter 
+  t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # learning rate
+  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
+  # sub-sample
+  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
+  # update
+  ## likelihood
+  grad_est_lik <- rep( 0.0, times=length(w) )
+  for (j in J) {
+    aux_fun <- function(w, z=z_obs[j,]){
+      gr <- log_sampling_pdf(z, w)
+      return(gr)
+    }
+    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
+  }
+  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
+  # gradient clipping/rescaring
+  norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
+  grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
+  w <- w +eta*grad_est_lik ; 
+  ## prior
+  aux_fun <- function(w){
+    d <- length(w)
+    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
+    return(gr)
+  }
+  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  ## noise
+  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # termination criterion
+  if  ( t >= Tmax ) {
+    Qterm <- 1
+  }
+  # record the produced chain
+  w_chain_clipping <- rbind(w_chain_clipping,w)
+}
 ```
 
 ```{r}
+plot(w_chain[,1], type='l') +
+abline(h=w_true[1], col='red')
 #
-#
-#
+plot(w_chain[,2], type='l') +
+abline(h=w_true[2], col='red')
 ```
 
 
@@ -337,9 +458,8 @@ Let's go back to the code without using the clipping gradient.
 Based on the above, copy the tail end of the generated chain $w^(t)$ after discarding the burn in, as 'w_chain_output'.  
 
 ```{r}
-#
-#
-#
+T_bunrin <- as.integer(0.6*Tmax)
+w_chain_output <- w_chain[T_bunrin:Tmax,]
 ```
 
 
@@ -349,9 +469,9 @@ Based on the above, copy the tail end of the generated chain $w^(t)$ after disca
 Plot the histograms plots of output chains $\{w_1^{(t)}\}$ and $\{w_2^{(t)}\}$ for the estimation of the marginal posterior distributions of the dimensions of $w$. 
 
 ```{r}
+hist(w_chain_output[,1]) 
 #
-#
-#
+hist(w_chain_output[,2]) 
 ```
 
 ## Task  (for homework practice)   
@@ -365,9 +485,8 @@ To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator
 based on SGLD output chain.
 
 ```{r}
-#
-#
-#
+w_est = mean(rowMeans(w_chain_output))
+w_est
 ```
 
 
@@ -390,9 +509,14 @@ Particularly, compute the point estimate
 
 
 ```{r}
-#
-#
-#
+x_new <- c(1,0.5)
+T <- dim(w_chain_output)[1]
+h_est <- 0.0 
+for (t in 1:T) {
+  h_est <- h_est + prediction_rule( x_new , w_chain_output[t,] )
+}
+h_est <- h_est / T
+h_est
 ```
 
 Now, compute the point estimate  
@@ -404,26 +528,35 @@ Now, compute the point estimate
 by just plugin in the estimate $\hat{w}$. 
 
 ```{r}
-#
-#
-#
+x_new <- c(1,0.5)
+w_est <- colMeans(w_chain_output)
+h_est <- prediction_rule( x_new , w_est )
+h_est
 ```
 
 Now, estimate the pdf of the prediction rule at the example with feature $x_\text{new}=c(1, 0.5)$ (to represent the uncertainty) by using a histogram  
 
 ```{r}
-#
-#
-#
+x_new <- c(1,0.5)
+T <- dim(w_chain_output)[1]
+h_chain <- c()
+for (t in 1:T) {
+  h_chain <- c( h_chain , 
+                prediction_rule( x_new , w_chain_output[t,] ) 
+                )
+}
+hist(h_chain)
 ```
 
 
 
-# Mixture model  (for homework practice)   
+# Mixture model  (for homework practice )
 
 ```{r}
 rm( list = ls() )
 ```
+
+This task is given as a supplementary material, for your information. You can do it at home for practice.   
 
 The following example is given as a homework practice.   
 
@@ -585,15 +718,75 @@ Plot the trace plot and the histogram of the generated chain $\{w^{(t)}\}$. Did 
 
 
 ```{r}
+Tmax <- 500
 #
+w_seed <- 0.0
 #
+eta <- 10^(-2)
+eta_C <- eta
+eta_s <- 0.51
+eta_T0 <- 0.3*Tmax
+eta_T1 <- 0.6*Tmax
 #
+batch_size <- 1000
+#
+tau <- 1.0
+#
+# Set the seed
+w <- w_seed
+w_chain_clipping <- c(w)
+# iterate
+t <- 1
+Qterm <- 0
+#
+clipping_threshold <- 10
+#
+# iterate
+#
+while ( (Qterm != 1) ) {
+  # counter 
+  t <- t+1
+  cat( t ) ; cat( ' ' ) ## counter added for display reasons
+  # learning rate
+  eta <- learning_rate(t, eta_T0, eta_T1, eta_C, eta_s)
+  # sub-sample
+  J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
+  # update
+  ## likelihood
+  grad_est_lik <- rep( 0.0, times=length(w) )
+  for (j in J) {
+    aux_fun <- function(w, z=z_obs[j]){
+      gr <- log_sampling_pdf(z, w)
+      return(gr)
+    }
+    grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
+  }
+  grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
+  # gradient clipping/rescaring
+  norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
+  grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
+  w <- w +eta*grad_est_lik ; 
+  ## prior
+  aux_fun <- function(w){
+    d <- length(w)
+    gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
+    return(gr)
+  }
+  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  ## noise
+  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # termination criterion
+  if  ( t >= Tmax ) {
+    Qterm <- 1
+  }
+  # record the produced chain
+  w_chain_clipping <- rbind(w_chain_clipping,w)
+}
 ```
 
 ```{r}
-#
-#
-#
+plot(w_chain_clipping, type = 'l')
+hist(w_chain_clipping)
 ```
 
 

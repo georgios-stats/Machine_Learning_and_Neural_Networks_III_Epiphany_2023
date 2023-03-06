@@ -223,11 +223,11 @@ R implementation:
 
 
 ```{r}
-#
-#
-#
+nn.out.1 <- nnet(O3 ~ temp + ibh + ibt, 
+                 ozone, 
+                 size=2, 
+                 linout=TRUE)
 ```
-
 ## Task: A naive training of NN (to be done in the computer practical class) 
 
 Let us denote the training dataset as usual by $\left\{ z_{i}=\left(x_{i},y_{i}\right)\right\}$.  
@@ -239,9 +239,8 @@ Compute the produced error function from the naively trained NN
 \]
 
 ```{r}
-#
-#
-#
+EF <- sum((nn.out.1$fitted.values-ozone$O3)^2)
+EF  
 ```
 
 Compute the generated RSS representing the unexplained variation if we consider no input features 
@@ -250,10 +249,9 @@ Compute the generated RSS representing the unexplained variation if we consider 
 \text{RSS}=\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}
 \]
 
-```{r}
-#
-#
-#
+```{r}  
+RSS  <- sum((ozone$O3-mean(ozone$O3))^2)
+RSS
 ```
 
 How EF and RSS compare?  
@@ -261,13 +259,17 @@ How EF and RSS compare?
 You may observe that they are close --thats bad news; WHY?.  
 
 ```{r}
-#
-#
-#
+EF  
+RSS
+# Well they are close, so our naively trained NN has no predictive ability. 
+#This is possibly due to a careless training of the NN, aka, the estimated weights are not good choices. 
+#This is because training/learning NN is a non-convex learning problem, aka there are many local minima, some of them away from the global minimum. 
+#I need to find a way to discover better values for the weights
+# It can be done by standardizing the dataset values, and training the NN multiple times with different starting values for the weights (aka seeds)  
 ```
 
 
-## Task: Standardise inputs / outputs (given)  
+## Task: Standardise inputs / outputs (given)
 
 The problem with the above NN, may be that, in the nnet R package, the seeds (starting values) in the SGD used to learn the weights of the NN were "bad".  
 
@@ -315,10 +317,28 @@ Save the produced object (output) of the corresponding nnet{nnet} call as your b
 
 Do it below 
 
-```{r}
+```{r, results="hide"}
+Nrealizations <- 100
 #
+nn.out.1.best <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T)
+#EF.best <- sum((nn.out.1.best$fitted.values-ozone[$O3],1])^2)
+EF.best <- nn.out.1.best$value
 #
-#
+for (r in 1:Nrealizations) {
+  #
+  set.seed( r )
+  #
+  nn.out.1.new <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T)
+  EF.new <- nn.out.1.new$value
+  #
+  if (EF.new < EF.best) {
+   #
+    nn.out.1.best <- nn.out.1.new
+    #
+    EF.best <- EF.new
+  }
+}
+
 ```
 
 Report your discovered best Error Function value EF, and compare it to the RSS computed earlier.   
@@ -332,11 +352,10 @@ Is it better now?
 Do it below
 
 ```{r}
-#
-#
-#
+EF.best
+RSS  <- sum((ozone$O3-mean(ozone$O3))^2)
+RSS
 ```
-
 ## Task: Print the estimated weights (to be done in the computer practical class)
 
 Print the estimated weights of the fitted feed forward neural network.  
@@ -346,11 +365,8 @@ Use the command **summary{base}** to do this  as "summary( output object from nn
 Do it below
 
 ```{r}
-#
-#
-#
+summary(nn.out.1.best)
 ```
-
 Description of what you have gotten:  
 
 + i2->h1, refers to the link between the second input variable and the first hidden neuron.  
@@ -428,11 +444,37 @@ Essentially, do the same as above but with for **ibh** instead of **temp**, i.e.
 
 ```{r}
 #
+# Create the input object x that will be used in the function predict() 
 #
+xx <-expand.grid(temp=0,ibh=seq(-3,3,0.1),ibt=0)
 #
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$ibh*ozscales['ibh']+ozmeans['ibh']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="ibh",ylab="O3")
 ```
 
-## Task: Perform the training with shrinckage  (given as a homework)
+## Task: Plot predictions (to be done in the computer practical class)
 
 Plot the predicted "O3" values for **ibt** in the range $(-3,3)$, while the other two input variables **ibh** and **temp** are fixed to points **ibh=0**, **ibt=0**.  
 
@@ -442,11 +484,37 @@ Essentially, copy / past the code above and swap **ibt** and **temp**, i.e. use
 
 ```{r}
 #
+# Create the input object x that will be used in the function predict() 
 #
+xx <-expand.grid(temp=0,ibh=0,ibt=seq(-3,3,0.1))  
 #
+# Make the predictions
+#
+pred.1.best <- predict(nn.out.1.best,new=xx)
+#
+# Your trained model is scaled, you need to bring its unites (input/output) back to the natural scale
+#
+# Here is how you get the mean and varances of the original data set
+#
+ozmeans <- attributes(ozone.rescaled)$"scaled:center"
+ozscales <- attributes(ozone.rescaled)$"scaled:scale"
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+xx.rescaled <- xx$ibt*ozscales['ibt']+ozmeans['ibt']
+#
+# Apply the re-scaling back to the original data for the inputs
+#
+pred.1.best.rescaled <- pred.1.best*ozscales['O3']+ozmeans['O3']
+#
+# plot
+#
+plot(xx.rescaled,
+     pred.1.best.rescaled,
+     cex=2,xlab="ibt",ylab="O3")
 ```
 
-## Task: Perform the training with shrinckage  (given as a homework)
+## Task: Perform the training with shrinckage  (to be done in the computer practical class)  
 
 The observed  discontinuities in the plots may possibly be due to the unreasonably large weights in the NN.  
 
@@ -472,14 +540,32 @@ Save the produced output object of the corresponding **nnet{nnet}** call as your
 Do it below 
 
 
-```{r}
+```{r, results="hide"}
+Nrealizations <- 100
 #
+nn.out.1.decay.best <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T, decay=0.001)
+#EF.best <- sum((nn.out.1.best$fitted.values-ozone[$O3],1])^2)
+EF.decay.best <- nn.out.1.best$value
 #
-#
+for (r in 1:Nrealizations) {
+  #
+  set.seed( r )
+  #
+  nn.out.1.new <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T, decay=0.001)
+  EF.new <- nn.out.1.new$value
+  #
+  if (EF.new < EF.best) {
+   #
+    nn.out.1.decay.best <- nn.out.1.new
+    #
+    EF.decay.best <- EF.new
+  }
+}
+
 ```
 
 
-## Task: Print the produced weights  (to be done in the computer practical class)
+## Task: Print the weights 
 
 Print the produced Error Function, and compare them to those you computed without the decay. Why do you think you observe this?    
 
@@ -488,17 +574,12 @@ Print the estimated weights, and compare them to those you computed without the 
 Do it below.  
 
 ```{r}
-#
-#
-#
+EF.decay.best
 ```
 
 ```{r}
-#
-#
-#
+summary(nn.out.1.decay.best)
 ```
-
 
 ## Task: Prediction plots  (given as a homework)
 
@@ -628,9 +709,10 @@ Do it below
 
 
 ```{r}
-#
-#
-#
+nnet.2.out <- nnet(x_train, y_train,  
+            size = 2, 
+            decay = 5e-4, 
+            maxit = 200)
 ```
 
 ## Predict (given as a homework)  
@@ -642,11 +724,15 @@ You may use function "maxCol {base}"
 
 Do it below
 
-
 ```{r}
-#
-#
-#
+#predictions
+nnet.2.pred <- predict(nnet.2.out, x_valid)
+max.col(nnet.2.pred)
+#actual labels
+max.col(y_valid)
+# compare
+match = mean(max.col(nnet.2.pred)==max.col(y_valid))
+match 
 ```
 
 

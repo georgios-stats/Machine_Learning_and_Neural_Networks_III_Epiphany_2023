@@ -51,7 +51,7 @@ Learning problem: Definitions, notation, and formulation -A recap
 
 Elements of convex learning problems  
 
-+ [04.Stochastic_gradient_Langevine_dynamics.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/04.Stochastic_gradient_Langevine_dynamics.pdf)  
++ [01.Convex_learning_problems.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Lecture_handouts/01.Convex_learning_problems.pdf)  
 
 
 Stochastic gradient descent  

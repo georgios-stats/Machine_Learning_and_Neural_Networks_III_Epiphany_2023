@@ -422,7 +422,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
   </mrow>
  </mrow></math> defined as 
-<div style = "text-align: center;"><img src="lyxpreviewcqRgpF1.png" alt="Mathematical Equation" />
+<div style = "text-align: center;"><img src="lyxpreviewpdrSZj1.png" alt="Mathematical Equation" />
 </div>
  where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>b</mi>
@@ -5034,7 +5034,94 @@ The bias can be computed by KKT condition <a href="#eq__12">(5.2)</a>, it is <ma
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
   </mrow>
- </mrow></math> then<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> then, for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>i</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>I</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> it is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msubsup>
+    <mrow><mi>y</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msubsup><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &lang; </mo>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msup><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo> &rang; </mo><mo>+</mo>
+    <msup>
+     <mrow><mi>b</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>-</mo>
+   <msub>
+    <mrow><mi>y</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mn>0</mn><mover accent='false'><mo> &#x27F9; </mo>
+   <mrow>
+    <msubsup>
+     <mrow><mi>y</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msubsup><mo>=</mo><mn>1</mn>
+   </mrow></mover><mo> &lang; </mo>
+   <msup>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msup><mo>,</mo>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo> &rang; </mo><mo>+</mo>
+   <msup>
+    <mrow><mi>b</mi>
+    </mrow>
+    <mrow><mo>*</mo>
+    </mrow>
+   </msup><mo>-</mo>
+   <msub>
+    <mrow><mi>y</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> and summing up all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>i</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>I</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>, I get <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -5048,84 +5135,34 @@ The bias can be computed by KKT condition <a href="#eq__12">(5.2)</a>, it is <ma
     </mrow>
    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <mrow>
+   <mrow><mo> &lang; </mo>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msup><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo> &rang; </mo><mo>+</mo>
+    <msup>
+     <mrow><mi>b</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msup><mo>-</mo>
     <msub>
      <mrow><mi>y</mi>
      </mrow>
      <mrow><mi>i</mi>
      </mrow>
-    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-    <mrow><mo> &lang; </mo>
-     <msup>
-      <mrow><mi>w</mi>
-      </mrow>
-      <mrow><mo>*</mo>
-      </mrow>
-     </msup><mo>,</mo>
-     <msub>
-      <mrow><mi>x</mi>
-      </mrow>
-      <mrow><mi>i</mi>
-      </mrow>
-     </msub><mo> &rang; </mo><mo>+</mo>
-     <msup>
-      <mrow><mi>b</mi>
-      </mrow>
-      <mrow><mo>*</mo>
-      </mrow>
-     </msup>
-    </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>-</mo><mn>1</mn>
+    </msub>
    </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>=</mo><mn>0</mn><mo> &#x27F9; </mo>
-   <msup>
-    <mrow><mi>b</mi>
-    </mrow>
-    <mrow><mo>*</mo>
-    </mrow>
-   </msup><mo>=</mo>
-   <mfrac>
-    <mrow><mn>1</mn>
-    </mrow>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
-
-     <mstyle mathvariant='script'><mi>I</mi>
-     </mstyle>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
-
-    </mrow>
-   </mfrac>
-   <msub>
-    <mrow><mo> &sum; </mo>
-    </mrow>
-    <mrow>
-     <mrow><mi>i</mi><mo> &isin; </mo>
-      <mstyle mathvariant='script'><mi>I</mi>
-      </mstyle>
-     </mrow>
-    </mrow>
-   </msub>
-   <msub>
-    <mrow><mi>y</mi>
-    </mrow>
-    <mrow><mi>i</mi>
-    </mrow>
-   </msub><mo> &lang; </mo>
-   <msup>
-    <mrow><mi>w</mi>
-    </mrow>
-    <mrow><mo>*</mo>
-    </mrow>
-   </msup><mo>,</mo>
-   <msub>
-    <mrow><mi>x</mi>
-    </mrow>
-    <mrow><mi>i</mi>
-    </mrow>
-   </msub><mo> &rang; </mo>
   </mrow>
  </mrow></math></div>
 </div>

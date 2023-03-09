@@ -6,6 +6,9 @@
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title>LyX Document</title>
 <style type='text/css'>
+/* LyX Provided Styles */
+mstyle.math { font-style: italic; }
+
 /* Layout-provided Styles */
 div.standard {
 text-align: left;
@@ -79,6 +82,22 @@ font-variant: normal;
 font-size: medium;
 
 }
+div.summary {
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.summary_label {
+font-weight: normal;
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
 div.definition {
 font-style: normal;
 font-variant: normal;
@@ -107,22 +126,6 @@ text-align: left;
 span.lemma_label {
 font-weight: bold;
 font-style: normal;
-font-variant: normal;
-font-size: medium;
-
-}
-div.summary {
-font-style: normal;
-font-variant: normal;
-font-size: medium;
-margin-top: 0.7ex;
-margin-bottom: 0.7ex;
-text-align: left;
-
-}
-span.summary_label {
-font-weight: normal;
-font-style: italic;
 font-variant: normal;
 font-size: medium;
 
@@ -268,7 +271,7 @@ div.foot:hover div.foot_inner {
 
 <div style='height:3ex'></div></div>
 <h3 class="subsection_" id='magicparlabel-30'>Aim</h3>
-<div class="plain_layout" id='magicparlabel-31'>To introduce the ideas of learning machines by introducing data into high-dimensional feature spaces for computational and accuracy gains; introduce the kernel trick, kernel functions, extend SVM into the kernel framework. </div>
+<div class="plain_layout" id='magicparlabel-31'>To introduce the ideas of learning machines by introducing data into high-dimensional feature spaces for accuracy gains; introduce the kernel trick, and kernel functions.</div>
 
 <div class="plain_layout" id='magicparlabel-32'><hr />
 
@@ -282,94 +285,312 @@ Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: 
 </ul>
 </li><li class="enumerate_item">Bishop, C. M. (2006). Pattern recognition and machine learning (Vol. 4, No. 4, p. 738). New York: Springer.
 
-<ul class="itemize" id='magicparlabel-50'><li class="itemize_item">Ch. 6 Kernel methods </li>
+<ul class="itemize" id='magicparlabel-50'><li class="itemize_item">Ch. 6.1, 6.2 Kernel methods </li>
 </ul>
 </li></ol>
 </div></div>
 <h2 class="section" id='magicparlabel-51'><span class="section_label">1</span> Intro and motivation</h2>
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-60'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 1.1:  Soft SVM from Computer practical 4</span></div>
+<div class="note" id='magicparlabel-56'><div class="note_item"><span class="note_label">Note 1.</span>
+Consider the Soft SVM with predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>s</mi><mi>i</mi><mi>g</mi><mi>n</mi>
+    </mrow>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> with separator <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo>+</mo>
+   <msub>
+    <mrow><mi>w</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub><mo>+</mo><mi>b</mi><mo>=</mo><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo><mo>+</mo><mi>b</mi>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math>. It can address learning problems where the data can (up to some degree of violation) be separates by a line (Figure <a href="#fig_Linearly_separable_data">a</a>). In more challenging cases where the geometry is strongly non-linear this can totally fail (Figure <a href="#fig_Non_linearly_separable_data_1">b</a>). <div class='float-figure'><div class="plain_layout" id='magicparlabel-60'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 1.1:  Soft SVM from Computer practical 4</span></div>
 <div class='float-figure'><div class="plain_layout" id='magicparlabel-64'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-0.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-0.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  Linearly separable data set, with linear separator</span></div>
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_Linearly_separable_data" />
+Linearly separable data set, with linear separator</span></div>
 </div>
 <div class='float-figure'><div class="plain_layout" id='magicparlabel-72'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-1.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-1.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  Non-linearly separable data set, with linear separator</span></div>
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Non_linearly_separable_data_1" />
+Non-linearly separable data set, with linear separator</span></div>
 </div>
 <div class='float-figure'><div class="plain_layout" id='magicparlabel-80'><img style='width:33%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-2.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Handouts_figures_07_Kernel_Methods_index-2.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  Non-linearly separable data set, with quadratic separator</span></div>
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_Non_linearly_separable_data" />
+Non-linearly separable data set, with quadratic separator</span></div>
 </div>
 
 </div>
-
-
+</div>
+</div>
 
 <div class="standard" id='magicparlabel-89'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-90'><span class="section_label">2</span> Improving expressive power</h2>
 
-<div class="note" id='magicparlabel-98'><div class="note_item"><span class="note_label">Note 1.</span>
+<div class="note" id='magicparlabel-90'><div class="note_item"><span class="note_label">Note 2.</span>
+The accuracy of predictive rule can be improved if I take into account the curvature by adding a quadratic term in the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>2</mn>
+ </mrow></math>nd dimension as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>w</mi>
+   <msub>
+    <mrow><mo>'</mo>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo>+</mo><mi>w</mi>
+   <msub>
+    <mrow><mo>'</mo>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub><mo>+</mo><mi>w</mi>
+   <msub>
+    <mrow><mo>'</mo>
+    </mrow>
+    <mrow><mn>2</mn>
+    </mrow>
+   </msub>
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mn>3</mn>
+    </mrow>
+   </msub><mo>+</mo><mi>b</mi><mo>=</mo><mo> &lang; </mo><mi>w</mi><mo>'</mo><mo>,</mo><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &rang; </mo><mo>+</mo><mi>b</mi>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>1</mn>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msub><mo>,</mo>
+    <msubsup>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msubsup>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> and learning the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>w</mi><mo>'</mo>
+  </mrow>
+ </mrow></math> . It works, (Figure <a href="#fig_Non_linearly_separable_data">c</a>).</div>
+</div>
+
+<div class="standard" id='magicparlabel-91'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-92'><div class="note_item"><span class="note_label">Note 3.</span>
+Consequently, in order to improve the expressiveness of a hypothesis class 
+<span style = "text-align: center;"><img src="lyxpreviewxbPmZO1.png" alt="Mathematical Equation" />
+</span>
+ (for some function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>f</mi>
+ </mrow></math>) with purpose to learn a more accurate predictive rule, it is reasonable to consider an embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, which can possibly be a vector of bases functions such as polynomials, splines, etc..., and work on the learning problem with 
+<span style = "text-align: center;"><img src="lyxpreviewxlnSbP1.png" alt="Mathematical Equation" />
+</span>
+.</div>
+</div>
+
+<div class="standard" id='magicparlabel-93'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-94'><div class="note_item"><span class="note_label">Note 4.</span>
+The above may drastically increase the dimensionality of the problem hence the computational cost and required number of example to train. This challenge is addressed by the Kernel trick.</div>
+</div>
+
+<div class="standard" id='magicparlabel-95'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-96'><div class="note_item"><span class="note_label">Note 5.</span>
+In general, kernel trick allows the design of powerful and cheap extensions of many well known algorithms.</div>
+</div>
+<h2 class="section" id='magicparlabel-101'><span class="section_label">2</span> Improving expressive power</h2>
+
+<div class="note" id='magicparlabel-109'><div class="note_item"><span class="note_label">Note 6.</span>
 To make the class of hypotheses more expressive with purpose to improve accuracy, we can first map the original instance space <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>X</mi>
    </mstyle>
   </mrow>
- </mrow></math> into another space (possibly of a higher dimension) and then learn a hypothesis in that space.</div>
+ </mrow></math> into another space <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>F</mi>
+  </mstyle>
+ </mrow></math> (possibly of a higher dimension) via an embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &psi; </mi>
+ </mrow></math> and then learn a hypothesis in that space.</div>
 </div>
 
-<div class="standard" id='magicparlabel-99'><br />
+<div class="standard" id='magicparlabel-110'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-100'><div class="definition_item"><span class="definition_label">Definition 2.</span>
-A Hilbert space is a vector space, with an inner product, which is also complete<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-104'>Going deeper to completeness is out of the scope.</div>
-</div></div>. </div>
+
+<div class="standard" id='magicparlabel-111'><br />
+
 </div>
 
-<div class="lemma" id='magicparlabel-105'><div class="lemma_item"><span class="lemma_label">Lemma 3.</span>
-If <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="summary" id='magicparlabel-112'><div class="summary_item"><span class="summary_label">Summary 7.</span>
+<a id="sum_The_basic_paradigm" />
+ Consider a hypothesis class 
+<span style = "text-align: center;"><img src="lyxpreviewMXdoVl1.png" alt="Mathematical Equation" />
+</span>
+ where the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>h</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>H</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> defined over <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>X</mi>
   </mstyle>
- </mrow></math> is a linear subspace of a Hilbert space, then every <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is to be trained against data set <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><mi>x</mi><mo> &isin; </mo>
-   <mstyle mathvariant='script'><mi>X</mi>
-   </mstyle>
-  </mrow>
- </mrow></math> can be written as <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>x</mi><mo>=</mo><mi>u</mi><mo>+</mo><mi>v</mi>
-  </mrow>
- </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>u</mi><mo> &isin; </mo>
-   <mstyle mathvariant='script'><mi>X</mi>
-   </mstyle>
-  </mrow>
- </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mo> &lang; </mo><mi>v</mi><mo>,</mo><mi>w</mi><mo> &rang; </mo><mo>=</mo><mn>0</mn>
-  </mrow>
- </mrow></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>w</mi><mo> &isin; </mo>
-   <mstyle mathvariant='script'><mi>X</mi>
-   </mstyle>
-  </mrow>
- </mrow></math>.</div>
-</div>
+  <mrow>
+   <mstyle mathvariant='script'><mi>S</mi>
+   </mstyle><mo>=</mo>
+   <msubsup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
-<div class="standard" id='magicparlabel-106'><br />
+     <mrow>
+      <msub>
+       <mrow><mi>z</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-</div>
+      <mrow>
+       <msub>
+        <mrow><mi>x</mi>
+        </mrow>
+        <mrow><mi>i</mi>
+        </mrow>
+       </msub><mo>,</mo>
+       <msub>
+        <mrow><mi>y</mi>
+        </mrow>
+        <mrow><mi>i</mi>
+        </mrow>
+       </msub>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-<div class="summary" id='magicparlabel-107'><div class="summary_item"><span class="summary_label">Summary 4.</span>
-<a id="sum_The_basic_paradigm" />
-The basic paradigm is as follows:</div>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
-<ol class="enumerate" id='magicparlabel-108'><li class="enumerate_item">Choose a mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
+     </mrow>
+    </mrow>
+    <mrow><mi>m</mi>
+    </mrow>
+   </msubsup>
+  </mrow>
+ </mrow></math> . The basic paradigm involves:</div>
+
+<ol class="enumerate" id='magicparlabel-113'><li class="enumerate_item">Choose a mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &psi; </mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -397,7 +618,7 @@ The basic paradigm is as follows:</div>
     <msub>
      <mrow><mi> &psi; </mi>
      </mrow>
-     <mrow><mi>n</mi>
+     <mrow><mi>d</mi>
      </mrow>
     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
@@ -527,45 +748,40 @@ The basic paradigm is as follows:</div>
     </mrow>
    </msup>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <msup>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow>
+      <mstyle mathvariant='normal'>
+       <mrow><mi>n</mi><mi>e</mi><mi>w</mi>
+       </mrow>
+      </mstyle>
+     </mrow>
+    </msup>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
  </mrow></math></li>
 </ol>
 </div>
 
-<div class="standard" id='magicparlabel-112'><br />
+<div class="standard" id='magicparlabel-117'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-113'><div class="note_item"><span class="note_label">Note 5.</span>
-Feature space <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mstyle mathvariant='script'><mi>F</mi>
-  </mstyle>
- </mrow></math> can be a Hilbert space, e.g a Euclidean space such as <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <mstyle mathvariant='script'><mi>F</mi>
-   </mstyle><mo> &sube; </mo>
-   <msup>
-    <mrow>
-     <mstyle mathvariant='double-struck'><mi>R</mi>
-     </mstyle>
-    </mrow>
-    <mrow><mi>n</mi>
-    </mrow>
-   </msup>
-  </mrow>
- </mrow></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>n</mi>
- </mrow></math>. That includes infinite dimensional spaces. </div>
-</div>
 
-<div class="standard" id='magicparlabel-114'><br />
+<div class="standard" id='magicparlabel-118'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-115'><div class="note_item"><span class="note_label">Note 6.</span>
+<div class="note" id='magicparlabel-119'><div class="note_item"><span class="note_label">Note 8.</span>
 The introduction of mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &psi; </mi><mo>:</mo>
@@ -576,7 +792,7 @@ The introduction of mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> induces </div>
 
-<ol class="enumerate" id='magicparlabel-116'><li class="enumerate_item">probability distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-120'><li class="enumerate_item">probability distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
    <mrow><mi>G</mi>
@@ -765,19 +981,87 @@ The introduction of mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
 </ol>
 </div>
 
-<div class="standard" id='magicparlabel-119'><br />
+<div class="standard" id='magicparlabel-123'><br />
 
 </div>
 
 
-<div class="standard" id='magicparlabel-120'><br />
+<div class="standard" id='magicparlabel-124'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-121'><div class="note_item"><span class="note_label">Note 7.</span>
-Any feature mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="definition" id='magicparlabel-125'><div class="definition_item"><span class="definition_label">Definition 9.</span>
+A Hilbert space is a vector space, with an inner product, which is also complete<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-129'>Going deeper to completeness is out of the scope.</div>
+</div></div>. </div>
+</div>
+
+<div class="lemma" id='magicparlabel-130'><div class="lemma_item"><span class="lemma_label">Lemma 10.</span>
+<a id="lem_If__is" />
+If <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>X</mi>
+  </mstyle>
+ </mrow></math> is a linear subspace of a Hilbert space, then every <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> can be written as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo>=</mo><mi>u</mi><mo>+</mo><mi>v</mi>
+  </mrow>
+ </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>u</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mo> &lang; </mo><mi>u</mi><mo>,</mo><mi>v</mi><mo> &rang; </mo><mo>=</mo><mn>0</mn>
+  </mrow>
+ </mrow></math> for all <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>v</mi><mo> &isin; </mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle>
+  </mrow>
+ </mrow></math>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-131'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-132'><div class="note_item"><span class="note_label">Note 11.</span>
+Feature space <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>F</mi>
+  </mstyle>
+ </mrow></math> is a Hilbert space preferably due to Lemma <a href="#lem_If__is">10</a> that enables the Kernel trick via the representation Theorem <a href="#thm__Representation_theorem__Assume">20</a>. Eg, a Euclidean space such as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow>
+    <mstyle mathvariant='double-struck'><mi>R</mi>
+    </mstyle>
+   </mrow>
+   <mrow><mi>d</mi>
+   </mrow>
+  </msup>
+ </mrow></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>d</mi>
+ </mrow></math>. That includes infinite dimensional spaces. </div>
+</div>
+
+<div class="standard" id='magicparlabel-133'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-134'><div class="note_item"><span class="note_label">Note 12.</span>
+As feature mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &psi; </mi>
- </mrow></math> that maps the original instances <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> any function that maps the original instances <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>X</mi>
   </mstyle>
@@ -785,46 +1069,30 @@ Any feature mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>F</mi>
   </mstyle>
- </mrow></math> can be used. The Euclidean space <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <mstyle mathvariant='script'><mi>F</mi>
-   </mstyle><mo> &sube; </mo>
-   <msup>
-    <mrow>
-     <mstyle mathvariant='double-struck'><mi>R</mi>
-     </mstyle>
-    </mrow>
-    <mrow><mi>n</mi>
-    </mrow>
-   </msup>
-  </mrow>
- </mrow></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>n</mi>
- </mrow></math> is a Hilbert space. There are also infinite dimensional Hilbert spaces.</div>
+ </mrow></math> can be used. </div>
 </div>
 
-<div class="standard" id='magicparlabel-122'><br />
+<div class="standard" id='magicparlabel-135'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-123'><div class="note_item"><span class="note_label">Note 8.</span>
-The success of this learning paradigm in Summary <a href="#sum_The_basic_paradigm">4</a> depends on choosing a good <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="note" id='magicparlabel-136'><div class="note_item"><span class="note_label">Note 13.</span>
+The success of the learning paradigm in Summary <a href="#sum_The_basic_paradigm">7</a> depends on choosing a good embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &psi; </mi>
- </mrow></math> for a given learning task. Eg, in SVM, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> for the particular learning task. Eg, in SVM, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &psi; </mi>
  </mrow></math> will make the image of the data distribution (close to being) linearly separable in the feature space <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>F</mi>
   </mstyle>
- </mrow></math>, thus making the resulting learning algorithm a good learner for a given task. This requires prior knowledge of the problem. However, some popular choices are the polynomial kernel and the Gaussian (or Radial Basis Functions) kernels.</div>
+ </mrow></math>, thus making the resulting learning algorithm a good learner for a given task. This requires prior knowledge of the problem (In Section <a href="#sec_Construction_of_kernels">4</a>, we see popular recipes for that). </div>
 </div>
 
-<div class="standard" id='magicparlabel-124'><br />
+<div class="standard" id='magicparlabel-141'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-125'><div class="note_item"><span class="note_label">Note 9.</span>
+<div class="note" id='magicparlabel-142'><div class="note_item"><span class="note_label">Note 14.</span>
 Using a <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -845,7 +1113,7 @@ Using a <math xmlns="http://www.w3.org/1998/Math/MathML">
     <msub>
      <mrow><mi> &psi; </mi>
      </mrow>
-     <mrow><mi>n</mi>
+     <mrow><mi>d</mi>
      </mrow>
     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
@@ -856,12 +1124,16 @@ Using a <math xmlns="http://www.w3.org/1998/Math/MathML">
 
   </mrow>
  </mrow></math> that is high dimensional (<math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>n</mi>
- </mrow></math> is too large) may improve accuracy (expressiveness) of the learner (e.g. recall in polynomial regression increasing the polynomial degree). However this increases the computational effort/cost required to perform calculations to minimize the associated risk function in the high dimensional space, as well as we need more data. </div>
+ <mrow><mi>d</mi>
+ </mrow></math> is too large) may improve accuracy (expressiveness) of the learner (e.g. recall in polynomial regression increasing the polynomial degree). However this increases the computational effort/cost required to perform calculations to minimize the associated risk function in the high dimensional space, as well as we need more data. This is addressed via the Kernel trick.</div>
 </div>
-<h2 class="section" id='magicparlabel-126'><span class="section_label">3</span> The Kernel trick</h2>
+<h2 class="section" id='magicparlabel-143'><span class="section_label">3</span> The Kernel trick</h2>
 
-<div class="note" id='magicparlabel-127'><div class="note_item"><span class="note_label">Note 10.</span>
+<div class="standard" id='magicparlabel-144'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-145'><div class="definition_item"><span class="definition_label">Definition 15.</span>
 Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>K</mi>
  </mrow></math> is defined as <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -906,9 +1178,21 @@ Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mstyle mathvariant='script'><mi>F</mi>
   </mstyle>
- </mrow></math>. Hence, Kernel functions are here are used to describe inner products in the feature space. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Kernel functions describe inner products in the feature space <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mstyle mathvariant='script'><mi>F</mi>
+  </mstyle>
+ </mrow></math>. </div>
+</div>
+
+<div class="standard" id='magicparlabel-146'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-147'><div class="note_item"><span class="note_label">Note 16.</span>
+Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>K</mi>
- </mrow></math> can be considered as specifying similarity between instances and of the embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> can be considered as specifying similarity between instances via the embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
@@ -922,13 +1206,13 @@ Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> into a space where these similarities are realized as inner products.</div>
 </div>
 
-<div class="standard" id='magicparlabel-128'><br />
+<div class="standard" id='magicparlabel-148'><br />
 
 </div>
 
-<div class="problem" id='magicparlabel-129'><div class="problem_item"><span class="problem_label">Problem 11.</span>
+<div class="problem" id='magicparlabel-149'><div class="problem_item"><span class="problem_label">Problem 17.</span>
 <a id="prob_Consider_the_following" />
- (General learning problem) Consider a prediction rule <math xmlns="http://www.w3.org/1998/Math/MathML">
+ (Learning problem) Consider a prediction rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -938,13 +1222,7 @@ Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> with <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow>
-   <msub>
-    <mrow><mi>h</mi>
-    </mrow>
-    <mrow><mi>w</mi>
-    </mrow>
-   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+  <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>=</mo><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -1065,7 +1343,7 @@ Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
      <mstyle mathvariant='double-struck'><mi>R</mi>
      </mstyle>
     </mrow>
-    <mrow><mo>-</mo>
+    <mrow><mo>+</mo>
     </mrow>
    </msub><mo> &rarr; </mo>
    <mstyle mathvariant='double-struck'><mi>R</mi>
@@ -1074,12 +1352,12 @@ Kernel function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> is a monotonically non-decreasing function.</div>
 </div>
 
-<div class="standard" id='magicparlabel-130'><br />
+<div class="standard" id='magicparlabel-150'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-131'><div class="example_item"><span class="example_label">Example 12.</span>
-In Soft SVM (Proposition <a href="#prop_Consider_the_hinge">prop:Consider-the-hinge</a>), it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="example" id='magicparlabel-151'><div class="example_item"><span class="example_label">Example 18.</span>
+In Soft SVM (Proposition <a href="#prop_Consider_the_hinge">prop:Consider-the-hinge</a>, Handout 6), it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1116,7 +1394,7 @@ In Soft SVM (Proposition <a href="#prop_Consider_the_hinge">prop:Consider-the-hi
     </mrow>
    </msubsup><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
-   <mrow><mn>1</mn><mo>-</mo>
+   <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo>
     <msub>
      <mrow><mi>y</mi>
      </mrow>
@@ -1149,19 +1427,19 @@ In Soft SVM (Proposition <a href="#prop_Consider_the_hinge">prop:Consider-the-hi
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-132'><br />
+<div class="standard" id='magicparlabel-152'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-133'><div class="note_item"><span class="note_label">Note 13.</span>
-The following result states a duality of a general learning problem <a href="#prob_Consider_the_following">11</a> to be able to be indirectly extended to a possibly high dimensional feature space with purpose to improve the expressiveness (accuracy of the predictive rule) by using kernel ideas mitigating the associated computational cost and data requirements. </div>
+<div class="note" id='magicparlabel-153'><div class="note_item"><span class="note_label">Note 19.</span>
+The following result states a duality in the learning problem <a href="#prob_Consider_the_following">17</a> that facilitates the implementation of the extension to a possibly high dimensional feature space (hence improving the expressiveness/accuracy) by using kernel functions (hence reducing dimensionlality, computational cost, and required data size). </div>
 </div>
 
-<div class="standard" id='magicparlabel-134'><br />
+<div class="standard" id='magicparlabel-154'><br />
 
 </div>
 
-<div class="theorem" id='magicparlabel-135'><div class="theorem_item"><span class="theorem_label">Theorem 14.</span>
+<div class="theorem" id='magicparlabel-155'><div class="theorem_item"><span class="theorem_label">Theorem 20.</span>
 <a id="thm__Representation_theorem__Assume" />
 (Representation theorem) Assume mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1216,9 +1494,9 @@ The following result states a duality of a general learning problem <a href="#pr
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> is the optimal solution of <a href="#eq_">(3.1)</a> in Problem <a href="#prob_Consider_the_following">11</a>. </div>
+ </mrow></math> is the optimal solution of <a href="#eq_">(3.1)</a> in Problem <a href="#prob_Consider_the_following">17</a>. </div>
 
-<div class="proof" id='magicparlabel-136'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-156'><div class="proof_item"><span class="proof_label">Proof.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
@@ -1482,7 +1760,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> Then the objective function of <a href="#eq_">3.1</a> at <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> Then the objective function of <a href="#eq_">(3.1)</a> at <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>w</mi>
  </mrow></math> is less than or equal to that of the minimizer <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1492,7 +1770,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mo>*</mo>
    </mrow>
   </msup>
- </mrow></math> implying that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> which implies that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>w</mi><mo>=</mo>
    <msubsup>
@@ -1525,11 +1803,11 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-138'><br />
+<div class="standard" id='magicparlabel-158'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-139'><div class="note_item"><span class="note_label">Note 15.</span>
+<div class="note" id='magicparlabel-159'><div class="note_item"><span class="note_label">Note 21.</span>
 <a id="note_Let__be" />
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1558,7 +1836,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo> &rang; </mo>
   </mrow>
- </mrow></math>. According to the representation Theorem <a href="#thm__Representation_theorem__Assume">14</a>, the general learning problem <a href="#prob_Consider_the_following">11</a>, can be equivalently addressed by re-writing the learning predictive rule as<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. According to the representation Theorem <a href="#thm__Representation_theorem__Assume">20</a>, the Learning problem <a href="#prob_Consider_the_following">17</a>, can be equivalently addressed by re-writing the learning predictive rule as<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2025,73 +2303,114 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-140'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-141'><div class="note_item"><span class="note_label">Note 16.</span>
-In learning problem <a href="#prob_Consider_the_following">11</a>, direct access to elements <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="example" id='magicparlabel-160'><div class="example_item"><span class="example_label">Example 22.</span>
+In Soft SVM (Proposition <a href="#prop_Consider_the_hinge">prop:Consider-the-hinge</a>, Handout 6), we can have<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mo> &sdot; </mo>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-  </mrow>
- </mrow></math> in the feature space is not necessary, as equivalently one can calculate or specify the kernel function (that is inner products in the feature space).</div>
-</div>
-
-<div class="standard" id='magicparlabel-142'><br />
-
-</div>
-
-<div class="definition" id='magicparlabel-143'><div class="definition_item"><span class="definition_label">Definition 17.</span>
-Gram matrix is called the <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>m</mi><mo> &times; </mo><mi>m</mi>
-  </mrow>
- </mrow></math> matrix <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi>G</mi>
- </mrow></math> s.t. <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msub>
-    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
-<mi>G</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
-
+  <mrow><munder accent='false'>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>m</mi><mi>i</mi><mi>z</mi><mi>e</mi>
     </mrow>
-    <mrow>
-     <mrow><mi>i</mi><mo>,</mo><mi>j</mi>
-     </mrow>
-    </mrow>
-   </msub><mo>=</mo><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+   </mstyle><mi> &alpha; </mi></munder><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <mrow>
+   <mrow><mi> &lambda; </mi>
     <msub>
-     <mrow><mi>x</mi>
+     <mrow><mo> &sum; </mo>
      </mrow>
      <mrow><mi>i</mi>
      </mrow>
-    </msub><mo>,</mo>
+    </msub>
     <msub>
-     <mrow><mi>x</mi>
+     <mrow><mo> &sum; </mo>
      </mrow>
      <mrow><mi>j</mi>
      </mrow>
     </msub>
+    <msub>
+     <mrow><mi> &alpha; </mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub>
+    <msub>
+     <mrow><mi> &alpha; </mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mi>j</mi>
+      </mrow>
+     </msub>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo>
+    <mfrac>
+     <mrow><mn>1</mn>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </mfrac>
+    <msub>
+     <mrow><mo> &sum; </mo>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo>
+     <msub>
+      <mrow><mi>y</mi>
+      </mrow>
+      <mrow><mi>i</mi>
+      </mrow>
+     </msub>
+     <msub>
+      <mrow><mo> &sum; </mo>
+      </mrow>
+      <mrow><mi>j</mi>
+      </mrow>
+     </msub>
+     <msub>
+      <mrow><mi> &alpha; </mi>
+      </mrow>
+      <mrow><mi>j</mi>
+      </mrow>
+     </msub><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+      </msub><mo>,</mo>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>j</mi>
+       </mrow>
+      </msub>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
    </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>.</div>
-</div>
-
-<div class="standard" id='magicparlabel-144'><br />
-
-</div>
-
-<div class="example" id='magicparlabel-145'><div class="example_item"><span class="example_label">Example 18.</span>
-In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
@@ -2103,20 +2422,16 @@ In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/Mat
    </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
    <mrow>
-    <msubsup>
+    <msub>
      <mrow><mo> &sum; </mo>
      </mrow>
-     <mrow>
-      <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
-      </mrow>
+     <mrow><mi>j</mi>
      </mrow>
-     <mrow><mi>m</mi>
-     </mrow>
-    </msubsup>
+    </msub>
     <msub>
      <mrow><mi> &alpha; </mi>
      </mrow>
-     <mrow><mi>i</mi>
+     <mrow><mi>j</mi>
      </mrow>
     </msub><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -2126,7 +2441,13 @@ In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/Mat
       </mrow>
       <mrow><mi>i</mi>
       </mrow>
-     </msub><mo>,</mo><mi>x</mi>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mi>j</mi>
+      </mrow>
+     </msub>
     </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -2134,73 +2455,36 @@ In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/Mat
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi> &alpha; </mi>
- </mrow></math> is learned by <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. It can be minimised via SGD. As we can just directly specify the kernel function without the need to even think about feature mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><munder accent='false'>
-   <mstyle mathvariant='normal'>
-    <mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>m</mi><mi>i</mi><mi>z</mi><mi>e</mi>
-    </mrow>
-   </mstyle><mi> &alpha; </mi></munder><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <mrow><mi> &lambda; </mi>
-    <msup>
-     <mrow><mi> &alpha; </mi>
-     </mrow>
-     <mrow><mi> &top; </mi>
-     </mrow>
-    </msup><mi>G</mi><mi> &alpha; </mi><mo>+</mo>
-    <mfrac>
-     <mrow><mn>1</mn>
-     </mrow>
-     <mrow><mi>m</mi>
-     </mrow>
-    </mfrac>
-    <msubsup>
-     <mrow><mo> &sum; </mo>
-     </mrow>
-     <mrow>
-      <mrow><mi>i</mi><mo>=</mo><mn>1</mn>
-      </mrow>
-     </mrow>
-     <mrow><mi>m</mi>
-     </mrow>
-    </msubsup><mo> max </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-    <mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>-</mo>
-     <msub>
-      <mrow><mi>y</mi>
-      </mrow>
-      <mrow><mi>i</mi>
-      </mrow>
-     </msub>
-     <msub>
-      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
-
-       <mrow><mi>G</mi><mi> &alpha; </mi>
-       </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
-
-      </mrow>
-      <mrow><mi>i</mi>
-      </mrow>
-     </msub>
-    </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-   </mrow>
+  <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> that can be solved as quadratic programming. </div>
+ </mrow></math> (which is eliminated and replaced by the kernel), we can call it Kernel SVM. </div>
 </div>
 
-<div class="standard" id='magicparlabel-146'><br />
+<div class="standard" id='magicparlabel-161'><br />
 
 </div>
 
-<div class="example" id='magicparlabel-147'><div class="example_item"><span class="example_label">Example 19.</span>
+<div class="note" id='magicparlabel-162'><div class="note_item"><span class="note_label">Note 23.</span>
+In Learning problem <a href="#prob_Consider_the_following">17</a>, direct access to elements <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &psi; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> in the feature space is not necessary, as equivalently one can calculate or just specify the associated kernel function (that is inner products in the feature space).</div>
+</div>
+
+<div class="standard" id='magicparlabel-163'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-164'><div class="example_item"><span class="example_label">Example 24.</span>
 (Polynomial Kernels) Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
@@ -2216,12 +2500,12 @@ In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/Mat
    </msup><mn>.</mn>
   </mrow>
  </mrow></math> Assume we want to extend the linear mapping 
-<span style = "text-align: center;"><img src="lyxprevieweNhgVG1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewciPrpa1.png" alt="Mathematical Equation" />
 </span>
  to the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>k</mi>
  </mrow></math> degree polynomial mapping 
-<span style = "text-align: center;"><img src="lyxpreviewymHnDO1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewXXxDcz1.png" alt="Mathematical Equation" />
 </span>
 . The multivariate polynomial can be written as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2338,24 +2622,8 @@ In Soft SVM, the predictive rule is <math xmlns="http://www.w3.org/1998/Math/Mat
   </mrow>
  </mrow></math></div>
 
-<div class="solution_" id='magicparlabel-152'><div class="solution__item"><span class="solution__label">Solution.</span>
-Set <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msub>
-    <mrow><mi>x</mi>
-    </mrow>
-    <mrow><mn>0</mn>
-    </mrow>
-   </msub><mo>=</mo>
-   <msub>
-    <mrow><mi>x</mi>
-    </mrow>
-    <mrow><mn>0</mn>
-    </mrow>
-   </msub><mo>'</mo><mo>=</mo><mn>1</mn>
-  </mrow>
- </mrow></math>. Then<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="solution_" id='magicparlabel-169'><div class="solution__item"><span class="solution__label">Solution.</span>
+It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd>
@@ -2412,7 +2680,30 @@ Set <math xmlns="http://www.w3.org/1998/Math/MathML">
       </mrow>
       <mrow><mi>k</mi>
       </mrow>
-     </msup>
+     </msup><mspace width="6px" /><mspace width="6px" /><mspace width="6px" /><mspace width="6px" />
+     <mstyle mathvariant='normal'><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mi>b</mi><mi>y</mi>&nbsp;<mi>s</mi><mi>e</mi><mi>t</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>g</mi>&nbsp;
+       <mstyle class='math'>
+        <mrow>
+         <msub>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>0</mn>
+          </mrow>
+         </msub><mo>=</mo>
+         <msub>
+          <mrow><mi>x</mi>
+          </mrow>
+          <mrow><mn>0</mn>
+          </mrow>
+         </msub><mo>'</mo><mo>=</mo><mn>1</mn>
+        </mrow>
+       </mstyle>
+      </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+     </mstyle>
     </mrow>
    </mtd>
   </mtr>
@@ -2444,7 +2735,7 @@ Set <math xmlns="http://www.w3.org/1998/Math/MathML">
       <mrow><mo> &prod; </mo>
       </mrow>
       <mrow>
-       <mrow><mi>j</mi><mo>=</mo><mn>0</mn>
+       <mrow><mi>i</mi><mo>=</mo><mn>0</mn>
        </mrow>
       </mrow>
       <mrow><mi>n</mi>
@@ -2499,7 +2790,7 @@ Set <math xmlns="http://www.w3.org/1998/Math/MathML">
        <mrow><mo> &prod; </mo>
        </mrow>
        <mrow>
-        <mrow><mi>j</mi><mo>=</mo><mn>0</mn>
+        <mrow><mi>i</mi><mo>=</mo><mn>0</mn>
         </mrow>
        </mrow>
        <mrow><mi>n</mi>
@@ -2526,7 +2817,7 @@ Set <math xmlns="http://www.w3.org/1998/Math/MathML">
        <mrow><mo> &prod; </mo>
        </mrow>
        <mrow>
-        <mrow><mi>j</mi><mo>=</mo><mn>0</mn>
+        <mrow><mi>i</mi><mo>=</mo><mn>0</mn>
         </mrow>
        </mrow>
        <mrow><mi>n</mi>
@@ -2577,47 +2868,38 @@ Set <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-153'><br />
+<div class="standard" id='magicparlabel-170'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-154'><span class="section_label">4</span> Construction of kernels</h2>
+<h2 class="section" id='magicparlabel-171'><span class="section_label">4</span> <a id="sec_Construction_of_kernels" />
+Construction of kernels</h2>
 
-<div class="note" id='magicparlabel-155'><div class="note_item"><span class="note_label">Note 20.</span>
-The suitability of any hypothesis class to a given learning task depends on the nature of that task. Feature mapping <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-180'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-181'><div class="note_item"><span class="note_label">Note 25.</span>
+The kernel formulated as an inner product in a feature space allows us to build interesting extensions of many well-known algorithms by making use of the kernel trick and without the need to have direct access to the feature space.</div>
+</div>
+
+<div class="standard" id='magicparlabel-182'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-183'><div class="note_item"><span class="note_label">Note 26.</span>
+Specifying a kernel function is a way to express prior knowledge without the need to have direct access to the feature space. This is consequence of the Representation theorem <a href="#thm__Representation_theorem__Assume">20</a> that kernel is the inner product of feature mappings <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &psi; </mi>
- </mrow></math> can be considered as expanding the class of linear classifiers to a richer class (corresponding to linear classifiers over the feature space). Embedding <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> which sufficiently replaces them in the learning problem, and the fact that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &psi; </mi>
  </mrow></math> is a way to express and utilize prior knowledge about the problem at hand. </div>
 </div>
 
-<div class="standard" id='magicparlabel-156'><br />
+<div class="standard" id='magicparlabel-189'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-157'><div class="note_item"><span class="note_label">Note 21.</span>
-Hence, according to the Representation theorem <a href="#thm__Representation_theorem__Assume">14</a>, specifying a kernel function is a way to express prior knowledge about the problem with purpose to enrich the hypothesis class and learn a more accurate predictor. </div>
-</div>
-
-<div class="standard" id='magicparlabel-158'><br />
-
-</div>
-
-<div class="claim" id='magicparlabel-159'><div class="claim_item"><span class="claim_label">Claim 22.</span>
-If we believe that positive examples can be distinguished by some ellipse, we can define <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mi> &psi; </mi>
- </mrow></math> to be all the monomials up to order <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mn>2</mn>
- </mrow></math>, or use a degree <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow><mn>2</mn>
- </mrow></math> polynomial kernel.</div>
-</div>
-
-<div class="standard" id='magicparlabel-160'><br />
-
-</div>
-
-<div class="note" id='magicparlabel-161'><div class="note_item"><span class="note_label">Note 23.</span>
-The question is if the specified function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="note" id='magicparlabel-190'><div class="note_item"><span class="note_label">Note 27.</span>
+The question is whether the specified function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -2627,7 +2909,7 @@ The question is if the specified function <math xmlns="http://www.w3.org/1998/Ma
    <mstyle mathvariant='double-struck'><mi>R</mi>
    </mstyle>
   </mrow>
- </mrow></math> (by the practitioner) is indeed a kernel function; namely if <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> (by the practitioner) is indeed a kernel function; i.e. if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>K</mi>
  </mrow></math> can be written as inner product <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2653,14 +2935,60 @@ The question is if the specified function <math xmlns="http://www.w3.org/1998/Ma
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math>. Theorem <a href="#lem_A_symmetric_function">25</a> provides sufficient and necessary conditions to check that. </div>
+ </mrow></math>. Theorem <a href="#lem_A_symmetric_function">30</a> provides sufficient and necessary conditions to check that. </div>
 </div>
 
-<div class="standard" id='magicparlabel-162'><br />
+<div class="standard" id='magicparlabel-191'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-163'><div class="definition_item"><span class="definition_label">Definition 24.</span>
+<div class="definition" id='magicparlabel-192'><div class="definition_item"><span class="definition_label">Definition 28.</span>
+Gram matrix is called the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>m</mi><mo> &times; </mo><mi>m</mi>
+  </mrow>
+ </mrow></math> matrix <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>G</mi>
+ </mrow></math> s.t. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+<mi>G</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo>=</mo><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-198'><br />
+
+</div>
+
+<div class="definition" id='magicparlabel-199'><div class="definition_item"><span class="definition_label">Definition 29.</span>
 A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo>:</mo>
@@ -2673,7 +3001,7 @@ A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> is positive semi-definite if its Gram matrix <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>G</mi>
- </mrow></math> , <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -2708,11 +3036,11 @@ A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> , is a positive semi-definite matrix.</div>
 </div>
 
-<div class="standard" id='magicparlabel-164'><br />
+<div class="standard" id='magicparlabel-200'><br />
 
 </div>
 
-<div class="theorem" id='magicparlabel-165'><div class="theorem_item"><span class="theorem_label">Theorem 25.</span>
+<div class="theorem" id='magicparlabel-201'><div class="theorem_item"><span class="theorem_label">Theorem 30.</span>
 <a id="lem_A_symmetric_function" />
 A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2760,7 +3088,7 @@ A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> , is a positive semi-definite matrix.</div>
 
-<div class="proof" id='magicparlabel-166'><div class="proof_item"><span class="proof_label">Proof.</span>
+<div class="proof" id='magicparlabel-202'><div class="proof_item"><span class="proof_label">Proof.</span>
 Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>K</mi>
  </mrow></math> implements an inner product <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -2780,7 +3108,21 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo> &rang; </mo>
   </mrow>
- </mrow></math> in some Hilbert space. Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> in some Hilbert space; let's consider <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &psi; </mi><mo>:</mo>
+   <mstyle mathvariant='script'><mi>X</mi>
+   </mstyle><mo> &rarr; </mo>
+   <msup>
+    <mrow>
+     <mstyle mathvariant='double-struck'><mi>R</mi>
+     </mstyle>
+    </mrow>
+    <mrow><mi>d</mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math> for simplicity. Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>G</mi>
  </mrow></math> be its Gram matrix with <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2809,15 +3151,7 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>i</mi>
  </mrow></math>-th column of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo> &Psi; </mo>
- </mrow></math>. You may consider that <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <msup>
-   <mrow><mo> &sdot; </mo>
-   </mrow>
-   <mrow><mo> &dagger; </mo>
-   </mrow>
-  </msup>
- </mrow></math> represents the transpose for simplicity. For any <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. For any <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &xi; </mi><mo> &isin; </mo>
    <msup>
@@ -2840,7 +3174,7 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
      <msup>
       <mrow><mi> &xi; </mi>
       </mrow>
-      <mrow><mo> &dagger; </mo>
+      <mrow><mi> &top; </mi>
       </mrow>
      </msup><mi>G</mi><mi> &xi; </mi>
     </mrow>
@@ -3059,8 +3393,7 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </mtd>
   </mtr>
- </mtable></math></div>
-<div class="proof_item">Assume the symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mtable></math>Assume the symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -3283,7 +3616,23 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 </div>
 
-<div class="example" id='magicparlabel-168'><div class="example_item"><span class="example_label">Example 26.</span>
+<div class="standard" id='magicparlabel-212'><br />
+
+</div>
+
+<div class="claim" id='magicparlabel-213'><div class="claim_item"><span class="claim_label">Claim 31.</span>
+In Figure <a href="#fig_Non_linearly_separable_data">c</a>, we could see that examples can be distinguished by some ellipse, so it was reasonable to we can define <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &psi; </mi>
+ </mrow></math> as a vector with elements all the monomials up to order ; alternatively we could use a degree <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>2</mn>
+ </mrow></math> polynomial kernel. </div>
+</div>
+
+<div class="standard" id='magicparlabel-214'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-215'><div class="example_item"><span class="example_label">Example 32.</span>
 Consider two kernel functions <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -3363,7 +3712,7 @@ Consider two kernel functions <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math> is a kernel function.</div>
 
-<div class="solution_" id='magicparlabel-169'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-216'><div class="solution__item"><span class="solution__label">Solution.</span>
 Let Gram matrix, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -3458,18 +3807,19 @@ Let Gram matrix, <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msub><mi> &xi; </mi><mo> &ge; </mo><mn>0</mn>
   </mrow>
- </mrow></math> that completes the proof according to Lemma <a href="#lem_A_symmetric_function">25</a>.</div>
+ </mrow></math> that completes the proof according to Lemma <a href="#lem_A_symmetric_function">30</a>.</div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-170'><br />
+<div class="standard" id='magicparlabel-217'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-171'><span class="section_label">5</span> Implementations</h2>
-<h3 class="subsection" id='magicparlabel-172'><span class="subsection_label">5.1</span> Kernel SVM</h3>
-<h3 class="subsection" id='magicparlabel-173'><span class="subsection_label">5.2</span> Kernel PCA </h3>
-<h3 class="subsection" id='magicparlabel-174'><span class="subsection_label">5.3</span> Gaussian process regression</h3>
-<h2 class="section" id='magicparlabel-175'><span class="section_label">A</span> &nbsp;&nbsp;</h2>
-<div class="standard" id='magicparlabel-176'>&nbsp;&nbsp;</div>
+<h2 class="section" id='magicparlabel-218'><span class="section_label">5</span> Implementations</h2>
+
+<div class="note" id='magicparlabel-219'><div class="note_item"><span class="note_label">Note 33.</span>
+The concept of a kernel formulated as an inner product in a feature space allows us to build interesting extensions of many well-known algorithms by making use of the kernel trick. One example was the Kernel SVM. We see some popular cases, below.</div>
+</div>
+<h3 class="subsection" id='magicparlabel-220'><span class="subsection_label">5.1</span> Gaussian process regression</h3>
+<h3 class="subsection" id='magicparlabel-221'><span class="subsection_label">5.2</span> Kernel PCA (maybe)</h3>
 </body>
 </html>

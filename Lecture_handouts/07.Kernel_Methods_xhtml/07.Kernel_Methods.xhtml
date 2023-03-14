@@ -10,6 +10,9 @@
 mstyle.math { font-style: italic; }
 
 /* Layout-provided Styles */
+del.strikeout {
+  text-decoration: line-through;
+}
 div.standard {
 text-align: left;
 
@@ -288,7 +291,7 @@ div.marginal {
 
 <div class="standard" id='magicparlabel-1'><div class='Shadowbox'><div class="plain_layout" id='magicparlabel-10'>Machine Learning and Neural Networks (MATH3431)&nbsp;&nbsp;Epiphany term, 2023<div style='height:3ex'></div></div>
 
-<div class="plain_layout" style='text-align: center;' id='magicparlabel-11'> Handout 7: Kernel methods <div style='height:3ex'></div></div>
+<div class="plain_layout" style='text-align: center;' id='magicparlabel-11'> Handout 8: Gaussian process regression<div style='height:3ex'></div></div>
 
 <div class="plain_layout" id='magicparlabel-28'>Lecturer &amp; author: Georgios P. Karagiannis <a href="georgios.karagiannis@durham.ac.uk">georgios.karagiannis@durham.ac.uk</a></div>
 
@@ -497,7 +500,7 @@ The accuracy of predictive rule can be improved if I take into account the curva
 
 <div class="note" id='magicparlabel-93'><div class="note_item"><span class="note_label">Note 3.</span>
 Consequently, in order to improve the expressiveness of a hypothesis class 
-<span style = "text-align: center;"><img src="lyxpreviewHEPPRq1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewcypvEn1.png" alt="Mathematical Equation" />
 </span>
  (for some function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>f</mi>
@@ -509,7 +512,7 @@ Consequently, in order to improve the expressiveness of a hypothesis class
 
   </mrow>
  </mrow></math>, which can possibly be a vector of bases functions such as polynomials, splines, etc..., and work on the learning problem with 
-<span style = "text-align: center;"><img src="lyxpreviewtIxvCm1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewDeUPDC1.png" alt="Mathematical Equation" />
 </span>
 .</div>
 </div>
@@ -559,7 +562,7 @@ To make the class of hypotheses more expressive with purpose to improve accuracy
 <div class="summary" id='magicparlabel-113'><div class="summary_item"><span class="summary_label">Summary 7.</span>
 <a id="sum_The_basic_paradigm" />
  Consider a hypothesis class 
-<span style = "text-align: center;"><img src="lyxpreviewDHNawE1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewCVVVgC1.png" alt="Mathematical Equation" />
 </span>
  where the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2813,12 +2816,12 @@ In Learning problem <a href="#prob_Consider_the_following">18</a>, direct access
    </msup><mn>.</mn>
   </mrow>
  </mrow></math> Assume we want to extend the linear mapping 
-<span style = "text-align: center;"><img src="lyxpreviewuWpfzN1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewZcWxtn1.png" alt="Mathematical Equation" />
 </span>
  to the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>k</mi>
  </mrow></math> degree polynomial mapping 
-<span style = "text-align: center;"><img src="lyxpreviewABQIMf1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewicRGJE1.png" alt="Mathematical Equation" />
 </span>
 . The multivariate polynomial can be written as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3243,7 +3246,6 @@ It is<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 
   </mrow>
  </mrow></math>.</div>
-</div>
 
 <div class="solution_" id='magicparlabel-220'><div class="solution__item"><span class="solution__label">Solution.</span>
 It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3533,58 +3535,108 @@ It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
       </mrow>
       <mrow><mi> &infin; </mi>
       </mrow>
-     </msubsup>
-     <mfrac>
-      <mrow>
-       <msup>
-        <mrow><mi>x</mi>
-        </mrow>
-        <mrow><mi>k</mi>
-        </mrow>
-       </msup>
-      </mrow>
-      <mrow>
+     </msubsup><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+     <mrow>
+      <mfrac>
        <mrow>
-        <msqrt>
-         <mrow><mi>k</mi><mo>!</mo>
-         </mrow>
-        </msqrt>
         <msup>
-         <mrow><mi> &sigma; </mi>
+         <mrow><mi>x</mi>
          </mrow>
          <mrow><mi>k</mi>
          </mrow>
         </msup>
        </mrow>
-      </mrow>
-     </mfrac><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-     <mrow><mo>-</mo>
-      <mfrac>
-       <mrow><mn>1</mn>
-       </mrow>
        <mrow>
-        <mrow><mn>2</mn>
+        <mrow>
+         <msqrt>
+          <mrow><mi>k</mi><mo>!</mo>
+          </mrow>
+         </msqrt>
          <msup>
           <mrow><mi> &sigma; </mi>
           </mrow>
-          <mrow><mn>2</mn>
+          <mrow><mi>k</mi>
           </mrow>
          </msup>
         </mrow>
        </mrow>
-      </mfrac>
-      <msup>
-       <mrow><mi>x</mi>
-       </mrow>
-       <mrow><mn>2</mn>
-       </mrow>
-      </msup>
-     </mrow>
+      </mfrac><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mo>-</mo>
+       <mfrac>
+        <mrow><mn>1</mn>
+        </mrow>
+        <mrow>
+         <mrow><mn>2</mn>
+          <msup>
+           <mrow><mi> &sigma; </mi>
+           </mrow>
+           <mrow><mn>2</mn>
+           </mrow>
+          </msup>
+         </mrow>
+        </mrow>
+       </mfrac>
+       <msup>
+        <mrow><mi>x</mi>
+        </mrow>
+        <mrow><mn>2</mn>
+        </mrow>
+       </msup>
+      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-     <mfrac>
-      <mrow>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+     <mrow>
+      <mfrac>
+       <mrow>
+        <msup>
+         <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+          <mrow><mi>x</mi><mo>'</mo>
+          </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+         </mrow>
+         <mrow><mi>k</mi>
+         </mrow>
+        </msup>
+       </mrow>
+       <mrow>
+        <mrow>
+         <msqrt>
+          <mrow><mi>k</mi><mo>!</mo>
+          </mrow>
+         </msqrt>
+         <msup>
+          <mrow><mi> &sigma; </mi>
+          </mrow>
+          <mrow><mi>k</mi>
+          </mrow>
+         </msup>
+        </mrow>
+       </mrow>
+      </mfrac><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+      <mrow><mo>-</mo>
+       <mfrac>
+        <mrow><mn>1</mn>
+        </mrow>
+        <mrow>
+         <mrow><mn>2</mn>
+          <msup>
+           <mrow><mi> &sigma; </mi>
+           </mrow>
+           <mrow><mn>2</mn>
+           </mrow>
+          </msup>
+         </mrow>
+        </mrow>
+       </mfrac>
        <msup>
         <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -3593,54 +3645,14 @@ It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
         </mrow>
-        <mrow><mi>k</mi>
+        <mrow><mn>2</mn>
         </mrow>
        </msup>
       </mrow>
-      <mrow>
-       <mrow>
-        <msqrt>
-         <mrow><mi>k</mi><mo>!</mo>
-         </mrow>
-        </msqrt>
-        <msup>
-         <mrow><mi> &sigma; </mi>
-         </mrow>
-         <mrow><mi>k</mi>
-         </mrow>
-        </msup>
-       </mrow>
-      </mrow>
-     </mfrac><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-     <mrow><mo>-</mo>
-      <mfrac>
-       <mrow><mn>1</mn>
-       </mrow>
-       <mrow>
-        <mrow><mn>2</mn>
-         <msup>
-          <mrow><mi> &sigma; </mi>
-          </mrow>
-          <mrow><mn>2</mn>
-          </mrow>
-         </msup>
-        </mrow>
-       </mrow>
-      </mfrac>
-      <msup>
-       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-        <mrow><mi>x</mi><mo>'</mo>
-        </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-       </mrow>
-       <mrow><mn>2</mn>
-       </mrow>
-      </msup>
      </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
 
     </mrow>
    </mtd>
@@ -3725,6 +3737,7 @@ It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
 
   </mrow>
  </mrow></math>.</div>
+</div>
 </div>
 
 <div class="standard" id='magicparlabel-226'><br />
@@ -3911,7 +3924,7 @@ A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mstyle mathvariant='double-struck'><mi>R</mi>
    </mstyle>
   </mrow>
- </mrow></math> implements an inner product in some Hilbert space if and only if it is positive semi-definite i.e. its Gram matrix <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> <del class='strikeout'>implements an inner product in some Hilbert space</del> is a valid kernel function in terms of if and only if it is positive semi-definite i.e. its Gram matrix <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>G</mi>
  </mrow></math> , <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3950,7 +3963,7 @@ A symmetric function <math xmlns="http://www.w3.org/1998/Math/MathML">
 <div class="proof" id='magicparlabel-258'><div class="proof_item"><span class="proof_label">Proof.</span>
 Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>K</mi>
- </mrow></math> implements an inner product <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is a valid kernel function (i.e. it implements an inner product in some Hilbert space) <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -3967,7 +3980,7 @@ Assume <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo> &rang; </mo>
   </mrow>
- </mrow></math> in some Hilbert space; let's consider <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> ; let's consider <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &psi; </mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -4555,7 +4568,8 @@ A powerful technique for constructing new kernels is to build them out of simple
 
   </mrow>
  </mrow></math> </i></li>
-<li class="enumerate_item"><i><math xmlns="http://www.w3.org/1998/Math/MathML">
+<li class="enumerate_item"><i><a id="enu__1" />
+<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -4669,7 +4683,34 @@ A powerful technique for constructing new kernels is to build them out of simple
     </mrow>
    </msup>
   </mrow>
- </mrow></math> </i></li>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo>'</mo><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub><mo>'</mo><mo>,</mo>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo>'</mo>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math></i></li>
 <li class="enumerate_item"><i><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -4752,7 +4793,34 @@ A powerful technique for constructing new kernels is to build them out of simple
     </mrow>
    </msup>
   </mrow>
- </mrow></math> </i></li>
+ </mrow></math> , <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo>'</mo><mo>=</mo>
+   <msup>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+     <mrow>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>1</mn>
+       </mrow>
+      </msub><mo>'</mo><mo>,</mo>
+      <msub>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msub><mo>'</mo>
+     </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+    </mrow>
+    <mrow><mi> &top; </mi>
+    </mrow>
+   </msup>
+  </mrow>
+ </mrow></math></i></li>
 <li class="enumerate_item"><i><math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -4763,7 +4831,13 @@ A powerful technique for constructing new kernels is to build them out of simple
 <mo>=</mo><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>K</mi>
+    </mrow>
+    <mrow><mn>1</mn>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
    <mrow><mi>x</mi><mo>,</mo><mi>x</mi><mo>'</mo>
    </mrow>
@@ -4911,7 +4985,7 @@ A powerful technique for constructing new kernels is to build them out of simple
    </msub><mi> &xi; </mi><mo> &ge; </mo><mn>0</mn>
   </mrow>
  </mrow></math></li>
-<li class="labeling_item"><span class='lyxlist'>For&nbsp;(<a href="#enu_">1.</a>).</span>
+<li class="labeling_item"><span class='lyxlist'>For&nbsp;(<a href="#enu__1">2.</a>).</span>
  Assume that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -5082,6 +5156,15 @@ A powerful technique for constructing new kernels is to build them out of simple
       <mrow><mi> &top; </mi>
       </mrow>
      </msup>
+     <msub>
+      <mrow><mi> &psi; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
      <msup>
       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -5089,10 +5172,12 @@ A powerful technique for constructing new kernels is to build them out of simple
         <msub>
          <mrow><mi> &psi; </mi>
          </mrow>
-         <mrow><mn>2</mn>
+         <mrow><mn>1</mn>
          </mrow>
         </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>x</mi>
+
+        <mrow><mi>x</mi><mo>'</mo>
+        </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
        </mrow>
@@ -5102,17 +5187,6 @@ A powerful technique for constructing new kernels is to build them out of simple
       <mrow><mi> &top; </mi>
       </mrow>
      </msup>
-     <msub>
-      <mrow><mi> &psi; </mi>
-      </mrow>
-      <mrow><mn>1</mn>
-      </mrow>
-     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-     <mrow><mi>x</mi><mo>'</mo>
-     </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
      <msub>
       <mrow><mi> &psi; </mi>
       </mrow>
@@ -5128,15 +5202,26 @@ A powerful technique for constructing new kernels is to build them out of simple
       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
        <mrow>
-        <msub>
-         <mrow><mi> &psi; </mi>
-         </mrow>
-         <mrow><mn>1</mn>
-         </mrow>
-        </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+        <msup>
+         <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+          <mrow>
+           <msub>
+            <mrow><mi> &psi; </mi>
+            </mrow>
+            <mrow><mn>1</mn>
+            </mrow>
+           </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
+          </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+         </mrow>
+         <mrow><mi> &top; </mi>
+         </mrow>
+        </msup>
         <msub>
          <mrow><mi> &psi; </mi>
          </mrow>
@@ -5153,17 +5238,28 @@ A powerful technique for constructing new kernels is to build them out of simple
       <mrow><mi> &top; </mi>
       </mrow>
      </msup>
-     <msub>
-      <mrow><mi> &psi; </mi>
-      </mrow>
-      <mrow><mn>1</mn>
-      </mrow>
-     </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+     <msup>
+      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-     <mrow><mi>x</mi><mo>'</mo>
-     </mrow>
+       <mrow>
+        <msub>
+         <mrow><mi> &psi; </mi>
+         </mrow>
+         <mrow><mn>1</mn>
+         </mrow>
+        </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+        <mrow><mi>x</mi><mo>'</mo>
+        </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+      </mrow>
+      <mrow><mi> &top; </mi>
+      </mrow>
+     </msup>
      <msub>
       <mrow><mi> &psi; </mi>
       </mrow>

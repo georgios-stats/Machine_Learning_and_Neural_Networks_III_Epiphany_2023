@@ -60,6 +60,7 @@ Stochastic gradient descent
 
 + [03.Stochastic_gradient_descent.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/03.Stochastic_gradient_descent.pdf)  
 
+
 Stochastic gradient Langevin dynamics  
 
 + [04.Stochastic_gradient_Langevine_dynamics.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/04.Stochastic_gradient_Langevine_dynamics.pdf)  
@@ -67,6 +68,7 @@ Stochastic gradient Langevin dynamics
 Artificial Neural Networks  
 
 + [05.Artificial_neural_networks.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/05.Artificial_neural_networks.pdf)  
+
 
 Support Vector Machines  
 
@@ -76,5 +78,9 @@ Kernel methods
 
 + [07.Kernel_Methods.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/master/Lecture_handouts/07.Kernel_Methods.pdf)  
 
+
+Gaussian process regression  
+
++ [08.Gaussian_process_regression.pdf](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Lecture_handouts/08.Gaussian_process_regression.pdf)  
 
 

@@ -372,7 +372,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> but <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> ( beware it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -382,7 +382,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
     </mrow>
    </msub><mo> &ne; </mo><mi>C</mi>
   </mrow>
- </mrow></math>, and why the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>), and why the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>i</mi>
  </mrow></math>-th point <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -400,7 +400,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
     </mrow>
     <mrow><mi>i</mi>
     </mrow>
-   </msub><mo> &ne; </mo><mi>C</mi>
+   </msub><mo>=</mo><mi>C</mi>
   </mrow>
  </mrow></math>. </li>
 <li class="enumerate_item">Given optimal values <math xmlns="http://www.w3.org/1998/Math/MathML">

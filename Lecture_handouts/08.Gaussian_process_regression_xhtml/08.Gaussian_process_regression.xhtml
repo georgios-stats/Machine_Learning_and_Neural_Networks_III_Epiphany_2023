@@ -114,7 +114,6 @@ font-variant: normal;
 font-size: medium;
 
 }
-dl.description dt { font-weight: bold; }
 div.notation {
 font-style: normal;
 font-variant: normal;
@@ -131,6 +130,7 @@ font-variant: normal;
 font-size: medium;
 
 }
+dl.description dt { font-weight: bold; }
 div.proposition {
 font-style: italic;
 font-variant: normal;
@@ -169,8 +169,10 @@ div.foot:hover div.foot_inner {
 	margin: 0em 1em;
 	padding: 1em;
 }
-span.flex_url {
-font-family: monospace;
+div.Frameless { margin: 1em; }
+div.Boxed {
+	border: solid thick black;
+	padding: 0.5ex;
 }
 div.float {
 	border: 2px solid black;
@@ -181,6 +183,9 @@ div.float-caption {
 	border: 2px solid black;
 	padding: 1ex;
 	margin: 1ex;
+}
+span.flex_url {
+font-family: monospace;
 }
 div.marginal {
 	border: 2px solid black;
@@ -211,7 +216,7 @@ div.marginal {
 
 <div style='height:3ex'></div></div>
 <h3 class="subsection_" id='magicparlabel-30'>Aim</h3>
-<div class="plain_layout" id='magicparlabel-31'>To introduce the ideas of learning machines by introducing data into high-dimensional feature spaces for accuracy gains; introduce the kernel trick, and kernel functions.</div>
+<div class="plain_layout" id='magicparlabel-31'>To introduce the Gaussian process regression as a kernel method.</div>
 
 <div class="plain_layout" id='magicparlabel-32'><hr />
 
@@ -226,23 +231,27 @@ div.marginal {
 
 <ul class="itemize" id='magicparlabel-37'><li class="itemize_item">Chapter 2, Regression (supplementary)</li>
 </ul>
-</li><li class="enumerate_item">Roustant, O., Ginsbourger, D., &amp; Deville, Y. (2012). DiceKriging, DiceOptim: Two R packages for the analysis of computer experiments by kriging-based metamodeling and optimization. Journal of statistical software, 51, 1-55.
+</li></ol>
 
-<ul class="itemize" id='magicparlabel-39'><li class="itemize_item">Supplementary material related to the the implementation of GP in R computing environment. </li>
+
+<ol class="enumerate" id='magicparlabel-44'><li class="enumerate_item">Roustant, O., Ginsbourger, D., &amp; Deville, Y. (2012). DiceKriging, DiceOptim: Two R packages for the analysis of computer experiments by kriging-based metamodeling and optimization. Journal of statistical software, 51, 1-55.
+
+<ul class="itemize" id='magicparlabel-45'><li class="itemize_item">Supplementary material related to the the implementation of GP in R computing environment. </li>
 </ul>
 </li></ol>
+
 </div></div>
-<h2 class="section" id='magicparlabel-40'><span class="section_label">1</span> Intro and motivation </h2>
+<h2 class="section" id='magicparlabel-51'><span class="section_label">1</span> Intro and motivation </h2>
 
-<div class="note" id='magicparlabel-41'><div class="note_item"><span class="note_label">Note 1.</span>
-As motivation for the Gaussian process regression, we &ldquo;Kernelize&rdquo; the standard Bayesian normal linear regression int he machine learning framework.</div>
+<div class="note" id='magicparlabel-52'><div class="note_item"><span class="note_label">Note 1.</span>
+As motivation for the Gaussian process regression, we &ldquo;Kernelize&rdquo; the standard Bayesian normal linear regression in the machine learning framework.</div>
 </div>
 
-<div class="standard" id='magicparlabel-42'><br />
+<div class="standard" id='magicparlabel-53'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-43'><div class="note_item"><span class="note_label">Note 2.</span>
+<div class="note" id='magicparlabel-54'><div class="note_item"><span class="note_label">Note 2.</span>
 <a id="note_Consider_the_predictive" />
 Consider the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -599,11 +608,11 @@ Consider the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-44'><br />
+<div class="standard" id='magicparlabel-55'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-45'><div class="note_item"><span class="note_label">Note 3.</span>
+<div class="note" id='magicparlabel-56'><div class="note_item"><span class="note_label">Note 3.</span>
 <a id="note_The_marginal_likelihood" />
 The marginal likelihood is <a id="eq__6" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -676,12 +685,13 @@ The marginal likelihood is <a id="eq__6" />
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-50'><br />
+<div class="standard" id='magicparlabel-61'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-51'><div class="note_item"><span class="note_label">Note 4.</span>
-<a id="note_The_predictive_distribution" />
+<div class="note" id='magicparlabel-62'><div class="note_item"><span class="note_label">Note 4.</span>
+<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-66'>No need to memorize the formulas in <a href="#eq__6">(1.2)</a>, <a href="#eq_">(1.4)</a>, and <a href="#eq__1">1.4</a>. The material in Notes <a href="#note_Consider_the_predictive">2</a>, <a href="#note_The_marginal_likelihood">3</a>, and <a href="#note_The_predictive_distribution">4</a> is given as a motivation for the Gaussian process regression. </div>
+</div></div><a id="note_The_predictive_distribution" />
 The predictive distribution of a new outcome <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -1164,14 +1174,14 @@ The predictive distribution of a new outcome <math xmlns="http://www.w3.org/1998
    <mtd>(1.4)
    </mtd>
   </mtr>
- </mtable></math> according to Proposition <a href="#prop_Let___Consider">38</a>. </div>
+ </mtable></math> according to Proposition <a href="#prop_Let___Consider">43</a>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-52'><br />
+<div class="standard" id='magicparlabel-67'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-53'><div class="note_item"><span class="note_label">Note 5.</span>
+<div class="note" id='magicparlabel-68'><div class="note_item"><span class="note_label">Note 5.</span>
 In the prior part of <a href="#eq__2">(1.1)</a>, let's assume <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -1189,7 +1199,7 @@ In the prior part of <a href="#eq__2">(1.1)</a>, let's assume <math xmlns="http:
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> is positive or negative. By Kernel trick, in <a href="#eq_">(1.4)</a> and <a href="#eq__1">(1.4)</a>, the feature space always enters in the form inner products. In fact we can define a kernel <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is positive or negative. By applying Kernel trick in <a href="#eq_">(1.4)</a> and <a href="#eq__1">(1.4)</a>, the feature space always enters in the form inner products. In fact we can define a kernel <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1310,16 +1320,12 @@ In the prior part of <a href="#eq__2">(1.1)</a>, let's assume <math xmlns="http:
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-54'><br />
+<div class="standard" id='magicparlabel-69'><br />
 
 </div>
+<h2 class="section" id='magicparlabel-70'><span class="section_label">2</span> The Gaussian process regression model </h2>
 
-<div class="note" id='magicparlabel-55'><div class="note_item"><span class="note_label">Note 6.</span>
-No need to memorize the formulas in <a href="#eq__6">(1.2)</a>, <a href="#eq_">(1.4)</a>, and <a href="#eq__1">1.4</a>. The material in Notes <a href="#note_Consider_the_predictive">2</a>, <a href="#note_The_marginal_likelihood">3</a>, and <a href="#note_The_predictive_distribution">4</a> is given as a motivation for the Gaussian process regression. </div>
-</div>
-<h2 class="section" id='magicparlabel-56'><span class="section_label">2</span> The Gaussian process regression model </h2>
-
-<div class="definition" id='magicparlabel-57'><div class="definition_item"><span class="definition_label">Definition 7.</span>
+<div class="definition" id='magicparlabel-71'><div class="definition_item"><span class="definition_label">Definition 6.</span>
 <a id="def_Gaussian_process__GP_" />
 Gaussian process (GP) is a collection of random variables <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1414,19 +1420,142 @@ Gaussian process (GP) is a collection of random variables <math xmlns="http://ww
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-62'><br />
+<div class="standard" id='magicparlabel-76'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-63'><div class="note_item"><span class="note_label">Note 8.</span>
+<div class="note" id='magicparlabel-77'><div class="note_item"><span class="note_label">Note 7.</span>
 Essentially, GP is a distribution defined over functions. </div>
 </div>
 
-<div class="standard" id='magicparlabel-64'><br />
+<div class="standard" id='magicparlabel-78'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-65'><div class="note_item"><span class="note_label">Note 9.</span>
+<div class="example" id='magicparlabel-79'><div class="example_item"><span class="example_label">Example 8.</span>
+One way to simulate a GP realization <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo> &sim; </mo>
+   <mstyle mathvariant='normal'>
+    <mrow><mi>G</mi><mi>P</mi>
+    </mrow>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mo> &sdot; </mo><mo>,</mo><mo> &sdot; </mo>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, with <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mn>1</mn><mo>+</mo><mn>0.01</mn><mi>x</mi>
+  </mrow>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>x</mi><mo>,</mo><mi>x</mi><mo>'</mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo> exp </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo>-</mo>
+    <mfrac>
+     <mrow><mn>1</mn>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </mfrac>
+    <mfrac>
+     <mrow>
+      <msup>
+       <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+        <mrow><mi>x</mi><mo>-</mo><mi>x</mi><mo>'</mo>
+        </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msup>
+     </mrow>
+     <mrow><mn>1.5</mn>
+     </mrow>
+    </mfrac>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> in the range <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo> &isin; </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+
+   <mrow><mn>0</mn><mo>,</mo><mn>10</mn>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+  </mrow>
+ </mrow></math> is given in the following R code.</div>
+<div class="standard" id='magicparlabel-80'><span style='font-family:monospace;'><div class='Frameless'><div class="plain_layout" id='magicparlabel-84'><span style='font-family:monospace;'><div class='Boxed' style='width: 60%; '><div class="plain_layout" id='magicparlabel-88'><span style='font-family:monospace;'><span style='font-size:small;'>rm(list=ls())</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-89'><span style='font-family:monospace;'><span style='font-size:small;'>set.seed(99)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-90'><span style='font-family:monospace;'><span style='font-size:small;'>n &lt;- 50 #descretize the problem</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-91'><span style='font-family:monospace;'><span style='font-size:small;'>x &lt;- seq(from = 0, to = 10, length = n)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-92'><span style='font-family:monospace;'><span style='font-size:small;'>mu_x &lt;- matrix(1,n)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-93'><span style='font-family:monospace;'><span style='font-size:small;'>cov_x_x &lt;- matrix(nrow = n, ncol = n)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-94'><span style='font-family:monospace;'><span style='font-size:small;'>for (i in 1:n) {</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-95'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;mu_x[i] &lt;- 1+0.01*x[i]</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-96'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;for (j in 1:n) {</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-97'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;&emsp;cov_x_x[i,j]&lt;- 10*exp(-0.5*(x[i]-x[j])^2/1.5)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-98'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;}</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-99'><span style='font-family:monospace;'><span style='font-size:small;'>}</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-100'><span style='font-family:monospace;'><span style='font-size:small;'>f &lt;- rmvnorm(n = 1, mean = mu_x , sigma = cov_x_x)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-101'><span style='font-family:monospace;'><span style='font-size:small;'>plot(x,f,type="l",</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-102'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;main="f(.)~GP(m(.),c(.,.))",</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-103'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;ylab="f(x)",xlab="x",</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-104'><span style='font-family:monospace;'><span style='font-size:small;'>&emsp;cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)</span></span></div>
+
+<div class="plain_layout" id='magicparlabel-105'><span style='font-family:monospace;'><span style='font-size:small;'>points(x, f, cex = .5, col = "dark red")</span></span></div>
+</div><img style='width:40%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gaussian_process_regression_GP_realization.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gaussian_process_regression_GP_realization.png' />
+</span></div>
+</div></span></div>
+</div>
+
+<div class="standard" id='magicparlabel-106'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-107'><div class="note_item"><span class="note_label">Note 9.</span>
 <a id="note_Consider_a_function" />
 Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1548,7 +1677,7 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mstyle mathvariant='script'><mi>X</mi>
    </mstyle>
   </mrow>
- </mrow></math>. Based on the Kernel trick and Definition <a href="#def_Gaussian_process__GP_">7</a>, we can equivalently specify <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Based on the Kernel trick and Definition <a href="#def_Gaussian_process__GP_">6</a>, we can equivalently specify <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
@@ -1569,7 +1698,7 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> for some kernel / covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> for some corresponding kernel / covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1595,19 +1724,19 @@ Consider a function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-70'><br />
+<div class="standard" id='magicparlabel-112'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-71'><div class="note_item"><span class="note_label">Note 10.</span>
+<div class="note" id='magicparlabel-113'><div class="note_item"><span class="note_label">Note 10.</span>
 We introduce the concept of Gaussian process regression in the machine learning framework below.</div>
 </div>
 
-<div class="standard" id='magicparlabel-72'><br />
+<div class="standard" id='magicparlabel-114'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-73'><div class="note_item"><span class="note_label">Note 11.</span>
+<div class="note" id='magicparlabel-115'><div class="note_item"><span class="note_label">Note 11.</span>
 Consider the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -1626,7 +1755,7 @@ Consider the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mstyle mathvariant='double-struck'><mi>R</mi>
    </mstyle>
   </mrow>
- </mrow></math> with unknown image (possibly up to a set of properties, we will discuss this later) and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> with unknown formula (possibly up to a set of properties, we will discuss this later) and <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -1643,37 +1772,51 @@ Consider the predictive rule <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="example" id='magicparlabel-74'><div class="example_item"><span class="example_label">Example 12.</span>
-<div class="foot"><span class="foot_label">1</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-78'>R code for the plots/running example is available from <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/08.Gaussian_process_regression/plots.R</span></div>
-</div></div>Figure <a href="#fig_True">a</a> shows a function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="example" id='magicparlabel-116'><div class="example_item"><span class="example_label">Example 12.</span>
+Figure <a href="#fig_True">a</a> shows a function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. We pretend that we do not know <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> but we wish to recover it. To recover <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> we pretend that we do not know but we wish to recover. To recover <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>x</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-  </mrow>
- </mrow></math>, we collect training data set as in Figure <a href="#fig_Training_Examples">b</a>. <div class='float-figure'><div class="plain_layout" id='magicparlabel-86'>  </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-90'><img style='width:30%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____08_Gaussian_process_regression_Ex_real_fun.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____08_Gaussian_process_regression_Ex_real_fun.png' />
+ </mrow></math>, we collect training data set as in Figure <a href="#fig_Training_Examples">b</a>. <div class='float-figure'><div class="plain_layout" id='magicparlabel-120'>  </div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-124'><img style='width:30%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____08_Gaussian_process_regression_Ex_real_fun.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____08_Gaussian_process_regression_Ex_real_fun.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_True" />
-True <math xmlns="http://www.w3.org/1998/Math/MathML">
+</span></div>
+</div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-136'><img style='width:30%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_Ex_real_fun_data.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_Ex_real_fun_data.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Training_Examples" />
+  </span></div>
+</div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-152'><img style='width:30%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ession_Ex_CovFun_Gaussian_realizations_path.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ession_Ex_CovFun_Gaussian_realizations_path.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_Training_Examples_1" />
+</span></div>
+</div>
+
+
+<div class="plain_layout" id='magicparlabel-165'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 2.1:  A toy example. <a href="#fig_True">(a)</a> shows the true <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math></span></div>
-</div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-98'><img style='width:30%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_Ex_real_fun_data.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_Ex_real_fun_data.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Training_Examples" />
-Training Examples <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Fig <a href="#fig_Training_Examples">b</a> shows the training sample <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <mrow>
@@ -1703,11 +1846,26 @@ Training Examples <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math></span></div>
-</div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-106'><img style='width:30%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ession_Ex_CovFun_Gaussian_realizations_path.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ession_Ex_CovFun_Gaussian_realizations_path.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_Training_Examples_1" />
-Realizations of a prior Gaussian process <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> s.t. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>y</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>+</mo><mn>0</mn>
+  </mrow>
+ </mrow></math>. Fig <a href="#fig_Training_Examples_1">c</a> shows several realisations of the prior <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
@@ -1728,20 +1886,16 @@ Realizations of a prior Gaussian process <math xmlns="http://www.w3.org/1998/Mat
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> </span></div>
-</div>
-
-
-<div class="plain_layout" id='magicparlabel-111'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 2.1:  A toy example</span></div>
+ </mrow></math>. R code for the plots/running example is available from <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/08.Gaussian_process_regression/plots.R</span></span></div>
 </div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-116'><br />
+<div class="standard" id='magicparlabel-174'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-117'><div class="note_item"><span class="note_label">Note 13.</span>
+<div class="note" id='magicparlabel-175'><div class="note_item"><span class="note_label">Note 13.</span>
 For training purposes, assume there is available a set of observables <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msubsup>
@@ -1914,7 +2068,7 @@ For training purposes, assume there is available a set of observables <math xmln
     </mrow>
    </msup><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math>. <a href="#eq__3">(2.1)</a> can result by considering, a quadratic loss <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Statistical model <a href="#eq__3">(2.1)</a> can result by considering a quadratic loss <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -1954,7 +2108,7 @@ For training purposes, assume there is available a set of observables <math xmln
     </mrow>
    </msup>
   </mrow>
- </mrow></math>, and sampling distribution with pdf<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> and sampling distribution with pdf<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mstyle mathvariant='normal'>
@@ -2149,7 +2303,13 @@ For training purposes, assume there is available a set of observables <math xmln
       </msub><mo>|</mo><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+<mo>,</mo>
+      <msup>
+       <mrow><mi> &sigma; </mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msup>
      </mrow>
     </mtd>
     <mtd>
@@ -2188,7 +2348,7 @@ For training purposes, assume there is available a set of observables <math xmln
      <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+<mo>|</mo><mi> &beta; </mi><mo>,</mo><mi> &phi; </mi>
      </mrow>
     </mtd>
     <mtd>
@@ -2230,14 +2390,154 @@ For training purposes, assume there is available a set of observables <math xmln
  <mrow>
   <mrow><mi> &phi; </mi><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math> which are suppressed from the conditioning to easy the notation. </div>
+ </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-118'><br />
+<div class="standard" id='magicparlabel-176'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-119'><div class="note_item"><span class="note_label">Note 14.</span>
+<div class="notation" id='magicparlabel-177'><div class="notation_item"><span class="notation_label">Notation 14.</span>
+From now on, to easy the notation, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>x</mi>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi> &sigma; </mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msup>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math> , and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math> are suppressed from the conditioning; e.g. we use <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mo> &sdot; </mo><mo>,</mo><mo> &sdot; </mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> instead of C<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+  <mrow><mo> &sdot; </mo><mo>,</mo><mo> &sdot; </mo><mo>|</mo><mi> &phi; </mi>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+ </mrow></math>.</div>
+</div>
+
+<div class="standard" id='magicparlabel-178'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-179'><div class="note_item"><span class="note_label">Note 15.</span>
+A realization of <a href="#eq__13">(2.2)</a> (with ref to Fig <a href="#fig_Training_Examples_1">c</a>) can be simulated by setting a finite vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>x</mi><mo>:</mo><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mn>1</mn>
+     </mrow>
+    </msub><mo>,</mo><mn>...</mn><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>m</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>, computing <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &mu; </mi>
+ </mrow></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+<mi> &mu; </mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <msub>
+    <mrow><mi>x</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>C</mi>
+ </mrow></math> such that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>[</mo>
+<mi>C</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>]</mo>
+
+    </mrow>
+    <mrow>
+     <mrow><mi>i</mi><mo>,</mo><mi>j</mi>
+     </mrow>
+    </mrow>
+   </msub><mo>=</mo><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>j</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> and drawing am <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi>m</mi>
+ </mrow></math> dimensional vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &eta; </mi>
+ </mrow></math> from the multivariate Normal distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='normal'><mi>N</mi>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi> &mu; </mi><mo>,</mo><mi>C</mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math>. See Fig <a href="#fig_Training_Examples_1">c</a>, and the R code provided int he caption.</div>
+</div>
+
+<div class="standard" id='magicparlabel-180'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-181'><div class="note_item"><span class="note_label">Note 16.</span>
 Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -2399,13 +2699,7 @@ Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
            </msub>
           </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mi>I</mi>
-          <msup>
-           <mrow><mi> &sigma; </mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-          </msup>
+
          </mrow>
         </mtd>
         <mtd>
@@ -2540,11 +2834,11 @@ Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-124'><br />
+<div class="standard" id='magicparlabel-186'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-125'><div class="note_item"><span class="note_label">Note 15.</span>
+<div class="note" id='magicparlabel-187'><div class="note_item"><span class="note_label">Note 17.</span>
 <a id="note_Consider__as" />
  The conditional distribution of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2595,7 +2889,7 @@ Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math>, as results from <a href="#eq__4">2.3</a> (Proposition <a href="#prop_Let___Consider">38</a>),<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, as results from <a href="#eq__4">2.3</a> (Proposition <a href="#prop_Let___Consider">43</a>),<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd>
@@ -2866,11 +3160,11 @@ Consider <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mtable></math> </div>
 </div>
 
-<div class="standard" id='magicparlabel-126'><br />
+<div class="standard" id='magicparlabel-188'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-127'><div class="note_item"><span class="note_label">Note 16.</span>
+<div class="note" id='magicparlabel-189'><div class="note_item"><span class="note_label">Note 18.</span>
 Because <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msub>
@@ -2879,7 +3173,7 @@ Because <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mo>*</mo>
    </mrow>
   </msub>
- </mrow></math> is of any finite length, and the derivations in Note <a href="#note_Consider__as">15</a>, by definition of GP, the predictive distribution of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is of any finite length, and the derivations in Note <a href="#note_Consider__as">17</a>, by definition of GP, the predictive distribution of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mo> &sdot; </mo>
@@ -3163,7 +3457,7 @@ Because <math xmlns="http://www.w3.org/1998/Math/MathML">
       <msub>
        <mrow><mi>x</mi>
        </mrow>
-       <mrow><mi>x</mi>
+       <mrow><mo>*</mo>
        </mrow>
       </msub><mo>'</mo>
      </mrow>
@@ -3174,14 +3468,19 @@ Because <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msup>
   </mrow>
- </mrow></math>, <a href="#eq__7">(2.8)</a> results as the first block of <a href="#eq__10">2.4</a>, and <a href="#eq__8">(2.8)</a> results as the top off-diagonal block of <a href="#eq__9">2.5</a>.</div>
+ </mrow></math>, <a href="#eq__7">(2.8)</a> results as the first block of <a href="#eq__10">(2.4)</a>, and <a href="#eq__8">(2.8)</a> results as the top off-diagonal block of <a href="#eq__9">(2.5)</a>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-128'><br />
+<div class="standard" id='magicparlabel-190'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-129'><div class="note_item"><span class="note_label">Note 17.</span>
+
+<div class="standard" id='magicparlabel-191'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-192'><div class="note_item"><span class="note_label">Note 19.</span>
 Note that the posterior expected rule at <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -3330,7 +3629,14 @@ Note that the posterior expected rule at <math xmlns="http://www.w3.org/1998/Mat
       </msub>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+<mo>,</mo><mspace width="6px" /><mspace width="6px" /><mspace width="6px" />
+     <mstyle mathvariant='normal'>
+      <mrow><mi>i</mi><mi>f</mi>&nbsp;<mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mn>0</mn>
+      </mrow>
+     </mstyle>
     </mrow>
    </mtd>
    <mtd>
@@ -3338,39 +3644,28 @@ Note that the posterior expected rule at <math xmlns="http://www.w3.org/1998/Mat
   </mtr>
  </mtable></math>where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
-  <mrow><mi> &alpha; </mi><mo>=</mo><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <msub>
-    <mrow><mi>x</mi>
+  <mrow><mi> &alpha; </mi><mo>=</mo>
+   <msup>
+    <mrow><mi>y</mi>
     </mrow>
-    <mrow><mo>*</mo>
+    <mrow><mi> &top; </mi>
     </mrow>
-   </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-   <mrow><mi>y</mi><mo>-</mo><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>X</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-   </mrow>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+   </msup>
    <msup>
     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
      <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-      <mrow><mi>X</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>I</mi>
-       <msup>
-        <mrow><mi> &sigma; </mi>
-        </mrow>
-        <mrow><mn>2</mn>
-        </mrow>
-       </msup>
+      <mrow><mi>X</mi><mo>,</mo><mi>X</mi>
       </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
+<mo>+</mo><mi>I</mi>
+      <msup>
+       <mrow><mi> &sigma; </mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msup>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -3379,29 +3674,272 @@ Note that the posterior expected rule at <math xmlns="http://www.w3.org/1998/Mat
      <mrow><mo>-</mo><mn>1</mn>
      </mrow>
     </mrow>
-   </msup>
+   </msup><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>X</mi><mo>,</mo>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
   </mrow>
  </mrow></math>. This is in accordance to the Representation theorem (Theorem <a href="#thm__Representation_theorem__Assume">thm:(Representation-theorem)-Assume</a> in Handout 7 Kernel methods) with reference to the Bayesian linear regression (Note <a href="#note_Consider_the_predictive">2</a>).</div>
 </div>
 
-<div class="example" id='magicparlabel-134'><div class="example_item"><span class="example_label">Example 18.</span>
-Figure <a href="#fig_Predictive_GP">2.2</a> presents the predictive distribution from a trained GP regression
+<div class="example" id='magicparlabel-201'><div class="example_item"><span class="example_label">Example 20.</span>
+<a id="exa_Given_some_values" />
+Given some values for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi> &sigma; </mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msup>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math> (see Section <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi> &sigma; </mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msup>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math>), the predictive GP regression for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-139'><img style='width:30%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ussian_process_regression_GPR-n=10-par=good.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ussian_process_regression_GPR-n=10-par=good.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Figure 2.2:  <a id="fig_Predictive_GP" />
-Predictive GP</span></div>
+  </mrow>
+ </mrow></math> is represented in Figure <a href="#fig_Predictive_GP">a</a>. The red dots are training data points <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
+
+  <mrow>
+   <msub>
+    <mrow><mi>z</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub><mo>,</mo>
+    <msub>
+     <mrow><mi>y</mi>
+     </mrow>
+     <mrow><mi>i</mi>
+     </mrow>
+    </msub>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
+
+ </mrow></math>. The red line is the predictive GP mean <a href="#eq__7">(2.8)</a>. The blue shades is the ares between the <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>95</mn>%
+  </mrow>
+ </mrow></math> quantiles of the Normal distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='normal'><mi>N</mi>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi> &mu; </mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo>
+    <msub>
+     <mrow><mi>C</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mo>*</mo>
+      </mrow>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mo>*</mo>
+      </mrow>
+     </msub>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> at each point <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>x</mi>
+   </mrow>
+   <mrow><mo>*</mo>
+   </mrow>
+  </msub>
+ </mrow></math> of the inputs. Note that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='normal'><mi>N</mi>
+   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msub>
+     <mrow><mi> &mu; </mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <msub>
+     <mrow><mi>x</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>,</mo>
+    <msub>
+     <mrow><mi>C</mi>
+     </mrow>
+     <mrow><mo>*</mo>
+     </mrow>
+    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mo>*</mo>
+      </mrow>
+     </msub><mo>,</mo>
+     <msub>
+      <mrow><mi>x</mi>
+      </mrow>
+      <mrow><mo>*</mo>
+      </mrow>
+     </msub>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> is just a snapshot of <a href="#eq__5">2.6</a> at point <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msub>
+   <mrow><mi>x</mi>
+   </mrow>
+   <mrow><mo>*</mo>
+   </mrow>
+  </msub>
+ </mrow></math>. 
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-209'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ussian_process_regression_GPR-n=10-par=good.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ussian_process_regression_GPR-n=10-par=good.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_Predictive_GP" />
+</span></div>
+</div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-217'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Wise_choice_of_1" />
+</span></div>
+</div>
 
 
+<div class="plain_layout" id='magicparlabel-222'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 2.2:  Predictive GP regressions given different numbers of training data points, for some values of <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <msup>
+   <mrow><mi> &sigma; </mi>
+   </mrow>
+   <mrow><mn>2</mn>
+   </mrow>
+  </msup>
+ </mrow></math>, <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &beta; </mi>
+ </mrow></math>. Fig <a href="#fig_Predictive_GP">a</a> shows the predictive GP given <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>n</mi><mo>=</mo><mn>10</mn>
+  </mrow>
+ </mrow></math> data-points. Fig <a href="#fig_Wise_choice_of_1">b</a> shows the predictive GP given <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>n</mi><mo>=</mo><mn>6</mn>
+  </mrow>
+ </mrow></math> data-points.</span></div>
 </div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-145'><br />
+<div class="standard" id='magicparlabel-227'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-146'><span class="section_label">3</span> Training (via Empirical Bayes)</h2>
 
-<div class="note" id='magicparlabel-147'><div class="note_item"><span class="note_label">Note 19.</span>
+<div class="note" id='magicparlabel-228'><div class="note_item"><span class="note_label">Note 21.</span>
+(Related to Example <a href="#exa_Given_some_values">20</a>) Intuitively, we can imagine that the conditional <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>|</mo><mi>y</mi>
+  </mrow>
+ </mrow></math> in Figure <a href="#fig_Predictive_GP">a</a> results from the marginal/prior <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> in Figure <a href="#fig_Training_Examples_1">c</a> by forcing all the lines in Figure <a href="#fig_Training_Examples_1">c</a> to pass through the data points in Figure <a href="#fig_Training_Examples_1">c</a>. So the more the data points, the smaller the uncertainty around the predictive mean; compare Fig <a href="#fig_Predictive_GP">a</a> using <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>10</mn>
+ </mrow></math> examples and Fig <a href="#fig_Wise_choice_of">b</a> using <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>5</mn>
+ </mrow></math> examples.</div>
+</div>
+
+<div class="standard" id='magicparlabel-229'><br />
+
+</div>
+<h2 class="section" id='magicparlabel-230'><span class="section_label">3</span> <a id="sec_Training__via_Empirical" />
+Training (via Empirical Bayes)</h2>
+
+<div class="note" id='magicparlabel-231'><div class="note_item"><span class="note_label">Note 22.</span>
 Recall that the mean and covariance functions in <a href="#eq__5">(2.6)</a> depend on tunable parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
@@ -3417,7 +3955,7 @@ Recall that the mean and covariance functions in <a href="#eq__5">(2.6)</a> depe
  </mrow></math>. When the number of training examples is small, the behavior of <a href="#eq__5">(2.6)</a> is sensitive to these hyperparameters. In Figure <a href="#fig_Sensitivity_in_the">3.1</a>, there are two instances of GP regression given <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mn>6</mn>
  </mrow></math> examples where the tunable parameters are different.
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-155'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Gaussian_process_regression_GPR-n=6-par=bad.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Gaussian_process_regression_GPR-n=6-par=bad.png' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-239'><img style='width:33%;' src='6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Gaussian_process_regression_GPR-n=6-par=bad.png' alt='image: 6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Gaussian_process_regression_GPR-n=6-par=bad.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  Careless choice of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &phi; </mi>
  </mrow></math> Here <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3438,8 +3976,9 @@ Recall that the mean and covariance functions in <a href="#eq__5">(2.6)</a> depe
 
 
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-164'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' />
-<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  Wise choice of <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-248'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____aussian_process_regression_GPR-n=6-par=good.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_Wise_choice_of" />
+Wise choice of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &phi; </mi>
  </mrow></math> Here <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3459,7 +3998,7 @@ Recall that the mean and covariance functions in <a href="#eq__5">(2.6)</a> depe
 </div>
 
 
-<div class="plain_layout" id='magicparlabel-169'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 3.1:  <a id="fig_Sensitivity_in_the" />
+<div class="plain_layout" id='magicparlabel-253'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 3.1:  <a id="fig_Sensitivity_in_the" />
 Sensitivity in the tunable parameters <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &phi; </mi>
  </mrow></math>. Here <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3483,11 +4022,11 @@ Sensitivity in the tunable parameters <math xmlns="http://www.w3.org/1998/Math/M
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-175'><br />
+<div class="standard" id='magicparlabel-259'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-176'><div class="note_item"><span class="note_label">Note 20.</span>
+<div class="note" id='magicparlabel-260'><div class="note_item"><span class="note_label">Note 23.</span>
 The marginal likelihood <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -3515,47 +4054,54 @@ The marginal likelihood <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi>
   </mrow>
- </mrow></math> results from <a href="#eq__4">(2.3)</a> as<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow><mi>y</mi><mo>|</mo>
-   <msup>
-    <mrow><mi> &sigma; </mi>
-    </mrow>
-    <mrow><mn>2</mn>
-    </mrow>
-   </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi><mo> &sim; </mo>
-   <mstyle mathvariant='normal'><mi>N</mi>
-   </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+ </mrow></math> results from <a href="#eq__4">(2.3)</a> as<a id="eq__14" />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ <mtable>
+  <mtr>
+   <mtd>
+    <mrow><mi>y</mi><mo>|</mo>
+     <msup>
+      <mrow><mi> &sigma; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi><mo> &sim; </mo>
+     <mstyle mathvariant='normal'><mi>N</mi>
+     </mstyle><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-   <mrow><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+     <mrow><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-    <mrow><mi>X</mi><mo>|</mo><mi> &beta; </mi>
-    </mrow>
+      <mrow><mi>X</mi><mo>|</mo><mi> &beta; </mi>
+      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>,</mo><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-    <mrow><mi>X</mi><mo>,</mo><mi>X</mi><mo>|</mo><mi> &phi; </mi>
-    </mrow>
+      <mrow><mi>X</mi><mo>,</mo><mi>X</mi><mo>|</mo><mi> &phi; </mi>
+      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>+</mo><mi>I</mi>
-    <msup>
-     <mrow><mi> &sigma; </mi>
+      <msup>
+       <mrow><mi> &sigma; </mi>
+       </mrow>
+       <mrow><mn>2</mn>
+       </mrow>
+      </msup>
      </mrow>
-     <mrow><mn>2</mn>
-     </mrow>
-    </msup>
-   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mn>.</mn>
-  </mrow>
- </mrow></math></div>
+    </mrow>
+   </mtd>
+   <mtd>(3.1)
+   </mtd>
+  </mtr>
+ </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-177'><br />
+<div class="standard" id='magicparlabel-261'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-178'><div class="note_item"><span class="note_label">Note 21.</span>
+<div class="note" id='magicparlabel-262'><div class="note_item"><span class="note_label">Note 24.</span>
 Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -3601,7 +4147,62 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> according to Empirical Bayes procedure as well as according to classical methods using as error function the marginal likelihood, we need to minimize<a id="eq__12" />
+ </mrow></math> according to classical training methods, we can specify the empirical risk function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mover>
+    <mrow><mi>R</mi>
+    </mrow><mo stretchy="true">&circ;</mo>
+   </mover><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msup>
+     <mrow><mi> &sigma; </mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> by using the marginal likelihood in <a href="#eq__14">(3.1)</a>, as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mover>
+    <mrow><mi>R</mi>
+    </mrow><mo stretchy="true">&circ;</mo>
+   </mover><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow>
+    <msup>
+     <mrow><mi> &sigma; </mi>
+     </mrow>
+     <mrow><mn>2</mn>
+     </mrow>
+    </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mo>-</mo><mn>2</mn><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+    <mrow><mi>y</mi><mo>|</mo>
+     <msup>
+      <mrow><mi> &sigma; </mi>
+      </mrow>
+      <mrow><mn>2</mn>
+      </mrow>
+     </msup><mo>,</mo><mi> &phi; </mi><mo>,</mo><mi> &beta; </mi>
+    </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> <div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-266'>Equivalently Empirical Bayes training procedures</div>
+</div></div>. Hence, we need to minimize<a id="eq__12" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -3679,7 +4280,7 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
 
     </mrow>
    </mtd>
-   <mtd>(3.1)
+   <mtd>(3.2)
    </mtd>
   </mtr>
   <mtr>
@@ -3806,12 +4407,12 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-179'><br />
+<div class="standard" id='magicparlabel-267'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-180'><div class="note_item"><span class="note_label">Note 22.</span>
-<a href="#eq__12">(3.1)</a> can be solved via GD (Algorithm <a href="#alg_Gradient_descent_algorithm">alg:Gradient-descent-algorithm</a> Handout 2 Gradient descent), or the Stochastic Gradient (Handout 3: Stochastic gradient descent) as the required gradient ca be easily computed as<div class="marginal"><div class="plain_layout" id='magicparlabel-184'>No need to be memorized</div>
+<div class="note" id='magicparlabel-268'><div class="note_item"><span class="note_label">Note 25.</span>
+<a href="#eq__12">(3.2)</a> can be solved via GD (Algorithm <a href="#alg_Gradient_descent_algorithm">alg:Gradient-descent-algorithm</a> Handout 2 Gradient descent), or the Stochastic Gradient (Handout 3: Stochastic gradient descent) as the required gradient ca be easily computed as<div class="marginal"><div class="plain_layout" id='magicparlabel-272'>No need to be memorized</div>
 </div><math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -4210,13 +4811,19 @@ Let <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mtr>
  </mtable></math></div>
 </div>
-<h2 class="section" id='magicparlabel-185'><span class="section_label">4</span> Examples of Examples of Covariance Functions</h2>
 
-<div class="standard" id='magicparlabel-186'><br />
+<div class="standard" id='magicparlabel-273'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-187'><div class="note_item"><span class="note_label">Note 23.</span>
+
+<h2 class="section" id='magicparlabel-280'><span class="section_label">4</span> Examples of Covariance Functions</h2>
+
+<div class="standard" id='magicparlabel-281'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-282'><div class="note_item"><span class="note_label">Note 26.</span>
 The covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo>:</mo>
@@ -4246,27 +4853,27 @@ The covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> change together. </div>
 </div>
 
-<div class="standard" id='magicparlabel-188'><br />
+<div class="standard" id='magicparlabel-283'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-189'><div class="note_item"><span class="note_label">Note 24.</span>
+<div class="note" id='magicparlabel-284'><div class="note_item"><span class="note_label">Note 27.</span>
 Covariance function is a functional parameter of the GP prior <a href="#eq__13">(2.2)</a>. Different covarince functions represent different properties, hence they impose different prior info in the GP regression model; they are crusial parameters. </div>
 </div>
 
-<div class="standard" id='magicparlabel-190'><br />
+<div class="standard" id='magicparlabel-285'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-191'><div class="note_item"><span class="note_label">Note 25.</span>
+<div class="note" id='magicparlabel-286'><div class="note_item"><span class="note_label">Note 28.</span>
 Any positive definite Kernel as described in Section <a href="#sec_Construction_of_kernels">sec:Construction-of-kernels</a> in Handout 7 Kernel methods can be used as a covarince function. Consequently kernel construction approached and theories introduced can be use for the covariance functions as well.</div>
 </div>
 
-<div class="standard" id='magicparlabel-192'><br />
+<div class="standard" id='magicparlabel-287'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-193'><div class="definition_item"><span class="definition_label">Definition 26.</span>
+<div class="definition" id='magicparlabel-288'><div class="definition_item"><span class="definition_label">Definition 29.</span>
 Stationary covariance function is called a covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo>:</mo>
@@ -4306,13 +4913,33 @@ Stationary covariance function is called a covariance function <math xmlns="http
  </mrow></math> is a function of their distance and only. </div>
 </div>
 
-<div class="standard" id='magicparlabel-194'><br />
+<div class="standard" id='magicparlabel-289'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-195'><div class="note_item"><span class="note_label">Note 27.</span>
-a one-dimensional Gaussian process one way to understand the characteristic length-scale of the process (if this exists) is in terms of the number of upcrossings of a level <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="note" id='magicparlabel-290'><div class="note_item"><span class="note_label">Note 30.</span>
+<a id="note_a_one_dimensional_Gaussian" />
+In <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mn>1</mn>
+ </mrow></math>-D Gaussian process, one way to understand the characteristic length-scale of the process (if this exists) is in terms of the number of upcrossings of a level <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>u</mi>
+ </mrow></math>. Consider stationary covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>x</mi><mo>,</mo><mi>x</mi><mo>'</mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+<mo>=</mo><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo form='prefix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+   <mrow><mi>x</mi><mo>-</mo><mi>x</mi><mo>'</mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>&par;</mo>
+
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
  </mrow></math>. The expected number of upcrossings <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -4353,14 +4980,14 @@ a one-dimensional Gaussian process one way to understand the characteristic leng
    <msqrt>
     <mfrac>
      <mrow>
-      <mrow><mo>-</mo><mi>K</mi><mo>'</mo><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      <mrow><mo>-</mo><mi>C</mi><mo>'</mo><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mn>0</mn>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
       </mrow>
      </mrow>
      <mrow>
-      <mrow><mi>K</mi><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      <mrow><mi>C</mi><mo>'</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mn>0</mn>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -4380,7 +5007,7 @@ a one-dimensional Gaussian process one way to understand the characteristic leng
       </msup>
      </mrow>
      <mrow>
-      <mrow><mn>2</mn><mi>K</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      <mrow><mn>2</mn><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mn>0</mn>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
@@ -4394,14 +5021,15 @@ a one-dimensional Gaussian process one way to understand the characteristic leng
  </mrow></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-196'><br />
+<div class="standard" id='magicparlabel-291'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-197'><div class="note_item"><span class="note_label">Note 28.</span>
+<div class="note" id='magicparlabel-292'><div class="note_item"><span class="note_label">Note 31.</span>
+<a id="note_Popular_covariance_functions" />
 Popular covariance functions are</div>
 
-<dl class='description' id='magicparlabel-198'><dt class="description_label">Gaussian&nbsp;covariance&nbsp;function</dt>
+<dl class='description' id='magicparlabel-293'><dt class="description_label">Gaussian&nbsp;covariance&nbsp;function</dt>
 <dd class="description_item"> given as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -4436,7 +5064,7 @@ Popular covariance functions are</div>
   </mrow>
  </mrow></math>
 
-<ul class="itemize" id='magicparlabel-199'><li class="itemize_item">It is infinitely differentiable, which means that the GP is very smooth. </li>
+<ul class="itemize" id='magicparlabel-294'><li class="itemize_item">It is infinitely differentiable, which means that the GP is very smooth. </li>
 <li class="itemize_item">The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi> &phi; </mi>
  </mrow></math> is called lengthscale. </li>
@@ -4504,7 +5132,7 @@ Popular covariance functions are</div>
   </mrow>
  </mrow></math>
 
-<ul class="itemize" id='magicparlabel-203'><li class="itemize_item">It is not differentiable at <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-298'><li class="itemize_item">It is not differentiable at <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>r</mi><mo>=</mo><mn>0</mn>
   </mrow>
@@ -4602,7 +5230,7 @@ Popular covariance functions are</div>
  <mrow>
   <mrow><mi> &nu; </mi><mo>=</mo><mn>1</mn><mo>/</mo><mn>2</mn>
   </mrow>
- </mrow></math> , and the exponential one for <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> , and the Gaussian one for <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &nu; </mi><mo> &rarr; </mo><mi> &infin; </mi>
   </mrow>
@@ -4610,11 +5238,126 @@ Popular covariance functions are</div>
 </dl>
 </div>
 
-<div class="standard" id='magicparlabel-205'><br />
+<div class="standard" id='magicparlabel-300'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-206'><div class="note_item"><span class="note_label">Note 29.</span>
+<div class="example" id='magicparlabel-301'><div class="example_item"><span class="example_label">Example 32.</span>
+We investigate the effect of choosing a different length scale <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math> in Figure <a href="#fig_Investigation_of_the">4.1</a>. We consider the Gaussian covariance function. Figure <a href="#fig__1">a</a> shows that the smaller the length scale <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math> is the more it focuses on the small scale dependences. Figure <a href="#fig__1">a</a> shows that the smaller the length scale <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math> is the more upcrossings the associated GP has. This agrees with Note <a href="#note_a_one_dimensional_Gaussian">30</a>. Bottom line, it is reasonable for the researcher to specify a GP prior with a covariance with a smaller length scale <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math> if there is some a priori knowledge that the line <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &eta; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo> &sdot; </mo>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> may have strong small scale variation (eg changes more frequently). <div class='float-figure'><div class="plain_layout" id='magicparlabel-305'> <span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.1:  <a id="fig_Investigation_of_the" />
+Investigation of the effect of choosing a different length scale <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mi> &phi; </mi>
+ </mrow></math></span></div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-309'><img style='width:33%;' src='7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____egression_Ex_CovFun_Gaussian_scale_distance.png' alt='image: 7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____egression_Ex_CovFun_Gaussian_scale_distance.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig__1" />
+</span></div>
+
+
+</div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-318'><img style='width:33%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ss_regression_Ex_CovFun_Gaussian_scale_path.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ss_regression_Ex_CovFun_Gaussian_scale_path.png' />
+<span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig__1_1" />
+</span></div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+
+<div class="standard" id='magicparlabel-328'><br />
+
+</div>
+
+<div class="example" id='magicparlabel-329'><div class="example_item"><span class="example_label">Example 33.</span>
+We investigate the effect of choosing a different covariance functions: Gaussian, Exponential, Matern <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>3</mn><mo>/</mo><mn>2</mn>
+  </mrow>
+ </mrow></math> covariance functions (Note <a href="#note_Popular_covariance_functions">31</a>) in Figure <a href="#fig_Snapshots_of_different">4.2</a>. In Fig <a href="#fig_">a</a>, we observe that (a) covariance function reduces with distance that is closer points are expected to have larger dependence; (b) Gaussian cov gives more weight to small scale dependences (closer points) than the exponential. In Fig <a href="#fig_GP_realizations">b</a>, we see that the GP using a Gaussian cov is smoother than the GP using an Exponential cov. as expected as the former is infinitely differentiable while the latter is not differentiable. In general, Matern (<math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi> &nu; </mi><mo>=</mo><mn>3</mn><mo>/</mo><mn>2</mn>
+  </mrow>
+ </mrow></math>) 's behavior is between those of Gaussian and Exponential, as expected.<div class='float-figure'><div class="plain_layout" id='magicparlabel-333'> </div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-337'><img style='width:33%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ocess_regression_Ex_compare_CovFum_distance.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ocess_regression_Ex_compare_CovFum_distance.png' />
+</div>
+
+<div class="plain_layout" id='magicparlabel-338'><span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_" />
+</span></div>
+
+
+</div>
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-351'><img style='width:33%;' src='10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___n_process_regression_Ex_compare_CovFum_path.png' alt='image: 10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___n_process_regression_Ex_compare_CovFum_path.png' />
+</div>
+
+<div class="plain_layout" id='magicparlabel-352'><span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_GP_realizations" />
+ </span></div>
+</div>
+
+
+<div class="plain_layout" id='magicparlabel-361'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.2:  <a id="fig_Snapshots_of_different" />
+Investigation of the effect of choosing a different covariance functions: Gaussian, Exponential, Matern <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mn>3</mn><mo>/</mo><mn>2</mn>
+  </mrow>
+ </mrow></math> covariance functions. <a href="#fig_">(a)</a> shows the covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>x</mi><mo>,</mo><mi>x</mi><mo>'</mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> against the distance <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+  <mrow><mi>x</mi><mo>-</mo><mi>x</mi><mo>'</mo>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+ </mrow></math>. <a href="#fig_">(a)</a> shows the covariance function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>C</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+   <mrow><mi>x</mi><mo>,</mo><mi>x</mi><mo>'</mo>
+   </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> against the distance <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+  <mrow><mi>x</mi><mo>-</mo><mi>x</mi><mo>'</mo>
+  </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>|</mo>
+
+ </mrow></math>. <a href="#fig_GP_realizations">(b)</a> shows realizations of GP using different covariance functions.</span></div>
+
+
+</div>
+</div>
+</div>
+
+<div class="standard" id='magicparlabel-367'><br />
+
+</div>
+
+<div class="note" id='magicparlabel-368'><div class="note_item"><span class="note_label">Note 34.</span>
 Anisotropic versions of these isotropic covariance functions can be created anisotropy by setting <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>r</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -4648,9 +5391,9 @@ Anisotropic versions of these isotropic covariance functions can be created anis
  <mrow><mi>M</mi>
  </mrow></math> implement cross-dimensional dependencies in the inputs.</div>
 </div>
-<h2 class="section" id='magicparlabel-207'><span class="section_label">5</span> Practical maters</h2>
+<h2 class="section" id='magicparlabel-369'><span class="section_label">5</span> Practical maters</h2>
 
-<div class="note" id='magicparlabel-208'><div class="note_item"><span class="note_label">Note 30.</span>
+<div class="note" id='magicparlabel-370'><div class="note_item"><span class="note_label">Note 35.</span>
 One may consider some low degree polynomial form <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &mu; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -4739,11 +5482,11 @@ One may consider some low degree polynomial form <math xmlns="http://www.w3.org/
  </mrow></math>. </div>
 </div>
 
-<div class="standard" id='magicparlabel-209'><br />
+<div class="standard" id='magicparlabel-371'><br />
 
 </div>
 
-<div class="note" id='magicparlabel-210'><div class="note_item"><span class="note_label">Note 31.</span>
+<div class="note" id='magicparlabel-372'><div class="note_item"><span class="note_label">Note 36.</span>
 Thinking as a statistician, one may decompose <a href="#eq__13">(2.2)</a> as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -4850,51 +5593,53 @@ Thinking as a statistician, one may decompose <a href="#eq__13">(2.2)</a> as <ma
  </mrow></math> represents noise (or so short scale dependence that can be considered as noise in the model). </div>
 </div>
 
-<div class="standard" id='magicparlabel-211'><br />
+<div class="standard" id='magicparlabel-373'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-212'><span class="section_label">6</span> Practice, implementation, and code</h2>
-<div class="standard" id='magicparlabel-213'>Below is some practical examples on the implementation of Gaussian process regression in R programming environment by using the R packages: DiceKriging and DiceOptim. </div>
+<h2 class="section" id='magicparlabel-374'><span class="section_label">6</span> Practice, implementation, and code</h2>
+<div class="standard" id='magicparlabel-375'>Below is some practical examples on the implementation of Gaussian process regression in R programming environment by using the R packages: DiceKriging and DiceOptim. </div>
 
-<ul class="itemize" id='magicparlabel-214'><li class="itemize_item">Roustant, O., Ginsbourger, D., &amp; Deville, Y. (2012). DiceKriging, DiceOptim: Two R packages for the analysis of computer experiments by kriging-based metamodeling and optimization. Journal of statistical software, 51, 1-55.</li>
+<ul class="itemize" id='magicparlabel-376'><li class="itemize_item">Roustant, O., Ginsbourger, D., &amp; Deville, Y. (2012). DiceKriging, DiceOptim: Two R packages for the analysis of computer experiments by kriging-based metamodeling and optimization. Journal of statistical software, 51, 1-55.</li>
 </ul>
-<div class="standard" id='magicparlabel-215'>The examples below were created for the undergraduate programme SURF 2016 at Purdue University (July 8, 2016) however they are suitable to the course.</div>
+<div class="standard" id='magicparlabel-377'>The examples below were created for the undergraduate programme SURF 2016 at Purdue University (July 8, 2016) however they are suitable to the course for your practice.</div>
 
-<div class="standard" id='magicparlabel-216'>&nbsp;</div>
+<div class="standard" id='magicparlabel-378'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-217'>Toy example </div>
+<div class="standard" id='magicparlabel-379'>Toy example </div>
 
-<div class="standard" id='magicparlabel-218'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Numerical_example.ipynb</span> </div>
+<div class="standard" id='magicparlabel-380'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Numerical_example.ipynb</span> </div>
 
-<div class="standard" id='magicparlabel-223'>&nbsp;</div>
+<div class="standard" id='magicparlabel-385'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-224'>Realistic example: The Piston Simulation function model in 2D </div>
+<div class="standard" id='magicparlabel-386'>The Piston Simulation function model in 2D </div>
 
-<div class="standard" id='magicparlabel-225'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_2D.ipynb</span></div>
+<div class="standard" id='magicparlabel-387'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_2D.ipynb</span></div>
 
-<div class="standard" id='magicparlabel-230'>&nbsp;</div>
+<div class="standard" id='magicparlabel-392'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-231'>Practice Catalytic Reaction 5D</div>
+<div class="standard" id='magicparlabel-393'>Practice Catalytic Reaction 5D</div>
 
-<div class="standard" id='magicparlabel-232'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_CatalyticReaction_5D_solution.ipynb</span></div>
+<div class="standard" id='magicparlabel-394'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_CatalyticReaction_5D_solution.ipynb</span></div>
 
-<div class="standard" id='magicparlabel-237'>&nbsp;</div>
+<div class="standard" id='magicparlabel-399'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-238'>Practice Piston 7D</div>
+<div class="standard" id='magicparlabel-400'>Practice Piston 7D</div>
 
-<div class="standard" id='magicparlabel-239'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_Piston_7D_solution.ipynb</span></div>
+<div class="standard" id='magicparlabel-401'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_Piston_7D_solution.ipynb</span></div>
 
-<div class="standard" id='magicparlabel-244'>&nbsp;</div>
+<div class="standard" id='magicparlabel-406'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-245'>Practice Robot Arm 8D</div>
+<div class="standard" id='magicparlabel-407'>Practice Robot Arm 8D</div>
 
-<div class="standard" id='magicparlabel-246'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_Robot_Arm_8D_solution.ipynbb</span></div>
+<div class="standard" id='magicparlabel-408'><span class="flex_url">https://github.com/georgios-stats/Intro_GPR_SURF_2016/blob/master/Practice_Robot_Arm_8D_solution.ipynbb</span></div>
 
-<div class="standard" id='magicparlabel-251'>&nbsp;</div>
+<div class="standard" id='magicparlabel-413'>&nbsp;</div>
 
-<div class="standard" id='magicparlabel-252'><br />
+
+
+<div class="standard" id='magicparlabel-419'><br />
 </div>
-<h2 class="section" id='magicparlabel-253'><span class="section_label">A</span> <a id="sec_Multivariate_Normal_distribution" />
+<h2 class="section" id='magicparlabel-420'><span class="section_label">A</span> <a id="sec_Multivariate_Normal_distribution" />
 Multivariate Normal distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo>|</mo><mi> &mu; </mi><mo>,</mo><mo> &Sigma; </mo><mo> &sim; </mo>
@@ -4912,10 +5657,10 @@ Multivariate Normal distribution <math xmlns="http://www.w3.org/1998/Math/MathML
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math><div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-257'>More detailed material about the Multivariate Normal distribution can be found in the can be found in &ldquo;Handout 2: Revision in mixture of probability distributions&rdquo; of the module &ldquo;Bayesian Statistics III/IV (MATH3341/4031)&rdquo; Michaelmas term, 2021 available from <span class="flex_url">https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021/blob/main/Lecture_handouts/02_Revision_in_mixture_of_probability_distributions.pdf</span>. The material in this section is just a sub-set of the statements in the referenced handout.</div>
+ </mrow></math><div class="foot"><span class="foot_label">3</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-424'>More detailed material about the Multivariate Normal distribution can be found in the can be found in &ldquo;Handout 2: Revision in mixture of probability distributions&rdquo; of the module &ldquo;Bayesian Statistics III/IV (MATH3341/4031)&rdquo; Michaelmas term, 2021 available from <span class="flex_url">https://github.com/georgios-stats/Bayesian_Statistics_Michaelmas_2021/blob/main/Lecture_handouts/02_Revision_in_mixture_of_probability_distributions.pdf</span>. The material in this section is just a sub-set of the statements in the referenced handout.</div>
 </div></div></h2>
 
-<div class="definition" id='magicparlabel-262'><div class="definition_item"><span class="definition_label">Definition 32.</span>
+<div class="definition" id='magicparlabel-429'><div class="definition_item"><span class="definition_label">Definition 37.</span>
 <a id="def_Random_variable_" />
  A <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>d</mi>
@@ -4958,11 +5703,11 @@ Multivariate Normal distribution <math xmlns="http://www.w3.org/1998/Math/MathML
  </mrow></math> has a univariate Normal (Gaussian) distribution.</div>
 </div>
 
-<div class="standard" id='magicparlabel-263'><br />
+<div class="standard" id='magicparlabel-430'><br />
 
 </div>
 
-<div class="definition" id='magicparlabel-264'><div class="definition_item"><span class="definition_label">Definition 33.</span>
+<div class="definition" id='magicparlabel-431'><div class="definition_item"><span class="definition_label">Definition 38.</span>
 <a id="rem_We_denote_the" />
 We denote the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>d</mi>
@@ -4992,11 +5737,11 @@ We denote the <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-265'><br />
+<div class="standard" id='magicparlabel-432'><br />
 
 </div>
 
-<div class="notation" id='magicparlabel-266'><div class="notation_item"><span class="notation_label">Notation 34.</span>
+<div class="notation" id='magicparlabel-433'><div class="notation_item"><span class="notation_label">Notation 39.</span>
 <a id="rem_We_denote_the_1" />
 The <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>d</mi>
@@ -5020,11 +5765,11 @@ The <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>.</div>
 </div>
 
-<div class="standard" id='magicparlabel-267'><br />
+<div class="standard" id='magicparlabel-434'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-268'><div class="proposition_item"><span class="proposition_label">Proposition 35.</span>
+<div class="proposition" id='magicparlabel-435'><div class="proposition_item"><span class="proposition_label">Proposition 40.</span>
 <a id="prop_The_following_are" />
 Let random variable <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5105,11 +5850,11 @@ Let random variable <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math>. </i></div>
 </div>
 
-<div class="standard" id='magicparlabel-273'><br />
+<div class="standard" id='magicparlabel-440'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-274'><div class="proposition_item"><span class="proposition_label">Proposition 36.</span>
+<div class="proposition" id='magicparlabel-441'><div class="proposition_item"><span class="proposition_label">Proposition 41.</span>
 <a id="prop_Let_a__dimensional" />
 &nbsp;Let a <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>d</mi>
@@ -5139,7 +5884,7 @@ Let random variable <math xmlns="http://www.w3.org/1998/Math/MathML">
   </mrow>
  </mrow></math>. </div>
 
-<ol class="enumerate" id='magicparlabel-275'><li class="enumerate_item"><i>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-442'><li class="enumerate_item"><i>Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>y</mi><mo>=</mo><mi>A</mi><mi>x</mi>
   </mrow>
@@ -5242,19 +5987,19 @@ Let random variable <math xmlns="http://www.w3.org/1998/Math/MathML">
 </ol>
 </div>
 
-<div class="standard" id='magicparlabel-281'><br />
+<div class="standard" id='magicparlabel-448'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-282'><div class="proposition_item"><span class="proposition_label">Proposition 37.</span>
+<div class="proposition" id='magicparlabel-449'><div class="proposition_item"><span class="proposition_label">Proposition 42.</span>
 Any sub-vector of a vector with multivariate Normal distribution has a multivariate Normal distribution. </div>
 </div>
 
-<div class="standard" id='magicparlabel-287'><br />
+<div class="standard" id='magicparlabel-454'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-288'><div class="proposition_item"><span class="proposition_label">Proposition 38.</span>
+<div class="proposition" id='magicparlabel-455'><div class="proposition_item"><span class="proposition_label">Proposition 43.</span>
 <a id="prop_Let___Consider" />
  [Marginalization &amp; conditioning]  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5435,7 +6180,7 @@ Any sub-vector of a vector with multivariate Normal distribution has a multivari
   </mrow>
  </mrow></math> Then:</div>
 
-<ol class="enumerate" id='magicparlabel-297'><li class="enumerate_item">For the marginal, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-464'><li class="enumerate_item">For the marginal, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -5642,11 +6387,11 @@ Any sub-vector of a vector with multivariate Normal distribution has a multivari
 </ol>
 </div>
 
-<div class="standard" id='magicparlabel-312'><br />
+<div class="standard" id='magicparlabel-479'><br />
 
 </div>
 
-<div class="proposition" id='magicparlabel-313'><div class="proposition_item"><span class="proposition_label">Proposition 39.</span>
+<div class="proposition" id='magicparlabel-480'><div class="proposition_item"><span class="proposition_label">Proposition 44.</span>
 The density function of the <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>d</mi>
  </mrow></math>-dimensional Normal distribution with mean <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -5738,7 +6483,7 @@ The density function of the <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mtable></math></div>
 </div>
 
-<div class="standard" id='magicparlabel-326'><br />
+<div class="standard" id='magicparlabel-493'><br />
 
 </div>
 </body>

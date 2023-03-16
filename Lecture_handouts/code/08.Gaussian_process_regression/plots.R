@@ -5,6 +5,27 @@ library('DiceView')
 library('Cairo')
 library('latex2exp')
 
+#
+# Plot realization of Gaussian process
+#
+
+rm(list=ls())
+set.seed(99)
+n <- 50
+x <- seq(from = 0, to = 10, length = n)
+mu_x <- matrix(1,n)
+cov_x_x <- matrix(nrow = n, ncol = n)
+for (i in 1:n) {
+  mu_x[i] <- 1+0.01*x[i]
+  for (j in 1:n) {
+    cov_x_x[i,j]<- 10*exp(-0.5*(x[i]-x[j])^2/1.5)
+  }
+}
+f <- rmvnorm(n = 1, mean = mu_x , sigma = cov_x_x) 
+plot(x,f,type="l",main="f(.)~GP(m(.),c(.,.))",ylab="f(x)",xlab="x",cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
+points(x, f, cex = .5, col = "dark red")
+dev.copy(pdf,'./GP_realization.pdf')
+dev.off()
 
 
 # 
@@ -59,24 +80,49 @@ plot(X,Y,
      xlim = c(0.0,1.1), ylim = c(-0.7,0.7), 
      cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
 
-# # THE SHOW DATASET
-# n <- 100 ;
-# X <- seq(0,1,length=n) ;
-# Y <- rep(0,n) ;
-# for (i in 1:n) {
-# 	Y[i] <- fun_santetal(X[i]) ;
-# }
-
-# PLOTS
-
-#lines(X,Y,
-#		col="gray",
-#		main="y = f(x)", xlab="x", ylab="y",
-#		xlim = c(0.0,1.1), ylim = c(-0.7,0.7), 
-#		cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
-
 dev.copy(pdf,'./Ex_real_fun_data.pdf')
 dev.off()
+
+
+#
+# Plot the covariance functions
+#
+
+rm(list=ls())
+
+# Gaussian covariance function
+covtype <- "gauss"
+d <- 1
+n <- 500
+x <- seq(from=0, to=10, length=n)
+#
+param <- c(0.5)
+sigma2 <- 1
+#
+# Plot the simulated paths
+par(mar = c(6, 6, 6, 6))
+plot(x, rep(0,n), type="l", ylim=c(-2.2, 4.7), 
+     xlab="input, x", ylab=TeX(r'(output, $\eta(x)$)'),
+     main=TeX(r'( $\eta\left(\cdot\right)\sim GP \left(0,C\left(\cdot,\cdot\right)\right)$)'),
+     cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
+for (i in 1:10) {
+  model <- km(~1, 
+              design=data.frame(x=x), 
+              response=rep(0,n), 
+              covtype=covtype,
+              coef.trend=0, 
+              coef.cov=param, 
+              coef.var=sigma2, 
+              nugget=1e-4)
+  y <- simulate(model)
+  lines(x, y, col=i,
+        cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
+}
+#
+
+dev.copy(pdf,'./Ex_CovFun_Gaussian_realizations_path.pdf')
+dev.off()
+
 
 # 
 # Plot the covariance function for different families ==========================
@@ -117,7 +163,9 @@ legend("topleft", title="Types:", legend=covtype_lab, col=1:length(covtype_lab),
 dev.copy(pdf,'./Ex_compare_CovFum_path.pdf')
 dev.off()
 
+#
 # Plot the covariance function path
+#
 
 rm(list=ls())
 
@@ -286,9 +334,6 @@ sectionview(fun_santetal,add=TRUE,col='red',
 dev.copy(pdf,'./GPR-n=10-par=good.pdf') ;
 dev.off() ;
 
-
-
-
 # bad
 model_post <- km(formula = ~1,
                  design = data.frame(x=X_10), 
@@ -327,8 +372,6 @@ sectionview(fun_santetal,add=TRUE,col='red',
 dev.copy(pdf,'./GPR-n=6-par=bad.pdf') ;
 dev.off() ;
 
-
-
 model_post <- km(formula = ~1,
                  design = data.frame(x=X_6), 
                  response = Y_6,
@@ -346,10 +389,6 @@ sectionview(fun_santetal,add=TRUE,col='red',
 
 dev.copy(pdf,'./GPR-n=6-par=good.pdf') ;
 dev.off() ;
-
-
-
-
 
 
 #
@@ -377,7 +416,7 @@ model_post_train <- km(formula = ~1,
 show(model_post_train)
 
 # PLOTS
-sectionview( model_post_train , title="Predictive (trained) GP regression", 
+sectionview( model_post_train , title=TeX(r'( $\eta_{*}\left(\cdot\right)|y \sim GP \left(\mu_{*}(\cdot),C_{*}\left(\cdot,\cdot\right)\right)$)'), 
              xlim = c(0.0,1.1), ylim = c(-0.7,0.7), 
              cex.axis=2, cex.lab=2, cex.main=2, cex.sub=2)
 sectionview( fun_santetal, add=TRUE, col='red', 

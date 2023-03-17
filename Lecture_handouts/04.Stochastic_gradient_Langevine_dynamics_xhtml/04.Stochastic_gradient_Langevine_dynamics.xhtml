@@ -170,18 +170,6 @@ div.foot:hover div.foot_inner {
 	margin: 0em 1em;
 	padding: 1em;
 }
-div.marginal {
-	border: 2px solid black;
-	padding: 1ex;
-	margin: 1ex;
-	background-color: #F0F0F0;
-	float:right;
-	font-size: small;
-	font-weight: medium;
-	font-family: serif;
-	font-variant: normal;
-	font-style: normal;
-}
 span.flex_url {
 font-family: monospace;
 }
@@ -2174,6 +2162,7 @@ The popular learning rates <math xmlns="http://www.w3.org/1998/Math/MathML">
 </div>
 
 <div class="remark" id='magicparlabel-176'><div class="remark_item"><span class="remark_label">Remark 29.</span>
+<a id="rem__Mathematically_speaking__The" />
 &nbsp;(Mathematically speaking) The stochastic chain in <a href="#eq__7">(3.2)</a> can be viewed as a discretization of the continuous-time Langevin diffusion described by the stochastic differential equation<a id="eq__8" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
@@ -2896,8 +2885,7 @@ Certain dimensions may have a vastly larger curvature leading to much bigger gra
 </div>
 
 <div class="remark" id='magicparlabel-203'><div class="remark_item"><span class="remark_label">Remark 36.</span>
-<div class="marginal"><div class="plain_layout" id='magicparlabel-207'>To be explained in the computer practical and Lecture 9</div>
-</div>`Exploding gradients' is the practical phenomenon in which large updates to weights during training can cause a numerical overflow or underflow due to the machine error of the computer. Practical solutions involve, at each iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
+`Exploding gradients' is the practical phenomenon in which large updates to weights during training can cause a numerical overflow or underflow due to the machine error of the computer. Practical solutions involve, at each iteration <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>t</mi>
  </mrow></math>, checking the magnitude of the gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -2920,7 +2908,7 @@ Certain dimensions may have a vastly larger curvature leading to much bigger gra
 
  </mrow></math>), and instantly changing it (e.g., truncating it) if it is gonna result an overflow. </div>
 
-<dl class='description' id='magicparlabel-208'><dt class="description_label">Gradient&nbsp;scaling</dt>
+<dl class='description' id='magicparlabel-212'><dt class="description_label">Gradient&nbsp;scaling</dt>
 <dd class="description_item"> involves normalizing the gradient vector such that vector norm (magnitude) equals a defined value. More formally, given any gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>v</mi>
  </mrow></math> on an example, gradient clipping can be used in a standard recursion <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -3052,16 +3040,16 @@ Certain dimensions may have a vastly larger curvature leading to much bigger gra
 <dt class="description_label">Gradient&nbsp;clipping</dt>
 <dd class="description_item"> involves forcing the gradient values (element-wise) to a specific minimum or maximum value if the gradient exceeded an expected range.</dd>
 </dl>
-<div class="standard" id='magicparlabel-210'>Beware that unreasonable clipping may introduce significant bias and hence it should not be applied unnecessarily.</div>
+<div class="standard" id='magicparlabel-214'>Beware that unreasonable clipping may introduce significant bias and hence it should not be applied unnecessarily.</div>
 </div>
 
-<div class="standard" id='magicparlabel-211'><br />
+<div class="standard" id='magicparlabel-215'><br />
 
 </div>
-<h2 class="section" id='magicparlabel-212'><span class="section_label">4</span> <a id="sec_Examples" />
-Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-216'>Code is available from <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/04.Stochastic_gradient_Langevine_dynamics</span></div>
+<h2 class="section" id='magicparlabel-216'><span class="section_label">4</span> <a id="sec_Examples" />
+Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inner"><div class="plain_layout" id='magicparlabel-220'>Code is available from <span class="flex_url">https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/tree/main/Lecture_handouts/code/04.Stochastic_gradient_Langevine_dynamics</span></div>
 </div></div></h2>
-<div class="standard" id='magicparlabel-221'>We continue the Example <a href="#exa_Consider_the_simple">exa:Consider-the-simple</a> in Handout 1, and Example <a href="#sec_Example">sec:Example</a> in Handout 2. Consider the Bayesian Normal linear regression model<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-225'>We continue the Example <a href="#exa_Consider_the_simple">exa:Consider-the-simple</a> in Handout 1, and Example <a href="#sec_Example">sec:Example</a> in Handout 2. Consider the Bayesian Normal linear regression model<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
   <mtable>
    <mtr>
@@ -4810,7 +4798,7 @@ Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inn
 
  </mrow></math>.</div>
 
-<div class="standard" id='magicparlabel-243'>We consider <math xmlns="http://www.w3.org/1998/Math/MathML">
+<div class="standard" id='magicparlabel-247'>We consider <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &mu; </mi><mo>=</mo><mn>0</mn>
   </mrow>
@@ -4834,7 +4822,7 @@ Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inn
   </mrow>
  </mrow></math>, for our simulations below. </div>
 
-<ul class="itemize" id='magicparlabel-244'><li class="itemize_item">In Figures <a href="#fig_">4.1</a>, we ran the SGD for different batch sizes <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-248'><li class="itemize_item">In Figures <a href="#fig_">4.1</a>, we ran the SGD for different batch sizes <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>m</mi>
  </mrow></math> and compared it against the exact MLE. We observe that SGD trace converges to the exact MLE. The oscillations are due to the stochastic gradient (ie, noise in the gradient). </li>
 <li class="itemize_item">In Figures <a href="#fig__2">4.2</a>, we ran the SGLD for different batch sizes <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -4877,57 +4865,57 @@ Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inn
  </mrow></math>. </li>
 </ul>
 
-<div class="standard" id='magicparlabel-247'><br />
+<div class="standard" id='magicparlabel-251'><br />
 
 </div>
 
 
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-256'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w1_batch_size=10.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w1_batch_size=10.png' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-260'><img style='width:33%;' src='0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w1_batch_size=10.png' alt='image: 0_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w1_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig__1" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-264'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w1_batch_size=100.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w1_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-268'><img style='width:33%;' src='1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w1_batch_size=100.png' alt='image: 1_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w1_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig__1_1" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-272'><img style='width:33%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w1_batch_size=1000.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w1_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-276'><img style='width:33%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w1_batch_size=1000.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w1_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig__1_2" />
  </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-281'><img style='width:33%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w2_batch_size=10.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w2_batch_size=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-285'><img style='width:33%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w2_batch_size=10.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w2_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig__1_3" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-289'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w2_batch_size=100.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w2_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-293'><img style='width:33%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w2_batch_size=100.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w2_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig__1_1_1" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-297'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w2_batch_size=1000.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w2_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-301'><img style='width:33%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w2_batch_size=1000.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w2_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig__1_2_1" />
  </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-306'><img style='width:33%;' src='6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w3_batch_size=10.png' alt='image: 6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w3_batch_size=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-310'><img style='width:33%;' src='6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w3_batch_size=10.png' alt='image: 6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ent_Langevine_dynamics_SGD_w3_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig__1_3_1" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-314'><img style='width:33%;' src='7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w3_batch_size=100.png' alt='image: 7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w3_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-318'><img style='width:33%;' src='7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w3_batch_size=100.png' alt='image: 7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGD_w3_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig__1_1_1_1" />
  </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-322'><img style='width:33%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w3_batch_size=1000.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w3_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-326'><img style='width:33%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w3_batch_size=1000.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____t_Langevine_dynamics_SGD_w3_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure i:  <a id="fig__1_2_1_1" />
  </span></div>
 </div>
 
 
-<div class="plain_layout" id='magicparlabel-327'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.1:  <a id="fig_" />
+<div class="plain_layout" id='magicparlabel-331'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.1:  <a id="fig_" />
  Bayesian learning via SGD (SGD vs (exact)MLE) Study on batch size <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>m</mi>
  </mrow></math>. </span></div>
@@ -4938,51 +4926,51 @@ Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inn
 
 
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-341'><img style='width:33%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGLD_w1_batch_size=10.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGLD_w1_batch_size=10.png' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-345'><img style='width:33%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGLD_w1_batch_size=10.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____nt_Langevine_dynamics_SGLD_w1_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig__1_4" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-349'><img style='width:33%;' src='10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w1_batch_size=100.png' alt='image: 10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w1_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-353'><img style='width:33%;' src='10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w1_batch_size=100.png' alt='image: 10_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w1_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig__1_1_2" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-357'><img style='width:33%;' src='11_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w1_batch_size=1000.png' alt='image: 11_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w1_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-361'><img style='width:33%;' src='11_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w1_batch_size=1000.png' alt='image: 11_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w1_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig__1_2_2" />
 </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-366'><img style='width:33%;' src='12_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w2_batch_size=10.png' alt='image: 12_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w2_batch_size=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-370'><img style='width:33%;' src='12_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w2_batch_size=10.png' alt='image: 12_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w2_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig__1_3_2" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-374'><img style='width:33%;' src='13_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w2_batch_size=100.png' alt='image: 13_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w2_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-378'><img style='width:33%;' src='13_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w2_batch_size=100.png' alt='image: 13_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w2_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig__1_1_1_2" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-382'><img style='width:33%;' src='14_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w2_batch_size=1000.png' alt='image: 14_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w2_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-386'><img style='width:33%;' src='14_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w2_batch_size=1000.png' alt='image: 14_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w2_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig__1_2_1_2" />
 </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-391'><img style='width:33%;' src='15_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w3_batch_size=10.png' alt='image: 15_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w3_batch_size=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-395'><img style='width:33%;' src='15_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w3_batch_size=10.png' alt='image: 15_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___nt_Langevine_dynamics_SGLD_w3_batch_size=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig__1_3_1_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-399'><img style='width:33%;' src='16_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w3_batch_size=100.png' alt='image: 16_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w3_batch_size=100.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-403'><img style='width:33%;' src='16_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w3_batch_size=100.png' alt='image: 16_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___t_Langevine_dynamics_SGLD_w3_batch_size=100.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig__1_1_1_1_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-407'><img style='width:33%;' src='17_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w3_batch_size=1000.png' alt='image: 17_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w3_batch_size=1000.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-411'><img style='width:33%;' src='17_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w3_batch_size=1000.png' alt='image: 17_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____Langevine_dynamics_SGLD_w3_batch_size=1000.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure i:  <a id="fig__1_2_1_1_1" />
 </span></div>
 </div>
 
 
-<div class="plain_layout" id='magicparlabel-412'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.2:  <a id="fig__2" />
+<div class="plain_layout" id='magicparlabel-416'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.2:  <a id="fig__2" />
  Bayesian learning: SGLD vs exact posterior (in red). Temperature <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &tau; </mi><mo>=</mo><mn>1</mn>
@@ -4995,51 +4983,51 @@ Examples <div class="foot"><span class="foot_label">2</span><div class="foot_inn
 
 
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-425'><img style='width:33%;' src='18_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w1_tau=0_01.png' alt='image: 18_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w1_tau=0_01.png' />
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-429'><img style='width:33%;' src='18_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w1_tau=0_01.png' alt='image: 18_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w1_tau=0_01.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig__1_4_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-433'><img style='width:33%;' src='19_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w1_tau=1.png' alt='image: 19_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w1_tau=1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-437'><img style='width:33%;' src='19_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w1_tau=1.png' alt='image: 19_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w1_tau=1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig__1_1_2_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-441'><img style='width:33%;' src='20_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w1_tau=10.png' alt='image: 20_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w1_tau=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-445'><img style='width:33%;' src='20_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w1_tau=10.png' alt='image: 20_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w1_tau=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig__1_2_2_1" />
 </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-450'><img style='width:33%;' src='21_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w2_tau=0_01.png' alt='image: 21_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w2_tau=0_01.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-454'><img style='width:33%;' src='21_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w2_tau=0_01.png' alt='image: 21_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w2_tau=0_01.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig__1_3_2_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-458'><img style='width:33%;' src='22_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w2_tau=1.png' alt='image: 22_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w2_tau=1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-462'><img style='width:33%;' src='22_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w2_tau=1.png' alt='image: 22_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w2_tau=1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig__1_1_1_2_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-466'><img style='width:33%;' src='23_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w2_tau=10.png' alt='image: 23_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w2_tau=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-470'><img style='width:33%;' src='23_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w2_tau=10.png' alt='image: 23_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w2_tau=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig__1_2_1_2_1" />
 </span></div>
 </div>
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-475'><img style='width:33%;' src='24_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w3_tau=0_01.png' alt='image: 24_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w3_tau=0_01.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-479'><img style='width:33%;' src='24_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w3_tau=0_01.png' alt='image: 24_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___radient_Langevine_dynamics_SGLD_w3_tau=0_01.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig__1_3_1_1_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-483'><img style='width:33%;' src='25_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w3_tau=1.png' alt='image: 25_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w3_tau=1.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-487'><img style='width:33%;' src='25_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w3_tau=1.png' alt='image: 25_extra_tmp_mffk55_Dropbox_Teaching_2023_term2___c_gradient_Langevine_dynamics_SGLD_w3_tau=1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig__1_1_1_1_1_1" />
 </span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-491'><img style='width:33%;' src='26_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w3_tau=10.png' alt='image: 26_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w3_tau=10.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-495'><img style='width:33%;' src='26_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w3_tau=10.png' alt='image: 26_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____gradient_Langevine_dynamics_SGLD_w3_tau=10.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure i:  <a id="fig__1_2_1_1_1_1" />
 </span></div>
 </div>
 
 
-<div class="plain_layout" id='magicparlabel-496'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.3:  <a id="fig__2_1" />
+<div class="plain_layout" id='magicparlabel-500'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 4.3:  <a id="fig__2_1" />
  Bayesian learning: SGLD vs exact posterior (in red). Batch size <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mo>=</mo><mn>100</mn>

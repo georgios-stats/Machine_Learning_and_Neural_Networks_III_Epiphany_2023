@@ -618,7 +618,7 @@ w^{*} =\underset{w\in\mathcal{H}}{\arg\min}\left(\text{E}_{z\sim g}\left(\ell\le
 <pre class="r"><code>Nrealizations &lt;- 100
 #
 nn.out.1.decay.best &lt;- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T, decay=0.001)
-#EF.best &lt;- sum((nn.out.1.decay.best$fitted.values-ozone.rescaled[,1])^2)
+#EF.decay.best &lt;- sum((nn.out.1.decay.best$fitted.values-ozone.rescaled[,1])^2)
 EF.decay.best &lt;- nn.out.1.decay.best$value
 #
 for (r in 1:Nrealizations) {

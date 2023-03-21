@@ -375,7 +375,8 @@ Description of what you have gotten:
 
 + o refers to the output,  etc...  
 
-+ b->o refers to the weight on a NN edge linking an input neuron (constant input equalt to one) and an aoutput neuron and skipping the hidden layer. This is called skipping weight. This can be done, it is allowed in the FFNN, although it is often avoided.  
++ b->o refers to the weight on a NN edge linking an input neuron (constant input equalt to one) and an aoutput neuron and skipping the hidden layer. This is called skipping weight. This can be done, it is allowed in the FFNN, although it is often avoided. 
+
 
 ## Task: Plot predictions (given)
 
@@ -545,7 +546,7 @@ Nrealizations <- 100
 #
 nn.out.1.decay.best <- nnet(O3 ~ temp + ibh + ibt, ozone.rescaled, size=2, linout=T, decay=0.001)
 #EF.best <- sum((nn.out.1.best$fitted.values-ozone[$O3],1])^2)
-EF.decay.best <- nn.out.1.best$value
+EF.decay.best <- nn.out.1.decay.best$value
 #
 for (r in 1:Nrealizations) {
   #

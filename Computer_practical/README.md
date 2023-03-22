@@ -69,7 +69,7 @@ Stochastic learning methods (Computer practical 1)
 
 -   Tasks : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_tasks.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_tasks.Rmd)  
 
--   Solutions : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_tasks.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_solutions.Rmd)  
+-   Solutions : [Rnotebook](http://htmlpreview.github.io/?https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_solutions.nb.html) & [Rmd](https://github.com/georgios-stats/Machine_Learning_and_Neural_Networks_III_Epiphany_2023/blob/main/Computer_practical/Stochastic_learning_methods_solutions.Rmd)  
 
 Stochastic learning methods SGLD (Computer practical 2)
 

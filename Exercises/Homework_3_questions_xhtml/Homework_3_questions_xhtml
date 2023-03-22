@@ -652,7 +652,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
       </msub>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo>
+
      <msubsup>
       <mrow><mo> &sum; </mo>
       </mrow>
@@ -999,7 +999,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
       </msub>
      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mi> &nabla; </mi>
+<mo>-</mo><mi> &nabla; </mi>
      <msubsup>
       <mrow><mo> &sum; </mo>
       </mrow>

@@ -3464,7 +3464,15 @@ To simplify notation we will use <math xmlns="http://www.w3.org/1998/Math/MathML
     </mrow>
    </mrow>
   </msub>
- </mrow></math>. </div>
+ </mrow></math> as <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <mstyle mathvariant='script'><mi>V</mi>
+   </mstyle><mo>,</mo>
+   <mstyle mathvariant='script'><mi>E</mi>
+   </mstyle><mo>,</mo><mi> &sigma; </mi>
+  </mrow>
+ </mrow></math> is fixed here. </div>
 </div>
 
 <div class="standard" id='magicparlabel-212'><br />
@@ -5495,19 +5503,14 @@ Following we present some paradigms of NN implemented in applications seen befor
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-      <mrow><mn>1</mn><mo>-</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-       <mrow>
-        <msub>
-         <mrow><mi>h</mi>
-         </mrow>
-         <mrow><mi>w</mi>
-         </mrow>
-        </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+      <mrow><mn>1</mn><mo>-</mo>
+       <msub>
+        <mrow><mi>h</mi>
+        </mrow>
+        <mrow><mi>w</mi>
+        </mrow>
+       </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>x</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-       </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
       </mrow>
@@ -5686,27 +5689,22 @@ Following we present some paradigms of NN implemented in applications seen befor
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-     <mrow><mn>1</mn><mo>-</mo><mo> log </mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+     <mrow><mn>1</mn><mo>-</mo>
+      <msub>
+       <mrow><mi>h</mi>
+       </mrow>
+       <mrow><mi>w</mi>
+       </mrow>
+      </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-      <mrow>
-       <msub>
-        <mrow><mi>h</mi>
-        </mrow>
-        <mrow><mi>w</mi>
-        </mrow>
-       </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-       <msubsup>
-        <mrow><mi>x</mi>
-        </mrow>
-        <mrow><mi>i</mi>
-        </mrow>
-        <mrow><mo>*</mo>
-        </mrow>
-       </msubsup>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-      </mrow>
+      <msubsup>
+       <mrow><mi>x</mi>
+       </mrow>
+       <mrow><mi>i</mi>
+       </mrow>
+       <mrow><mo>*</mo>
+       </mrow>
+      </msubsup>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
      </mrow>

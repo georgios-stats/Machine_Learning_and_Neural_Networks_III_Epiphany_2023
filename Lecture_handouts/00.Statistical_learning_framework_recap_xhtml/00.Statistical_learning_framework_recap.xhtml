@@ -170,7 +170,7 @@ div.foot:hover div.foot_inner {
 
 <div class="standard" id='magicparlabel-1'><div class='Shadowbox'><div class="plain_layout" id='magicparlabel-10'>Machine Learning and Neural Networks (MATH3431)&nbsp;&nbsp;Epiphany term, 2023<div style='height:3ex'></div></div>
 
-<div class="plain_layout" style='text-align: center;' id='magicparlabel-11'> Handout 0: Learning problem: Definitions, notation, and formulation –A recap <div style='height:3ex'></div></div>
+<div class="plain_layout" style='text-align: center;' id='magicparlabel-11'> Handout 0: Machine learning –A recap on: definitions, notation, and formulation <div style='height:3ex'></div></div>
 
 <div class="plain_layout" id='magicparlabel-28'>Lecturer &amp; author: Georgios P. Karagiannis <a href="georgios.karagiannis@durham.ac.uk">georgios.karagiannis@durham.ac.uk</a></div>
 
@@ -185,11 +185,11 @@ div.foot:hover div.foot_inner {
 </div>
 <h3 class="subsection_" id='magicparlabel-33'>Reading&nbsp;list&nbsp;&amp;&nbsp;references:</h3>
 
-<ul class="itemize" id='magicparlabel-34'><li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
+<ul class="itemize" id='magicparlabel-34'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.
 
 <ul class="itemize" id='magicparlabel-35'><li class="itemize_item">Ch. 1 Introduction</li>
 </ul>
-</li><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer.
+</li><li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
 
 <ul class="itemize" id='magicparlabel-37'><li class="itemize_item">Ch. 1 Introduction</li>
 </ul>
@@ -206,7 +206,7 @@ div.foot:hover div.foot_inner {
  <mrow>
   <mstyle mathvariant='fraktur'><mi>A</mi>
   </mstyle>
- </mrow></math> build a (probabilistic/deterministic) model able to make predictions or decisions with minimum human interference and can be used for pattern recognition. <b>Learning</b> (or training, estimation) is called the procedure where the ML model is tuned. <b>Training data</b> (or observations, sample data set, examples) is a set of observables <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> build a (probabilistic/deterministic) model able to make predictions or decisions with minimum human interference and can be used for pattern recognition. <b>Learning</b> (or training, estimation, fitting) is called the procedure where the ML model is tuned. <b>Training data</b> (or observations, sample data set, examples) is a set of observables <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <mrow>
@@ -238,7 +238,7 @@ div.foot:hover div.foot_inner {
   </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math> (different than the training data) used to verify the performance of the ML model for a given a measure of success. <b>Measure of success</b> (or performance) is a quantity that indicates how bad the corresponding ML model or Algorithm performs (eg quantifies the failure/error), and can also be used for comparisons among different ML models; eg, <b>Risk function</b> or <b>Empirical Risk Function</b>. Two main problems in ML are the supervised learning (we focus here) and the unsupervised learning.</div>
+ </mrow></math> (different than the training data) used to verify the performance of the ML model for a given a measure of success. <b>Measure of success</b> (or performance) is a quantity that indicates how bad the corresponding ML model or Algorithm performs (eg quantifies the failure/error), and can also be used for comparisons among different ML models; eg, <b>Risk function</b> or <b>Empirical Risk Function</b>. Two main problems in ML are the supervised learning (we will focus on this here) and the unsupervised learning.</div>
 
 <div class="standard" id='magicparlabel-40'><b>Supervised learning</b> problems involve applications where the training data <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -246,7 +246,7 @@ div.foot:hover div.foot_inner {
    <mstyle mathvariant='script'><mi>Z</mi>
    </mstyle>
   </mrow>
- </mrow></math> comprises examples of the input vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> comprise examples of the input vectors <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -278,13 +278,13 @@ div.foot:hover div.foot_inner {
    <mstyle class='math'><mi>Y</mi>
    </mstyle>
   </mstyle>
- </mrow></math>we denote the target domain. <b>Classiﬁcation problems</b> are those which aim to assign each input vector <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> we denote the target domain. <b>Classiﬁcation problems</b> are those which aim to assign each input vector <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>x</mi>
  </mrow></math> to one of a ﬁnite number of discrete categories of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>y</mi>
  </mrow></math>. <b>Regression problems</b> are those where the output <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>y</mi>
- </mrow></math> consists of one or more continuous variables. All in all, the learner wishes to recover an unknown pattern (i.e. functional relationship) between components <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> consists of one or more continuous variables. All in all, the learner wishes to discover an unknown pattern (i.e. functional relationship) between components <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -297,7 +297,7 @@ div.foot:hover div.foot_inner {
    </mstyle>
   </mrow>
  </mrow></math> that act as outputs; i.e. 
-<span style = "text-align: center;"><img src="lyxpreviewWHDWjJ1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewWJDAlU1.png" alt="Mathematical Equation" />
 </span>
 . Hence, <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -307,7 +307,7 @@ div.foot:hover div.foot_inner {
  <mrow>
   <mstyle mathvariant='script'><mi>Y</mi>
   </mstyle>
- </mrow></math> is the output (or target) domain. The goal of learning is to discover a function which predicts <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is the output (or target) domain. The goal of learning is to discover a function which predicts (or help us make decisions about) <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>y</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>Y</mi>
@@ -429,7 +429,7 @@ We often denote the set of hypothesis as <math xmlns="http://www.w3.org/1998/Mat
    <mstyle mathvariant='double-struck'><mi>R</mi>
    </mstyle>
   </mrow>
- </mrow></math>. Hypothesis is a linear function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. A hypothesis is a linear function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>h</mi><mo>:</mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -505,7 +505,13 @@ Training data set <math xmlns="http://www.w3.org/1998/Math/MathML">
  </mrow></math> is any finite sequence of pairs <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+  <mrow>
+   <msub>
+    <mrow><mi>z</mi>
+    </mrow>
+    <mrow><mi>i</mi>
+    </mrow>
+   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
    <mrow>
     <msub>
@@ -559,7 +565,11 @@ Data generation model <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mstyle mathvariant='script'><mi>Y</mi>
    </mstyle>
   </mrow>
- </mrow></math>, unknown to the learner that has generated the data.</div>
+ </mrow></math>, unknown to the learner that has generated the data. E.g. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow><mi>z</mi><mo> &sim; </mo><mi>g</mi>
+  </mrow>
+ </mrow></math>.</div>
 </div>
 
 <div class="standard" id='magicparlabel-64'><br />
@@ -631,7 +641,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msub>
   </mrow>
- </mrow></math>. The purpose of loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Loss function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &ell; </mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -640,11 +650,11 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
   </mrow>
- </mrow></math> is to quantify the &ldquo;error&rdquo; for a given hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> specified according to the purpose to quantify the &ldquo;error&rdquo; for a given hypothesis <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>h</mi>
- </mrow></math> and example <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> and a given example <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>z</mi>
- </mrow></math> –the greater the error the greater its value of the loss.</div>
+ </mrow></math> –the greater the error the greater the value of the loss.</div>
 </div>
 
 <div class="standard" id='magicparlabel-75'><br />
@@ -671,7 +681,7 @@ We denote as <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mstyle>
    </mrow>
   </mstyle>
- </mrow></math> is uncountable, a loss function can be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is uncountable, a potential loss function is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -807,7 +817,7 @@ In binary classification problems with <math xmlns="http://www.w3.org/1998/Math/
    <mstyle mathvariant='script'><mi>H</mi>
    </mstyle>
   </mrow>
- </mrow></math>, w.r.t. probability distribution <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, w.r.t. the data generation model (which is a probability distribution) <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>g</mi>
  </mrow></math> over domain <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>Z</mi>
@@ -863,7 +873,7 @@ In learning, an ideal way to obtain an optimal predictor <math xmlns="http://www
    <mrow><mo>*</mo>
    </mrow>
   </msup>
- </mrow></math> is to compute the risk minimizer <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is to compute the minimizer of the risk; i.e. <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msup>
@@ -1435,7 +1445,7 @@ Consider a learning problem where the true data generation distribution (unknown
     </mstyle>
    </mrow>
   </msub>
- </mrow></math> is the minimizer of <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is the minimizer <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1447,15 +1457,9 @@ Consider a learning problem where the true data generation distribution (unknown
       </mrow>
      </mstyle>
     </mrow>
-   </msub><mo>=</mo><mo> arg </mo>
-   <msub>
-    <mrow><mo> min </mo>
-    </mrow>
-    <mrow>
-     <mrow><mi> &forall; </mi><mi> &theta; </mi>
-     </mrow>
-    </mrow>
-   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+   </msub><mo>=</mo><munder accent='false'>
+   <mrow><mo> arg </mo><mo> min </mo>
+   </mrow><mi> &theta; </mi></munder><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
    <mrow>
     <mfrac>
@@ -1625,10 +1629,7 @@ A learning problem with hypothesis class <math xmlns="http://www.w3.org/1998/Mat
 </div>
 
 <div class="example" id='magicparlabel-98'><div class="example_item"><span class="example_label">Example 18.</span>
-Consider the multiple linear regression problem 
-<span style = "text-align: center;"><img src="lyxpreviewWHDWjJ1.png" alt="Mathematical Equation" />
-</span>
- where <math xmlns="http://www.w3.org/1998/Math/MathML">
+Consider the multiple linear regression problem with regressors <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>x</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>X</mi>
@@ -1642,7 +1643,7 @@ Consider the multiple linear regression problem
     </mrow>
    </msup>
   </mrow>
- </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> and response <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>y</mi><mo> &isin; </mo>
    <mstyle mathvariant='script'><mi>Y</mi>
@@ -1749,7 +1750,7 @@ Consider the multiple linear regression problem
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 <mo>=</mo><mo> &lang; </mo><mi>w</mi><mo>,</mo><mi>x</mi><mo> &rang; </mo>
   </mrow>
- </mrow></math>, this learning problem could be defined equivalently with a hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, this learning problem could be defined equivalently (for presentation convinience) with a hypothesis class <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mstyle mathvariant='script'><mi>H</mi>
@@ -1795,7 +1796,7 @@ Consider the multiple linear regression problem
   </mrow>
  </mrow></math>. The latter will be mainly used.</div>
 </div>
-<h2 class="section" id='magicparlabel-105'><span class="section_label">A</span> Useful bits</h2>
+<h2 class="section" id='magicparlabel-105'><span class="section_label">A</span> Useful things</h2>
 <div class="standard" id='magicparlabel-106'>Below are some standard notation used as default in the notes except in cases that is defined otherwise. </div>
 
 <ul class="itemize" id='magicparlabel-107'><li class="itemize_item"><math xmlns="http://www.w3.org/1998/Math/MathML">

@@ -302,9 +302,9 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  <mrow>
   <mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math>. We seek to find the dual problem of <a href="#eq__2_1">3</a>-<a href="#eq__5">3</a>. </div>
+ </mrow></math>. </div>
 
-<ol class="enumerate" id='magicparlabel-21'><li class="enumerate_item">Specify the Lagrangian function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-25'><li class="enumerate_item">Specify the Lagrangian function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>L</mi>
  </mrow></math> associated to the above primal quadratic minimization problem, where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -340,7 +340,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   <mstyle mathvariant='script'><mi>D</mi>
   </mstyle>
  </mrow></math>. </li>
-<li class="enumerate_item">Apply the KKT conditions to the above problem, and write them down. </li>
+<li class="enumerate_item">Apply the Karush–Kuhn–Tucker (KKT) conditions to the above problem, and write them down. </li>
 <li class="enumerate_item"><a id="enu_Derive_and_write" />
 Derive and write down the dual Lagrangian quadratic maximization problem, along with the inequality and equality constraints, where you seek to find <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -578,10 +578,10 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 </ol>
 
 
-<div class="solution_" id='magicparlabel-33'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-37'><div class="solution__item"><span class="solution__label">Solution.</span>
 &nbsp; &nbsp;</div>
 
-<ol class="enumerate" id='magicparlabel-34'><li class="enumerate_item">It is <a id="eq__3_2" />
+<ol class="enumerate" id='magicparlabel-38'><li class="enumerate_item">It is <a id="eq__3_2" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -685,7 +685,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
  <mrow>
   <mrow><mi> &alpha; </mi><mo>,</mo><mi> &beta; </mi>
   </mrow>
- </mrow></math> be fixed. We minimize <a href="#eq__3_2ftydftu">(10)</a> wrt <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> be fixed. We minimize <a href="#eq__3_2">(4)</a> wrt <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>w</mi><mo>,</mo><mi>b</mi>
   </mrow>
@@ -836,7 +836,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    <mtd>(6)
    </mtd>
   </mtr>
- </mtable></math>and we substitute in <a href="#eq__3_2ftydftu">(10)</a> to get <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mtable></math>and we substitute <a href="#eq__6_1">(6)</a>-<a href="#eq__2_2_1">(6)</a> in <a href="#eq__3_2">(4)</a> and we get <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mover>
@@ -926,7 +926,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    </msub><mo> &rang; </mo>
   </mrow>
  </mrow></math> </li>
-<li class="enumerate_item">They are <a id="eq__4_1" />
+<li class="enumerate_item">The Karush–Kuhn–Tucker (KKT) conditions applied to the above problem are <a id="eq__4_1" />
 <a id="eq__3_2ftydftu" />
 <a id="eq__7_1" />
 <a id="eq__8_1" />
@@ -1204,7 +1204,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    <mtd>(10)
    </mtd>
   </mtr>
- </mtable></math> </li>
+ </mtable></math></li>
 <li class="enumerate_item">It is&nbsp; <a id="eq__15_1" />
 <a id="eq__1_1_1" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -1388,7 +1388,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
  </mtable></math> constrain <a href="#eq__1_1_1">(12)</a> results from <a href="#eq__2_2_1">(6)</a>, <a href="#eq__3_2ftydftu">(10)</a>, and <a href="#eq__4_1">(10)</a>.</li>
 <li class="enumerate_item">&nbsp;
 
-<ul class="itemize" id='magicparlabel-39'><li class="itemize_item">By <a href="#eq__6_1">(6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-43'><li class="itemize_item">By <a href="#eq__6_1">(6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1878,16 +1878,16 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-50'><br />
+<div class="standard" id='magicparlabel-54'><br />
 
 </div>
 
-<div class="standard" id='magicparlabel-51'><hr />
+<div class="standard" id='magicparlabel-55'><hr />
 
 </div>
 
 
-<div class="standard" id='magicparlabel-52'><br />
+<div class="standard" id='magicparlabel-56'><br />
 
 </div>
 

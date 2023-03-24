@@ -8,7 +8,8 @@
 <style type='text/css'>
 /* Layout-provided Styles */
 div.standard {
-	margin-bottom: 2ex;
+text-align: left;
+
 }
 div.plain_layout {
 text-align: left;
@@ -240,7 +241,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
 
     </mrow>
    </mtd>
-   <mtd>(1)
+   <mtd>(0.1)
    </mtd>
   </mtr>
   <mtr>
@@ -279,7 +280,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
      </msub><mo>,</mo><mspace width="6px" /><mspace width="6px" /><mi> &forall; </mi><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
     </mrow>
    </mtd>
-   <mtd>(2)
+   <mtd>(0.2)
    </mtd>
   </mtr>
   <mtr>
@@ -295,16 +296,16 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
      </msub><mo> &ge; </mo><mn>0</mn><mo>,</mo><mspace width="6px" /><mspace width="6px" /><mi> &forall; </mi><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
     </mrow>
    </mtd>
-   <mtd>(3)
+   <mtd>(0.3)
    </mtd>
   </mtr>
  </mtable></math> for some user-specified fixed parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math>. We seek to find the dual problem of <a href="#eq__2_1">3</a>-<a href="#eq__5">3</a>. </div>
+ </mrow></math>. </div>
 
-<ol class="enumerate" id='magicparlabel-19'><li class="enumerate_item">Specify the Lagrangian function <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ol class="enumerate" id='magicparlabel-23'><li class="enumerate_item">Specify the Lagrangian function <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>L</mi>
  </mrow></math> associated to the above primal quadratic minimization problem, where <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -317,7 +318,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </msub>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math> are the Lagrange coefficients wrt <a href="#eq__3_1">(3)</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> are the Lagrange coefficients wrt <a href="#eq__3_1">(0.3)</a>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -328,7 +329,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </msub>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math> are the Lagrange coefficients wrt <a href="#eq__5">(3)</a>. Write down any possible restrictions on the Lagrange coefficients.</li>
+ </mrow></math> are the Lagrange coefficients wrt <a href="#eq__5">(0.3)</a>. Write down any possible restrictions on the Lagrange coefficients.</li>
 <li class="enumerate_item">Compute the dual Lagrangian function denoted as <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mover>
@@ -340,7 +341,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   <mstyle mathvariant='script'><mi>D</mi>
   </mstyle>
  </mrow></math>. </li>
-<li class="enumerate_item">Apply the KKT conditions to the above problem, and write them down. </li>
+<li class="enumerate_item">Apply the Karush–Kuhn–Tucker (KKT) conditions to the above problem, and write them down. </li>
 <li class="enumerate_item"><a id="enu_Derive_and_write" />
 Derive and write down the dual Lagrangian quadratic maximization problem, along with the inequality and equality constraints, where you seek to find <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -578,10 +579,10 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 </ol>
 
 
-<div class="solution_" id='magicparlabel-31'><div class="solution__item"><span class="solution__label">Solution.</span>
+<div class="solution_" id='magicparlabel-35'><div class="solution__item"><span class="solution__label">Solution.</span>
 &nbsp; &nbsp;</div>
 
-<ol class="enumerate" id='magicparlabel-32'><li class="enumerate_item">It is <a id="eq__3_2" />
+<ol class="enumerate" id='magicparlabel-36'><li class="enumerate_item">It is <a id="eq__3_2" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -677,7 +678,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </msub>
     </mrow>
    </mtd>
-   <mtd>(4)
+   <mtd>(0.4)
    </mtd>
   </mtr>
  </mtable></math></li>
@@ -685,7 +686,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
  <mrow>
   <mrow><mi> &alpha; </mi><mo>,</mo><mi> &beta; </mi>
   </mrow>
- </mrow></math> be fixed. We minimize <a href="#eq__3_2ftydftu">(10)</a> wrt <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> be fixed. We minimize <a href="#eq__3_2">(0.4)</a> wrt <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>w</mi><mo>,</mo><mi>b</mi>
   </mrow>
@@ -743,7 +744,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </msub>
     </mrow>
    </mtd>
-   <mtd>(5)
+   <mtd>(0.5)
    </mtd>
   </mtr>
   <mtr>
@@ -833,10 +834,10 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </msub>
     </mrow>
    </mtd>
-   <mtd>(6)
+   <mtd>(0.6)
    </mtd>
   </mtr>
- </mtable></math>and we substitute in <a href="#eq__3_2ftydftu">(10)</a> to get <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mtable></math>and we substitute <a href="#eq__6_1">(0.6)</a>-<a href="#eq__2_2_1">(0.6)</a> in <a href="#eq__3_2">(0.4)</a> and we get <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mover>
@@ -926,7 +927,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    </msub><mo> &rang; </mo>
   </mrow>
  </mrow></math> </li>
-<li class="enumerate_item">They are <a id="eq__4_1" />
+<li class="enumerate_item">The Karush–Kuhn–Tucker (KKT) conditions applied to the above problem are <a id="eq__4_1" />
 <a id="eq__3_2ftydftu" />
 <a id="eq__7_1" />
 <a id="eq__8_1" />
@@ -1109,7 +1110,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </mrow>
     </mstyle>
    </mtd>
-   <mtd>(7)
+   <mtd>(0.7)
    </mtd>
   </mtr>
   <mtr>
@@ -1127,7 +1128,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    </mtd>
    <mtd><mrow/>
    </mtd>
-   <mtd>(8)
+   <mtd>(0.8)
    </mtd>
   </mtr>
   <mtr>
@@ -1177,7 +1178,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </mrow>
     </mstyle>
    </mtd>
-   <mtd>(9)
+   <mtd>(0.9)
    </mtd>
   </mtr>
   <mtr>
@@ -1201,10 +1202,10 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    </mtd>
    <mtd><mrow/>
    </mtd>
-   <mtd>(10)
+   <mtd>(0.10)
    </mtd>
   </mtr>
- </mtable></math> </li>
+ </mtable></math></li>
 <li class="enumerate_item">It is&nbsp; <a id="eq__15_1" />
 <a id="eq__1_1_1" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -1323,7 +1324,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 
     </mrow>
    </mtd>
-   <mtd>(11)
+   <mtd>(0.11)
    </mtd>
   </mtr>
   <mtr>
@@ -1382,13 +1383,13 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 <mspace width="6px" /><mspace width="6px" /><mspace width="6px" /><mi> &forall; </mi><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>m</mi>
     </mrow>
    </mtd>
-   <mtd>(12)
+   <mtd>(0.12)
    </mtd>
   </mtr>
- </mtable></math> constrain <a href="#eq__1_1_1">(12)</a> results from <a href="#eq__2_2_1">(6)</a>, <a href="#eq__3_2ftydftu">(10)</a>, and <a href="#eq__4_1">(10)</a>.</li>
+ </mtable></math> constrain <a href="#eq__1_1_1">(0.12)</a> results from <a href="#eq__2_2_1">(0.6)</a>, <a href="#eq__3_2ftydftu">(0.10)</a>, and <a href="#eq__4_1">(0.10)</a>.</li>
 <li class="enumerate_item">&nbsp;
 
-<ul class="itemize" id='magicparlabel-37'><li class="itemize_item">By <a href="#eq__6_1">(6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
+<ul class="itemize" id='magicparlabel-41'><li class="itemize_item">By <a href="#eq__6_1">(0.6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1407,7 +1408,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
    </mrow>
   </msub>
  </mrow></math> does not contribute to the computation of the weights. </li>
-<li class="itemize_item">By <a href="#eq__6_1">(6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
+<li class="itemize_item">By <a href="#eq__6_1">(0.6)</a>, if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1451,7 +1452,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
     </mrow>
    </msub><mo> &ne; </mo><mi>C</mi>
   </mrow>
- </mrow></math>) then <a href="#eq__2_2_1">(6)</a> implies that <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>) then <a href="#eq__2_2_1">(0.6)</a> implies that <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1461,7 +1462,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
     </mrow>
    </msub><mo>&gt;</mo><mn>0</mn>
   </mrow>
- </mrow></math>. By <a href="#eq__8_1">(10)</a> if <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. By <a href="#eq__8_1">(0.10)</a> if <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1481,7 +1482,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
     </mrow>
    </msub><mo>=</mo><mn>0</mn>
   </mrow>
- </mrow></math>. Hence, given these, from <a href="#eq__7_1">(10)</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>. Hence, given these, from <a href="#eq__7_1">(0.10)</a>, it is <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mn>1</mn><mo>=</mo>
    <msub>
@@ -1531,7 +1532,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
   </msub>
  </mrow></math> lies inside the boundary. </li>
 </ul>
-</li><li class="enumerate_item">From <a href="#eq__7_1">(10)</a>, it is either <math xmlns="http://www.w3.org/1998/Math/MathML">
+</li><li class="enumerate_item">From <a href="#eq__7_1">(0.10)</a>, it is either <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -1607,7 +1608,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
   </mrow>
- </mrow></math>. From <a href="#eq__6_1">(6)</a> , it is <a id="eq__17_1" />
+ </mrow></math>. From <a href="#eq__6_1">(0.6)</a> , it is <a id="eq__17_1" />
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -1651,10 +1652,10 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
      </msub>
     </mrow>
    </mtd>
-   <mtd>(13)
+   <mtd>(0.13)
    </mtd>
   </mtr>
- </mtable></math>Using <a href="#eq__7_1">(10)</a> and summing up indexes in <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mtable></math>Using <a href="#eq__7_1">(0.10)</a> and summing up indexes in <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <mstyle mathvariant='script'><mi>M</mi>
@@ -1868,7 +1869,7 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 
     </mrow>
    </mtd>
-   <mtd>(14)
+   <mtd>(0.14)
    </mtd>
   </mtr>
  </mtable></math></li>
@@ -1878,16 +1879,16 @@ Derive and write down the dual Lagrangian quadratic maximization problem, along 
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-48'><br />
+<div class="standard" id='magicparlabel-52'><br />
 
 </div>
 
-<div class="standard" id='magicparlabel-49'><hr />
+<div class="standard" id='magicparlabel-53'><hr />
 
 </div>
 
 
-<div class="standard" id='magicparlabel-50'><br />
+<div class="standard" id='magicparlabel-54'><br />
 
 </div>
 </body>

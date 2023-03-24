@@ -29,6 +29,13 @@ margin-bottom: 0.5ex;
 text-align: left;
 
 }
+ol.enumerate {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
 ul.itemize {
 margin-top: 0.7ex;
 margin-bottom: 0.7ex;
@@ -126,13 +133,6 @@ font-variant: normal;
 font-size: medium;
 
 }
-ol.enumerate {
-margin-top: 0.7ex;
-margin-bottom: 0.7ex;
-margin-left: 3ex;
-text-align: left;
-
-}
 div.remark {
 font-style: normal;
 font-variant: normal;
@@ -145,6 +145,22 @@ text-align: left;
 span.remark_label {
 font-weight: normal;
 font-style: italic;
+font-variant: normal;
+font-size: medium;
+
+}
+div.algorithm {
+font-style: italic;
+font-variant: normal;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+span.algorithm_label {
+font-weight: bold;
+font-style: normal;
 font-variant: normal;
 font-size: medium;
 
@@ -328,15 +344,16 @@ font-family: monospace;
 <div style='height:3ex'></div></div>
 <h3 class="subsection_" id='magicparlabel-25'>Reading list &amp; references:</h3>
 
-<ul class="itemize" id='magicparlabel-26'><li class="itemize_item">Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
+<ol class="enumerate" id='magicparlabel-26'><li class="enumerate_item"><a id="enu_Shalev_Shwartz__S____" />
+Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press. 
 
 <ul class="itemize" id='magicparlabel-27'><li class="itemize_item">Ch. 14.1 Gradient Descent</li>
 </ul>
-</li></ul>
-<div class="plain_layout" id='magicparlabel-28'>Further reading</div>
+</li><li class="enumerate_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer. 
 
-<ul class="itemize" id='magicparlabel-29'><li class="itemize_item">Bishop, C. M. (2006). Pattern recognition and machine learning. New York: Springer. </li>
+<ul class="itemize" id='magicparlabel-29'><li class="itemize_item">Further reading</li>
 </ul>
+</li></ol>
 </div></div>
 <h2 class="section" id='magicparlabel-30'><span class="section_label">1</span> Motivations</h2>
 
@@ -453,7 +470,7 @@ Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
       <mrow><mo> min </mo>
       </mrow>
       <mrow>
-       <mrow><mi> &forall; </mi><mi>h</mi><mo> &isin; </mo>
+       <mrow><mi>h</mi><mo> &isin; </mo>
         <mstyle mathvariant='script'><mi>H</mi>
         </mstyle>
        </mrow>
@@ -475,7 +492,7 @@ Consider a learning problem <math xmlns="http://www.w3.org/1998/Math/MathML">
       <mrow><mo> min </mo>
       </mrow>
       <mrow>
-       <mrow><mi> &forall; </mi><mi>h</mi><mo> &isin; </mo>
+       <mrow><mi>h</mi><mo> &isin; </mo>
         <mstyle mathvariant='script'><mi>H</mi>
         </mstyle>
        </mrow>
@@ -543,7 +560,7 @@ For the sake of notation simplicity and generalization, we will present Gradient
       <mrow><mo> min </mo>
       </mrow>
       <mrow>
-       <mrow><mi> &forall; </mi><mi>w</mi><mo> &isin; </mo>
+       <mrow><mi>w</mi><mo> &isin; </mo>
         <mstyle mathvariant='script'><mi>H</mi>
         </mstyle>
        </mrow>
@@ -824,7 +841,7 @@ Gradient descent algorithm with learning rate <math xmlns="http://www.w3.org/199
 </div>
 
 <div class="remark" id='magicparlabel-55'><div class="remark_item"><span class="remark_label">Remark 5.</span>
-Interpreting GD, GD produces a chain <math xmlns="http://www.w3.org/1998/Math/MathML">
+(Intuition) GD produces a chain <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msup>
@@ -838,7 +855,7 @@ Interpreting GD, GD produces a chain <math xmlns="http://www.w3.org/1998/Math/Ma
   </msup>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
- </mrow></math> that drifts towards the minimum <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> that drifts towards a minimum <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <msup>
    <mrow><mi>w</mi>
@@ -869,7 +886,7 @@ Interpreting GD, GD produces a chain <math xmlns="http://www.w3.org/1998/Math/Ma
 </div>
 
 <div class="remark" id='magicparlabel-57'><div class="remark_item"><span class="remark_label">Remark 6.</span>
-For more intuitive explanation, consider the (1st order) Taylor polynomial for the approximation of <math xmlns="http://www.w3.org/1998/Math/MathML">
+(More intuition) Consider the (1st order) Taylor polynomial for the approximation of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>w</mi>
@@ -1310,7 +1327,7 @@ Handout 1</div>
 <div class="remark" id='magicparlabel-63'><div class="remark_item"><span class="remark_label">Remark 7.</span>
 Given <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>T</mi>
- </mrow></math> GD algorithm iterations, the output of GD can be (but not a exclusively), </div>
+ </mrow></math> iterations of GD algorithm, the output of GD can be (but not a exclusively), </div>
 
 <ol class="enumerate" id='magicparlabel-64'><li class="enumerate_item">the average (after discarding the first few iterations of <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -1506,7 +1523,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
    <mrow><mi>t</mi>
    </mrow>
   </msub>
- </mrow></math> is called learning rate, step size, or gain. It determines the size of the steps GD takes to reach a (local) minimum. <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> is called learning rate (or step size, gain). It determines the size of the steps GD takes to reach a (local) minimum. <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
 
   <msub>
@@ -1939,7 +1956,7 @@ The parameter <math xmlns="http://www.w3.org/1998/Math/MathML">
     </mrow>
    </msub>
   </mrow>
- </mrow></math> may be chosen based on pilot runs. &nbsp;</li>
+ </mrow></math> may be chosen based on pilot runs against a small fraction of the training data set. &nbsp;</li>
 </ul>
 </div>
 
@@ -2147,7 +2164,7 @@ The set of subgradients of function <math xmlns="http://www.w3.org/1998/Math/Mat
 
 </div>
 
-<div class="definition" id='magicparlabel-172'><div class="definition_item"><span class="definition_label">Definition 15.</span>
+<div class="algorithm" id='magicparlabel-172'><div class="algorithm_item"><span class="algorithm_label">Algorithm 15.</span>
 The Gradient Descent algorithm using subgradients in non-differentiable cases, results by replacing the gradient <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi> &nabla; </mi><mi>f</mi><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
@@ -2662,7 +2679,7 @@ For the sake of the analysis of the GD, let us consider:</div>
    <mrow><mo>*</mo>
    </mrow>
   </msup>
- </mrow></math> is the minimizer in <a href="#eq_gvbzvcb">(2.1)</a>.</div>
+ </mrow></math> is a minimizer in <a href="#eq_gvbzvcb">(2.1)</a>.</div>
 </div>
 
 <div class="standard" id='magicparlabel-196'><br />
@@ -2670,7 +2687,7 @@ For the sake of the analysis of the GD, let us consider:</div>
 </div>
 
 <div class="note" id='magicparlabel-197'><div class="note_item"><span class="note_label">Note 21.</span>
-We consider Lemma <a href="#lem_Let__be">22</a> as given Fact. </div>
+We consider Lemma <a href="#lem_Let__be">22</a> as a given Fact. </div>
 </div>
 
 <div class="standard" id='magicparlabel-198'><br />
@@ -2842,7 +2859,7 @@ memorize</div>
  </mtable></math></div>
 
 <div class="proof" id='magicparlabel-204'><div class="proof_item"><span class="proof_label">Proof.</span>
-Omitted; see the 2nd reference.</div>
+Omitted; see the Reference <a href="#enu_Shalev_Shwartz__S____">1.</a>.</div>
 </div>
 </div>
 
@@ -3336,7 +3353,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
 
 <div class="proof" id='magicparlabel-223'><div class="proof_item"><span class="proof_label">Proof.</span>
 
-<span style = "text-align: center;"><img src="lyxpreviewSDKNRO1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewYYpKbR1.png" alt="Mathematical Equation" />
 </span>
  Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -3448,7 +3465,7 @@ The following provides conditions under which the gradient (or sub-gradient) is 
   </mrow>
  </mrow></math>.</div>
 <div class="proof_item">For 
-<span style = "text-align: center;"><img src="lyxpreviewgsaLqf1.png" alt="Mathematical Equation" />
+<span style = "text-align: center;"><img src="lyxpreviewPXyOjE1.png" alt="Mathematical Equation" />
 </span>
  see Exercise <a href="#exer____2_1">exer:()-2-1</a> in the Exercise sheet.</div>
 </div>
@@ -4397,9 +4414,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
    <msub>
     <mrow><mo> min </mo>
     </mrow>
-    <mrow>
-     <mrow><mi> &forall; </mi><mi>w</mi>
-     </mrow>
+    <mrow><mi>w</mi>
     </mrow>
    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -4425,9 +4440,7 @@ Consider the simple Normal linear regression problem where the dataset <math xml
    <msub>
     <mrow><mo> min </mo>
     </mrow>
-    <mrow>
-     <mrow><mi> &forall; </mi><mi>w</mi>
-     </mrow>
+    <mrow><mi>w</mi>
     </mrow>
    </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
@@ -4502,18 +4515,20 @@ compute <a id="eq_GD_UPDATE_MECHANISM_1" />
  <mtable>
   <mtr>
    <mtd>
-    <mrow>
-     <msup>
-      <mrow><mi>w</mi>
-      </mrow>
-      <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+    <msup>
+     <mrow><mi>w</mi>
+     </mrow>
+     <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
-       <mrow><mi>t</mi><mo>+</mo><mn>1</mn>
-       </mrow>
+      <mrow><mi>t</mi><mo>+</mo><mn>1</mn>
+      </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-      </mrow>
-     </msup><mo>=</mo>
+     </mrow>
+    </msup>
+   </mtd>
+   <mtd>
+    <mrow><mo>=</mo>
      <msup>
       <mrow><mi>w</mi>
       </mrow>
@@ -4531,106 +4546,110 @@ compute <a id="eq_GD_UPDATE_MECHANISM_1" />
      </msub><mo>,</mo>
     </mrow>
    </mtd>
-   <mtd>(5.3)
-   </mtd>
-  </mtr>
- </mtable></math> where <math xmlns="http://www.w3.org/1998/Math/MathML">
- <mrow>
-  <mrow>
-   <msub>
-    <mrow><mi>v</mi>
-    </mrow>
-    <mrow><mi>t</mi>
-    </mrow>
-   </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
-   <mtable>
-    <mtr>
-     <mtd>
-      <mrow><mn>2</mn>
-       <msubsup>
-        <mrow><mi>w</mi>
-        </mrow>
-        <mrow><mn>1</mn>
-        </mrow>
-        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>t</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-        </mrow>
-       </msubsup><mo>+</mo><mn>2</mn>
-       <msubsup>
-        <mrow><mi>w</mi>
-        </mrow>
-        <mrow><mn>2</mn>
-        </mrow>
-        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>t</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-        </mrow>
-       </msubsup>
-       <mover>
-        <mrow><mi>x</mi>
-        </mrow><mo stretchy="true">&OverBar;</mo>
-       </mover><mo>-</mo><mn>2</mn>
-       <mover>
-        <mrow><mi>y</mi>
-        </mrow><mo stretchy="true">&OverBar;</mo>
-       </mover>
+   <mtd>
+    <mrow>
+     <mstyle mathvariant='normal'>
+      <mrow><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mspace width="6px" />
       </mrow>
-     </mtd>
-    </mtr>
-    <mtr>
-     <mtd>
-      <mrow><mn>2</mn>
-       <msubsup>
-        <mrow><mi>w</mi>
-        </mrow>
-        <mrow><mn>1</mn>
-        </mrow>
-        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-<mi>t</mi>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-        </mrow>
-       </msubsup>
-       <mover>
-        <mrow><mi>x</mi>
-        </mrow><mo stretchy="true">&OverBar;</mo>
-       </mover><mo>+</mo><mn>2</mn>
-       <msubsup>
-        <mrow><mi>w</mi>
-        </mrow>
+     </mstyle><mspace width="6px" />
+     <msub>
+      <mrow><mi>v</mi>
+      </mrow>
+      <mrow><mi>t</mi>
+      </mrow>
+     </msub><mo>=</mo><mo form='prefix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>(</mo>
+     <mtable>
+      <mtr>
+       <mtd>
         <mrow><mn>2</mn>
-        </mrow>
-        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+         <msubsup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>t</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-        </mrow>
-       </msubsup>
-       <mover>
-        <mrow>
-         <msup>
-          <mrow><mi>x</mi>
+          </mrow>
+         </msubsup><mo>+</mo><mn>2</mn>
+         <msubsup>
+          <mrow><mi>w</mi>
           </mrow>
           <mrow><mn>2</mn>
           </mrow>
-         </msup>
-        </mrow><mo stretchy="true">&macr;</mo>
-       </mover><mo>-</mo><mn>2</mn>
-       <msup>
-        <mrow><mi>y</mi>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msubsup>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&OverBar;</mo>
+         </mover><mo>-</mo><mn>2</mn>
+         <mover>
+          <mrow><mi>y</mi>
+          </mrow><mo stretchy="true">&OverBar;</mo>
+         </mover>
         </mrow>
-        <mrow><mi> &top; </mi>
+       </mtd>
+      </mtr>
+      <mtr>
+       <mtd>
+        <mrow><mn>2</mn>
+         <msubsup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mn>1</mn>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msubsup>
+         <mover>
+          <mrow><mi>x</mi>
+          </mrow><mo stretchy="true">&OverBar;</mo>
+         </mover><mo>+</mo><mn>2</mn>
+         <msubsup>
+          <mrow><mi>w</mi>
+          </mrow>
+          <mrow><mn>2</mn>
+          </mrow>
+          <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>t</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+          </mrow>
+         </msubsup>
+         <mover>
+          <mrow>
+           <msup>
+            <mrow><mi>x</mi>
+            </mrow>
+            <mrow><mn>2</mn>
+            </mrow>
+           </msup>
+          </mrow><mo stretchy="true">&macr;</mo>
+         </mover><mo>-</mo><mn>2</mn>
+         <msup>
+          <mrow><mi>y</mi>
+          </mrow>
+          <mrow><mi> &top; </mi>
+          </mrow>
+         </msup><mi>x</mi>
         </mrow>
-       </msup><mi>x</mi>
-      </mrow>
-     </mtd>
-    </mtr>
-   </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo>
-  </mrow>
- </mrow></math></li>
+       </mtd>
+      </mtr>
+     </mtable><mo form='postfix' fence='true' stretchy='true' symmetric='true' lspace='thinmathspace'>)</mo>
+    </mrow>
+   </mtd>
+   <mtd>(5.3)
+   </mtd>
+  </mtr>
+ </mtable></math></li>
 <li class="enumerate_item"><a id="enu_terminate_if_2" />
 terminate if a termination criterion is satisfied, e.g.<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5154,8 +5173,8 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
    <mrow><mo>*</mo>
    </mrow>
   </msup>
- </mrow></math>. This is because it creates unreasonably big steps in <a href="#eq_GD_UPDATE_MECHANISM">(2.2)</a> that the produced chain overshoots the global minimum. See the cartoon in Figures <a href="#fig__2">g</a> and <a href="#fig__1_1">h</a>. 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-268'><img style='width:30%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_1.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_1.png' />
+ </mrow></math>. This is because it creates unreasonably big steps in <a href="#eq_GD_UPDATE_MECHANISM">(2.2)</a> that the produced chain overshoots the global minimum; see the cartoon in Figures <a href="#fig__2">g</a> and <a href="#fig__1_1">h</a>. 
+<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-272'><img style='width:30%;' src='2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_1.png' alt='image: 2_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_1.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure a:  <a id="fig_chain" />
  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5178,7 +5197,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-276'><img style='width:30%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_2.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_2.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-280'><img style='width:30%;' src='3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_2.png' alt='image: 3_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____II_Handouts_figures_02_Gradient_descent_w_2.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure b:  <a id="fig_chain_1" />
  <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5201,7 +5220,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-284'><img style='width:30%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____andouts_figures_02_Gradient_descent_f_error.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____andouts_figures_02_Gradient_descent_f_error.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-288'><img style='width:30%;' src='4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____andouts_figures_02_Gradient_descent_f_error.png' alt='image: 4_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____andouts_figures_02_Gradient_descent_f_error.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure c:  <a id="fig_chain_2" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5257,7 +5276,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
 
 
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-293'><img style='width:30%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_1_zoom.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_1_zoom.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-297'><img style='width:30%;' src='5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_1_zoom.png' alt='image: 5_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_1_zoom.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure d:  <a id="fig_" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5280,7 +5299,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-301'><img style='width:30%;' src='6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_2_zoom.png' alt='image: 6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_2_zoom.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-305'><img style='width:30%;' src='6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_2_zoom.png' alt='image: 6_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ndouts_figures_02_Gradient_descent_w_2_zoom.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure e:  <a id="fig__1" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>{</mo>
@@ -5303,7 +5322,7 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
 
  </mrow></math></span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-309'><img style='width:30%;' src='7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ts_figures_02_Gradient_descent_f_error_zoom.png' alt='image: 7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ts_figures_02_Gradient_descent_f_error_zoom.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-313'><img style='width:30%;' src='7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ts_figures_02_Gradient_descent_f_error_zoom.png' alt='image: 7_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____ts_figures_02_Gradient_descent_f_error_zoom.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure f:  <a id="fig_chain_2_1" />
 <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
@@ -5357,22 +5376,25 @@ terminate if a termination criterion is satisfied, e.g.<math display="block" xml
  </mrow></math></span></div>
 </div>
 
-</div>
 
-<div class='float-figure'><div class='float-figure'><div class="plain_layout" id='magicparlabel-321'><img style='width:60%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gradient_descent_cartoon-big-learning-rate.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gradient_descent_cartoon-big-learning-rate.png' />
+
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-322'><img style='width:60%;' src='8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gradient_descent_cartoon-big-learning-rate.png' alt='image: 8_extra_tmp_mffk55_Dropbox_Teaching_2023_term2_____Gradient_descent_cartoon-big-learning-rate.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure g:  <a id="fig__2" />
 Unnecessarily large learning rate</span></div>
 </div>
-<div class='float-figure'><div class="plain_layout" id='magicparlabel-329'><img style='width:60%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____radient_descent_cartoon-small-learning-rate.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____radient_descent_cartoon-small-learning-rate.png' />
+<div class='float-figure'><div class="plain_layout" id='magicparlabel-330'><img style='width:60%;' src='9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____radient_descent_cartoon-small-learning-rate.png' alt='image: 9_extra_tmp_mffk55_Dropbox_Teaching_2023_term2____radient_descent_cartoon-small-learning-rate.png' />
 <span class='float-caption-Standard float-caption float-caption-standard'>Sub-Figure h:  <a id="fig__1_1" />
 Unnecessarily small learning rate</span></div>
 </div>
 
+
+<div class="plain_layout" id='magicparlabel-335'><span class='float-caption-Standard float-caption float-caption-standard'>Figure 5.1:  <a id="fig__1_1_1" />
+</span></div>
 </div>
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-334'><br />
+<div class="standard" id='magicparlabel-340'><br />
 
 </div>
 </body>

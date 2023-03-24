@@ -203,7 +203,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>}</mo>
 
   </mrow>
- </mrow></math> . We assume <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math> . Let <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -240,7 +240,20 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
     </mrow>
    </msup>
   </mrow>
- </mrow></math>, and modeled as an ANN <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, let <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mrow>
+  <mrow>
+   <msub>
+    <mrow><mi>h</mi>
+    </mrow>
+    <mrow><mi>w</mi>
+    </mrow>
+   </msub><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mi>x</mi>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+  </mrow>
+ </mrow></math> be modeled as an ANN <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -321,7 +334,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  <mrow>
   <mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>q</mi>
   </mrow>
- </mrow></math>, with activation functions softmax function <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>, and let the associated activation functions be <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -384,7 +397,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
     </mrow>
    </mstyle><mspace width="6px" /><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>...</mn><mo>,</mo><mi>q</mi>
   </mrow>
- </mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML">
+ </mrow></math>(called softmax function) and <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
    <msub>
@@ -543,7 +556,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  <mrow><mi>c</mi>
  </mrow></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow><mi>q</mi>
- </mrow></math> are known quantities. </div>
+ </mrow></math> are known integers. </div>
 
 <dl class='description' id='magicparlabel-18'><dt class="description_label">Hint</dt>
 <dd class="description_item"> You may use <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -619,14 +632,10 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  <mrow>
   <mrow>
    <mfrac>
-    <mrow>
-     <mstyle mathvariant='normal'><mi>d</mi>
-     </mstyle>
+    <mrow><mi> &part; </mi>
     </mrow>
     <mrow>
-     <mrow>
-      <mstyle mathvariant='normal'><mi>d</mi>
-      </mstyle>
+     <mrow><mi> &part; </mi>
       <msub>
        <mrow><mi>a</mi>
        </mrow>
@@ -753,9 +762,11 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
 
 
 <div class="solution_" id='magicparlabel-36'><div class="solution__item"><span class="solution__label">Solution.</span>
-&nbsp;&nbsp;Forward&nbsp;pass </div>
+&nbsp;&nbsp;</div>
 
-<dl class='description' id='magicparlabel-37'><dt class="description_label">Set</dt>
+<ol class="enumerate" id='magicparlabel-37'><li class="enumerate_item">Forward&nbsp;pass 
+
+<dl class='description' id='magicparlabel-38'><dt class="description_label">Set</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -782,7 +793,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
 <dt class="description_label">Compute</dt>
 <dd class="description_item"> 
 
-<dl class='description' id='magicparlabel-39'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
+<dl class='description' id='magicparlabel-40'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>1</mn>
   </mrow>
@@ -793,7 +804,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-40'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-41'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -872,7 +883,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-43'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-44'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -991,9 +1002,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  </mrow></math> </dd>
 </dl>
 </dd></dl>
-</div>
-
-<ol class="enumerate" id='magicparlabel-46'><li class="enumerate_item">It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+</li><li class="enumerate_item">It is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
    <mtd>
@@ -1692,10 +1701,10 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </mtr>
  </mtable></math>
 
-<dl class='description' id='magicparlabel-48'><dt class="description_label">Backward&nbsp;pass</dt>
+<dl class='description' id='magicparlabel-49'><dt class="description_label">Backward&nbsp;pass</dt>
 <dd class="description_item"> 
 
-<dl class='description' id='magicparlabel-49'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
+<dl class='description' id='magicparlabel-50'><dt class="description_label">at&nbsp;<math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow><mi>t</mi><mo>=</mo><mn>2</mn>
   </mrow>
@@ -1706,7 +1715,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-50'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-51'><dt class="description_label">comp</dt>
 <dd class="description_item"> <math xmlns="http://www.w3.org/1998/Math/MathML">
  <mrow>
   <mrow>
@@ -1776,7 +1785,7 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
   </mrow>
  </mrow></math>
 
-<dl class='description' id='magicparlabel-52'><dt class="description_label">comp</dt>
+<dl class='description' id='magicparlabel-53'><dt class="description_label">comp</dt>
 <dd class="description_item"> &nbsp;<math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
  <mtable>
   <mtr>
@@ -2023,11 +2032,12 @@ div.Shadowbox { border: solid gray medium; border-bottom: solid black 1ex; borde
  </mrow></math></dd>
 </dl>
 </li></ol>
+</div>
 
 </div>
 </div>
 
-<div class="standard" id='magicparlabel-59'><br />
+<div class="standard" id='magicparlabel-60'><br />
 
 </div>
 

@@ -309,7 +309,7 @@ You may use the R function 'grad{numDeriv}' to numerically compute the gradient;
 If the gradient explodes apply gradient clipping/scaling with threshold $C=10.0$, as 
 
 \[
-w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
+w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,I\right)
 \]
  where 
 \[

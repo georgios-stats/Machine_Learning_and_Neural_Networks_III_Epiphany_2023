@@ -491,7 +491,7 @@ Use arguments
 
 + **degree=2**, for $d$ 
 
-+ **gamma=1**, for $\gamma$ 
++ **gamma=2**, for $\gamma$ 
 
 + **coef0=0**, for $c_0$      
 

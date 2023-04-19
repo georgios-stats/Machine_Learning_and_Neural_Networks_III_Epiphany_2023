@@ -7188,18 +7188,23 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
            </msubsup>
           </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mn>2</mn>
-          <msubsup>
-           <mrow><mi>w</mi>
-           </mrow>
-           <mrow><mn>2</mn>
-           </mrow>
-           <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+          <mrow>
+           <msubsup>
+            <mrow><mi>w</mi>
+            </mrow>
+            <mrow><mn>2</mn>
+            </mrow>
+            <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>t</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-           </mrow>
-          </msubsup>
+            </mrow>
+           </msubsup>
+          </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
           <msub>
            <mrow><mi>x</mi>
            </mrow>
@@ -7249,10 +7254,18 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
           </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-          <mover>
+          <msub>
            <mrow><mi>x</mi>
-           </mrow><mo stretchy="true">&OverBar;</mo>
-          </mover><mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+           </mrow>
+           <mrow>
+            <msup>
+             <mrow><mi>j</mi>
+             </mrow>
+             <mrow><mo>*</mo>
+             </mrow>
+            </msup>
+           </mrow>
+          </msub><mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
           <mrow>
            <msubsup>
@@ -7265,28 +7278,7 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
             </mrow>
-           </msubsup>
-           <msup>
-            <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-             <msub>
-              <mrow><mi>x</mi>
-              </mrow>
-              <mrow>
-               <msup>
-                <mrow><mi>j</mi>
-                </mrow>
-                <mrow><mo>*</mo>
-                </mrow>
-               </msup>
-              </mrow>
-             </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-            </mrow>
-            <mrow><mn>2</mn>
-            </mrow>
-           </msup><mo>-</mo>
+           </msubsup><mo>-</mo>
            <msubsup>
             <mrow>
              <mover>
@@ -7302,30 +7294,30 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
 
             </mrow>
            </msubsup>
-           <msup>
-            <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
-
-             <msub>
-              <mrow><mi>x</mi>
-              </mrow>
-              <mrow>
-               <msup>
-                <mrow><mi>j</mi>
-                </mrow>
-                <mrow><mo>*</mo>
-                </mrow>
-               </msup>
-              </mrow>
-             </msub>
-<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-
-            </mrow>
-            <mrow><mn>2</mn>
-            </mrow>
-           </msup>
           </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
+          <msup>
+           <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+            <msub>
+             <mrow><mi>x</mi>
+             </mrow>
+             <mrow>
+              <msup>
+               <mrow><mi>j</mi>
+               </mrow>
+               <mrow><mo>*</mo>
+               </mrow>
+              </msup>
+             </mrow>
+            </msub>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
+           </mrow>
+           <mrow><mn>2</mn>
+           </mrow>
+          </msup>
          </mrow>
         </mtd>
        </mtr>
@@ -7649,18 +7641,23 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
         </msubsup>
        </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
-<mo>+</mo><mn>2</mn>
-       <msubsup>
-        <mrow><mi>w</mi>
-        </mrow>
-        <mrow><mn>2</mn>
-        </mrow>
-        <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+<mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+
+       <mrow>
+        <msubsup>
+         <mrow><mi>w</mi>
+         </mrow>
+         <mrow><mn>2</mn>
+         </mrow>
+         <mrow><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 <mi>t</mi>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-        </mrow>
-       </msubsup>
+         </mrow>
+        </msubsup>
+       </mrow>
+<mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
+
        <msub>
         <mrow><mi>x</mi>
         </mrow>
@@ -7710,10 +7707,18 @@ The SVRG with learning rate <math xmlns="http://www.w3.org/1998/Math/MathML">
        </mrow>
 <mo form='postfix' fence='true' stretchy='true' symmetric='true'>)</mo>
 
-       <mover>
+       <msub>
         <mrow><mi>x</mi>
-        </mrow><mo stretchy="true">&OverBar;</mo>
-       </mover><mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
+        </mrow>
+        <mrow>
+         <msup>
+          <mrow><mi>j</mi>
+          </mrow>
+          <mrow><mo>*</mo>
+          </mrow>
+         </msup>
+        </mrow>
+       </msub><mo>+</mo><mn>2</mn><mo form='prefix' fence='true' stretchy='true' symmetric='true'>(</mo>
 
        <mrow>
         <msubsup>

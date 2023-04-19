@@ -178,7 +178,7 @@ data(ozone)
 Read the description by "?ozone".  
 
 ```{r}
-?ozone
+#?ozone
 ```
 
 Print "ozone" data set.   
@@ -353,7 +353,7 @@ Do it below
 
 ```{r}
 EF.best
-RSS  <- sum((ozone$O3-mean(ozone$O3))^2)
+RSS  <- sum((ozone.rescaled[,1]-mean(ozone.rescaled[,1]))^2)
 RSS
 ```
 ## Task: Print the estimated weights (to be done in the computer practical class)

@@ -308,6 +308,7 @@ while ( (Qterm != 1) ) {
   # sub-sample
   J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
   # update
+  w_new <- w
   ## likelihood
   grad_est_lik <- rep( 0.0, times=length(w) )
   for (j in J) {
@@ -318,16 +319,18 @@ while ( (Qterm != 1) ) {
     grad_est_lik <- grad_est_lik + numDeriv::grad(aux_fun, w)
   }
   grad_est_lik <- ( n_obs / batch_size) * grad_est_lik
-  w <- w +eta*grad_est_lik ; 
+  w_new <- w_new +eta*grad_est_lik ; 
   ## prior
   aux_fun <- function(w){
     d <- length(w)
     gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
     return(gr)
   }
-  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  w_new <- w_new +eta*numDeriv::grad(aux_fun, w) ;
   ## noise
-  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  w_new <- w_new +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # record
+  w <- w_new
   # termination criterion
   if  ( t >= Tmax ) {
     Qterm <- 1
@@ -367,7 +370,7 @@ You may use the R function 'grad{numDeriv}' to numerically compute the gradient;
 If the gradient explodes apply gradient clipping/scaling with threshold $C=10.0$, as 
 
 \[
-w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,1\right)
+w^{(t+1)}=w^{(t)}+\eta_{t}\left(\text{clip}\left(\frac{n}{m}\sum_{j\in\mathcal{J}^{(t)}}\nabla_{w}\log\left(f\left(z^{(t)}|w^{(t)}\right)\right),c\right)+\nabla_{w}\log\left(f\left(w^{(t)}\right)\right)\right)+\sqrt{\eta_{t}\tau}\epsilon_{t},\,\epsilon_{t}\sim\text{N}\left(0,I\right)
 \]
  where 
 \[
@@ -410,6 +413,7 @@ while ( (Qterm != 1) ) {
   # sub-sample
   J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
   # update
+  w_new <- w
   ## likelihood
   grad_est_lik <- rep( 0.0, times=length(w) )
   for (j in J) {
@@ -423,16 +427,18 @@ while ( (Qterm != 1) ) {
   # gradient clipping/rescaring
   norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
   grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
-  w <- w +eta*grad_est_lik ; 
+  w_new <- w_new +eta*grad_est_lik ; 
   ## prior
   aux_fun <- function(w){
     d <- length(w)
     gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
     return(gr)
   }
-  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  w_new <- w_new +eta*numDeriv::grad(aux_fun, w) ;
   ## noise
-  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  w_new <- w_new +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # record 
+  w <- w_new
   # termination criterion
   if  ( t >= Tmax ) {
     Qterm <- 1
@@ -485,7 +491,7 @@ To learn $\text{E}_{f}\left(w_{1}+w_{2}|y\right)$, compute the estimator
 based on SGLD output chain.
 
 ```{r}
-w_est = mean(rowMeans(w_chain_output))
+w_est = mean(rowSums(w_chain_output))
 w_est
 ```
 

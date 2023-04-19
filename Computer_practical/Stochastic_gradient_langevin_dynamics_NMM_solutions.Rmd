@@ -321,6 +321,7 @@ while ( (Qterm != 1) ) {
   # sub-sample
   J <- sample.int( n = n_obs, size = batch_size, replace = FALSE)
   # update
+  w_new <- w
   ## likelihood
   grad_est_lik <- rep( 0.0, times=length(w) )
   for (j in J) {
@@ -334,16 +335,18 @@ while ( (Qterm != 1) ) {
   # gradient clipping/rescaring
   norm_grad_est_lik <- sqrt(sum(grad_est_lik^2))
   grad_est_lik <- grad_est_lik * min( 1.0, clipping_threshold/norm_grad_est_lik )
-  w <- w +eta*grad_est_lik ; 
+  w_new <- w_new +eta*grad_est_lik ; 
   ## prior
   aux_fun <- function(w){
     d <- length(w)
     gr <- log_prior_pdf(w, rep(0,d), 100*diag(d))
     return(gr)
   }
-  w <- w +eta*numDeriv::grad(aux_fun, w) ;
+  w_new <- w_new +eta*numDeriv::grad(aux_fun, w) ;
   ## noise
-  w <- w +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  w_new <- w_new +sqrt(eta)*sqrt(tau)*rnorm(n = length(w), mean = 0, sd = 1)
+  # record
+  w <- w_new
   # termination criterion
   if  ( t >= Tmax ) {
     Qterm <- 1
